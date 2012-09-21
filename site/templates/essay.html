@@ -1,0 +1,71 @@
+<article class="essay">
+  <h2 class="title">{{essay.title}}</h2>
+
+  <section class="intro">
+    {{{essay.intro_html}}}
+  </section>
+
+  {{#if sponsor}}
+  <section class="sponsor essay-sponsor">
+    <div class="label">
+      {{#if sponsor.label}}
+        {{{sponsor.label}}}
+      {{else}}
+        Essay is sponsored by
+      {{/if}}
+    </div>
+
+    {{#if sponsor.text_format}}
+    <div class="name">
+      {{#if sponsor.url}}
+        <a href="{{sponsor.url}}">{{{sponsor.name}}}</a>
+      {{else}}
+        {{{sponsor.name}}}
+      {{/if}}
+    </div>
+    <div class="content">{{{sponsor.content}}}</div>
+    {{/if}}
+
+    {{#if sponsor.image_format}}
+    <div class="image">
+      {{#if sponsor.url}}
+        <a href="{{sponsor.url}}" target="_blank"><img src="{{sponsor.content}}" alt=""></a>
+      {{else}}
+        <img src="{{sponsor.content}}" alt="">
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{#if sponsor.video_format}}
+    <div class="video">{{{sponsor.content}}}</div>
+    {{/if}}
+  </section>
+  {{/if}}
+
+  <section class="body">
+    {{{essay.body_html}}}
+  </section>
+
+  <section class="meta">
+    <div class="published"><span class="label">Published</span> {{{essay.published_at_html}}}</div>
+    <div class="updated"><span class="label">Updated</span> {{{essay.updated_at_html}}}</div>
+    {{#each collections}}
+    <div class="collection"><a href="{{baseURL}}/collection/{{slug}}">{{name}}</a></div>
+    {{/each}}
+  </section>
+
+  <section class="author">
+    {{#if author.photo_url}}
+    <div class="photo"><img src="{{author.photo_url}}" alt="{{author.name}}"></div>
+    {{/if}}
+    <div class="content">
+      <h5 class="name"><span class="label">Author</span> {{author.name}}</h5>
+      <div class="bio">{{{author.bio}}}</div>
+      <ul class="links">
+        {{#each author.links}}
+        <li><a href="{{url}}" target="_blank">{{label}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+  </section>
+</article>

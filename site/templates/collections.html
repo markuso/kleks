@@ -1,0 +1,14 @@
+{{#if collections}}
+<section class="collections">
+  <h3><span class="label">Collections</span></h3>
+
+  <ul>
+  {{#each collections}}
+    <li class="collection">
+      <h4 class="name"><a href="{{baseURL}}/collection/{{slug}}">{{name}}</a></h4>
+      <div class="updated">{{{updated_at_html}}}</div>
+    </li>
+  {{/each}}
+  </ul>
+</section>
+{{/if}}

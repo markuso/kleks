@@ -1,0 +1,5 @@
+.DS_Store
+.kansorc
+*.sublime-*
+packages
+node_modules

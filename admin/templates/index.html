@@ -1,0 +1,12 @@
+<div id="app"></div>
+
+<script type="text/javascript">
+  var $ = require('jquery');
+  var exports = this;
+  $(function() {
+    var App = require('controllers/index');
+    exports.app = new App({
+      el: $("#app")
+    });
+  });
+</script>

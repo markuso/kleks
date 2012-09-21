@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <meta charset="utf-8">
+  <title>{{title}}</title>
+
+  <meta name="discription" content="{{site.seo_description}}">
+  <meta name="keywords" content="{{site.seo_keywords}}">
+  <meta name="developer" content="Markus Ochel at Markuso Web Solutions - http://www.markuso.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=3.0, user-scalable=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <!-- <link rel="shortcut icon" href="{{baseURL}}/static/img/favicon.ico">
+  <link rel="apple-touch-icon-precomposed" href="{{baseURL}}/static/img/apple-touch-icon-precomposed.png"> -->
+
+  <link rel="stylesheet" href="{{baseURL}}/static/css/index.css" type="text/css" media="screen" charset="utf-8">
+
+  <script src="{{baseURL}}/static/js/modernizr.custom.js"></script>
+
+  {{#if site.css}}<style>{{{site.css}}}</style>{{/if}}
+
+</head>
+<body class="theme-{{site.theme}}">
+
+  <div class="container">
+    <h1 class="site-name"><a href="{{baseURL}}/">{{{site.name_html}}}</a></h1>
+
+    <section class="site-promo">
+      {{{blocks.site_promo.content}}}
+    </section>
+
+    {{{content}}}
+
+    {{#if site.footer_html}}<footer>{{{site.footer_html}}}</footer>{{/if}}
+  </div>
+
+  <script src="{{baseURL}}/modules.js"></script>
+  <script type="text/javascript">
+    var $ = require('jquery');
+    var _gaq = { push: function(x){} };
+    $(function() {
+      var app = require('lib/app');
+      app.initialize({
+        site: {
+          id: '{{site._id}}',
+          name: '{{site.name}}'
+        }
+      });
+    });
+  </script>
+
+  {{#if site.google_analytics_code}}
+  <!-- <script type="text/javascript">
+    var _gaq = [];
+    _gaq.push(['_setAccount', '{{site.google_analytics_code}}']);
+    _gaq.push(['_setDomainName', '{{site._id}}']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script> -->
+  {{/if}}
+
+</body>
+</html>

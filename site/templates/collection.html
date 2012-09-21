@@ -1,0 +1,44 @@
+<article class="collection">
+  <h2 class="title">{{collection.name}}</h2>
+  
+  {{#if sponsor}}
+  <section class="sponsor collection-sponsor">
+    <div class="label">
+      {{#if sponsor.label}}
+        {{{sponsor.label}}}
+      {{else}}
+        Collection is sponsored by
+      {{/if}}
+    </div>
+
+    {{#if sponsor.text_format}}
+    <div class="name">
+      {{#if sponsor.url}}
+        <a href="{{sponsor.url}}">{{{sponsor.name}}}</a>
+      {{else}}
+        {{{sponsor.name}}}
+      {{/if}}
+    </div>
+    <div class="content">{{{sponsor.content}}}</div>
+    {{/if}}
+
+    {{#if sponsor.image_format}}
+    <div class="image">
+      {{#if sponsor.url}}
+        <a href="{{sponsor.url}}" target="_blank"><img src="{{sponsor.content}}" alt=""></a>
+      {{else}}
+        <img src="{{sponsor.content}}" alt="">
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{#if sponsor.video_format}}
+    <div class="video">{{{sponsor.content}}}</div>
+    {{/if}}
+  </section>
+  {{/if}}
+
+  {{#each essays}}
+    <h3><a href="{{baseURL}}/essay/{{slug}}">{{title}}</a></h3>
+  {{/each}}
+</article>

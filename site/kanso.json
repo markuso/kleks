@@ -1,0 +1,35 @@
+{
+  "name": "site",
+  "version": "0.0.1",
+  "description": "Kleks site application that renders each site.",
+  "load": "server/setup",
+  "modules": ["server","lib"],
+  "handlebars": {
+    "templates": "templates"
+  },
+  "attachments": ["static"],
+  "duality": { "base_template": "base.html" },
+  "coffee-script": {
+    "modules": ["server","lib"]
+  },
+  "stylus": {
+      "compress": true,
+      "compile": "static/css/index.styl",
+      "remove_from_attachments": true
+  },
+  "dependencies": {
+    "modules": null,
+    "settings": null,
+    "attachments": null,
+    "properties": null,
+    "db": null,
+    "coffee-script-precompiler": null,
+    "stylus-precompiler": null,
+    "duality": null,
+    "handlebars": null,
+    "handlebars-helpers": null,
+    "duality-handlebars": null,
+    "showdown": null,
+    "jquery": null
+  }
+}

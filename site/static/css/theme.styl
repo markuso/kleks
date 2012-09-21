@@ -1,0 +1,274 @@
+@import url('http://fonts.googleapis.com/css?family=Lato:300,400,700')
+
+$tealColor  = #61E0DF // #97E6D3
+$greenColor = #81C977
+$brownColor = #B4805B
+$blueColor  = #BAD0EF
+$greyColor  = #b4b4b4
+
+$primaryColor = $blueColor
+$lightGrey    = #c4c4c4
+$linkColor    = darken($primaryColor, 20%)
+$textColor    = #848484
+
+// apply a natural box layout model to all elements
+*
+  border-box()
+
+body
+  margin: 0
+  padding: 0
+  background: #fff
+  color: $textColor
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-weight: 300
+  font-size: 16px
+  letter-spacing: 0em
+  word-spacing: 0.2em
+  line-height: 1.5em
+
+.container
+  max-width: 960px
+  margin: 0
+  padding: 40px
+  border-left: 20px solid $primaryColor
+
+h1, h2, h3, h4, h5, h6
+  color: darken($textColor, 4%)
+  font-weight: 300
+  line-height: 1.2em
+
+h1
+  font-size: 3.5em
+h2
+  font-size: 2.5em
+h3
+  font-size: 2em
+h4
+  font-size: 1.5em
+h5
+  font-size: 1.125em
+  font-weight: 400
+h6
+  font-size: 0.875em
+  font-weight: 400
+  line-height: 1.5em
+
+a
+  color: $linkColor
+  text-decoration: none
+  
+  &.button
+    display: inline-block
+    padding: 10px 20px
+    background: $primaryColor
+    color: #fff
+    font-weight: 400
+
+    &.large
+      font-size: 2em
+      line-height: 1.2em
+      padding: 14px 30px
+
+b
+  font-weight: 700
+
+strong
+ font-weight: 400 
+
+small
+  font-size: 0.875em
+  color: $lightGrey
+
+blockquote
+  position: relative
+  border-right: 10px solid $primaryColor
+  padding: 0 1.5em 0 2.5em
+  margin: 1.5em 0
+  text-align: right
+  font-size: 1.125em
+  font-weight: 300
+  &:before
+    content: '“'
+    position: absolute
+    top: 0.2em
+    left: 0
+    color: $primaryColor
+    font-size: 6em
+    font-weight: 700
+
+img
+  display: block
+  border: 0
+
+.site-name
+  margin: 0 0 0.8em -0.05em
+  font-size: 5.25em
+  line-height: 0.8em
+  font-weight: 300
+  color: $lightGrey
+  letter-spacing: -0.07em
+  word-spacing: 0em
+  white-space: nowrap
+  a
+    color: $lightGrey
+  b, strong
+    color: $primaryColor
+
+.site-promo
+  color: $primaryColor
+  font-size: 1.25em
+  font-weight: 400
+
+span.label
+  font-weight: 300
+  color: $lightGrey
+
+article
+
+  > .intro
+    margin-bottom: 2em
+    font-size: 1.125em
+    font-weight: 400
+    line-height: 1.6em
+    color: darken($textColor, 5%)
+
+  .sponsor
+    float: right
+    width: 300px
+    max-width: 300px
+    margin: 0 0 1em 1em
+    text-align: center
+    background: #f9f9f9
+    content-box()
+
+    .label
+      color: #fff
+      background: $primaryColor
+      font-size: 0.875em
+
+    .name
+      font-size: 1.125em
+      padding: 1em
+    
+    .content
+      padding: 0 1em 1em 1em
+      overflow: hidden
+
+    .image img
+      width: 100%
+      overflow: hidden
+
+    .video
+      overflow: hidden
+      iframe
+        display: block
+
+article.home
+
+  .collections
+    
+    > ul
+      list-style-type: none
+      margin: 0
+      padding: 0
+
+      > li
+        display: inline-block
+        position: relative
+        width: 48%
+        padding: 0
+        margin: 0.5em 0.5em 0 0
+        border: solid 1px $primaryColor
+
+        .name
+          margin: 0
+          a
+            display: block
+            color: inherit
+            padding: 1em
+
+        .updated
+          position: absolute
+          bottom: 0
+          right: 0
+          padding: 10px 20px
+          background: $primaryColor
+          color: #fff
+
+article.essay
+
+  .body
+    
+    ol, ul
+      margin: 0 0.8em
+      li
+        margin-bottom: 1em
+
+  .meta
+    font-size: 0.875em
+    line-height: 1.5em
+    margin: 2em 0
+    > div
+      display: inline-block
+      margin-right: 2em
+
+  .author
+    margin-top: 2em
+    padding-top: 2em
+    border-top: 1px solid $primaryColor
+
+    .photo
+      float: left
+      width: 10%
+      min-width: 30px
+      img
+        width: 100%
+        max-width: 100%
+
+    .content
+      display: inline-block
+      width: 88%
+      padding-left: 1em
+
+      .name
+        margin: 0 0 0.5em 0
+
+      .bio
+        font-size: 0.875em
+        line-height: 1.5em
+
+      .links
+        list-style-type: none
+        margin: 0
+        padding: 0
+        > li
+          display: inline-block
+          margin-right: 2em
+
+article.essays
+
+  > ul.list
+    list-style-type: none
+    margin: 0
+    padding: 0
+
+    li.item
+      margin-bottom: 1em
+      
+      .meta
+        font-size: 0.875em
+        > a
+          display: inline-block
+          margin-right: 2em
+
+footer
+  margin-top: 2em
+  padding-top: 2em
+  border-top: 1px solid $primaryColor
+  color: #aaa
+  clear: both
+
+  .copyright
+    font-size: 0.75em
+    line-height: 1.5em

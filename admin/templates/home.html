@@ -1,0 +1,31 @@
+<div class="row-fluid">
+  
+  <div class="span4">
+    <h3>Sites</h3>
+    <ul>
+      {{#each sites}}
+      <li>{{name}} ({{_id}})</li>
+      {{/each}}
+    </ul>
+  </div>
+
+
+  <div class="span4">
+    <h3>Collections</h3>
+    <ul>
+      {{#each collections}}
+      <li>{{name}} ({{_id}})</li>
+      {{/each}}
+    </ul>
+  </div>
+
+
+  <div class="span4">
+    <h3>Essays</h3>
+    <ul>
+      {{#each essays}}
+      <li>{{title}} ({{_id}})</li>
+      {{/each}}
+    </ul>
+  </div>
+</div>

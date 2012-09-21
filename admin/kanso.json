@@ -1,0 +1,37 @@
+{
+  "name": "admin",
+  "version": "0.0.1",
+  "description": "Kleks admin application that allows writers to manage content.",
+  "load": "server/setup",
+  "modules": ["server","controllers","models","lib"],
+  "handlebars": {
+    "templates": "templates"
+  },
+  "attachments": ["static"],
+  "duality": { "base_template": "base.html" },
+  "coffee-script": {
+    "modules": ["server","controllers","models","lib"]
+  },
+  "stylus": {
+      "compress": true,
+      "compile": "static/css/index.styl",
+      "remove_from_attachments": true
+  },
+  "dependencies": {
+    "modules": null,
+    "settings": null,
+    "attachments": null,
+    "properties": null,
+    "db": null,
+    "coffee-script-precompiler": null,
+    "stylus-precompiler": null,
+    "duality": null,
+    "handlebars": null,
+    "handlebars-helpers": null,
+    "duality-handlebars": null,
+
+    "jquery": null,
+    "spine": null,
+    "underscore": null
+  }
+}
