@@ -3,6 +3,7 @@ require('lib/spine-couch-ajax')
 
 class Contact extends Spine.Model
   @configure "Contact", "name", "email", "note"
+  
   @extend Spine.Model.CouchAjax
   
   @nameSort: (a, b) ->

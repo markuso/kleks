@@ -1,22 +1,12 @@
 Spine       = require('spine/core')
+require('spine/route')
+require('spine/manager')
+
 templates   = require('duality/templates')
 session     = require('session')
 
-# Sites       = require('controllers/sites')
-# Authors     = require('controllers/authors')
-# Collections = require('controllers/collections')
-# Essays      = require('controllers/essays')
-# Blocks      = require('controllers/blocks')
-# Sponsors    = require('controllers/sponsors')
-# Contacts    = require('controllers/contacts')
-
-Site        = require('models/site')
-Author      = require('models/author')
-Collection  = require('models/collection')
-Essay       = require('models/essay')
-Block       = require('models/block')
-Sponsor     = require('models/sponsor')
-Contact     = require('models/contact')
+MainNav   = require('controllers/main-nav')
+MainStack   = require('controllers/main-stack')
 
 
 class App extends Spine.Controller
@@ -28,7 +18,7 @@ class App extends Spine.Controller
   checkSession: ->
     session.info (err, info) =>
       if '_admin' in info.userCtx.roles
-        @render()
+        @startApp()
       else
         username = 'admin'
         pass = 'couchaxs'
@@ -37,30 +27,17 @@ class App extends Spine.Controller
             alert "Error logging in as #{username}: #{err}"
           else
             if '_admin' in resp.roles
-              @render()
+              @startApp()
             else
               alert "User #{username} does not have permission"
 
-  render: ->
-    site = new Sites
-    Site.fetch()
-    Author.fetch()
-    Collection.fetch()
-    Essay.fetch()
-    Block.fetch()
-    Sponsor.fetch()
-    Contact.fetch()
+  startApp: ->
+    @mainNav   = new MainNav
+    @mainStack = new MainStack
 
-    @context =
-      sites: Site.all()
-      authors: Author.all()
-      collections: Collection.all()
-      essays: Essay.all()
-      blocks: Block.all()
-      sponsors: Sponsor.all()
-      contacts: Contact.all()
+    @append @mainNav, @mainStack
 
-    @el.html templates.render('home.html', {}, @context)
+    Spine.Route.setup()
 
 
 module.exports = App

@@ -3,6 +3,7 @@ require('lib/spine-couch-ajax')
 
 class Essay extends Spine.Model
   @configure "Essay", "site", "slug", "title", "intro", "body", "published", "published_at", "updated_at", "author_id", "sponsor_id", "collections"
+  
   @extend Spine.Model.CouchAjax
   
   @titleSort: (a, b) ->

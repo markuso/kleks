@@ -29,7 +29,7 @@
     "handlebars": null,
     "handlebars-helpers": null,
     "duality-handlebars": null,
-
+    "showdown": null,
     "jquery": null,
     "spine": null,
     "underscore": null

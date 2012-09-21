@@ -3,6 +3,7 @@ require('lib/spine-couch-ajax')
 
 class Collection extends Spine.Model
   @configure "Collection", "site", "slug", "name", "intro"
+  
   @extend Spine.Model.CouchAjax
   
   @nameSort: (a, b) ->

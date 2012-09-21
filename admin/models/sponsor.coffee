@@ -3,6 +3,7 @@ require('lib/spine-couch-ajax')
 
 class Sponsor extends Spine.Model
   @configure "Sponsor", "format", "name", "url", "label", "content", "note", "contact_id"
+  
   @extend Spine.Model.CouchAjax
   
   @nameSort: (a, b) ->
