@@ -88,6 +88,32 @@ transform(tr)
 hacel()
   transform(translate3d(0,0,0))
 
+arrow(direction = 'right', size = 10px, color = #666, width = 0.53em, length = 1em)
+  /*
+   * In Internet Explorer, The"border-style: dashed" will never be
+   * rendered unless "(width * 5) >= border-width" is true.
+   * Since "width" is set to "0", the "dashed-border" remains
+   * invisible to the user, which renders the border just like how
+   * "border-color: transparent" renders.
+   */
+  border-style: dashed
+  border-color: transparent
+  border-width: width
+  display: -moz-inline-box
+  display: inline-block
+  /* Use font-size to control the size of the arrow. */
+  font-size: size
+  height: 0
+  line-height: 0
+  position: relative
+  vertical-align: middle
+  width: 0
+  
+  border-{direction}-width: length;
+  border-{direction}-style: solid;
+  border-{direction}-color: color;
+  {direction}: 0.25em;
+
 clearfix()
   *zoom: 1
   &:before, &:after

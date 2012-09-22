@@ -9,6 +9,8 @@ Blocks      = require('controllers/blocks')
 Contacts    = require('controllers/contacts')
 Sponsors    = require('controllers/sponsors')
 
+FilterBox   = require('controllers/filter-box')
+
 
 class MainStack extends Spine.Stack
   className: 'main stack'
@@ -34,6 +36,11 @@ class MainStack extends Spine.Stack
     '/blocks':      'blocks'
     '/contacts':    'contacts'
     '/sponsors':    'sponsors'
+
+  constructor: ->
+    super
+    @filterBox = new FilterBox
+    @append @filterBox
 
 
 module.exports = MainStack

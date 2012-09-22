@@ -10,14 +10,18 @@ class Blocks extends Spine.Controller
 
   constructor: ->
     super
-    @active @render
-    Block.bind 'change fetch', @render
+    # @active @render
+    Block.bind 'change refresh', @render
+    Spine.bind 'filterbox:change', @filter
 
   render: =>
     context = 
-      blocks: Block.all()
+      blocks: Block.filter(@filterObj)
     @el.html templates.render('blocks.html', {}, context)
     @
+
+  filter: (@filterObj) =>
+    @render()
 
 
 module.exports = Blocks

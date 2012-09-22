@@ -9,10 +9,17 @@ class MainNav extends Spine.Controller
   constructor: ->
     super
     @render()
+    @setup()
 
   render: =>
     @el.html templates.render('main-nav.html', {}, {})
     @
+
+  setup: =>
+    links = @el.find('li a')
+    links.on 'click', (e) ->
+      links.removeClass('active')
+      $(@).addClass('active')
 
 
 module.exports = MainNav

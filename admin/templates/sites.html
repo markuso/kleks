@@ -5,7 +5,10 @@
     <div class="actions">
       <div><a href="{{link}}" target="_blank">{{_id}}</span></div>
     </div>
-    <a href="#/{{type}}/{{_id}}/edit">{{name}}</a>
+    <a class="site-name" href="#/{{type}}/{{_id}}/edit">{{{name_html}}}</a>
+    <div class="meta">
+      {{#if tagline}}<div>{{{tagline}}}</div>{{/if}}
+    </div>
   </li>
   {{/each}}
 </ul>

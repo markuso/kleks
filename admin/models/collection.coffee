@@ -1,13 +1,14 @@
 Spine = require('spine/core')
 require('lib/spine-couch-ajax')
 
-class Collection extends Spine.Model
+BaseModel = require('models/base')
+
+class Collection extends BaseModel
   @configure "Collection", "site", "slug", "name", "intro"
-  
+
   @extend Spine.Model.CouchAjax
-  
-  @nameSort: (a, b) ->
-    if a.name > b.name then 1 else -1
+
+  @queryOn: ['name','slug']
     
   validate: ->
     return 'Site is required' unless @site

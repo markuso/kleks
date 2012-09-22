@@ -9,8 +9,8 @@ class Dashboard extends Spine.Controller
 
   constructor: ->
     super
-    @active @render
-    Essay.bind 'change fetch', @render
+    # @active @render
+    Essay.bind 'change refresh', @render
 
   render: =>
     context = 

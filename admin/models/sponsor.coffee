@@ -1,13 +1,14 @@
 Spine = require('spine/core')
 require('lib/spine-couch-ajax')
 
-class Sponsor extends Spine.Model
+BaseModel = require('models/base')
+
+class Sponsor extends BaseModel
   @configure "Sponsor", "format", "name", "link", "label", "content", "note", "contact_id"
   
   @extend Spine.Model.CouchAjax
-  
-  @nameSort: (a, b) ->
-    if a.name > b.name then 1 else -1
+
+  @queryOn: ['name','content','link','format']
     
   validate: ->
     @format ?= 'text'

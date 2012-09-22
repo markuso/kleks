@@ -10,14 +10,18 @@ class Contacts extends Spine.Controller
 
   constructor: ->
     super
-    @active @render
-    Contact.bind 'change fetch', @render
+    # @active @render
+    Contact.bind 'change refresh', @render
+    Spine.bind 'filterbox:change', @filter
 
   render: =>
     context = 
-      contacts: Contact.all()
+      contacts: Contact.filter(@filterObj)
     @el.html templates.render('contacts.html', {}, context)
     @
+
+  filter: (@filterObj) =>
+    @render()
 
 
 module.exports = Contacts

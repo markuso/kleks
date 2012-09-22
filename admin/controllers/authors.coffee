@@ -10,14 +10,18 @@ class Authors extends Spine.Controller
 
   constructor: ->
     super
-    @active @render
-    Author.bind 'change fetch', @render
+    # @active @render
+    Author.bind 'change refresh', @render
+    Spine.bind 'filterbox:change', @filter
 
   render: =>
     context = 
-      authors: Author.all()
+      authors: Author.filter(@filterObj)
     @el.html templates.render('authors.html', {}, context)
     @
+
+  filter: (@filterObj) =>
+    @render()
 
 
 module.exports = Authors

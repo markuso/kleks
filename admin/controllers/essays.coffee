@@ -10,14 +10,18 @@ class Essays extends Spine.Controller
 
   constructor: ->
     super
-    @active @render
-    Essay.bind 'change fetch', @render
+    # @active @render
+    Essay.bind 'change refresh', @render
+    Spine.bind 'filterbox:change', @filter
 
   render: =>
     context = 
-      essays: Essay.all()
+      essays: Essay.filter(@filterObj)
     @el.html templates.render('essays.html', {}, context)
     @
+
+  filter: (@filterObj) =>
+    @render()
 
 
 module.exports = Essays

@@ -10,14 +10,18 @@ class Sponsors extends Spine.Controller
 
   constructor: ->
     super
-    @active @render
-    Sponsor.bind 'change fetch', @render
+    # @active @render
+    Sponsor.bind 'change refresh', @render
+    Spine.bind 'filterbox:change', @filter
 
   render: =>
     context = 
-      sponsors: Sponsor.all()
+      sponsors: Sponsor.filter(@filterObj)
     @el.html templates.render('sponsors.html', {}, context)
     @
+
+  filter: (@filterObj) =>
+    @render()
 
 
 module.exports = Sponsors

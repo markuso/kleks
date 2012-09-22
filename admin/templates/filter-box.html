@@ -1,0 +1,11 @@
+<input class="filter-input" type="text" value="" placeholder="filter">
+<div class="selected-site">
+  <i class="icon"></i>
+  <span>All sites</span>
+</div>
+<ul class="site-selector">
+  <li data-id="">All sites</li>
+  {{#each sites}}
+  <li data-id="{{_id}}">{{{name_html}}}</li>
+  {{/each}}
+</ul>
