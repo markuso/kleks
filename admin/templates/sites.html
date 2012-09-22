@@ -1,6 +1,11 @@
-<h3>Sites</h3>
-<ul>
+<h1>Sites <span class="count">{{sites.length}}</span></h1>
+<ul class="sites list">
   {{#each sites}}
-  <li>{{name}} ({{_id}})</li>
+  <li>
+    <div class="actions">
+      <div><a href="{{link}}" target="_blank">{{_id}}</span></div>
+    </div>
+    <a href="#/{{type}}/{{_id}}/edit">{{name}}</a>
+  </li>
   {{/each}}
 </ul>

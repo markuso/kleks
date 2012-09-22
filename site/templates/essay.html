@@ -17,8 +17,8 @@
 
     {{#if sponsor.text_format}}
     <div class="name">
-      {{#if sponsor.url}}
-        <a href="{{sponsor.url}}">{{{sponsor.name}}}</a>
+      {{#if sponsor.link}}
+        <a href="{{sponsor.link}}">{{{sponsor.name}}}</a>
       {{else}}
         {{{sponsor.name}}}
       {{/if}}
@@ -28,8 +28,8 @@
 
     {{#if sponsor.image_format}}
     <div class="image">
-      {{#if sponsor.url}}
-        <a href="{{sponsor.url}}" target="_blank"><img src="{{sponsor.content}}" alt=""></a>
+      {{#if sponsor.link}}
+        <a href="{{sponsor.link}}" target="_blank"><img src="{{sponsor.content}}" alt=""></a>
       {{else}}
         <img src="{{sponsor.content}}" alt="">
       {{/if}}
@@ -55,15 +55,15 @@
   </section>
 
   <section class="author">
-    {{#if author.photo_url}}
-    <div class="photo"><img src="{{author.photo_url}}" alt="{{author.name}}"></div>
+    {{#if author.photo}}
+    <div class="photo"><img src="{{author.photo}}" alt="{{author.name}}"></div>
     {{/if}}
     <div class="content">
       <h5 class="name"><span class="label">Author</span> {{author.name}}</h5>
       <div class="bio">{{{author.bio}}}</div>
       <ul class="links">
         {{#each author.links}}
-        <li><a href="{{url}}" target="_blank">{{label}}</a></li>
+        <li><a href="{{link}}" target="_blank">{{label}}</a></li>
         {{/each}}
       </ul>
     </div>

@@ -10,10 +10,10 @@ class Authors extends Spine.Controller
 
   constructor: ->
     super
-    Author.fetch()
     @active @render
+    Author.bind 'change fetch', @render
 
-  render: ->
+  render: =>
     context = 
       authors: Author.all()
     @el.html templates.render('authors.html', {}, context)

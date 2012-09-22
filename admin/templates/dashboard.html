@@ -1,0 +1,11 @@
+<h1>Dashboard</h1>
+<ul class="drafts list">
+  {{#each drafts}}
+  <li>
+    <a href="#/{{type}}/{{_id}}/edit">{{title}}</a>
+    <div class="meta">
+      <div><a href="http://{{site}}/{{type}}/{{slug}}" target="_blank">view on {{site}}</a></div>
+    </div>
+  </li>
+  {{/each}}
+</ul>

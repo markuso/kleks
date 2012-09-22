@@ -10,10 +10,10 @@ class Sites extends Spine.Controller
 
   constructor: ->
     super
-    Site.fetch()
     @active @render
+    Site.bind 'change fetch', @render
 
-  render: ->
+  render: =>
     context = 
       sites: Site.all()
     @el.html templates.render('sites.html', {}, context)

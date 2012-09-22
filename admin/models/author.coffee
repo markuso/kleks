@@ -2,7 +2,7 @@ Spine = require('spine/core')
 require('lib/spine-couch-ajax')
 
 class Author extends Spine.Model
-  @configure "Author", "site", "name", "email", "bio", "links", "photo_url"
+  @configure "Author", "site", "name", "email", "bio", "links", "photo"
   
   @extend Spine.Model.CouchAjax
   

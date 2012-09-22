@@ -1,0 +1,11 @@
+<h1>Collections <span class="count">{{collections.length}}</span></h1>
+<ul class="collections list">
+  {{#each collections}}
+  <li>
+    <a href="#/{{type}}/{{_id}}/edit">{{name}}</a>
+    <div class="meta">
+      <div><a href="http://{{site}}/{{type}}/{{slug}}" target="_blank">view on {{site}}</a></div>
+    </div>
+  </li>
+  {{/each}}
+</ul>

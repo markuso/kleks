@@ -1,26 +1,39 @@
 Spine       = require('spine/core')
 
+Dashboard   = require('controllers/dashboard')
 Sites       = require('controllers/sites')
 Authors     = require('controllers/authors')
-# Collections = require('controllers/collections')
-# Essays      = require('controllers/essays')
-# Blocks      = require('controllers/blocks')
-# Sponsors    = require('controllers/sponsors')
-# Contacts    = require('controllers/contacts')
+Collections = require('controllers/collections')
+Essays      = require('controllers/essays')
+Blocks      = require('controllers/blocks')
+Contacts    = require('controllers/contacts')
+Sponsors    = require('controllers/sponsors')
 
 
 class MainStack extends Spine.Stack
   className: 'main stack'
 
   controllers:
-    sites: Sites
-    authors: Authors
+    dashboard:   Dashboard
+    sites:       Sites
+    authors:     Authors
+    collections: Collections
+    essays:      Essays
+    blocks:      Blocks
+    contacts:    Contacts
+    sponsors:    Sponsors
 
-  default: 'sites'
+  default: 'dashboard'
 
   routes:
-    '/sites':   'sites'
-    '/authors': 'authors'
+    '/':            'dashboard'
+    '/sites':       'sites'
+    '/authors':     'authors'
+    '/collections': 'collections'
+    '/essays':      'essays'
+    '/blocks':      'blocks'
+    '/contacts':    'contacts'
+    '/sponsors':    'sponsors'
 
 
 module.exports = MainStack

@@ -5,8 +5,16 @@ require('spine/manager')
 templates   = require('duality/templates')
 session     = require('session')
 
-MainNav   = require('controllers/main-nav')
+MainNav     = require('controllers/main-nav')
 MainStack   = require('controllers/main-stack')
+
+Site        = require('models/site')
+Author      = require('models/author')
+Collection  = require('models/collection')
+Essay       = require('models/essay')
+Block       = require('models/block')
+Contact     = require('models/contact')
+Sponsor     = require('models/sponsor')
 
 
 class App extends Spine.Controller
@@ -32,6 +40,15 @@ class App extends Spine.Controller
               alert "User #{username} does not have permission"
 
   startApp: ->
+    # Load data models
+    Site.fetch()
+    Author.fetch()
+    Collection.fetch()
+    Essay.fetch()
+    Block.fetch()
+    Contact.fetch()
+    Sponsor.fetch()
+
     @mainNav   = new MainNav
     @mainStack = new MainStack
 

@@ -4,13 +4,13 @@ templates   = require('duality/templates')
 
 
 class MainNav extends Spine.Controller
-  className: 'main nav'
+  className: 'main navbar'
 
   constructor: ->
     super
     @render()
 
-  render: ->
+  render: =>
     @el.html templates.render('main-nav.html', {}, {})
     @
 
