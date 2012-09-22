@@ -101,13 +101,34 @@ img
   display: block
   border: 0
 
-input, textarea
+input, textarea, select
+  display: block
+  width: 100%
   color: $textColor
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
   font-size: 1em
   font-weight: 300
-  padding: 5px 10px
-  margin: 0.5em 0
+  padding: 5px
+  margin: 0
   border: 1px solid #f3f3f3
+
+textarea
+  max-width: 100%
+  min-width: 50%
+  height: 120px
+  min-height: 60px
+
+button, .button
+  display: inline-block
+  padding: 10px 30px
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-size: 1.1em
+  font-weight: 400
+  color: #fff
+  background: $primaryColor
+  border: 0
+  border-radius(0)
+
 
 ::-webkit-input-placeholder
   color: #f3f3f3
@@ -142,6 +163,7 @@ span.label
   top: 20px
   right: 30px
   width: 30%
+  z-index: 10
 
   .filter-input
     display: block
@@ -255,14 +277,32 @@ span.label
     right: 0
     overflow: auto
     padding: 20px 30px
+    background: #fff
 
     > h1
-      margin: 0 0 20px 0
+      margin: 0 0 0.5em -0.05em
 
       .count
         color: $lightGrey
         font-weight: 300
         margin-left: 1em
+
+    .item-title
+      color: $primaryColor
+
+    .save-button
+      float: right
+      margin: 5px 0 0 0
+
+    .cancel-button
+      float: right
+      display: block
+      border: 0
+      margin: 5px 0 0 0
+      padding: 10px 30px
+
+      &:hover
+        background: $lightGrey
 
     > ul.list
       list-style-type: none
@@ -307,7 +347,53 @@ span.label
             &:hover
               text-decoration: underline
 
-.stack > .panel:not(.active)
+    > form
+      margin: 1.5em 0
+      clearfix()
+     
+      .field
+        padding: 5px 0
+        clearfix()
+
+        label
+          display: block
+          color: $lightGrey
+
+        input[name='name'],
+        input[name='title']
+          font-size: 1.5em
+
+        &.inline
+
+          label
+            display: inline-block
+            width: 20%
+            float: left
+            padding: 10px 0
+
+          select, input, textarea
+            display: block
+            width: 75%
+            float: right
+            margin-left: 10px
+
+        input[type='checkbox']
+          display: inline-block
+          width: auto
+          float: left
+          margin: 4px 10px 4px 0
+
+      .error-message
+        display: none
+        color: #fff
+        padding: 5px 10px
+        background: orange
+
+.stack > .panel > .panel
+  z-index: 20
+
+
+.stack .panel:not(.active)
   display: none
 
 
@@ -321,4 +407,3 @@ span.label
         font-size: 0.75em
         line-height: 1em
         color: $lightGrey
-

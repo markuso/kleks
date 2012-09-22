@@ -1,0 +1,38 @@
+<a class="cancel-button" href="#">Cancel</a>
+<button class="save-button">Save</button>
+<h1>Collection</h1>
+<h3 class="item-title">{{name}}</h3>
+
+<form class="collection">
+  <div class="error-message"></div>
+
+  <div class="field">
+    <label>Name</label>
+    <input type="text" name="name" value="{{name}}" required>
+  </div>
+  <div class="field">
+    <label>Slug</label>
+    <input type="text" name="slug" value="{{slug}}" required>
+  </div>
+  <div class="field">
+    <label>Intro</label>
+    <textarea name="intro">{{intro}}</textarea>
+  </div>
+  <div class="field">
+    <input type="checkbox" name="pinned" {{#if pinned}}checked{{/if}}>
+    <label>Pinned</label>
+  </div>
+  <div class="field">
+    <label>Sponsor</label>
+    <select name="sponsor_id">
+      <option value=""></option>
+      {{#each sponsors}}
+      <option value="{{_id}}">{{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="field">
+    <label>Updated At</label>
+    <input type="text" name="updated_at" value="{{updated_at}}" readonly>
+  </div>
+</form>
