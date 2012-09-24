@@ -16,7 +16,7 @@ class Blocks extends Spine.Controller
 
   render: =>
     context = 
-      blocks: Block.filter(@filterObj)
+      blocks: Block.filter(@filterObj).sort(Block.titleSort)
     @el.html templates.render('blocks.html', {}, context)
     @
 

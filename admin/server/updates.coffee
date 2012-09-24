@@ -1,4 +1,4 @@
-_   = require('underscore')._
+{_}   = require('underscore')
 
 exports.spine_adapter_model = (doc, req) ->
   if req.method is 'POST'    
@@ -9,7 +9,7 @@ exports.spine_adapter_model = (doc, req) ->
     destroy(doc, req)
 
 create = (doc, req) ->
-  doc = JSON.parse req.body
+  doc = JSON.parse(req.body)
   doc.type = req.query.type
   doc._id = req.uuid unless doc._id
   resp =

@@ -1,11 +1,15 @@
-<h1>Blocks <span class="count">{{blocks.length}}</span></h1>
+<h1>
+  Blocks
+  <a class="new" href="#/block/new">+</a>
+  <span class="count">{{blocks.length}}</span>
+</h1>
 <ul class="blocks list">
   {{#each blocks}}
   <li>
     <div class="actions">
       <div>{{code}}</div>
     </div>
-    <a href="#/{{type}}/{{_id}}/edit">{{name}}</a>
+    <a href="#/block/{{id}}">{{name}}</a>
     <div class="meta">
       <div>{{site}}</div>
     </div>

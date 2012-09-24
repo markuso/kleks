@@ -26,7 +26,7 @@ class FilterBox extends Spine.Controller
     @selectedSite = $(@el).find('.selected-site')
     @siteSelector = $(@el).find('ul.site-selector')
     
-    @filterInput.on 'keyup', (e) =>
+    @filterInput.on 'keypress', (e) =>
       @filter()
     
     @selectedSite.on 'click', (e) =>
@@ -36,7 +36,12 @@ class FilterBox extends Spine.Controller
       $item = $(e.currentTarget)
       @selectedSite.find('> span').html($item.html())
       @siteId = $item.attr('data-id')
-      @siteSelector.hide()
+      @siteSelector
+        .hide()
+        .scrollTop(0, 0)
+        .children()
+        .removeClass('selected')
+      $item.addClass('selected')
       @filter()
 
   filter: =>

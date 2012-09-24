@@ -1,11 +1,15 @@
-<h1>Contacts <span class="count">{{contacts.length}}</span></h1>
+<h1>
+  Contacts
+  <a class="new" href="#/contact/new">+</a>
+  <span class="count">{{contacts.length}}</span>
+</h1>
 <ul class="contacts list">
   {{#each contacts}}
   <li>
     <div class="actions">
       <div><a href="mailto:{{email}}">{{email}}</a></div>
     </div>
-    <a href="#/{{type}}/{{_id}}/edit">{{name}}</a>
+    <a href="#/contact/{{id}}">{{name}}</a>
     <div class="note">{{{note}}}</div>
   </li>
   {{/each}}

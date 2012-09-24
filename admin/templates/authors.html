@@ -1,11 +1,15 @@
-<h1>Authors <span class="count">{{authors.length}}</span></h1>
+<h1>
+  Authors
+  <a class="new" href="#/author/new">+</a>
+  <span class="count">{{authors.length}}</span>
+</h1>
 <ul class="authors list">
   {{#each authors}}
   <li>
     <div class="actions">
       <div><strong>Bio</strong> on {{site}}</div>
     </div>
-    <a href="#/{{type}}/{{_id}}/edit">{{name}}</a>
+    <a href="#/author/{{id}}">{{name}}</a>
   </li>
   {{/each}}
 </ul>

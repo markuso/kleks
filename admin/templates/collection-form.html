@@ -1,11 +1,24 @@
-<a class="cancel-button" href="#">Cancel</a>
-<button class="save-button">Save</button>
+<div class="buttons">
+  <button class="save-button">Save</button>
+  <button class="cancel-button plain">Cancel</button>
+</div>
 <h1>Collection</h1>
 <h3 class="item-title">{{name}}</h3>
 
 <form class="collection">
   <div class="error-message"></div>
 
+  <div class="field">
+    <div class="field-left">
+      <label>Site</label>
+      <select name="site">
+        {{#each sites}}
+        <option value="{{id}}">{{name}} &mdash; {{id}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="field-right site-selected"></div>
+  </div>
   <div class="field">
     <label>Name</label>
     <input type="text" name="name" value="{{name}}" required>
@@ -27,12 +40,16 @@
     <select name="sponsor_id">
       <option value=""></option>
       {{#each sponsors}}
-      <option value="{{_id}}">{{name}}</option>
+      <option value="{{id}}">{{name}}</option>
       {{/each}}
     </select>
   </div>
   <div class="field">
     <label>Updated At</label>
-    <input type="text" name="updated_at" value="{{updated_at}}" readonly>
+    <input type="text" name="updated_at" value="{{updated_at}}" placeholder="ex. Feb 20 2012 6:30 PM or leave blank">
   </div>
 </form>
+
+{{#if id}}
+<button class="delete-button plain">Delete {{type}}</button>
+{{/if}}

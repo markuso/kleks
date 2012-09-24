@@ -108,6 +108,7 @@ input, textarea, select
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
   font-size: 1em
   font-weight: 300
+  word-spacing: 0.2em
   padding: 5px
   margin: 0
   border: 1px solid #f3f3f3
@@ -128,7 +129,18 @@ button, .button
   background: $primaryColor
   border: 0
   border-radius(0)
+  cursor: pointer
 
+  &:hover
+    background: darken($primaryColor, 5%)
+    
+  &.plain
+    color: $primaryColor
+    background: #fff
+    border: 1px solid #f3f3f3
+
+    &:hover
+      background: #f3f3f3
 
 ::-webkit-input-placeholder
   color: #f3f3f3
@@ -141,9 +153,8 @@ button, .button
   right: 0
 
 .site-name
-  margin: 0 0 0.8em -0.05em
   font-size: 1.65em
-  line-height: 0.8em
+  line-height: 1em
   font-weight: 300
   color: $lightGrey
   letter-spacing: -0.07em
@@ -163,6 +174,7 @@ span.label
   top: 20px
   right: 30px
   width: 30%
+  background: #fff
   z-index: 10
 
   .filter-input
@@ -186,7 +198,7 @@ span.label
 
     .icon
       float: right
-      margin: 1px 0 0 0
+      margin: 5px 5px 0 0
       arrow('top', 10px, $lightGrey)
 
     &:hover
@@ -205,11 +217,14 @@ span.label
     -webkit-user-select: none
 
     li
-      padding: 10px 20px
+      padding: 10px 10px
       cursor: pointer
 
       &:hover
         background: #f3f3f3
+
+      &.selected
+        opacity: 0.5
 
 
 .main.navbar
@@ -290,19 +305,11 @@ span.label
     .item-title
       color: $primaryColor
 
-    .save-button
+    .buttons
       float: right
-      margin: 5px 0 0 0
 
-    .cancel-button
-      float: right
-      display: block
-      border: 0
-      margin: 5px 0 0 0
-      padding: 10px 30px
-
-      &:hover
-        background: $lightGrey
+      button, .button
+        margin: 5px 0 5px 10px
 
     > ul.list
       list-style-type: none
@@ -317,6 +324,11 @@ span.label
         border-bottom: 1px dotted #f3f3f3
         padding: 0.5em 0
         clearfix()
+
+        .note
+          font-size: 0.75em
+          line-height: 1em
+          color: $lightGrey
         
         .meta
           font-size: 0.75em
@@ -360,8 +372,20 @@ span.label
           color: $lightGrey
 
         input[name='name'],
+        input[name='name_html'],
         input[name='title']
           font-size: 1.5em
+
+        .field-left
+          float: left
+          width: 48%
+
+        .field-right
+          float: right
+          width: 48%
+
+        .site-selected
+          font-size: 2em
 
         &.inline
 
@@ -389,21 +413,10 @@ span.label
         padding: 5px 10px
         background: orange
 
-.stack > .panel > .panel
+.stack > .panel > .form.panel
   z-index: 20
-
 
 .stack .panel:not(.active)
   display: none
 
 
-.contacts.panel
-  
-  > ul.list
-
-    > li
-
-      .note
-        font-size: 0.75em
-        line-height: 1em
-        color: $lightGrey

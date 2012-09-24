@@ -1,0 +1,59 @@
+<div class="buttons">
+  <button class="save-button">Save</button>
+  <button class="cancel-button plain">Cancel</button>
+</div>
+<h1>Site</h1>
+<h3 class="item-title">{{name}}</h3>
+
+<form class="collection">
+  <div class="error-message"></div>
+
+  <div class="field">
+    <label>ID</label>
+    <input type="text" name="_id" value="{{_id}}" required placeholder="www.example.com">
+  </div>
+  <div class="field">
+    <div class="field-left">
+      <label>Name</label>
+      <input type="text" name="name" value="{{name}}" required>
+    </div>
+    <div class="field-right">
+      <label>Name HTML</label>
+      <input type="text" name="name_html" value="{{name_html}}" required>
+    </div>
+  </div>
+  <div class="field">
+    <label>Tagline</label>
+    <input type="text" name="tagline" value="{{tagline}}">
+  </div>
+  <div class="field">
+    <div class="field-left">
+      <label>Theme</label>
+      <select name="theme">
+        {{#each themes}}
+        <option value="{{.}}">{{.}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="field-right">
+      <label>Link</label>
+      <input type="text" name="link" value="{{link}}" required placeholder="http://www.example.com">
+    </div>
+  </div>
+  <div class="field">
+    <label>Footer HTML</label>
+    <textarea name="footer_html">{{footer_html}}</textarea>
+  </div>
+  <div class="field">
+    <label>CSS</label>
+    <textarea name="css">{{css}}</textarea>
+  </div>
+  <div class="field">
+    <label>Google Analytics Code</label>
+    <input type="text" name="google_analytics_code" value="{{google_analytics_code}}">
+  </div>
+</form>
+
+{{#if id}}
+<button class="delete-button plain">Delete {{type}}</button>
+{{/if}}

@@ -14,7 +14,7 @@ class Dashboard extends Spine.Controller
 
   render: =>
     context = 
-      drafts: Essay.findAllByAttribute('published', true)
+      drafts: Essay.findAllByAttribute('published', false)
     @el.html templates.render('dashboard.html', {}, context)
     @
 

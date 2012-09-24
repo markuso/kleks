@@ -1,11 +1,15 @@
-<h1>Sites <span class="count">{{sites.length}}</span></h1>
+<h1>
+  Sites
+  <a class="new" href="#/site/new">+</a>
+  <span class="count">{{sites.length}}</span>
+</h1>
 <ul class="sites list">
   {{#each sites}}
   <li>
     <div class="actions">
-      <div><a href="{{link}}" target="_blank">{{_id}}</span></div>
+      <div><a href="{{link}}" target="_blank">{{id}}</span></div>
     </div>
-    <a class="site-name" href="#/{{type}}/{{_id}}/edit">{{{name_html}}}</a>
+    <a class="site-name" href="#/site/{{id}}">{{{name_html}}}</a>
     <div class="meta">
       {{#if tagline}}<div>{{{tagline}}}</div>{{/if}}
     </div>

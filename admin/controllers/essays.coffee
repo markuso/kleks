@@ -16,7 +16,7 @@ class Essays extends Spine.Controller
 
   render: =>
     context = 
-      essays: Essay.filter(@filterObj)
+      essays: Essay.filter(@filterObj).sort(Essay.titleSort)
     @el.html templates.render('essays.html', {}, context)
     @
 

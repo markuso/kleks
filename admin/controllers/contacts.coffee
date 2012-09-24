@@ -16,7 +16,7 @@ class Contacts extends Spine.Controller
 
   render: =>
     context = 
-      contacts: Contact.filter(@filterObj)
+      contacts: Contact.filter(@filterObj).sort(Contact.nameSort)
     @el.html templates.render('contacts.html', {}, context)
     @
 

@@ -16,7 +16,7 @@ class Sponsors extends Spine.Controller
 
   render: =>
     context = 
-      sponsors: Sponsor.filter(@filterObj)
+      sponsors: Sponsor.filter(@filterObj).sort(Sponsor.nameSort)
     @el.html templates.render('sponsors.html', {}, context)
     @
 

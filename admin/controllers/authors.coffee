@@ -16,7 +16,7 @@ class Authors extends Spine.Controller
 
   render: =>
     context = 
-      authors: Author.filter(@filterObj)
+      authors: Author.filter(@filterObj).sort(Author.nameSort)
     @el.html templates.render('authors.html', {}, context)
     @
 

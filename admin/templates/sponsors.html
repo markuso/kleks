@@ -1,11 +1,15 @@
-<h1>Sponsors <span class="count">{{sponsors.length}}</span></h1>
+<h1>
+  Sponsors
+  <a class="new" href="#/sponsor/new">+</a>
+  <span class="count">{{sponsors.length}}</span>
+</h1>
 <ul class="sponsors list">
   {{#each sponsors}}
   <li>
     <div class="actions">
       <div>{{site}}</div>
     </div>
-    <a href="#/{{type}}/{{_id}}/edit">{{name}}</a>
+    <a href="#/sponsor/{{id}}">{{name}}</a>
     <div class="meta">
       <div><a href="{{link}}">{{link}}</a></div>
       <div><strong>{{format}}</strong> format</div>
