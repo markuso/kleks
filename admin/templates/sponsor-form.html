@@ -1,0 +1,52 @@
+<div class="buttons">
+  <button class="save-button">Save</button>
+  <button class="cancel-button plain">Cancel</button>
+</div>
+<h1>Sponsor</h1>
+<h3 class="item-title">{{name}}</h3>
+
+<form class="sponsor">
+  <div class="error-message"></div>
+
+  <div class="field required">
+    <label>Name</label>
+    <input type="text" name="name" value="{{name}}">
+  </div>
+  <div class="field">
+    <label>Link</label>
+    <input type="text" name="link" value="{{link}}">
+  </div>
+  <div class="field">
+    <label>Label</label>
+    <input type="text" name="label" value="{{label}}">
+  </div>
+  <div class="field">
+    <label>Format</label>
+    <select name="format">
+      <option value="text">Text</option>
+      <option value="image">Image</option>
+      <option value="video">Video</option>
+    </select>
+  </div>
+  <div class="field">
+    <label>Content</label>
+    <textarea name="content">{{content}}</textarea>
+  </div>
+  <div class="field">
+    <label>Note</label>
+    <textarea name="note">{{note}}</textarea>
+  </div>
+  <div class="field">
+    <label>Contact</label>
+    <select name="contact_id">
+      <option value=""></option>
+      {{#each contacts}}
+      <option value="{{id}}">{{name}}</option>
+      {{/each}}
+    </select>
+  </div>
+</form>
+
+{{#if id}}
+<button class="delete-button plain">Delete {{type}}</button>
+{{/if}}

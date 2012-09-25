@@ -1,4 +1,7 @@
 module.exports = [
+  # show root
+  { from: "/", to: "_show/index" }
+
   # static
   { from: "/static/*", to: "static/*" }
 
@@ -43,8 +46,8 @@ module.exports = [
     }
   }
 
-  # show root
-  { from: "/", to: "_show/index" }
+  # show color page
+  { from: "/_colors", to: "_show/colors" }
 
   # catch all
   { from: "*", to: "_show/not_found" }

@@ -1,0 +1,73 @@
+// Following imports are part of the admin app
+@import '../../../admin/static/css/mixin'
+
+setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor = null)
+  
+  if !$linkColor
+    $linkColor = darken($primaryColor, 20%)
+  
+  h1, h2, h3, h4, h5, h6
+    color: darken($textColor, 4%)
+
+  a
+    color: $linkColor
+    &.button
+      background: $primaryColor
+
+  blockquote
+    border-color: $primaryColor
+    &:before
+      color: $primaryColor
+
+  button, .button
+    background: $primaryColor
+    &:hover
+      background: darken($primaryColor, 5%)
+    &.plain
+      color: $primaryColor
+
+
+
+  .container
+    border-color: $primaryColor
+
+  .site-name
+    b, strong
+      color: $primaryColor
+
+  .site-promo
+    color: $primaryColor
+
+  .main-nav
+    .icon
+      background: $primaryColor
+      &:hover
+        background: darken($primaryColor, 10%)
+    > ul
+      background: $primaryColor
+      > li
+        a
+          &:hover
+            background: darken($primaryColor, 5%)
+          &.active
+            background: darken($primaryColor, 10%)
+
+  article
+    .sponsor
+      .label
+        background: $primaryColor
+
+  article.home
+    .collections      
+      > ul
+        > li
+          border-color: $primaryColor
+          .updated
+            background: $primaryColor
+
+  article.essay
+    .author
+      border-color: $primaryColor
+
+  footer
+    border-color: $primaryColor

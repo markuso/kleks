@@ -5,21 +5,21 @@
 <h1>Site</h1>
 <h3 class="item-title">{{name}}</h3>
 
-<form class="collection">
+<form class="site">
   <div class="error-message"></div>
 
-  <div class="field">
-    <label>ID</label>
-    <input type="text" name="_id" value="{{_id}}" required placeholder="www.example.com">
+  <div class="field required">
+    <label>Site ID</label>
+    <input type="text" name="_id" value="{{_id}}" placeholder="www.example.com">
   </div>
   <div class="field">
-    <div class="field-left">
+    <div class="field-left required">
       <label>Name</label>
-      <input type="text" name="name" value="{{name}}" required>
+      <input type="text" name="name" value="{{name}}">
     </div>
-    <div class="field-right">
+    <div class="field-right required">
       <label>Name HTML</label>
-      <input type="text" name="name_html" value="{{name_html}}" required>
+      <input type="text" name="name_html" value="{{name_html}}">
     </div>
   </div>
   <div class="field">
@@ -37,8 +37,12 @@
     </div>
     <div class="field-right">
       <label>Link</label>
-      <input type="text" name="link" value="{{link}}" required placeholder="http://www.example.com">
+      <input type="text" name="link" value="{{link}}" placeholder="http://www.example.com">
     </div>
+  </div>
+  <div class="field">
+    <label>Menu HTML</label>
+    <textarea name="menu_html" placeholder="only LI items">{{menu_html}}</textarea>
   </div>
   <div class="field">
     <label>Footer HTML</label>
@@ -47,6 +51,14 @@
   <div class="field">
     <label>CSS</label>
     <textarea name="css">{{css}}</textarea>
+  </div>
+  <div class="field">
+    <label>SEO Description</label>
+    <input type="text" name="seo_description" value="{{seo_description}}">
+  </div>
+  <div class="field">
+    <label>SEO Keywords</label>
+    <input type="text" name="seo_keywords" value="{{seo_keywords}}">
   </div>
   <div class="field">
     <label>Google Analytics Code</label>

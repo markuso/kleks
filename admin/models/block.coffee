@@ -11,7 +11,9 @@ class Block extends BaseModel
   @queryOn: ['name','code']
     
   validate: ->
-    return 'Name is required' unless @name
+    return 'Site is required' unless @site
     return 'Code is required' unless @code
+    return 'Name is required' unless @name
+    return 'Content is required' unless @content
 
 module.exports = Block

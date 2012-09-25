@@ -2,10 +2,10 @@
   <button class="save-button">Save</button>
   <button class="cancel-button plain">Cancel</button>
 </div>
-<h1>Collection</h1>
+<h1>Author</h1>
 <h3 class="item-title">{{name}}</h3>
 
-<form class="collection">
+<form class="author">
   <div class="error-message"></div>
 
   <div class="field">
@@ -24,29 +24,20 @@
     <input type="text" name="name" value="{{name}}">
   </div>
   <div class="field required">
-    <label>Slug</label>
-    <input type="text" name="slug" value="{{slug}}">
+    <label>Email</label>
+    <input type="text" name="email" value="{{email}}">
+  </div>
+  <div class="field required">
+    <label>Bio</label>
+    <textarea name="bio">{{bio}}</textarea>
   </div>
   <div class="field">
-    <label>Intro</label>
-    <textarea name="intro">{{intro}}</textarea>
+    <label>Photo</label>
+    <input type="text" name="photo" value="{{photo}}" placeholder="URL to photo including http://">
   </div>
   <div class="field">
-    <input type="checkbox" name="pinned" {{#if pinned}}checked{{/if}}>
-    <label>Pinned</label>
-  </div>
-  <div class="field">
-    <label>Sponsor</label>
-    <select name="sponsor_id">
-      <option value=""></option>
-      {{#each sponsors}}
-      <option value="{{id}}">{{name}}</option>
-      {{/each}}
-    </select>
-  </div>
-  <div class="field">
-    <label>Updated At</label>
-    <input type="text" name="updated_at" value="{{updated_at}}" placeholder="ex. Feb 20 2012 6:30 PM or leave blank">
+    <label>Links JSON</label>
+    <textarea name="links" placeholder="[{ label: url }, ...]">{{links}}</textarea>
   </div>
 </form>
 

@@ -69,15 +69,22 @@ exports.collection = (head, req) ->
     sponsor.image_format = sponsor.format is 'image'
     sponsor.video_format = sponsor.format is 'video'
 
-  return {
-    site: site
-    title: collection.name
-    content: templates.render 'collection.html', req,
-      collection: collection
-      essays: essays
-      sponsor: sponsor
-      nav: 'collection'
-  }
+  if collection
+    return {
+      site: site
+      title: collection.name
+      content: templates.render 'collection.html', req,
+        collection: collection
+        essays: essays
+        sponsor: sponsor
+        nav: 'collection'
+    }
+  else
+    return {
+      code: 404
+      title: '404 Not Found'
+      content: templates.render '404.html', req, { host: req.headers.Host }
+    }
 
 
 exports.essays = (head, req) ->
@@ -152,7 +159,7 @@ exports.essay = (head, req) ->
     doc.updated_at_html = new Date(doc.updated_at).toDateString()
     return doc
 
-  essay = transformEssay(essay)
+  essay = transformEssay(essay) if essay
 
   collections = _.map collections, (doc) ->
     if doc.intro?
@@ -167,16 +174,23 @@ exports.essay = (head, req) ->
     sponsor.image_format = sponsor.format is 'image'
     sponsor.video_format = sponsor.format is 'video'
 
-  return {
-    site: site
-    title: essay.title
-    content: templates.render 'essay.html', req,
-      essay: essay
-      collections: collections
-      author: author
-      sponsor: sponsor
-      nav: 'essay'
-  }
+  if essay
+    return {
+      site: site
+      title: essay.title
+      content: templates.render 'essay.html', req,
+        essay: essay
+        collections: collections
+        author: author
+        sponsor: sponsor
+        nav: 'essay'
+    }
+  else
+    return {
+      code: 404
+      title: '404 Not Found'
+      content: templates.render '404.html', req, { host: req.headers.Host }
+    }
 
 
 ###

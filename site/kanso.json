@@ -14,7 +14,7 @@
   },
   "stylus": {
       "compress": true,
-      "compile": "static/css/index.styl",
+      "compile": ["static/css/index.styl", "static/css/themes"],
       "remove_from_attachments": true
   },
   "dependencies": {

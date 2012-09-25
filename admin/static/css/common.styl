@@ -1,0 +1,142 @@
+/* Common CSS that is imported into Admin and Site */
+
+@import url('http://fonts.googleapis.com/css?family=Lato:300,400,700')
+
+// apply a natural box layout model to all elements
+*
+  border-box()
+
+body
+  margin: 0
+  padding: 0
+  background: #fff
+  color: $textColor
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-weight: $normalFont
+  font-size: 16px
+  letter-spacing: 0em
+  word-spacing: 0.2em
+  line-height: 1.5em
+
+h1, h2, h3, h4, h5, h6
+  color: darken($textColor, 4%)
+  font-weight: $normalFont
+  line-height: 1.2em
+  margin: 0
+
+h1
+  font-size: 3.5em
+h2
+  font-size: 2.5em
+h3
+  font-size: 2em
+h4
+  font-size: 1.5em
+h5
+  font-size: 1.125em
+  font-weight: $boldFont
+h6
+  font-size: 0.875em
+  font-weight: $boldFont
+  line-height: 1.5em
+
+a
+  color: $linkColor
+  text-decoration: none
+
+  &:hover
+    text-decoration: none
+  
+  &.button
+    display: inline-block
+    padding: 10px 20px
+    background: $primaryColor
+    color: #fff
+    font-weight: $boldFont
+
+    &.large
+      font-size: 2em
+      line-height: 1.2em
+      padding: 14px 30px
+
+strong
+ font-weight: $boldFont
+
+b
+  font-weight: $heavyFont
+
+small
+  font-size: 0.875em
+  color: $lightGrey
+
+span.label
+  font-weight: $normalFont
+  color: $lightGrey
+
+blockquote
+  position: relative
+  border-right: 10px solid $primaryColor
+  padding: 0 1.5em 0 2.5em
+  margin: 1.5em 0
+  text-align: right
+  font-size: 1.125em
+  font-weight: $normalFont
+  &:before
+    content: '“'
+    position: absolute
+    top: 0.2em
+    left: 0
+    color: $primaryColor
+    font-size: 6em
+    font-weight: $heavyFont
+
+img
+  display: block
+  border: 0
+
+input, textarea, select
+  display: block
+  width: 100%
+  color: $textColor
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-size: 1em
+  font-weight: $normalFont
+  word-spacing: 0.2em
+  padding: 5px
+  margin: 0
+  border: 1px solid #f3f3f3
+
+textarea
+  max-width: 100%
+  min-width: 50%
+  height: 120px
+  min-height: 60px
+
+button, .button
+  display: inline-block
+  padding: 10px 30px
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
+  font-size: 1.1em
+  font-weight: $boldFont
+  color: #fff
+  background: $primaryColor
+  border: 0
+  border-radius(0)
+  cursor: pointer
+
+  &:hover
+    background: darken($primaryColor, 5%)
+    
+  &.plain
+    color: $primaryColor
+    background: #fff
+    border: 1px solid #f3f3f3
+
+    &:hover
+      background: #f3f3f3
+
+::-webkit-input-placeholder
+  color: #e3e3e3
+
+.clearfix
+  clearfix()

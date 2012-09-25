@@ -33,5 +33,9 @@
     "jquery": null,
     "spine": null,
     "underscore": null
+  },
+
+  "app": {
+    "themes": ["default","blue","green","brown","teal","grey"]
   }
 }

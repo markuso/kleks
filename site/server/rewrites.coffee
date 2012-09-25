@@ -62,6 +62,9 @@ module.exports = [
   # Redirected old URLs
   # moved '/posts/some-old-path', '/some-new-path'
 
+  # 404 not found 
+  { from: '/not-found', to: '_show/not_found' }
+
   # Catch all route
   { from: '*', to: '_show/not_found' }
 ]

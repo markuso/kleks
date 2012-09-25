@@ -1,149 +1,11 @@
-@import url('http://fonts.googleapis.com/css?family=Lato:300,400,700')
+/* Admin theme.styl CSS */
 
-$tealColor  = #61E0DF // #97E6D3
-$greenColor = #81C977
-$brownColor = #B4805B
-$blueColor  = #BAD0EF
-$greyColor  = #b4b4b4
-
-$primaryColor = $blueColor
-$lightGrey    = #c4c4c4
-$linkColor    = darken($primaryColor, 20%)
-$textColor    = #848484
+$availableThemeColors = 'theme-default' $defaultColor, 'theme-blue' $blueColor, 'theme-green' $greenColor, 'theme-brown' $brownColor, 'theme-teal' $tealColor, 'theme-grey' $greyColor
 
 $navbarWidth  = 180px
 
-// apply a natural box layout model to all elements
-*
-  border-box()
-
 body
-  margin: 0
-  padding: 0
   background: #f3f3f3
-  color: $textColor
-  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
-  font-weight: 300
-  font-size: 16px
-  letter-spacing: 0em
-  word-spacing: 0.2em
-  line-height: 1.5em
-
-h1, h2, h3, h4, h5, h6
-  color: darken($textColor, 4%)
-  font-weight: 300
-  line-height: 1.2em
-  margin: 0
-
-h1
-  font-size: 3.5em
-h2
-  font-size: 2.5em
-h3
-  font-size: 2em
-h4
-  font-size: 1.5em
-h5
-  font-size: 1.125em
-  font-weight: 400
-h6
-  font-size: 0.875em
-  font-weight: 400
-  line-height: 1.5em
-
-a
-  color: $linkColor
-  text-decoration: none
-
-  &:hover
-    text-decoration: none
-  
-  &.button
-    display: inline-block
-    padding: 10px 20px
-    background: $primaryColor
-    color: #fff
-    font-weight: 400
-
-    &.large
-      font-size: 2em
-      line-height: 1.2em
-      padding: 14px 30px
-
-strong
- font-weight: 400
-
-b
-  font-weight: 700
-
-small
-  font-size: 0.875em
-  color: $lightGrey
-
-blockquote
-  position: relative
-  border-right: 10px solid $primaryColor
-  padding: 0 1.5em 0 2.5em
-  margin: 1.5em 0
-  text-align: right
-  font-size: 1.125em
-  font-weight: 300
-  &:before
-    content: '“'
-    position: absolute
-    top: 0.2em
-    left: 0
-    color: $primaryColor
-    font-size: 6em
-    font-weight: 700
-
-img
-  display: block
-  border: 0
-
-input, textarea, select
-  display: block
-  width: 100%
-  color: $textColor
-  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
-  font-size: 1em
-  font-weight: 300
-  word-spacing: 0.2em
-  padding: 5px
-  margin: 0
-  border: 1px solid #f3f3f3
-
-textarea
-  max-width: 100%
-  min-width: 50%
-  height: 120px
-  min-height: 60px
-
-button, .button
-  display: inline-block
-  padding: 10px 30px
-  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
-  font-size: 1.1em
-  font-weight: 400
-  color: #fff
-  background: $primaryColor
-  border: 0
-  border-radius(0)
-  cursor: pointer
-
-  &:hover
-    background: darken($primaryColor, 5%)
-    
-  &.plain
-    color: $primaryColor
-    background: #fff
-    border: 1px solid #f3f3f3
-
-    &:hover
-      background: #f3f3f3
-
-::-webkit-input-placeholder
-  color: #f3f3f3
 
 #app
   position: absolute
@@ -155,18 +17,24 @@ button, .button
 .site-name
   font-size: 1.65em
   line-height: 1em
-  font-weight: 300
+  font-weight: $normalFont
   color: $lightGrey
   letter-spacing: -0.07em
   word-spacing: 0em
   white-space: nowrap
   a
     color: $lightGrey
-  b, strong
-    color: $primaryColor
+  // b, strong
+  //   color: $primaryColor
+
+  // loop through all available theme colors
+  for c in $availableThemeColors
+    &.{c[0]}
+      b, strong
+        color: c[1]
 
 span.label
-  font-weight: 300
+  font-weight: $normalFont
   color: $lightGrey
 
 .filter-box
@@ -182,7 +50,7 @@ span.label
     width: 100%
     color: $lightGrey
     font-size: 1.5em
-    font-weight: 300
+    font-weight: $normalFont
     padding: 5px 10px
     margin: 0
     border: 1px solid #f3f3f3
@@ -244,7 +112,7 @@ span.label
     margin-bottom: 20px
     font-size: 4.25em
     line-height: 1em
-    font-weight: 400
+    font-weight: $boldFont
     color: #fff
     letter-spacing: -0.07em
     word-spacing: 0em
@@ -264,7 +132,7 @@ span.label
       a
         display: block
         padding: 10px 20px
-        font-weight: 400
+        font-weight: $boldFont
         color: #fff
 
         &:hover
@@ -406,6 +274,11 @@ span.label
           width: auto
           float: left
           margin: 4px 10px 4px 0
+
+      .required label:after
+        content: ' *'
+        color: $textColor
+
 
       .error-message
         display: none

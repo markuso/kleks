@@ -60,7 +60,7 @@ class CollectionForm extends Spine.Controller
 
   siteChange: ->
     site = Site.find(@formSite.val())
-    @formSite.parents('.field').find('.site-selected').html "<div class=\"site-name\">#{site.name_html}</div>"
+    @formSite.parents('.field').find('.site-selected').html "<div class=\"site-name theme-#{site.theme}\">#{site.name_html}</div>"
 
   save: (e) ->
     e.preventDefault()

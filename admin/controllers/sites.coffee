@@ -1,6 +1,7 @@
 Spine       = require('spine/core')
 # $           = Spine.$
 templates   = require('duality/templates')
+settings    = require('settings/root')
 
 Site        = require('models/site')
 
@@ -41,7 +42,7 @@ class SiteForm extends Spine.Controller
       @title = 'New Site'
       @item = {}
     
-    @item.themes = ['default','blue','green']
+    @item.themes = settings.app.themes
     @html templates.render('site-form.html', {}, @item)
 
     @itemTitle.html @title

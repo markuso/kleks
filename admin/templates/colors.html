@@ -1,0 +1,19 @@
+<div style="background: #fff; padding: 20px;">
+  <h1>Color Samples</h1>
+
+  {{#each colors}}
+    <div style="background: {{.}}; width: 100px; height: 80px; float: left; margin: 20px; color: #fff; text-align: center;">{{.}}</div>
+  {{/each}}
+
+  <p style="clear: both;">&nbsp;</p>
+
+  {{#each colors}}
+  <div style="width: 960px;" class="clearfix">
+    <div style="background: {{.}}; width: 100px; height: 80px; float: right; color: #fff; text-align: center;">{{.}}</div>
+    <div class="site-name" style="font-size: 5.25em; float: left;">
+      Evolving <b style="color: {{.}};">Something</b>
+    </div>
+    <div>The color code is {{.}}</div>
+  </div>
+  {{/each}}
+</div>

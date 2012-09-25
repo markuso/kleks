@@ -12,5 +12,7 @@ class Author extends BaseModel
     
   validate: ->
     return 'Name is required' unless @name
+    return 'Email is required' unless @email
+    return 'Bio is required' unless @bio
 
 module.exports = Author

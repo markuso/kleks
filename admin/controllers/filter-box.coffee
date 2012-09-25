@@ -1,5 +1,5 @@
 Spine       = require('spine/core')
-# $           = Spine.$
+$           = Spine.$
 templates   = require('duality/templates')
 
 Site  = require('models/site')
@@ -26,7 +26,7 @@ class FilterBox extends Spine.Controller
     @selectedSite = $(@el).find('.selected-site')
     @siteSelector = $(@el).find('ul.site-selector')
     
-    @filterInput.on 'keypress', (e) =>
+    @filterInput.on 'keyup', (e) =>
       @filter()
     
     @selectedSite.on 'click', (e) =>
@@ -34,7 +34,7 @@ class FilterBox extends Spine.Controller
     
     @siteSelector.find('li').on 'click', (e) =>
       $item = $(e.currentTarget)
-      @selectedSite.find('> span').html($item.html())
+      @selectedSite.find('> span').html($item.html()).attr('class', $item.attr('class'))
       @siteId = $item.attr('data-id')
       @siteSelector
         .hide()
@@ -45,7 +45,7 @@ class FilterBox extends Spine.Controller
       @filter()
 
   filter: =>
-    @query = @filterInput.val()
+    @query = $.trim(@filterInput.val())
     Spine.trigger 'filterbox:change',
       query: @query
       siteId: @siteId
