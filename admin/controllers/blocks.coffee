@@ -80,7 +80,7 @@ class BlockForm extends Spine.Controller
     @errorMessage.html(msg).show()
     @el.scrollTop(0, 0)
   
-  destroy: ->
+  destroy: (e) ->
     e.preventDefault()
     if @item and confirm "Are you sure you want to delete this #{@item.constructor.name}?"
       @item.destroy()
