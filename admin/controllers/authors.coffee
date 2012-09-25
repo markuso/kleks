@@ -14,7 +14,7 @@ class AuthorForm extends Spine.Controller
     '.error-message':          'errorMessage'
     'form':                    'form'
     'select[name=site]':       'formSite'
-    'select[name=links]':      'formLinks'
+    '.links-list':             'linksList'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
 
@@ -24,6 +24,7 @@ class AuthorForm extends Spine.Controller
     'click .cancel-button':     'cancel'
     'click .delete-button':     'destroy'
     'change select[name=site]': 'siteChange'
+    'click .add-link':          'addLink'
 
   constructor: ->
     super
@@ -51,9 +52,9 @@ class AuthorForm extends Spine.Controller
     # Set few initial form values
     if @editing
       @formSite.val(@item.site)
-      @formLinks.val(JSON.stringify(@item.links))
     else
       @formSite.val(@stack.stack.filterBox.siteId)
+      @addLink()
     @siteChange()
 
   siteChange: ->
@@ -64,6 +65,10 @@ class AuthorForm extends Spine.Controller
     else
       $siteSelected.html ""
 
+  addLink: (e) ->
+    e?.preventDefault()
+    @linksList.append templates.render('partials/link-form.html', {}, {})
+
   save: (e) ->
     e.preventDefault()
     if @editing
@@ -71,8 +76,14 @@ class AuthorForm extends Spine.Controller
     else
       @item = new Author().fromForm(@form)
 
-    # Transform some fields before saving
-    @item.links = JSON.parse(@item.links)
+    # Construct the links list object
+    links = []
+    @linksList.find('.link-form').each ->
+      label = $.trim $(@).find('input[name=link_label]').val()
+      url = $.trim $(@).find('input[name=link_url]').val()
+      if label and url
+        links.push label: label, url: url
+    @item.links = links
     
     # Save the item and make sure it validates
     if @item.save()
@@ -86,6 +97,7 @@ class AuthorForm extends Spine.Controller
     @el.scrollTop(0, 0)
   
   destroy: ->
+    e.preventDefault()
     if @item and confirm "Are you sure you want to delete this #{@item.constructor.name}?"
       @item.destroy()
       @back()

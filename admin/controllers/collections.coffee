@@ -97,6 +97,7 @@ class CollectionForm extends Spine.Controller
     @el.scrollTop(0, 0)
   
   destroy: ->
+    e.preventDefault()
     if @item and confirm "Are you sure you want to delete this #{@item.constructor.name}?"
       @item.destroy()
       @back()

@@ -34,9 +34,15 @@
     <label>Photo</label>
     <input type="text" name="photo" value="{{photo}}" placeholder="URL to photo including http://">
   </div>
-  <div class="field">
-    <label>Links JSON</label>
-    <textarea name="links" placeholder="[{ label: url }, ...]">{{links}}</textarea>
+  
+  <h4 class="heading">
+    Links
+    <a class="button small add-link" href="#">+</a>
+  </h4>
+  <div class="field inline links-list">
+    {{#each links}}
+      {{{include "partials/link-form.html"}}}
+    {{/each}}
   </div>
 </form>
 
