@@ -8,24 +8,25 @@
 <form class="block">
   <div class="error-message"></div>
 
+  <div class="field required">
+    <label>Site</label>
+    <select name="site">
+      <option value="" disabled>Choose a site...</option>
+      {{#each sites}}
+      <option value="{{id}}">{{name}} &mdash; {{id}}</option>
+      {{/each}}
+    </select>
+    <div class="site-selected"></div>
+  </div>
   <div class="field">
     <div class="field-left required">
-      <label>Site</label>
-      <select name="site">
-        {{#each sites}}
-        <option value="{{id}}">{{name}} &mdash; {{id}}</option>
-        {{/each}}
-      </select>
+      <label>Code</label>
+      <input type="text" name="code" value="{{code}}" placeholder="ie. site_intro or site_promo">
     </div>
-    <div class="field-right site-selected"></div>
-  </div>
-  <div class="field required">
-    <label>Code</label>
-    <input type="text" name="code" value="{{code}}" placeholder="like: site_intro or site_promo">
-  </div>
-  <div class="field required">
-    <label>Name</label>
-    <input type="text" name="name" value="{{name}}">
+    <div class="field-right required">
+      <label>Name</label>
+      <input type="text" name="name" value="{{name}}" placeholder="Used in admin list only">
+    </div>
   </div>
   <div class="field required">
     <label>Content HTML</label>

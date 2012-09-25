@@ -8,28 +8,27 @@
 <form class="author">
   <div class="error-message"></div>
 
-  <div class="field">
-    <div class="field-left required">
-      <label>Site</label>
-      <select name="site">
-        {{#each sites}}
-        <option value="{{id}}">{{name}} &mdash; {{id}}</option>
-        {{/each}}
-      </select>
-    </div>
-    <div class="field-right site-selected"></div>
+  <div class="field required">
+    <label>Site</label>
+    <select name="site">
+      <option value="" disabled>Choose a site...</option>
+      {{#each sites}}
+      <option value="{{id}}">{{name}} &mdash; {{id}}</option>
+      {{/each}}
+    </select>
+    <div class="site-selected"></div>
   </div>
   <div class="field required">
     <label>Name</label>
-    <input type="text" name="name" value="{{name}}">
+    <input type="text" name="name" value="{{name}}" placeholder="Fullname of author">
   </div>
   <div class="field required">
     <label>Email</label>
-    <input type="text" name="email" value="{{email}}">
+    <input type="text" name="email" value="{{email}}" placeholder="person@example.com">
   </div>
   <div class="field required">
     <label>Bio</label>
-    <textarea name="bio">{{bio}}</textarea>
+    <textarea name="bio" placeholder="Provide the author's bio content HTML">{{bio}}</textarea>
   </div>
   <div class="field">
     <label>Photo</label>

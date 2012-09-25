@@ -230,19 +230,37 @@ span.label
     > form
       margin: 1.5em 0
       clearfix()
+
+      .heading
+        color: $primaryColor
      
       .field
-        padding: 5px 0
+        position: relative
+        padding: 10px 0
         clearfix()
 
         label
           display: block
+          padding: 5px 0
           color: $lightGrey
+
+        input[type='text'],
+        input[type='search'],
+        textarea,
+        select
+          display: block
+          width: 100%
 
         input[name='name'],
         input[name='name_html'],
-        input[name='title']
+        input[name='title'],
+        input[name='code']
           font-size: 1.5em
+
+        input[type='checkbox']
+          display: inline-block
+          float: left
+          margin: 4px 10px 4px 0
 
         .field-left
           float: left
@@ -253,32 +271,35 @@ span.label
           width: 48%
 
         .site-selected
-          font-size: 2em
-
+          position: absolute
+          top: 42px
+          right: 0
+          padding-left: 10px
+          background: #fff
+        
         &.inline
-
+          
           label
             display: inline-block
             width: 20%
             float: left
-            padding: 10px 0
 
-          select, input, textarea
+          input[type='text'],
+          input[type='search'],
+          textarea,
+          select
             display: block
             width: 75%
             float: right
-            margin-left: 10px
 
-        input[type='checkbox']
-          display: inline-block
-          width: auto
-          float: left
-          margin: 4px 10px 4px 0
+          input[type='checkbox']
+            width: auto
+            float: none
+            margin: 4px 10px
 
       .required label:after
         content: ' *'
         color: $textColor
-
 
       .error-message
         display: none

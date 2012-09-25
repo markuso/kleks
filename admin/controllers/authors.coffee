@@ -57,8 +57,12 @@ class AuthorForm extends Spine.Controller
     @siteChange()
 
   siteChange: ->
-    site = Site.find(@formSite.val())
-    @formSite.parents('.field').find('.site-selected').html "<div class=\"site-name theme-#{site.theme}\">#{site.name_html}</div>"
+    $siteSelected = @formSite.parents('.field').find('.site-selected')
+    site = Site.exists(@formSite.val())
+    if site
+      $siteSelected.html "<div class=\"site-name theme-#{site.theme}\">#{site.name_html}</div>"
+    else
+      $siteSelected.html ""
 
   save: (e) ->
     e.preventDefault()

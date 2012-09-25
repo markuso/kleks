@@ -65,9 +65,18 @@ exports.collection = (head, req) ->
     return doc
 
   if sponsor
-    sponsor.text_format = sponsor.format is 'text'
-    sponsor.image_format = sponsor.format is 'image'
-    sponsor.video_format = sponsor.format is 'video'
+    # Check for strat/end dates of sponsorship
+    start = new Date(collection.sponsor_start)
+    end = new Date(collection.sponsor_end)
+    now = new Date()
+    if start <= now and end >= now
+      # let continue on
+      sponsor.text_format = sponsor.format is 'text'
+      sponsor.image_format = sponsor.format is 'image'
+      sponsor.video_format = sponsor.format is 'video'
+    else
+      # let's remove the sponsor
+      sponsor = null
 
   if collection
     return {
@@ -170,9 +179,18 @@ exports.essay = (head, req) ->
     return doc
 
   if sponsor
-    sponsor.text_format = sponsor.format is 'text'
-    sponsor.image_format = sponsor.format is 'image'
-    sponsor.video_format = sponsor.format is 'video'
+    # Check for strat/end dates of sponsorship
+    start = new Date(essay.sponsor_start)
+    end = new Date(essay.sponsor_end)
+    now = new Date()
+    if start <= now and end >= now
+      # let continue on
+      sponsor.text_format = sponsor.format is 'text'
+      sponsor.image_format = sponsor.format is 'image'
+      sponsor.video_format = sponsor.format is 'video'
+    else
+      # let's remove the sponsor
+      sponsor = null
 
   if essay
     return {

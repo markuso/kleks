@@ -94,7 +94,12 @@ img
   display: block
   border: 0
 
-input, textarea, select
+input[type='text'],
+input[type='search'],
+textarea,
+select
+  -webkit-appearance: none
+  outline: none
   display: block
   width: 100%
   color: $textColor
@@ -102,15 +107,19 @@ input, textarea, select
   font-size: 1em
   font-weight: $normalFont
   word-spacing: 0.2em
-  padding: 5px
+  padding: 5px 0
   margin: 0
-  border: 1px solid #f3f3f3
+  border: 0
+  border-bottom: 2px dotted #f3f3f3
+  border-radius(0)
 
 textarea
   max-width: 100%
   min-width: 50%
   height: 120px
   min-height: 60px
+  border-left: 2px dotted #f3f3f3
+  padding-left: 2px
 
 button, .button
   display: inline-block

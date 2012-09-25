@@ -10,36 +10,38 @@
 
   <div class="field required">
     <label>Name</label>
-    <input type="text" name="name" value="{{name}}">
+    <input type="text" name="name" value="{{name}}" placeholder="Type the sponsorship name">
   </div>
   <div class="field">
     <label>Link</label>
-    <input type="text" name="link" value="{{link}}">
+    <input type="text" name="link" value="{{link}}" placeholder="Full URL to link image or text to">
   </div>
   <div class="field">
-    <label>Label</label>
-    <input type="text" name="label" value="{{label}}">
-  </div>
-  <div class="field">
-    <label>Format</label>
-    <select name="format">
-      <option value="text">Text</option>
-      <option value="image">Image</option>
-      <option value="video">Video</option>
-    </select>
+    <div class="field-left">
+      <label>Format</label>
+      <select name="format" placeholder="Select a format...">
+        <option value="text">Text</option>
+        <option value="image">Image</option>
+        <option value="video">Video</option>
+      </select>
+    </div>
+    <div class="field-right">
+      <label>Label</label>
+      <input type="text" name="label" value="{{label}}" placeholder="Text to override the 'Sponsored By' label if need be">
+    </div>
   </div>
   <div class="field">
     <label>Content</label>
-    <textarea name="content">{{content}}</textarea>
+    <textarea name="content" placeholder="Type text or paste embed code of an image or video">{{content}}</textarea>
   </div>
   <div class="field">
     <label>Note</label>
-    <textarea name="note">{{note}}</textarea>
+    <textarea name="note" placeholder="Type a private note for your eyes only">{{note}}</textarea>
   </div>
   <div class="field">
     <label>Contact</label>
     <select name="contact_id">
-      <option value=""></option>
+      <option value="">Select a contact...</option>
       {{#each contacts}}
       <option value="{{id}}">{{name}}</option>
       {{/each}}

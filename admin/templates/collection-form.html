@@ -8,45 +8,57 @@
 <form class="collection">
   <div class="error-message"></div>
 
-  <div class="field">
-    <div class="field-left required">
-      <label>Site</label>
-      <select name="site">
-        {{#each sites}}
-        <option value="{{id}}">{{name}} &mdash; {{id}}</option>
-        {{/each}}
-      </select>
-    </div>
-    <div class="field-right site-selected"></div>
+  <div class="field required">
+    <label>Site</label>
+    <select name="site">
+      <option value="" disabled>Choose a site...</option>
+      {{#each sites}}
+      <option value="{{id}}">{{name}} &mdash; {{id}}</option>
+      {{/each}}
+    </select>
+    <div class="site-selected"></div>
   </div>
   <div class="field required">
     <label>Name</label>
-    <input type="text" name="name" value="{{name}}">
+    <input type="text" name="name" value="{{name}}" placeholder="Collection name in titlecase">
   </div>
   <div class="field required">
     <label>Slug</label>
-    <input type="text" name="slug" value="{{slug}}">
+    <input type="text" name="slug" value="{{slug}}" placeholder="Choose a lug — all lowercase and hyphens but and NO spaces">
   </div>
   <div class="field">
-    <label>Intro</label>
-    <textarea name="intro">{{intro}}</textarea>
+    <label>Intro MD/HTML</label>
+    <textarea name="intro" placeholder="Provide a collection introduction text as Markdown/HTML">{{intro}}</textarea>
   </div>
   <div class="field">
-    <input type="checkbox" name="pinned" {{#if pinned}}checked{{/if}}>
-    <label>Pinned</label>
+    <div class="field-left">
+      <label>Pinned</label>
+      <input type="checkbox" name="pinned" {{#if pinned}}checked{{/if}}>
+    </div>
+    <div class="field-right">
+      <label>Updated</label>
+      <input type="text" name="updated_at" value="{{updated_at}}" placeholder="ex. Feb 20 2012 6:30 PM or leave blank">
+    </div>
   </div>
+
+  <h3 class="heading">Sponsorship</h3>
   <div class="field">
-    <label>Sponsor</label>
-    <select name="sponsor_id">
-      <option value=""></option>
-      {{#each sponsors}}
-      <option value="{{id}}">{{name}}</option>
-      {{/each}}
-    </select>
-  </div>
-  <div class="field">
-    <label>Updated At</label>
-    <input type="text" name="updated_at" value="{{updated_at}}" placeholder="ex. Feb 20 2012 6:30 PM or leave blank">
+    <div class="field-left">
+      <label>Sponsor</label>
+      <select name="sponsor_id">
+        <option value="">Select a sponsor...</option>
+        {{#each sponsors}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="field-right">
+      <label>Start</label>
+      <input type="text" name="sponsor_start" value="{{sponsor_start}}" placeholder="ex. Feb 20 2012 6:30 PM">
+      <br class="clearfix">
+      <label>End</label>
+      <input type="text" name="sponsor_end" value="{{sponsor_end}}" placeholder="ex. Feb 20 2012 6:30 PM">
+    </div>
   </div>
 </form>
 
