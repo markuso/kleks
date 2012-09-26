@@ -17,6 +17,8 @@ class Essay extends BaseModel
   @queryOn: ['title','slug']
     
   validate: ->
+    @updated_at = new Date().toJSON()
+    @published_at = new Date().toJSON() unless @published_at
     return 'Site is required' unless @site
     return 'Slug is required' unless @slug
     return 'Title is required' unless @title
