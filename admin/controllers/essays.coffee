@@ -2,6 +2,8 @@ Spine       = require('spine/core')
 # $           = Spine.$
 templates   = require('duality/templates')
 
+MultiSelect = require('controllers/ui/multi-select')
+
 Essay       = require('models/essay')
 Author      = require('models/author')
 Collection  = require('models/collection')
@@ -19,7 +21,7 @@ class EssayForm extends Spine.Controller
     'select[name=site]':       'formSite'
     'select[name=author_id]':  'formAuthorId'
     'select[name=sponsor_id]': 'formSponsorId'
-    'select[name=collections]': 'formCollections'
+    '.collections-list':       'collectionsList'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
 
@@ -47,6 +49,8 @@ class EssayForm extends Spine.Controller
     else
       @title = 'New Essay'
       @item = {}
+
+    @item.collections ?= []
     
     @item.sites = Site.all().sort(Site.nameSort)
     @item.sponsors = Sponsor.all().sort(Sponsor.nameSort)
@@ -82,10 +86,11 @@ class EssayForm extends Spine.Controller
   
   makeCollectionsList: (site) ->
     collections = Collection.findAllByAttribute('site', site.id)
-    @formCollections.empty()
-    for collection in collections
-      @formCollections.append "<option value=\"#{collection.id}\" data-slug=\"#{collection.slug}\">#{collection.name}</option>"
-    @formCollections.val (c.id for c in @item.collections)
+    @collectionSelect = new MultiSelect
+      items: collections
+      selectedItems: (c.id for c in @item.collections)
+      valueFields: ['id','slug']
+    @collectionsList.html @collectionSelect.el
 
   save: (e) ->
     e.preventDefault()
@@ -97,16 +102,7 @@ class EssayForm extends Spine.Controller
     # Convert some boolean properties
     @item.published = Boolean(@item.published)
 
-    # Pull all selected collections
-    collections = []
-    @formCollections.children('option:selected').each ->
-      $option = $(@)
-      id = $option.attr('value')
-      slug = $option.attr('data-slug')
-      if id and slug
-        collections.push id: id, slug: slug
-    @item.collections = collections
-    @log @item.collections
+    @item.collections = @collectionSelect.selected()
 
     # Take care of some dates if need be
     try
@@ -135,7 +131,7 @@ class EssayForm extends Spine.Controller
       @back()
 
   cancel: (e) ->
-    e.preventDefault
+    e.preventDefault()
     if @dirtyForm
       if confirm "You may have some unsaved changes.\nAre you sure you want to cancel?"
         @back()
@@ -146,7 +142,7 @@ class EssayForm extends Spine.Controller
     @navigate('/essays/list')
 
   preventSubmit: (e) ->
-    e.preventDefault
+    e.preventDefault()
     
   deactivate: ->
     super

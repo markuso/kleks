@@ -1,11 +1,17 @@
-<h1>Dashboard</h1>
-<ul class="drafts list">
-  {{#each drafts}}
-  <li>
-    <a href="#/essay/{{id}}">{{title}}</a>
-    <div class="meta">
-      <div><a href="http://{{site}}/essay/{{slug}}" target="_blank">view on {{site}}</a></div>
-    </div>
-  </li>
-  {{/each}}
-</ul>
+<div class="content">
+  <h1>Dashboard</h1>
+  <ul class="drafts list">
+    {{#each drafts}}
+    <li>
+      <a href="#/essay/{{id}}">{{title}}</a>
+      <div class="meta">
+        <div><a href="http://{{site}}/essay/{{slug}}" target="_blank">view on {{site}}</a></div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="sidebar">
+  
+</div>

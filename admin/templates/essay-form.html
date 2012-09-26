@@ -1,81 +1,87 @@
-<div class="buttons">
-  <button class="save-button">Save</button>
-  <button class="cancel-button plain">Cancel</button>
-</div>
-<h1>Essay</h1>
-<h3 class="item-title">{{title}}</h3>
-
 <form class="essay">
-  <div class="error-message"></div>
 
-  <div class="field required">
-    <label>Site</label>
-    <select name="site">
-      <option value="" disabled>Choose a site...</option>
-      {{#each sites}}
-      <option value="{{id}}">{{name}} &mdash; {{id}}</option>
-      {{/each}}
-    </select>
-    <div class="site-selected"></div>
-  </div>
-  <div class="field required">
-    <label>Title</label>
-    <input type="text" name="title" value="{{title}}" placeholder="Write a smart title">
-  </div>
-  <div class="field">
-    <div class="field-left required">
-      <label>Slug</label>
-      <input type="text" name="slug" value="{{slug}}" placeholder="All lowercase and hyphens but and NO spaces">
-    </div>
-    <div class="field-right">
-      <label>Author</label>
-      <select name="author_id"></select>
-    </div>
-  </div>
-  <div class="field">
-    <label>Intro MD/HTML</label>
-    <textarea name="intro" placeholder="Provide an essay introduction text as Markdown/HTML">{{intro}}</textarea>
-  </div>
-  <div class="field">
-    <label>Body MD/HTML</label>
-    <textarea name="body" placeholder="Write your essay content as Markdown/HTML">{{body}}</textarea>
-  </div>
-  <div class="field">
-    <label>Collections</label>
-    <select name="collections" multiple></select>
-  </div>
-  <div class="field">
-    <div class="field-left">
-      <label>Published</label>
-      <input type="checkbox" name="published" {{#if published}}checked{{/if}}>
-    </div>
-    <div class="field-right">
-      <label>Published At</label>
-      <input type="text" name="published_at" value="{{published_at}}" placeholder="ex. Feb 20 2012 6:30 PM or leave blank">
-    </div>
-  </div>
+  <div class="content">
+    <h1>Essay</h1>
+    <h3 class="item-title">{{title}}</h3>
 
-  <h3 class="heading">Sponsorship</h3>
-  <div class="field">
-    <div class="field-left">
-      <label>Sponsor</label>
-      <select name="sponsor_id">
-        <option value="">Select a sponsor...</option>
-        {{#each sponsors}}
-        <option value="{{id}}">{{name}}</option>
+    <div class="error-message"></div>
+
+    <div class="field required">
+      <label>Site</label>
+      <select name="site">
+        <option value="" disabled>Choose a site...</option>
+        {{#each sites}}
+        <option value="{{id}}">{{name}} &mdash; {{id}}</option>
         {{/each}}
       </select>
+      <div class="site-selected"></div>
     </div>
-    <div class="field-right">
-      <label>Start</label>
-      <input type="text" name="sponsor_start" value="{{sponsor_start}}" placeholder="ex. Feb 20 2012 6:30 PM">
-      <br class="clearfix">
-      <label>End</label>
-      <input type="text" name="sponsor_end" value="{{sponsor_end}}" placeholder="ex. Feb 20 2012 6:30 PM">
+    <div class="field required">
+      <label>Collections</label>
+      <div class="collections-list"></div>
+    </div>
+    <div class="field required">
+      <label>Title</label>
+      <input type="text" name="title" value="{{title}}" placeholder="Write a smart title">
+    </div>
+    <div class="field">
+      <div class="field-left required">
+        <label>Slug</label>
+        <input type="text" name="slug" value="{{slug}}" placeholder="All lowercase and hyphens but and NO spaces">
+      </div>
+      <div class="field-right required">
+        <label>Author</label>
+        <select name="author_id"></select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Intro MD/HTML</label>
+      <textarea name="intro" placeholder="Provide an essay introduction text as Markdown/HTML">{{intro}}</textarea>
+    </div>
+    <div class="field">
+      <label>Body MD/HTML</label>
+      <textarea name="body" placeholder="Write your essay content as Markdown/HTML">{{body}}</textarea>
+    </div>
+    <div class="field">
+      <div class="field-left">
+        <label>Published</label>
+        <input type="checkbox" name="published" {{#if published}}checked{{/if}}>
+      </div>
+      <div class="field-right">
+        <label>Published At</label>
+        <input type="text" name="published_at" value="{{published_at}}" placeholder="ex. Feb 20 2012 6:30 PM or leave blank">
+      </div>
     </div>
   </div>
-</form>
 
-{{#if id}}
-<button class="delete-button plain">Delete {{type}}</button>
-{{/if}}
+  <div class="sidebar">
+    <div class="buttons">
+      <button class="save-button">Save</button>
+      <button class="cancel-button plain">Cancel</button>
+      {{#if id}}<a class="delete-button" href="#">delete {{type}}</a>{{/if}}
+    </div>
+
+    <div class="top-spacer"></div>
+
+    <h3 class="heading">Sponsorship</h3>
+    <div class="field">
+      <div class="field-left">
+        <label>Sponsor</label>
+        <select name="sponsor_id">
+          <option value="">Select a sponsor...</option>
+          {{#each sponsors}}
+          <option value="{{id}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="field-right">
+        <label>Start</label>
+        <input type="text" name="sponsor_start" value="{{sponsor_start}}" placeholder="Feb 20 2012 6:30 PM">
+        <br class="clearfix">
+        <label>End</label>
+        <input type="text" name="sponsor_end" value="{{sponsor_end}}" placeholder="Feb 20 2012 6:30 PM">
+      </div>
+    </div>
+  </div>
+
+</form>

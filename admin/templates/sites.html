@@ -1,18 +1,24 @@
-<h1>
-  Sites
-  <a class="new" href="#/site/new">+</a>
-  <span class="count">{{sites.length}}</span>
-</h1>
-<ul class="sites list">
-  {{#each sites}}
-  <li>
-    <div class="actions">
-      <div><a href="{{link}}" target="_blank">{{id}}</span></div>
-    </div>
-    <a class="site-name theme-{{theme}}" href="#/site/{{id}}">{{{name_html}}}</a>
-    <div class="meta">
-      {{#if tagline}}<div>{{{tagline}}}</div>{{/if}}
-    </div>
-  </li>
-  {{/each}}
-</ul>
+<div class="content">
+  <h1>
+    Sites
+    <a class="new" href="#/site/new">+</a>
+    <span class="count">{{sites.length}}</span>
+  </h1>
+  <ul class="sites list">
+    {{#each sites}}
+    <li>
+      <div class="actions">
+        <div><a href="{{link}}" target="_blank">{{id}}</a></div>
+      </div>
+      <a class="site-name theme-{{theme}}" href="#/site/{{id}}">{{{name_html}}}</a>
+      <div class="meta">
+        {{#if tagline}}<div>{{{tagline}}}</div>{{/if}}
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="sidebar">
+  
+</div>

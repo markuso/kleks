@@ -1,15 +1,21 @@
-<h1>
-  Collections
-  <a class="new" href="#/collection/new">+</a>
-  <span class="count">{{collections.length}}</span>
-</h1>
-<ul class="collections list">
-  {{#each collections}}
-  <li>
-    <div class="actions">
-      <div><a href="http://{{site}}/collection/{{slug}}" target="_blank">{{site}}</a></div>
-    </div>
-    <a href="#/collection/{{id}}">{{name}}</a>
-  </li>
-  {{/each}}
-</ul>
+<div class="content">
+  <h1>
+    Collections
+    <a class="new" href="#/collection/new">+</a>
+    <span class="count">{{collections.length}}</span>
+  </h1>
+  <ul class="collections list">
+    {{#each collections}}
+    <li>
+      <div class="actions">
+        <div><a href="http://{{site}}/collection/{{slug}}" target="_blank">{{site}}</a></div>
+      </div>
+      <a href="#/collection/{{id}}">{{name}}</a>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="sidebar">
+  
+</div>

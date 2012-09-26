@@ -1,18 +1,24 @@
-<h1>
-  Essays
-  <a class="new" href="#/essay/new">+</a>
-  <span class="count">{{essays.length}}</span>
-</h1>
-<ul class="essays list">
-  {{#each essays}}
-  <li>
-    <div class="actions">
-      {{#unless published}}<div><strong>In Draft</strong></div>{{/unless}}
-    </div>
-    <a href="#/essay/{{id}}">{{title}}</a>
-    <div class="meta">
-      <div><a href="http://{{site}}/essay/{{slug}}" target="_blank">view on {{site}}</a></div>
-    </div>
-  </li>
-  {{/each}}
-</ul>
+<div class="content">
+  <h1>
+    Essays
+    <a class="new" href="#/essay/new">+</a>
+    <span class="count">{{essays.length}}</span>
+  </h1>
+  <ul class="essays list">
+    {{#each essays}}
+    <li>
+      <div class="actions">
+        {{#unless published}}<div><strong>In Draft</strong></div>{{/unless}}
+      </div>
+      <a href="#/essay/{{id}}">{{title}}</a>
+      <div class="meta">
+        <div><a href="http://{{site}}/essay/{{slug}}" target="_blank">view on {{site}}</a></div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="sidebar">
+  
+</div>

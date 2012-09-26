@@ -1,71 +1,77 @@
-<div class="buttons">
-  <button class="save-button">Save</button>
-  <button class="cancel-button plain">Cancel</button>
-</div>
-<h1>Site</h1>
-<h3 class="item-title">{{name}}</h3>
-
 <form class="site">
-  <div class="error-message"></div>
+  
+  <div class="content">
+    <h1>Site</h1>
+    <h3 class="item-title">{{name}}</h3>
 
-  <div class="field required">
-    <label>Site ID</label>
-    <input type="text" name="_id" value="{{_id}}" placeholder="www.example.com">
-  </div>
-  <div class="field">
-    <div class="field-left required">
-      <label>Name</label>
-      <input type="text" name="name" value="{{name}}" placeholder="Evolving Something">
+    <div class="error-message"></div>
+
+    <div class="field required">
+      <label>Site ID</label>
+      <input type="text" name="_id" value="{{_id}}" placeholder="www.example.com">
     </div>
-    <div class="field-right required">
-      <label>Name HTML</label>
-      <input type="text" name="name_html" value="{{name_html}}" placeholder="Evolving <b>Something</b>">
+    <div class="field">
+      <div class="field-left required">
+        <label>Name</label>
+        <input type="text" name="name" value="{{name}}" placeholder="Evolving Something">
+      </div>
+      <div class="field-right required">
+        <label>Name HTML</label>
+        <input type="text" name="name_html" value="{{name_html}}" placeholder="Evolving <b>Something</b>">
+      </div>
+    </div>
+    <div class="field">
+      <label>Tagline</label>
+      <input type="text" name="tagline" value="{{tagline}}" placeholder="Yet another great Kleks site">
+    </div>
+    <div class="field">
+      <div class="field-left">
+        <label>Theme</label>
+        <select name="theme">
+          {{#each themes}}
+          <option value="{{.}}">{{.}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="field-right">
+        <label>Link</label>
+        <input type="text" name="link" value="{{link}}" placeholder="http://www.example.com">
+      </div>
+    </div>
+    <div class="field">
+      <label>Menu HTML</label>
+      <textarea name="menu_html" placeholder="only LI items">{{menu_html}}</textarea>
+    </div>
+    <div class="field">
+      <label>Footer HTML</label>
+      <textarea name="footer_html" placeholder="Content to show on all pages in the footer">{{footer_html}}</textarea>
+    </div>
+    <div class="field">
+      <label>CSS</label>
+      <textarea name="css" placeholder="Custom CSS to override on site">{{css}}</textarea>
+    </div>
+    <div class="field">
+      <label>SEO Description</label>
+      <input type="text" name="seo_description" value="{{seo_description}}" placeholder="Keep it concise and short">
+    </div>
+    <div class="field">
+      <label>SEO Keywords</label>
+      <input type="text" name="seo_keywords" value="{{seo_keywords}}" placeholder="Short list of comma seperated keywords">
+    </div>
+    <div class="field">
+      <label>Google Analytics Code</label>
+      <input type="text" name="google_analytics_code" value="{{google_analytics_code}}" placeholder="UA-XXXXXXXXX-XX">
     </div>
   </div>
-  <div class="field">
-    <label>Tagline</label>
-    <input type="text" name="tagline" value="{{tagline}}" placeholder="Yet another great Kleks site">
-  </div>
-  <div class="field">
-    <div class="field-left">
-      <label>Theme</label>
-      <select name="theme">
-        {{#each themes}}
-        <option value="{{.}}">{{.}}</option>
-        {{/each}}
-      </select>
+
+  <div class="sidebar">
+    <div class="buttons">
+      <button class="save-button">Save</button>
+      <button class="cancel-button plain">Cancel</button>
+      {{#if id}}<a class="delete-button" href="#">delete {{type}}</a>{{/if}}
     </div>
-    <div class="field-right">
-      <label>Link</label>
-      <input type="text" name="link" value="{{link}}" placeholder="http://www.example.com">
-    </div>
+
+    <div class="top-spacer"></div>
   </div>
-  <div class="field">
-    <label>Menu HTML</label>
-    <textarea name="menu_html" placeholder="only LI items">{{menu_html}}</textarea>
-  </div>
-  <div class="field">
-    <label>Footer HTML</label>
-    <textarea name="footer_html" placeholder="Content to show on all pages in the footer">{{footer_html}}</textarea>
-  </div>
-  <div class="field">
-    <label>CSS</label>
-    <textarea name="css" placeholder="Custom CSS to override on site">{{css}}</textarea>
-  </div>
-  <div class="field">
-    <label>SEO Description</label>
-    <input type="text" name="seo_description" value="{{seo_description}}" placeholder="Keep it concise and short">
-  </div>
-  <div class="field">
-    <label>SEO Keywords</label>
-    <input type="text" name="seo_keywords" value="{{seo_keywords}}" placeholder="Short list of comma seperated keywords">
-  </div>
-  <div class="field">
-    <label>Google Analytics Code</label>
-    <input type="text" name="google_analytics_code" value="{{google_analytics_code}}" placeholder="UA-XXXXXXXXX-XX">
-  </div>
+
 </form>
-
-{{#if id}}
-<button class="delete-button plain">Delete {{type}}</button>
-{{/if}}

@@ -4,9 +4,6 @@ $availableThemeColors = 'theme-default' $defaultColor, 'theme-blue' $blueColor, 
 
 $navbarWidth  = 180px
 
-body
-  background: #f3f3f3
-
 #app
   position: absolute
   top: 0
@@ -39,9 +36,9 @@ span.label
 
 .filter-box
   position: absolute
-  top: 20px
-  right: 30px
-  width: 30%
+  top: 0
+  right: 0
+  width: 35%
   background: #fff
   z-index: 10
 
@@ -49,15 +46,34 @@ span.label
     display: block
     width: 100%
     color: $lightGrey
+    background: #fff
     font-size: 1.5em
     font-weight: $normalFont
-    padding: 5px 10px
+    padding: 5px 40px 5px 10px
     margin: 0
     border: 1px solid #f3f3f3
     outline: none
 
+  .clear-filter
+    display: none
+    position: absolute
+    top: 0
+    right: 0
+    width: 20px
+    height: 20px
+    background: #D3A924
+    padding: 0
+    margin: 10px
+    color: white
+    text-align: center
+    line-height: 1em
+    cursor: pointer
+
+    &.active
+      display: block
+
   .selected-site
-    padding: 5px 5px 5px 10px
+    padding: 10px 10px
     border: 1px solid #f3f3f3
     border-top: 0
     line-height: 1em
@@ -70,7 +86,7 @@ span.label
       arrow('top', 10px, $lightGrey)
 
     &:hover
-      background: #f3f3f3
+      background: #fafafa
 
   ul.site-selector
     display: none
@@ -89,7 +105,7 @@ span.label
       cursor: pointer
 
       &:hover
-        background: #f3f3f3
+        background: #fafafa
 
       &.selected
         opacity: 0.5
@@ -146,10 +162,9 @@ span.label
   position: absolute
   top: 0
   left: $navbarWidth
-  right: 20%
+  right: 0
   bottom: 0
-  max-width: 900px
-  background: #fff
+  min-width: 800px
   overflow: hidden
 
   .panel
@@ -158,28 +173,72 @@ span.label
     bottom: 0
     left: 0
     right: 0
-    overflow: auto
-    padding: 20px 30px
-    background: #fff
+    overflow: hidden
 
-    > h1
+    > .panel
+      background: #f3f3f3
+      overflow: auto
+
+      .content
+        position: relative
+        float: left
+        width: 65%
+        min-height: 100%
+        padding: 20px 3%
+        background: #fff
+
+      .sidebar
+        float: right
+        width: 35%
+        padding: 20px 3%
+
+        .top-spacer
+          display: block
+          height: 3em
+
+        .buttons
+          position: fixed
+          width: 26%
+          margin-top: -21px
+          padding-top: 20px
+          padding-bottom: 10px
+          border-bottom: 1px solid #fff
+          background: #F3F3F3
+          z-index: 10
+
+          button, .button
+            margin: 0 10px 10px 0
+
+        input[type='text'],
+        input[type='search'],
+        textarea,
+        select
+          border-color: #d3d3d3
+
+        ::-webkit-input-placeholder
+          color: #d3d3d3
+
+      &.form
+        z-index: 20
+
+
+    h1
       margin: 0 0 0.5em -0.05em
 
+      .new
+        font-weight: $heavyFont
+        line-height: 1em
+
       .count
+        float: right
         color: $lightGrey
         font-weight: 300
-        margin-left: 1em
+        margin-left: 0.5em
 
     .item-title
       color: $primaryColor
 
-    .buttons
-      float: right
-
-      button, .button
-        margin: 5px 0 5px 10px
-
-    > ul.list
+    ul.list
       list-style-type: none
       margin: 0
       padding: 0
@@ -227,9 +286,8 @@ span.label
             &:hover
               text-decoration: underline
 
-    > form
-      margin: 1.5em 0
-      clearfix()
+    form
+      margin: 0
 
       .heading
         color: $primaryColor
@@ -308,10 +366,31 @@ span.label
         padding: 5px 10px
         background: orange
 
-.stack > .panel > .form.panel
-  z-index: 20
-
 .stack .panel:not(.active)
   display: none
 
 
+ul.ui-multi-select
+  list-style-type: none
+  padding: 0
+  margin: 0
+  -webkit-user-select: none
+
+  > li
+    display: inline-block
+    padding: 4px 10px
+    margin: 0 12px 12px 0
+    max-width: 100%
+    background: #fff
+    border: 1px solid #f3f3f3
+    ellipsis()
+    cursor: pointer
+
+    &:hover
+      background: #fafafa
+
+    &.selected
+      color: $linkColor
+      font-weight: $boldFont
+      border-color: $primaryColor
+      outline: 2px solid rgba($primaryColor, 0.5)

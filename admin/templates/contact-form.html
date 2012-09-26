@@ -1,27 +1,33 @@
-<div class="buttons">
-  <button class="save-button">Save</button>
-  <button class="cancel-button plain">Cancel</button>
-</div>
-<h1>Contact</h1>
-<h3 class="item-title">{{name}}</h3>
-
 <form class="contact">
-  <div class="error-message"></div>
 
-  <div class="field required">
-    <label>Name</label>
-    <input type="text" name="name" value="{{name}}" placeholder="Fullname of contact person">
+  <div class="content">
+    <h1>Contact</h1>
+    <h3 class="item-title">{{name}}</h3>
+
+    <div class="error-message"></div>
+
+    <div class="field required">
+      <label>Name</label>
+      <input type="text" name="name" value="{{name}}" placeholder="Fullname of contact person">
+    </div>
+    <div class="field">
+      <label>Email</label>
+      <input type="text" name="email" value="{{email}}" placeholder="person@example.com">
+    </div>
+    <div class="field">
+      <label>Note</label>
+      <textarea name="note" placeholder="Anything to keep for your eyes only">{{note}}</textarea>
+    </div>
   </div>
-  <div class="field">
-    <label>Email</label>
-    <input type="text" name="email" value="{{email}}" placeholder="person@example.com">
+
+  <div class="sidebar">
+    <div class="buttons">
+      <button class="save-button">Save</button>
+      <button class="cancel-button plain">Cancel</button>
+      {{#if id}}<a class="delete-button" href="#">delete {{type}}</a>{{/if}}
+    </div>
+
+    <div class="top-spacer"></div>
   </div>
-  <div class="field">
-    <label>Note</label>
-    <textarea name="note" placeholder="Anything to keep for your eyes only">{{note}}</textarea>
-  </div>
+
 </form>
-
-{{#if id}}
-<button class="delete-button plain">Delete {{type}}</button>
-{{/if}}

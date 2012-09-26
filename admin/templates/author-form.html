@@ -1,51 +1,57 @@
-<div class="buttons">
-  <button class="save-button">Save</button>
-  <button class="cancel-button plain">Cancel</button>
-</div>
-<h1>Author</h1>
-<h3 class="item-title">{{name}}</h3>
-
 <form class="author">
-  <div class="error-message"></div>
-
-  <div class="field required">
-    <label>Site</label>
-    <select name="site">
-      <option value="" disabled>Choose a site...</option>
-      {{#each sites}}
-      <option value="{{id}}">{{name}} &mdash; {{id}}</option>
-      {{/each}}
-    </select>
-    <div class="site-selected"></div>
-  </div>
-  <div class="field required">
-    <label>Name</label>
-    <input type="text" name="name" value="{{name}}" placeholder="Fullname of author">
-  </div>
-  <div class="field required">
-    <label>Email</label>
-    <input type="text" name="email" value="{{email}}" placeholder="person@example.com">
-  </div>
-  <div class="field required">
-    <label>Bio</label>
-    <textarea name="bio" placeholder="Provide the author's bio content HTML">{{bio}}</textarea>
-  </div>
-  <div class="field">
-    <label>Photo</label>
-    <input type="text" name="photo" value="{{photo}}" placeholder="URL to photo including http://">
-  </div>
   
-  <h4 class="heading">
-    Links
-    <a class="button small add-link" href="#">+</a>
-  </h4>
-  <div class="field inline links-list">
-    {{#each links}}
-      {{{include "partials/link-form.html"}}}
-    {{/each}}
-  </div>
-</form>
+  <div class="content">
+    <h1>Author</h1>
+    <h3 class="item-title">{{name}}</h3>
 
-{{#if id}}
-<button class="delete-button plain">Delete {{type}}</button>
-{{/if}}
+    <div class="error-message"></div>
+
+    <div class="field required">
+      <label>Site</label>
+      <select name="site">
+        <option value="" disabled>Choose a site...</option>
+        {{#each sites}}
+        <option value="{{id}}">{{name}} &mdash; {{id}}</option>
+        {{/each}}
+      </select>
+      <div class="site-selected"></div>
+    </div>
+    <div class="field required">
+      <label>Name</label>
+      <input type="text" name="name" value="{{name}}" placeholder="Fullname of author">
+    </div>
+    <div class="field required">
+      <label>Email</label>
+      <input type="text" name="email" value="{{email}}" placeholder="person@example.com">
+    </div>
+    <div class="field required">
+      <label>Bio</label>
+      <textarea name="bio" placeholder="Provide the author's bio content HTML">{{bio}}</textarea>
+    </div>
+    <div class="field">
+      <label>Photo</label>
+      <input type="text" name="photo" value="{{photo}}" placeholder="URL to photo including http://">
+    </div>
+    
+    <h4 class="heading">
+      Links
+      <a class="button small add-link" href="#">+</a>
+    </h4>
+    <div class="field inline links-list">
+      {{#each links}}
+        {{{include "partials/link-form.html"}}}
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="buttons">
+      <button class="save-button">Save</button>
+      <button class="cancel-button plain">Cancel</button>
+      {{#if id}}<a class="delete-button" href="#">delete {{type}}</a>{{/if}}
+    </div>
+
+    <div class="top-spacer"></div>
+  </div>
+
+</form>

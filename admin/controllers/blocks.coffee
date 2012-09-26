@@ -87,7 +87,7 @@ class BlockForm extends Spine.Controller
       @back()
 
   cancel: (e) ->
-    e.preventDefault
+    e.preventDefault()
     if @dirtyForm
       if confirm "You may have some unsaved changes.\nAre you sure you want to cancel?"
         @back()
@@ -98,7 +98,7 @@ class BlockForm extends Spine.Controller
     @navigate('/blocks/list')
 
   preventSubmit: (e) ->
-    e.preventDefault
+    e.preventDefault()
     
   deactivate: ->
     super

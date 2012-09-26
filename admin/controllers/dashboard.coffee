@@ -4,8 +4,9 @@ templates   = require('duality/templates')
 
 Essay       = require('models/essay')
 
-class Dashboard extends Spine.Controller
-  className: 'authors panel'
+
+class DashboardOne extends Spine.Controller
+  className: 'dashboard one panel'
 
   constructor: ->
     super
@@ -17,6 +18,18 @@ class Dashboard extends Spine.Controller
       drafts: Essay.findAllByAttribute('published', false)
     @el.html templates.render('dashboard.html', {}, context)
     @
+
+
+class Dashboard extends Spine.Stack
+  className: 'dashboards panel'
+
+  controllers:
+    one: DashboardOne
+
+  default: 'one'
+
+  routes:
+    '/dashboard/one': 'one'
 
 
 module.exports = Dashboard

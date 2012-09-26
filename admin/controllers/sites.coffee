@@ -77,7 +77,7 @@ class SiteForm extends Spine.Controller
       @back()
   
   cancel: (e) ->
-    e.preventDefault
+    e.preventDefault()
     if @dirtyForm
       if confirm "You may have some unsaved changes.\nAre you sure you want to cancel?"
         @back()
@@ -88,7 +88,7 @@ class SiteForm extends Spine.Controller
     @navigate('/sites/list')
 
   preventSubmit: (e) ->
-    e.preventDefault
+    e.preventDefault()
     
   deactivate: ->
     super
