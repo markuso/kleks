@@ -1,7 +1,7 @@
 Spine     = require('spine/core')
 $         = Spine.$
 
-class MultiSelect extends Spine.Controller
+class MultiSelectUI extends Spine.Controller
   tag: 'ul'
   className: 'ui-multi-select'
   tagClass: ''
@@ -63,4 +63,4 @@ class MultiSelect extends Spine.Controller
     return items
 
 
-module.exports = MultiSelect
+module.exports = MultiSelectUI

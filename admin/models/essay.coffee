@@ -4,7 +4,7 @@ require('lib/spine-couch-ajax')
 BaseModel = require('models/base')
 
 class Essay extends BaseModel
-  @configure "Essay", "site", "slug", "title", "intro", "body", "published", "published_at", "updated_at", "author_id", "sponsor_id", "sponsor_start", "sponsor_end", "collections"
+  @configure "Essay", "site", "slug", "title", "intro", "body", "photo", "published", "published_at", "updated_at", "author_id", "sponsor_id", "sponsor_start", "sponsor_end", "collections", "_attachments"
   
   @extend Spine.Model.CouchAjax
   

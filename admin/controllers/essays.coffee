@@ -2,7 +2,8 @@ Spine       = require('spine/core')
 # $           = Spine.$
 templates   = require('duality/templates')
 
-MultiSelect = require('controllers/ui/multi-select')
+MultiSelectUI = require('controllers/ui/multi-select')
+FileUploadUI  = require('controllers/ui/file-upload')
 
 Essay       = require('models/essay')
 Author      = require('models/author')
@@ -22,6 +23,7 @@ class EssayForm extends Spine.Controller
     'select[name=author_id]':  'formAuthorId'
     'select[name=sponsor_id]': 'formSponsorId'
     '.collections-list':       'collectionsList'
+    '.files-list':             'filesList'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
 
@@ -51,6 +53,7 @@ class EssayForm extends Spine.Controller
       @item = {}
 
     @item.collections ?= []
+    @item._attachments ?= {}
     
     @item.sites = Site.all().sort(Site.nameSort)
     @item.sponsors = Sponsor.all().sort(Sponsor.nameSort)
@@ -65,6 +68,12 @@ class EssayForm extends Spine.Controller
     else
       @formSite.val(@stack.stack.filterBox.siteId)
     @siteChange()
+
+    # Files upload area
+    @fileUpload = new FileUploadUI
+      docId: @item.id
+      attachments: @item._attachments
+    @filesList.find('.upload-ui').html @fileUpload.el
 
   siteChange: ->
     $siteSelected = @formSite.parents('.field').find('.site-selected')
@@ -86,7 +95,7 @@ class EssayForm extends Spine.Controller
   
   makeCollectionsList: (site) ->
     collections = Collection.findAllByAttribute('site', site.id)
-    @collectionSelect = new MultiSelect
+    @collectionSelect = new MultiSelectUI
       items: collections
       selectedItems: (c.id for c in @item.collections)
       valueFields: ['id','slug']
@@ -103,6 +112,10 @@ class EssayForm extends Spine.Controller
     @item.published = Boolean(@item.published)
 
     @item.collections = @collectionSelect.selected()
+
+    # TODO: Take care of files and photo
+    @item._attachments = @fileUpload.attachments
+    @item.photo = null
 
     # Take care of some dates if need be
     try

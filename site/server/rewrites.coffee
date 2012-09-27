@@ -35,13 +35,13 @@ module.exports = [
   }
 
   # Collection's page - list of essays
-  # `:cid` is the collection's _id
+  # `:slug` is the collection's slug
   {
-    from: '/render/:site/collection/:cid',
+    from: '/render/:site/collection/:slug',
     to: '_list/collection/essays_by_collection',
     query: {
-      startkey: [':site', ':cid', {}],
-      endkey: [':site', ':cid'],
+      startkey: [':site', ':slug', {}],
+      endkey: [':site', ':slug'],
       descending: 'true',
       include_docs: 'true'
     }
@@ -58,6 +58,10 @@ module.exports = [
       include_docs: 'true'
     }
   }
+
+  # File attachments paths
+  { from: '/file/:id/:filename', to: '../../:id/:filename' }
+  { from: '/render/:site/file/:id/:filename', to: '../../:id/:filename' }
 
   # Redirected old URLs
   # moved '/posts/some-old-path', '/some-new-path'

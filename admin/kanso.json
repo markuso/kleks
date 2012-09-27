@@ -21,6 +21,7 @@
     "modules": null,
     "settings": null,
     "attachments": null,
+    "base64": null,
     "properties": null,
     "db": null,
     "coffee-script-precompiler": null,

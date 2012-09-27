@@ -46,6 +46,9 @@ module.exports = [
     }
   }
 
+  # File attachments paths
+  { from: '/file/:id/:filename', to: '../../:id/:filename' }
+
   # show color page
   { from: "/_colors", to: "_show/colors" }
 
