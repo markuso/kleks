@@ -1,6 +1,8 @@
 Spine = require('spine/core')
 require('lib/spine-couch-ajax')
 
+utils = require('lib/utils')
+
 BaseModel = require('models/base')
 
 class Site extends BaseModel
@@ -14,5 +16,7 @@ class Site extends BaseModel
     return 'Site ID is required' unless @_id
     return 'Name is required' unless @name
     return 'Name HTML is required' unless @name_html
+
+    return false
 
 module.exports = Site

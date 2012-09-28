@@ -12,7 +12,7 @@
   font-size: 5.25em
   line-height: 0.8em
   font-weight: $normalFont
-  color: $lightGrey
+  color: #C4C4C4
   letter-spacing: -0.07em
   word-spacing: 0em
   white-space: nowrap
@@ -98,6 +98,9 @@
 
 
 article
+  
+  a
+    font-weight: 400
 
   > .intro
     margin-bottom: 2em
@@ -112,7 +115,7 @@ article
     max-width: $normalFontpx
     margin: 0 0 1em 1em
     text-align: center
-    background: #f9f9f9
+    background: lighten($faintGrey, 3%)
     content-box()
 
     .label

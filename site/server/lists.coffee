@@ -66,10 +66,10 @@ exports.collection = (head, req) ->
 
   if sponsor
     # Check for strat/end dates of sponsorship
-    start = new Date(collection.sponsor_start)
-    end = new Date(collection.sponsor_end)
+    sponsor_start = new Date(collection.sponsor_start)
+    sponsor_end = new Date(collection.sponsor_end)
     now = new Date()
-    if start <= now and end >= now
+    if sponsor_start <= now and sponsor_end >= now
       # let continue on
       sponsor.text_format = sponsor.format is 'text'
       sponsor.image_format = sponsor.format is 'image'
@@ -180,10 +180,10 @@ exports.essay = (head, req) ->
 
   if sponsor
     # Check for strat/end dates of sponsorship
-    start = new Date(essay.sponsor_start)
-    end = new Date(essay.sponsor_end)
+    sponsor_start = new Date(essay.sponsor_start)
+    sponsor_end = new Date(essay.sponsor_end)
     now = new Date()
-    if start <= now and end >= now
+    if sponsor_start <= now and sponsor_end >= now
       # let continue on
       sponsor.text_format = sponsor.format is 'text'
       sponsor.image_format = sponsor.format is 'image'

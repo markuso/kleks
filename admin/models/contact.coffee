@@ -1,6 +1,8 @@
 Spine = require('spine/core')
 require('lib/spine-couch-ajax')
 
+utils = require('lib/utils')
+
 BaseModel = require('models/base')
 
 class Contact extends BaseModel
@@ -12,5 +14,7 @@ class Contact extends BaseModel
     
   validate: ->
     return 'Name is required' unless @name
+
+    return false
 
 module.exports = Contact

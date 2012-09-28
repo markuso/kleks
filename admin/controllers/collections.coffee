@@ -1,6 +1,7 @@
 Spine       = require('spine/core')
 # $           = Spine.$
 templates   = require('duality/templates')
+utils       = require('lib/utils')
 
 Collection  = require('models/collection')
 Sponsor     = require('models/sponsor')
@@ -16,6 +17,8 @@ class CollectionForm extends Spine.Controller
     'form':                    'form'
     'select[name=site]':       'formSite'
     'select[name=sponsor_id]': 'formSponsorId'
+    'input[name=name]':        'formName'
+    'input[name=pinned]':      'formPinned'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
 
@@ -25,6 +28,7 @@ class CollectionForm extends Spine.Controller
     'click .cancel-button':     'cancel'
     'click .delete-button':     'destroy'
     'change select[name=site]': 'siteChange'
+    'blur input[name=slug]':    'updateSlug'
 
   constructor: ->
     super
@@ -54,6 +58,7 @@ class CollectionForm extends Spine.Controller
     if @editing
       @formSite.val(@item.site)
       @formSponsorId.val(@item.sponsor_id)
+      @formPinned.prop('checked', @item.pinned)
     else
       @formSite.val(@stack.stack.filterBox.siteId)
     @siteChange()
@@ -66,6 +71,11 @@ class CollectionForm extends Spine.Controller
     else
       $siteSelected.html ""
 
+  updateSlug: (e) =>
+    slug = $(e.currentTarget)
+    unless slug.val()
+      slug.val utils.cleanSlug(@formName.val())
+
   save: (e) ->
     e.preventDefault()
     if @editing
@@ -73,18 +83,9 @@ class CollectionForm extends Spine.Controller
     else
       @item = new Collection().fromForm(@form)
 
-    # Convert some boolean properties
-    @item.pinned = Boolean(@item.pinned)
+    # Take care of some boolean checkboxes
+    @item.pinned = @formPinned.is(':checked')
 
-    # Take care of some dates if need be
-    try
-      if @item.updated_at
-        @item.updated_at = new Date(@item.updated_at).toJSON()
-      else
-        @item.updated_at = new Date().toJSON()
-    catch error
-      @showError "Date format is wrong. Use this format: 'Feb 20 2012 6:30 PM'"
-    
     # Save the item and make sure it validates
     if @item.save()
       @back()
@@ -117,8 +118,8 @@ class CollectionForm extends Spine.Controller
     e.preventDefault()
     
   deactivate: ->
-    super
     @el.scrollTop(0, 0)
+    super
 
 
 class CollectionList extends Spine.Controller

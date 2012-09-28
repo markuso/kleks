@@ -91,8 +91,8 @@ class SponsorForm extends Spine.Controller
     e.preventDefault()
     
   deactivate: ->
-    super
     @el.scrollTop(0, 0)
+    super
 
 
 class SponsorList extends Spine.Controller

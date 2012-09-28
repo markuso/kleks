@@ -27,7 +27,7 @@
     <div class="field">
       <div class="field-left required">
         <label>Slug</label>
-        <input type="text" name="slug" value="{{slug}}" placeholder="All lowercase and hyphens but and NO spaces">
+        <input type="text" name="slug" value="{{slug}}" placeholder="All lowercase and hyphens but NO spaces">
       </div>
       <div class="field-right required">
         <label>Author</label>
@@ -45,7 +45,7 @@
     <div class="field">
       <div class="field-left">
         <label>Published</label>
-        <input type="checkbox" name="published" {{#if published}}checked{{/if}}>
+        <input type="checkbox" name="published">
       </div>
       <div class="field-right">
         <label>Published At</label>
@@ -64,7 +64,7 @@
     <div class="top-spacer"></div>
 
     <h3 class="heading">Files</h3>
-    <div class="field files-list">
+    <div class="field">
       <div class="upload-ui"></div>
     </div>
 

@@ -37,6 +37,8 @@
   },
 
   "app": {
+    "dev_host": "admin.kleks.local",
+    "prod_host": "kleks.markuso.com",
     "themes": ["default","blue","green","brown","teal","grey"]
   }
 }

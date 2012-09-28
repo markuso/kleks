@@ -1,6 +1,7 @@
 Spine       = require('spine/core')
-# $           = Spine.$
+$           = Spine.$
 templates   = require('duality/templates')
+utils       = require('lib/utils')
 
 MultiSelectUI = require('controllers/ui/multi-select')
 FileUploadUI  = require('controllers/ui/file-upload')
@@ -22,8 +23,10 @@ class EssayForm extends Spine.Controller
     'select[name=site]':       'formSite'
     'select[name=author_id]':  'formAuthorId'
     'select[name=sponsor_id]': 'formSponsorId'
+    'input[name=title]':       'formTitle'
+    'input[name=published]':   'formPublished'
     '.collections-list':       'collectionsList'
-    '.files-list':             'filesList'
+    '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
 
@@ -33,6 +36,7 @@ class EssayForm extends Spine.Controller
     'click .cancel-button':     'cancel'
     'click .delete-button':     'destroy'
     'change select[name=site]': 'siteChange'
+    'blur input[name=slug]':    'updateSlug'
 
   constructor: ->
     super
@@ -65,15 +69,18 @@ class EssayForm extends Spine.Controller
     if @editing
       @formSite.val(@item.site)
       @formSponsorId.val(@item.sponsor_id)
+      @formPublished.prop('checked', @item.published)
     else
       @formSite.val(@stack.stack.filterBox.siteId)
+      @formPublished.prop('checked', true)
     @siteChange()
 
     # Files upload area
-    @fileUpload = new FileUploadUI
+    @fileUploadUI = new FileUploadUI
       docId: @item.id
+      selectedFile: @item.photo
       attachments: @item._attachments
-    @filesList.find('.upload-ui').html @fileUpload.el
+    @fileUploadContainer.html @fileUploadUI.el
 
   siteChange: ->
     $siteSelected = @formSite.parents('.field').find('.site-selected')
@@ -95,11 +102,16 @@ class EssayForm extends Spine.Controller
   
   makeCollectionsList: (site) ->
     collections = Collection.findAllByAttribute('site', site.id)
-    @collectionSelect = new MultiSelectUI
+    @collectionSelectUI = new MultiSelectUI
       items: collections
       selectedItems: (c.id for c in @item.collections)
       valueFields: ['id','slug']
-    @collectionsList.html @collectionSelect.el
+    @collectionsList.html @collectionSelectUI.el
+
+  updateSlug: (e) =>
+    slug = $(e.currentTarget)
+    unless slug.val()
+      slug.val utils.cleanSlug(@formTitle.val())
 
   save: (e) ->
     e.preventDefault()
@@ -108,23 +120,11 @@ class EssayForm extends Spine.Controller
     else
       @item = new Essay().fromForm(@form)
 
-    # Convert some boolean properties
-    @item.published = Boolean(@item.published)
+    @item.collections = @collectionSelectUI.selected()
+    @item._attachments = @fileUploadUI.attachments
 
-    @item.collections = @collectionSelect.selected()
-
-    # TODO: Take care of files and photo
-    @item._attachments = @fileUpload.attachments
-    @item.photo = null
-
-    # Take care of some dates if need be
-    try
-      if @item.published_at
-        @item.published_at = new Date(@item.published_at).toJSON()
-      else
-        @item.published_at = new Date().toJSON()
-    catch error
-      @showError "Date format is wrong. Use this format: 'Feb 20 2012 6:30 PM'"
+    # Take care of some boolean checkboxes
+    @item.published = @formPublished.is(':checked')
     
     # Save the item and make sure it validates
     if @item.save()
@@ -158,8 +158,8 @@ class EssayForm extends Spine.Controller
     e.preventDefault()
     
   deactivate: ->
-    super
     @el.scrollTop(0, 0)
+    super
 
 
 class EssayList extends Spine.Controller

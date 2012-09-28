@@ -117,8 +117,8 @@ class AuthorForm extends Spine.Controller
     e.preventDefault()
     
   deactivate: ->
-    super
     @el.scrollTop(0, 0)
+    super
 
 
 class AuthorList extends Spine.Controller

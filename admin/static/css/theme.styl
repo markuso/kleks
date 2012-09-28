@@ -15,7 +15,7 @@ $navbarWidth  = 180px
   font-size: 1.65em
   line-height: 1em
   font-weight: $normalFont
-  color: $lightGrey
+  color: #C4C4C4
   letter-spacing: -0.07em
   word-spacing: 0em
   white-space: nowrap
@@ -51,7 +51,7 @@ span.label
     font-weight: $normalFont
     padding: 5px 40px 5px 10px
     margin: 0
-    border: 1px solid #f3f3f3
+    border: 1px solid $faintGrey
     outline: none
 
   .clear-filter
@@ -74,7 +74,7 @@ span.label
 
   .selected-site
     padding: 10px 10px
-    border: 1px solid #f3f3f3
+    border: 1px solid $faintGrey
     border-top: 0
     line-height: 1em
     cursor: pointer
@@ -86,7 +86,7 @@ span.label
       arrow('top', 10px, $lightGrey)
 
     &:hover
-      background: #fafafa
+      background: lighten($faintGrey, 50%)
 
   ul.site-selector
     display: none
@@ -94,7 +94,7 @@ span.label
     margin: 0
     padding: 0
     background: #fff
-    border: 1px solid #f3f3f3
+    border: 1px solid $faintGrey
     border-top: 0
     max-height: 500px
     overflow: auto
@@ -105,7 +105,7 @@ span.label
       cursor: pointer
 
       &:hover
-        background: #fafafa
+        background: lighten($faintGrey, 50%)
 
       &.selected
         opacity: 0.5
@@ -176,7 +176,7 @@ span.label
     overflow: hidden
 
     > .panel
-      background: #f3f3f3
+      background: $faintGrey
       overflow: auto
 
       .content
@@ -200,10 +200,12 @@ span.label
           position: fixed
           width: 26%
           margin-top: -21px
+          margin-left: -5px
           padding-top: 20px
           padding-bottom: 10px
           border-bottom: 1px solid #fff
           background: #F3F3F3
+          box-shadow: 0 5px 0 rgba(0,0,0,0.05)
           z-index: 10
 
           button, .button
@@ -242,13 +244,13 @@ span.label
       list-style-type: none
       margin: 0
       padding: 0
-      border-top: 1px dotted #f3f3f3
+      border-top: 1px dotted $faintGrey
       clearfix()
 
       > li
         font-size: 1.5em
         line-height: 1.5em
-        border-bottom: 1px dotted #f3f3f3
+        border-bottom: 1px dotted $faintGrey
         padding: 0.5em 0
         clearfix()
 
@@ -291,7 +293,7 @@ span.label
 
       .heading
         color: $primaryColor
-        margin: 1em 0
+        margin: 1em 0 0.4em 0
      
       .field
         position: relative
@@ -336,7 +338,7 @@ span.label
           padding-left: 10px
           background: #fff
         
-        &.inline
+        .inline
           
           label
             display: inline-block
@@ -382,12 +384,12 @@ ul.ui-multi-select
     margin: 0 12px 12px 0
     max-width: 100%
     background: #fff
-    border: 1px solid #f3f3f3
+    border: 1px solid $faintGrey
     ellipsis()
     cursor: pointer
 
     &:hover
-      background: #fafafa
+      background: lighten($faintGrey, 50%)
 
     &.selected
       color: $linkColor
@@ -399,31 +401,43 @@ ul.ui-multi-select
   
   .dropzone
     padding: 20px
-    border: 4px dashed #fafafa
-    color: #fafafa
+    border: 4px dashed #fff
+    color: #fff
     font-size: 2em
     text-align: center
     cursor: default
 
   .filename
-    background: #fafafa
+    background: #fff
     padding: 0 5px
     margin-top: -6px
     line-height: 1.7em
     text-align: center
     overflow: hidden
 
-  ul.list
+  ul.files-list
     list-style-type: none
-    margin: 0
+    margin: 20px 0
     padding: 0
 
     li
       position: relative
       float: left
-      width: 49%
-      margin-right: 1%
+      width: 46%
+      margin-right: 4%
       overflow: hidden
+      -webkit-user-select: none
+      cursor: pointer
 
-      img
+      &.selected
+        border-color: $primaryColor
+        outline: 4px solid rgba($primaryColor, 0.5)
+
+      > img
         width: 100%
+
+      > div
+        border: 1px solid #e3e3e3
+        em
+          font-weight: $boldFont
+          font-size: 0.8em

@@ -1,6 +1,8 @@
 Spine = require('spine/core')
 require('lib/spine-couch-ajax')
 
+utils = require('lib/utils')
+
 BaseModel = require('models/base')
 
 class Essay extends BaseModel
@@ -17,15 +19,40 @@ class Essay extends BaseModel
   @queryOn: ['title','slug']
     
   validate: ->
-    @updated_at = new Date().toJSON()
-    @published_at = new Date().toJSON() unless @published_at
+    @slug = utils.cleanSlug @slug
+    
     return 'Site is required' unless @site
     return 'Slug is required' unless @slug
     return 'Title is required' unless @title
+
+    # Take care of some dates
+    @updated_at = new Date().toJSON()
+    try
+      if @published_at
+        @published_at = new Date(@published_at).toJSON()
+      else
+        @published_at = new Date().toJSON()
+    catch error
+      return "Date format is wrong. Use this format: 'Feb 20 2012 6:30 PM'"
+
+    # Convert some boolean properties
+    @published = Boolean(@published)
+
+    # Sponsor dates if setting a sponsor
     if @sponsor_id
       return 'Sponsor Start Date is required' unless @sponsor_start
       return 'Sponsor End Date is required' unless @sponsor_end
-      if new Date(@sponsor_start) >= new Date(@sponsor_end)
-        return 'Sponsor Start Date cannot be later the End Date'
+      try
+        if new Date(@sponsor_start).toJSON() >= new Date(@sponsor_end).toJSON()
+          return 'Sponsor Start Date cannot be later than End Date'
+      catch error
+        return "Sponsor date format is wrong. Use this format: 'Feb 20 2012 6:30 PM'"
+
+    # Some content transformation
+    @intro = utils.cleanContent @intro
+    @body = utils.cleanContent @body
+
+    return false
+
 
 module.exports = Essay

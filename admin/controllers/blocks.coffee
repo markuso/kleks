@@ -101,8 +101,8 @@ class BlockForm extends Spine.Controller
     e.preventDefault()
     
   deactivate: ->
-    super
     @el.scrollTop(0, 0)
+    super
 
 
 class BlockList extends Spine.Controller

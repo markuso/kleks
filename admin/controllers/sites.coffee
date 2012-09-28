@@ -91,8 +91,8 @@ class SiteForm extends Spine.Controller
     e.preventDefault()
     
   deactivate: ->
-    super
     @el.scrollTop(0, 0)
+    super
 
 
 class SiteList extends Spine.Controller
