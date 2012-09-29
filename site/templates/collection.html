@@ -1,13 +1,17 @@
 {{#if collection.css}}<style>{{{collection.css}}}</style>{{/if}}
 
 <article class="collection">
-  <h2 class="title"><a href="{{baseURL}}/collection/{{collection.slug}}">{{collection.title}}</a></h2>
+  <h2 class="title"><a href="{{baseURL}}/collection/{{collection.slug}}">{{collection.name}}</a></h2>
 
   {{#if collection.photo}}
   <section class="photo">
     <img src="/file/{{collection._id}}/{{collection.photo}}">
   </section>
   {{/if}}
+
+  <section class="intro">
+    {{{collection.intro_html}}}
+  </section>
   
   {{#if sponsor}}
   <section class="sponsor collection-sponsor">
@@ -46,7 +50,12 @@
   </section>
   {{/if}}
 
+  <ul class="list">
   {{#each essays}}
-    <h3><a href="{{baseURL}}/essay/{{slug}}">{{title}}</a></h3>
+    <li>
+      <div class="date fresh-{{fresh}}">{{published_at_html}}</div>
+      <h3><a href="{{baseURL}}/essay/{{slug}}">{{title}}</a></h3>
+    </li>
   {{/each}}
+  </ul>
 </article>

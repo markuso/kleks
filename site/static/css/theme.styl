@@ -69,7 +69,7 @@
       arrow('top', 12px, #fff, 12px, 7px)
       margin: 0 auto
       display: block
-      top: 0
+      top: 2px
 
   > ul
     display: none
@@ -97,7 +97,7 @@
       padding: 0
 
       &.heading
-        padding: 10px 20px
+        padding: 7px 20px
         font-size: 1.1em
         font-weight: $boldFont
         color: #fff
@@ -245,6 +245,26 @@ article
       iframe
         display: block
 
+  > ul.list
+    list-style-type: none
+    margin: 0
+    padding: 0
+
+    > li
+      margin-bottom: 1em
+      clearfix()
+      
+      .date
+        float: right
+        padding: 5px 10px
+        color: $lightGrey
+
+      .meta
+        font-size: 0.875em
+        > a
+          display: inline-block
+          margin-right: 2em
+
 article.home
 
   .collections
@@ -270,12 +290,16 @@ article.home
             padding: 1em
 
         .updated
+          display: none
           position: absolute
           bottom: 0
           right: 0
           padding: 10px 20px
           background: $primaryColor
           color: #fff
+
+          &.fresh-true
+            display: block
 
 article.essay
 
@@ -327,21 +351,6 @@ article.essay
           display: inline-block
           margin-right: 2em
 
-article.essays
-
-  > ul.list
-    list-style-type: none
-    margin: 0
-    padding: 0
-
-    li.item
-      margin-bottom: 1em
-      
-      .meta
-        font-size: 0.875em
-        > a
-          display: inline-block
-          margin-right: 2em
 
 footer
   margin-top: 2em

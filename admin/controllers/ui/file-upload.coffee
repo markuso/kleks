@@ -58,6 +58,9 @@ class FileUploadUI extends Spine.Controller
       $item.append $("<div><em>#{type}</em><br>#{name}</div>")
 
     @filesList.append $item
+    
+    # Also select the item if it is the only one
+    @selectItem($item) if @attachments.length is 1
 
   itemClick: (e) ->
     # Selecting the main photo

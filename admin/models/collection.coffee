@@ -1,12 +1,13 @@
 Spine = require('spine/core')
 require('lib/spine-couch-ajax')
 
-utils = require('lib/utils')
+utils  = require('lib/utils')
+moment = require('lib/moment')
 
 BaseModel = require('models/base')
 
 class Collection extends BaseModel
-  @configure "Collection", "site", "slug", "name", "intro", "pinned", "updated_at", "sponsor_id", "sponsor_start", "sponsor_end", "_attachments"
+  @configure "Collection", "site", "slug", "name", "intro", "photo", "pinned", "updated_at", "sponsor_id", "sponsor_start", "sponsor_end", "sponsors_history", "_attachments"
 
   @extend Spine.Model.CouchAjax
 
@@ -20,13 +21,9 @@ class Collection extends BaseModel
     return 'Name is required' unless @name
     
     # Take care of some dates
-    try
-      if @updated_at
-        @updated_at = new Date(@updated_at).toJSON()
-      else
-        @updated_at = new Date().toJSON()
-    catch error
-      return "Date format is wrong. Use this format: 'Feb 20 2012 6:30 PM'"
+    updated_at = moment(@updated_at)
+    return "Updated #{utils.msg.DATE_NOT_VALID}" unless updated_at.isValid()
+    @updated_at = updated_at.utc().format()
     
     # Convert some boolean properties
     @pinned = Boolean(@pinned)
@@ -35,11 +32,14 @@ class Collection extends BaseModel
     if @sponsor_id
       return 'Sponsor Start Date is required' unless @sponsor_start
       return 'Sponsor End Date is required' unless @sponsor_end
-      try
-        if new Date(@sponsor_start).toJSON() >= new Date(@sponsor_end).toJSON()
-          return 'Sponsor Start Date cannot be later than End Date'
-      catch error
-        return "Sponsor date format is wrong. Use this format: 'Feb 20 2012 6:30 PM'"
+      sponsor_start = moment(@sponsor_start)
+      sponsor_end = moment(@sponsor_end)
+      return "Sponsor Start #{utils.msg.DATE_NOT_VALID}" unless sponsor_start.isValid()
+      return "Sponsor End #{utils.msg.DATE_NOT_VALID}" unless sponsor_end.isValid()
+      return 'Sponsor Start Date cannot be later than End Date' if sponsor_start >= sponsor_end
+      # Save in UTC format string
+      @sponsor_start = sponsor_start.utc().format()
+      @sponsor_end = sponsor_end.utc().format()
 
     # Some content transformation
     @intro = utils.cleanContent @intro

@@ -1,6 +1,10 @@
 # Bunch of utility functions
 settings   = require('settings/root')
 
+exports.msg = {
+  DATE_NOT_VALID: "Date format is wrong. Use this format: 'Feb 20 2012 6:30 PM'"
+}
+
 exports.cleanCode = (code) ->
   code.toLowerCase().replace(/[\ \.\'\"\-]/g, '_')
 

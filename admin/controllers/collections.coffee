@@ -3,6 +3,8 @@ Spine       = require('spine/core')
 templates   = require('duality/templates')
 utils       = require('lib/utils')
 
+FileUploadUI  = require('controllers/ui/file-upload')
+
 Collection  = require('models/collection')
 Sponsor     = require('models/sponsor')
 Site        = require('models/site')
@@ -19,6 +21,7 @@ class CollectionForm extends Spine.Controller
     'select[name=sponsor_id]': 'formSponsorId'
     'input[name=name]':        'formName'
     'input[name=pinned]':      'formPinned'
+    '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
 
@@ -47,6 +50,8 @@ class CollectionForm extends Spine.Controller
     else
       @title = 'New Collection'
       @item = {}
+
+    @item._attachments ?= {}
     
     @item.sites = Site.all().sort(Site.nameSort)
     @item.sponsors = Sponsor.all().sort(Sponsor.nameSort)
@@ -62,6 +67,13 @@ class CollectionForm extends Spine.Controller
     else
       @formSite.val(@stack.stack.filterBox.siteId)
     @siteChange()
+
+    # Files upload area
+    @fileUploadUI = new FileUploadUI
+      docId: @item.id
+      selectedFile: @item.photo
+      attachments: @item._attachments
+    @fileUploadContainer.html @fileUploadUI.el
 
   siteChange: ->
     $siteSelected = @formSite.parents('.field').find('.site-selected')
@@ -82,6 +94,8 @@ class CollectionForm extends Spine.Controller
       @item.fromForm(@form)
     else
       @item = new Collection().fromForm(@form)
+
+    @item._attachments = @fileUploadUI.attachments
 
     # Take care of some boolean checkboxes
     @item.pinned = @formPinned.is(':checked')

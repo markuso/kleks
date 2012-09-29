@@ -2,6 +2,8 @@ templates = require('duality/templates')
 dutils    = require('duality/utils')
 Showdown  = require('showdown')
 _         = require('underscore')._
+utils     = require('lib/utils')
+moment    = require('lib/moment')
 
 
 exports.home = (head, req) ->
@@ -25,7 +27,8 @@ exports.home = (head, req) ->
       doc.intro_html = converter.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
-    doc.updated_at_html = new Date(doc.updated_at).toDateString()
+    doc.updated_at_html = utils.prettyDate(doc.updated_at)
+    doc.fresh = utils.isItFresh(doc.updated_at)
     return doc
 
   return {
@@ -56,20 +59,24 @@ exports.collection = (head, req) ->
     sponsor ?= doc if doc.type is 'sponsor'
     site ?= doc if doc.type is 'site'
 
+  if collection
+    collection.fresh = utils.isItFresh(collection.updated_at)
+
   essays = _.map essays, (doc) ->
     if doc.intro?
       doc.intro_html = converter.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
-    doc.published_at_html = new Date(doc.published_at).toDateString()
+    doc.published_at_html = utils.prettyDate(doc.published_at)
+    doc.fresh = utils.isItFresh(doc.published_at)
     return doc
 
   if sponsor
     # Check for strat/end dates of sponsorship
-    sponsor_start = new Date(collection.sponsor_start)
-    sponsor_end = new Date(collection.sponsor_end)
-    now = new Date()
-    if sponsor_start <= now and sponsor_end >= now
+    sponsor_start = moment.utc(collection.sponsor_start)
+    sponsor_end = moment.utc(collection.sponsor_end)
+    now = moment.utc()
+    if sponsor_start.diff(now) <= 0 and sponsor_start.diff(now) >= 0
       # let continue on
       sponsor.text_format = sponsor.format is 'text'
       sponsor.image_format = sponsor.format is 'image'
@@ -120,8 +127,9 @@ exports.essays = (head, req) ->
       doc.intro_html = converter.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
-    doc.published_at_html = new Date(doc.published_at).toDateString()
-    doc.updated_at_html = new Date(doc.updated_at).toDateString()
+    doc.published_at_html = utils.prettyDate(doc.published_at)
+    doc.updated_at_html = utils.prettyDate(doc.updated_at)
+    doc.fresh = utils.isItFresh(doc.published_at)
     return doc
 
   return {
@@ -164,8 +172,9 @@ exports.essay = (head, req) ->
     doc.body_html = converter.makeHtml(
       doc.body.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
     )
-    doc.published_at_html = new Date(doc.published_at).toDateString()
-    doc.updated_at_html = new Date(doc.updated_at).toDateString()
+    doc.published_at_html = utils.prettyDate(doc.published_at)
+    doc.updated_at_html = utils.prettyDate(doc.updated_at)
+    doc.fresh = utils.isItFresh(doc.published_at)
     return doc
 
   essay = transformEssay(essay) if essay
@@ -175,15 +184,16 @@ exports.essay = (head, req) ->
       doc.intro_html = converter.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
-    doc.updated_at_html = new Date(doc.updated_at).toDateString()
+    doc.updated_at_html = utils.prettyDate(doc.updated_at)
+    doc.fresh = utils.isItFresh(doc.updated_at)
     return doc
 
   if sponsor
     # Check for strat/end dates of sponsorship
-    sponsor_start = new Date(essay.sponsor_start)
-    sponsor_end = new Date(essay.sponsor_end)
-    now = new Date()
-    if sponsor_start <= now and sponsor_end >= now
+    sponsor_start = moment.utc(essay.sponsor_start)
+    sponsor_end = moment.utc(essay.sponsor_end)
+    now = moment.utc()
+    if sponsor_start.diff(now) <= 0 and sponsor_start.diff(now) >= 0
       # let continue on
       sponsor.text_format = sponsor.format is 'text'
       sponsor.image_format = sponsor.format is 'image'

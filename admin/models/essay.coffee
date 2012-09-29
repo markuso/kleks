@@ -2,11 +2,12 @@ Spine = require('spine/core')
 require('lib/spine-couch-ajax')
 
 utils = require('lib/utils')
+moment = require('lib/moment')
 
 BaseModel = require('models/base')
 
 class Essay extends BaseModel
-  @configure "Essay", "site", "slug", "title", "intro", "body", "photo", "published", "published_at", "updated_at", "author_id", "sponsor_id", "sponsor_start", "sponsor_end", "sponsors_history", "collections", "_attachments"
+  @configure "Essay", "site", "slug", "title", "intro", "body", "photo", "published", "published_at", "published_at", "author_id", "sponsor_id", "sponsor_start", "sponsor_end", "sponsors_history", "collections", "_attachments"
   
   @extend Spine.Model.CouchAjax
   
@@ -26,14 +27,11 @@ class Essay extends BaseModel
     return 'Title is required' unless @title
 
     # Take care of some dates
-    @updated_at = new Date().toJSON()
-    try
-      if @published_at
-        @published_at = new Date(@published_at).toJSON()
-      else
-        @published_at = new Date().toJSON()
-    catch error
-      return "Date format is wrong. Use this format: 'Feb 20 2012 6:30 PM'"
+    @updated_at = moment.utc().format()
+
+    published_at = moment(@published_at)
+    return "Published #{utils.msg.DATE_NOT_VALID}" unless published_at.isValid()
+    @published_at = published_at.utc().format()
 
     # Convert some boolean properties
     @published = Boolean(@published)
@@ -42,11 +40,14 @@ class Essay extends BaseModel
     if @sponsor_id
       return 'Sponsor Start Date is required' unless @sponsor_start
       return 'Sponsor End Date is required' unless @sponsor_end
-      try
-        if new Date(@sponsor_start).toJSON() >= new Date(@sponsor_end).toJSON()
-          return 'Sponsor Start Date cannot be later than End Date'
-      catch error
-        return "Sponsor date format is wrong. Use this format: 'Feb 20 2012 6:30 PM'"
+      sponsor_start = moment(@sponsor_start)
+      sponsor_end = moment(@sponsor_end)
+      return "Sponsor Start #{utils.msg.DATE_NOT_VALID}" unless sponsor_start.isValid()
+      return "Sponsor End #{utils.msg.DATE_NOT_VALID}" unless sponsor_end.isValid()
+      return 'Sponsor Start Date cannot be later than End Date' if sponsor_start >= sponsor_end
+      # Save in UTC format string
+      @sponsor_start = sponsor_start.utc().format()
+      @sponsor_end = sponsor_end.utc().format()
 
     # Some content transformation
     @intro = utils.cleanContent @intro
