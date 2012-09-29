@@ -35,6 +35,11 @@ In CSS `.styl` file we are using the _Lato_ font:
       word-spacing: 0.2em
       line-height: 1.5em
 
+Main Photos
+-----------
+
+Dimension must be **900 x 180** pixels saved as JPG at _70%_ or a PNG with trying to keep file size below 50K.
+
 
 Donation URL
 ------------

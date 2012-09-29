@@ -26,11 +26,23 @@
   .site-name
     font-size: 2.8em
 
-  .main-nav
-    margin: 0
+  .site-tagline
+    margin-bottom: 2em
+
+  .main-nav,
+  .toc-nav
+    margin: 4px 4px 0 0
+
+  article
+
+    > .photo
+      left: -14px
 
 // Odd one
 @media (max-width: 600px)
+
+  .toc-nav
+    display: none
   
   article
     
@@ -58,8 +70,17 @@
   .site-name
     font-size: 3.5em
 
-  .main-nav
+  .site-tagline
+    margin-bottom: 2.5em
+
+  .main-nav,
+  .toc-nav
     margin: 12px 12px 0 0
+
+  article
+
+    > .photo
+      left: -20px
 
 
 // Portrait tablet to landscape and desktop

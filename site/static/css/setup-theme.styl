@@ -5,9 +5,6 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
   
   if !$linkColor
     $linkColor = darken($primaryColor, 20%)
-  
-  h1, h2, h3, h4, h5, h6
-    color: darken($textColor, 4%)
 
   a
     color: $linkColor
@@ -25,8 +22,6 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
       background: darken($primaryColor, 5%)
     &.plain
       color: $primaryColor
-
-
 
   .container
     border-color: $primaryColor

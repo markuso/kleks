@@ -1,6 +1,5 @@
 # Bunch of utility functions
-
-settings    = require('settings/root')
+settings   = require('settings/root')
 
 exports.cleanCode = (code) ->
   code.toLowerCase().replace(/[\ \.\'\"\-]/g, '_')
@@ -9,6 +8,11 @@ exports.cleanSlug = (slug) ->
   slug.toLowerCase().replace(/[\ \.\'\"]/g, '-')
 
 exports.cleanContent = (content) ->
-  dev_host = settings.app.dev_host
-  prod_host = settings.app.prod_host
-  content.replace(/\http(s)?:\/\/admin.kleks.local/g, '')
+  protocol = "http(s)?:\/\/"
+  if settings.app.dev_host
+    dev_host = new RegExp(protocol+settings.app.dev_host, "g")
+    content = content.replace(dev_host, '')
+  if settings.app.prod_host
+    prod_host = new RegExp(protocol+settings.app.prod_host, "g")
+    content = content.replace(prod_host, '')
+  return content

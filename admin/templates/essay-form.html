@@ -1,7 +1,10 @@
 <form class="essay">
 
   <div class="content">
-    <h1>Essay</h1>
+    <h1>
+      Essay
+      <span class="status">{{#if published}}Published{{else}}In Draft{{/if}}</span>
+    </h1>
     <h3 class="item-title">{{title}}</h3>
 
     <div class="error-message"></div>

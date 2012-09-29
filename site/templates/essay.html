@@ -1,7 +1,15 @@
-<article class="essay">
-  <h2 class="title">{{essay.title}}</h2>
+{{#if essay.css}}<style>{{{essay.css}}}</style>{{/if}}
 
-  <section class="intro">
+<article class="view essay">
+  <h2 class="title"><a href="{{baseURL}}/essay/{{essay.slug}}">{{essay.title}}</a></h2>
+
+  {{#if essay.photo}}
+  <section class="photo">
+    <img src="/file/{{essay._id}}/{{essay.photo}}">
+  </section>
+  {{/if}}
+
+  <section class="intro" id="TOC-Introduction">
     {{{essay.intro_html}}}
   </section>
 
@@ -69,3 +77,11 @@
     </div>
   </section>
 </article>
+
+<nav class="toc-nav">
+  <div class="icon"><div>TOC</div><span></span><i></i></div>
+  <ul>
+    <li class="heading">Essay's Table of Content</li>
+    <li><a href="#TOC-Introduction">Introduction</a></li>
+  </ul>
+</nav>

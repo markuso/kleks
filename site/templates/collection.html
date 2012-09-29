@@ -1,5 +1,13 @@
+{{#if collection.css}}<style>{{{collection.css}}}</style>{{/if}}
+
 <article class="collection">
-  <h2 class="title">{{collection.name}}</h2>
+  <h2 class="title"><a href="{{baseURL}}/collection/{{collection.slug}}">{{collection.title}}</a></h2>
+
+  {{#if collection.photo}}
+  <section class="photo">
+    <img src="/file/{{collection._id}}/{{collection.photo}}">
+  </section>
+  {{/if}}
   
   {{#if sponsor}}
   <section class="sponsor collection-sponsor">

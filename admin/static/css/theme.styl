@@ -231,7 +231,7 @@ span.label
         font-weight: $heavyFont
         line-height: 1em
 
-      .count
+      .count, .status
         float: right
         color: $lightGrey
         font-weight: 300
@@ -423,15 +423,14 @@ ul.ui-multi-select
     li
       position: relative
       float: left
-      width: 46%
-      margin-right: 4%
+      max-height: 120px
+      margin: 0 4% 10px 0
       overflow: hidden
       -webkit-user-select: none
       cursor: pointer
 
       &.selected
-        border-color: $primaryColor
-        outline: 4px solid rgba($primaryColor, 0.5)
+        outline: 4px solid $primaryColor
 
       > img
         width: 100%

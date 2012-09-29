@@ -3,6 +3,9 @@
   <ul class="drafts list">
     {{#each drafts}}
     <li>
+      <div class="actions">
+        {{#unless published}}<div><strong>In Draft</strong></div>{{/unless}}
+      </div>
       <a href="#/essay/{{id}}">{{title}}</a>
       <div class="meta">
         <div><a href="http://{{site}}/essay/{{slug}}" target="_blank">view on {{site}}</a></div>

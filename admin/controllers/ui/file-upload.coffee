@@ -62,11 +62,18 @@ class FileUploadUI extends Spine.Controller
   itemClick: (e) ->
     # Selecting the main photo
     e.preventDefault()
-    @selectItem(e.currentTarget)
+    e.stopPropagation()
+    item = e.currentTarget
+    if $(item).hasClass('selected')
+      @resetSelection('Nothing is selected')
+    else
+      @selectItem(item)
 
   itemDblClick: (e) ->
     # Removing an attachment
     e.preventDefault()
+    e.stopPropagation()
+    @resetSelection()
     @removeItem(e.currentTarget)
 
   selectItem: (item) =>
@@ -77,9 +84,9 @@ class FileUploadUI extends Spine.Controller
       @fileName.html "Selected: #{name}"
       @fileSelectedInput.val(name)
 
-  resetSelection: ->
+  resetSelection: (msg = '') ->
     @filesList.children().removeClass('selected')
-    @fileName.html ''
+    @fileName.html msg
     @fileSelectedInput.val('')
 
   removeItem: (item) =>
@@ -87,6 +94,9 @@ class FileUploadUI extends Spine.Controller
       name = $(item).attr('data-filename')
       if confirm "Remove this attachment?\n#{name}"
         delete @attachments[name]
+        $(item).remove()
+        @fileSelectedInput.val('') if @fileSelectedInput.val() is name
+        @fileName.html "#{name} was removed"
 
   setupZoneEvents: ->
     @dropzone.on 'dragenter dragover', (e) ->

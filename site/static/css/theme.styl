@@ -8,7 +8,7 @@
   border-left: 20px solid $primaryColor
 
 .site-name
-  margin: 0 0 0.8em -0.05em
+  margin: 0 0 5px -0.05em
   font-size: 5.25em
   line-height: 0.8em
   font-weight: $normalFont
@@ -17,22 +17,31 @@
   word-spacing: 0em
   white-space: nowrap
   a
-    color: $lightGrey
+    color: #C4C4C4
   b, strong
     color: $primaryColor
+
+.site-tagline
+  width: 70%
+  color: #C4C4C4
+  font-size: 1.1em
+  line-height: 1em
+  margin: 0 0 3em 0
 
 .site-promo
   color: $primaryColor
   font-size: 1.25em
   font-weight: $boldFont
 
-.main-nav
-  position: absolute
+.main-nav,
+.toc-nav
+  position: fixed
   top: 0
   right: 0
   padding: 0
-  margin: 46px 40px 0 0
+  margin: 20px 20px 0 0
   -webkit-user-select: none
+  z-index: 20
 
   $iconSize = 60px
 
@@ -45,6 +54,7 @@
     padding: 10px
     background: $primaryColor
     cursor: pointer
+    outline: 4px solid #fff
 
     &:hover
       background: darken($primaryColor, 10%)
@@ -62,20 +72,39 @@
   > ul
     display: none
     position: absolute
-    top: $iconSize
+    top: $iconSize+10px
     right: 0
-    min-width: 220px
+    min-width: 260px
+    max-width: 400px
     list-style-type: none
     padding: 0
     margin: 0
     background: $primaryColor
+    box-shadow(-4px 4px 0 rgba(0, 0, 0, 0.1))
+
+    &:before
+      content: ''
+      position: absolute
+      top: -10px
+      right: 0
+      width: $iconSize
+      height: 10px
+      background: $primaryColor
 
     > li
       padding: 0
 
+      &.heading
+        padding: 10px 20px
+        font-size: 1.1em
+        font-weight: $boldFont
+        color: #fff
+        border-bottom: 1px solid rgba(255,255,255,0.5)
+        white-space: nowrap
+
       a
         display: block
-        padding: 7px 12px
+        padding: 10px 20px
         font-size: 1.2em
         font-weight: $normalFont
         color: #fff
@@ -96,11 +125,56 @@
           color: $textColor
           background: #fff
 
+.toc-nav
+  // see .main-nav above
+  right: 70px
+
+  .icon
+
+    div
+      width: 48px
+      height: 24px
+      color: #fff
+      font-size: 22px
+      font-weight: $heavyFont
+      line-height: 1em
+      text-align: center
+      margin-left: -4px
+      overflow: hidden
+
+  > ul
+
+    > li
+
+      a
+        font-size: 1em
+        line-height: 1em
+
 
 article
   
-  a
-    font-weight: 400
+  &.view
+    a
+      font-weight: $boldFont
+
+  > .title
+    color: $textDarkColor
+    margin-bottom: 0.5em;
+
+    a
+      color: $textDarkColor
+      font-weight: $normalFont
+
+  > .photo
+    position: relative
+    left: -40px
+    width: 105%
+    max-height: 180px
+    margin: 0 0 1em 0
+    overflow: hidden
+
+    img
+      width: 100%
 
   > .intro
     margin-bottom: 2em
@@ -111,9 +185,9 @@ article
 
   .sponsor
     float: right
-    width: $normalFontpx
-    max-width: $normalFontpx
-    margin: 0 0 1em 1em
+    width: 300px
+    max-width: 300px
+    margin: 0.4em 0 1em 1em
     text-align: center
     background: lighten($faintGrey, 3%)
     content-box()
