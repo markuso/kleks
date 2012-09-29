@@ -76,7 +76,7 @@ exports.collection = (head, req) ->
     sponsor_start = moment.utc(collection.sponsor_start)
     sponsor_end = moment.utc(collection.sponsor_end)
     now = moment.utc()
-    if sponsor_start.diff(now) <= 0 and sponsor_start.diff(now) >= 0
+    if sponsor_start.diff(now) <= 0 and sponsor_end.diff(now) >= 0
       # let continue on
       sponsor.text_format = sponsor.format is 'text'
       sponsor.image_format = sponsor.format is 'image'
@@ -193,7 +193,7 @@ exports.essay = (head, req) ->
     sponsor_start = moment.utc(essay.sponsor_start)
     sponsor_end = moment.utc(essay.sponsor_end)
     now = moment.utc()
-    if sponsor_start.diff(now) <= 0 and sponsor_start.diff(now) >= 0
+    if sponsor_start.diff(now) <= 0 and sponsor_end.diff(now) >= 0
       # let continue on
       sponsor.text_format = sponsor.format is 'text'
       sponsor.image_format = sponsor.format is 'image'
