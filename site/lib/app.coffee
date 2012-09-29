@@ -13,11 +13,16 @@ exports.initialize = (config) ->
   $tocNavIcon = $tocNav.find('> .icon')
   $tocNavList = $tocNav.find('> ul')
   
+  $collectionNav = $('.collection-nav')
+  $collectionNavIcon = $collectionNav.find('> .icon')
+  $collectionNavList = $collectionNav.find('> ul')
+  
   $article = $('.container > article')
 
   hidePopups = (exceptMe) ->
     $mainNavList.hide() unless $mainNavList is exceptMe
     $tocNavList.hide() unless $tocNavList is exceptMe
+    $collectionNavList.hide() unless $collectionNavList is exceptMe
 
   $('html').on 'click', (e) ->
     hidePopups()
@@ -41,3 +46,15 @@ exports.initialize = (config) ->
       e.stopPropagation()
       hidePopups($tocNavList)
       $tocNavList.toggle()
+
+  # Setup the Collection menu
+  if $collectionNav
+    $collectionNavId = $collectionNav.attr('data-id')
+    if $collectionNavId
+      for c in [1...5]
+        $collectionNavList.append "<li><a href=\"#\">Essay Number #{c}</a></li>"
+
+    $collectionNavIcon.on 'click', (e) ->
+      e.stopPropagation()
+      hidePopups($collectionNavList)
+      $collectionNavList.toggle()
