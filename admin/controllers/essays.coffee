@@ -3,6 +3,10 @@ $           = Spine.$
 templates   = require('duality/templates')
 utils       = require('lib/utils')
 
+# For importing HTML from old sites
+require('lib/reMarked')
+require('lib/jquery-xdomainajax')
+
 MultiSelectUI = require('controllers/ui/multi-select')
 FileUploadUI  = require('controllers/ui/file-upload')
 
@@ -25,6 +29,7 @@ class EssayForm extends Spine.Controller
     'select[name=sponsor_id]': 'formSponsorId'
     'input[name=title]':       'formTitle'
     'input[name=published]':   'formPublished'
+    'textarea[name=body]':     'formBody'
     '.collections-list':       'collectionsList'
     '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
@@ -37,6 +42,7 @@ class EssayForm extends Spine.Controller
     'click .delete-button':     'destroy'
     'change select[name=site]': 'siteChange'
     'blur input[name=slug]':    'updateSlug'
+    'click .import-button':     'import'
 
   constructor: ->
     super
@@ -72,7 +78,7 @@ class EssayForm extends Spine.Controller
       @formPublished.prop('checked', @item.published)
     else
       @formSite.val(@stack.stack.filterBox.siteId)
-      @formPublished.prop('checked', true)
+      # @formPublished.prop('checked', true)
     @siteChange()
 
     # Files upload area
@@ -81,6 +87,18 @@ class EssayForm extends Spine.Controller
       selectedFile: @item.photo
       attachments: @item._attachments
     @fileUploadContainer.html @fileUploadUI.el
+
+    # Use Sisyphus to auto save forms to LocalStorage
+    @form.sisyphus
+      customKeyPrefix: ''
+      timeout: 0
+      autoRelease: true
+      name: if @editing then @item.id else 'new-essay'
+      onSave: -> console.log "Saved to local storage"
+      onBeforeRestore: -> alert "About to restore from local storage"
+      onRestore: -> alert "Restored from local storage"
+      onRelease: -> console.log "Local storage was released"
+      excludeFields: []
 
   siteChange: ->
     $siteSelected = @formSite.parents('.field').find('.site-selected')
@@ -112,6 +130,38 @@ class EssayForm extends Spine.Controller
     slug = $(e.currentTarget)
     unless slug.val()
       slug.val utils.cleanSlug(@formTitle.val())
+
+  import: (e) =>
+    # For importing old HTML to Markdown directly from old location
+    e.preventDefault()
+    url = $.trim @formBody.val()
+    if url
+      $.ajax
+        type: 'GET'
+        url: url
+        success: (res) =>
+          $content = $(res.responseText).find('.entry')
+          @log res
+          @log $content
+          if $content
+            $content.find('.addthis_toolbox, .author-bio').remove()
+            options =
+                link_list:  false    # render links as references, create link list as appendix
+                h1_setext:  true     # underline h1 headers
+                h2_setext:  true     # underline h2 headers
+                h_atx_suf:  true     # header suffixes (###)
+                gfm_code:   false    # render code blocks as via ``` delims
+                li_bullet:  "*"      # list item bullet style
+                hr_char:    "-"      # hr style
+                indnt_str:  "    "   # indentation string
+                bold_char:  "*"      # char used for strong
+                emph_char:  "_"      # char used for em
+                gfm_tbls:   false    # markdown-extra tables
+                tbl_edges:  false    # show side edges on tables
+                hash_lnks:  false    # anchors w/hash hrefs as links
+            reMarker = new reMarked(options)
+            markdown = reMarker.render($content.html())
+            @formBody.val(markdown)
 
   save: (e) ->
     e.preventDefault()

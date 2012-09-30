@@ -62,6 +62,7 @@
     {{/each}}
   </section>
 
+  {{#if author}}
   <section class="author">
     {{#if author.photo}}
     <div class="photo"><img src="{{author.photo}}" alt="{{author.name}}"></div>
@@ -76,6 +77,7 @@
       </ul>
     </div>
   </section>
+  {{/if}}
 </article>
 
 <nav class="toc-nav">

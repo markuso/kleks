@@ -1,7 +1,9 @@
 {{#if collection.css}}<style>{{{collection.css}}}</style>{{/if}}
 
 <article class="collection">
-  <h2 class="title"><a href="{{baseURL}}/collection/{{collection.slug}}">{{collection.name}}</a></h2>
+  <h2 class="title">
+    <a href="{{baseURL}}/collection/{{collection.slug}}">{{collection.name}}</a>&nbsp;<small>Collection</small>
+  </h2>
 
   {{#if collection.photo}}
   <section class="photo">

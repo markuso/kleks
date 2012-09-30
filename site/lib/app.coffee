@@ -1,9 +1,14 @@
 # App's main client script
-
 $ = require('jquery')
+require('lib/fastclick')
 
 exports.initialize = (config) ->
   touch = Modernizr.touch
+
+  # Use the fastclick module for touch devices.
+  # Add a class of `needsclick` of the original click
+  # is needed.
+  new FastClick(document.body)
 
   $mainNav = $('.main-nav')
   $mainNavIcon = $mainNav.find('> .icon')

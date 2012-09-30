@@ -24,6 +24,10 @@ exports.essays_by_collection =
       emit [doc.site, doc.slug, {}], null
       # Also add the collection's sponsor doc
       emit [doc.site, doc.slug, {}], { _id: doc.sponsor_id } if doc.sponsor_id
+      # Also add the collection's associated blocks
+      if doc.blocks
+        for block_id, i in doc.blocks
+          emit [doc.site, doc.slug, {}], { _id: block_id }
       # Also add the site doc
       emit [doc.site, doc.slug, {}], { _id: doc.site }
 
@@ -54,5 +58,9 @@ exports.essays_by_slug =
       emit [doc.site, doc.slug, {}], { _id: doc.author_id } if doc.author_id
       # Also add the essay's sponsor doc
       emit [doc.site, doc.slug, {}], { _id: doc.sponsor_id } if doc.sponsor_id
+      # Also add the essay's associated blocks
+      if doc.blocks
+        for block_id, i in doc.blocks
+          emit [doc.site, doc.slug, {}], { _id: block_id }
       # Also add the site doc
       emit [doc.site, doc.slug, {}], { _id: doc.site }

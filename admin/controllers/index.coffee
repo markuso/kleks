@@ -1,6 +1,8 @@
 Spine       = require('spine/core')
 require('spine/route')
 require('spine/manager')
+# require('lib/fastclick')
+require('lib/sisyphus')
 
 templates   = require('duality/templates')
 session     = require('session')
@@ -20,7 +22,7 @@ Sponsor     = require('models/sponsor')
 class App extends Spine.Controller
   
   constructor: ->
-    super
+    super    
     @checkSession()
 
   checkSession: ->
@@ -55,6 +57,14 @@ class App extends Spine.Controller
     @append @mainNav, @mainStack
 
     Spine.Route.setup()
+
+    @doOtherStuff()
+
+  doOtherStuff: ->
+    # Use the fastclick module for touch devices.
+    # Add a class of `needsclick` of the original click
+    # is needed.
+    # new FastClick(document.body)
 
 
 module.exports = App

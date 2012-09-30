@@ -11,7 +11,7 @@ exports.home = (head, req) ->
   return if req.client and req.initial_hit
   start code: 200, headers: {'Content-Type': 'text/html'}
 
-  converter = new Showdown.converter()
+  md = new Showdown.converter()
   collections = []
   blocks = {}
   site = null
@@ -24,7 +24,7 @@ exports.home = (head, req) ->
   
   collections = _.map collections, (doc) ->
     if doc.intro?
-      doc.intro_html = converter.makeHtml(
+      doc.intro_html = md.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
     doc.updated_at_html = utils.prettyDate(doc.updated_at)
@@ -46,9 +46,10 @@ exports.collection = (head, req) ->
   return if req.client and req.initial_hit
   start code: 200, headers: {'Content-Type': 'text/html'}
 
-  converter = new Showdown.converter()
+  md = new Showdown.converter()
   essays = []
   collection = null
+  blocks = {}
   sponsor = null
   site = null
 
@@ -56,15 +57,20 @@ exports.collection = (head, req) ->
     doc = row.doc
     essays.push(doc) if doc.type is 'essay'
     collection ?= doc if doc.type is 'collection'
+    blocks[doc.code] = doc if doc.type is 'block'
     sponsor ?= doc if doc.type is 'sponsor'
     site ?= doc if doc.type is 'site'
 
   if collection
+    if collection.intro?
+      collection.intro_html = md.makeHtml(
+        collection.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
+      )
     collection.fresh = utils.isItFresh(collection.updated_at)
 
   essays = _.map essays, (doc) ->
     if doc.intro?
-      doc.intro_html = converter.makeHtml(
+      doc.intro_html = md.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
     doc.published_at_html = utils.prettyDate(doc.published_at)
@@ -93,6 +99,7 @@ exports.collection = (head, req) ->
         collection: collection
         essays: essays
         sponsor: sponsor
+        blocks: blocks
         nav: 'collection'
     }
   else
@@ -108,7 +115,7 @@ exports.essays = (head, req) ->
   return if req.client and req.initial_hit
   start code: 200, headers: {'Content-Type': 'text/html'}
 
-  converter = new Showdown.converter()
+  md = new Showdown.converter()
   essays = []
   site = null
 
@@ -124,7 +131,7 @@ exports.essays = (head, req) ->
 
   essays = _.map essays, (doc) ->
     if doc.intro?
-      doc.intro_html = converter.makeHtml(
+      doc.intro_html = md.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
     doc.published_at_html = utils.prettyDate(doc.published_at)
@@ -150,11 +157,12 @@ exports.essay = (head, req) ->
   return if req.client and req.initial_hit
   start code: 200, headers: {'Content-Type': 'text/html'}
 
-  converter = new Showdown.converter()
+  md = new Showdown.converter()
   essay = null
   collections = []
   author = null
   sponsor = null
+  blocks = {}
   site = null
 
   while row = getRow()
@@ -163,13 +171,14 @@ exports.essay = (head, req) ->
     collections.push(doc) if doc.type is 'collection'
     sponsor ?= doc if doc.type is 'sponsor'
     author ?= doc if doc.type is 'author'
+    blocks[doc.code] = doc if doc.type is 'block'
     site ?= doc if doc.type is 'site'
 
   transformEssay = (doc) ->
-    doc.intro_html = converter.makeHtml(
+    doc.intro_html = md.makeHtml(
       doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
     )
-    doc.body_html = converter.makeHtml(
+    doc.body_html = md.makeHtml(
       doc.body.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
     )
     doc.published_at_html = utils.prettyDate(doc.published_at)
@@ -181,7 +190,7 @@ exports.essay = (head, req) ->
 
   collections = _.map collections, (doc) ->
     if doc.intro?
-      doc.intro_html = converter.makeHtml(
+      doc.intro_html = md.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
     doc.updated_at_html = utils.prettyDate(doc.updated_at)
@@ -211,6 +220,7 @@ exports.essay = (head, req) ->
         collections: collections
         author: author
         sponsor: sponsor
+        blocks: blocks
         nav: 'essay'
     }
   else
@@ -225,11 +235,11 @@ exports.essay = (head, req) ->
 exports.rssfeed = function (head, req) {
     start({code: 200, headers: {'Content-Type': 'application/rss+xml'}});
 
-    var converter = new Showdown.converter();
+    var md = new Showdown.converter();
 
     var rows = getRows(function (row) {
         var doc = row.doc;
-        doc.markdown_html = converter.makeHtml(
+        doc.markdown_html = md.makeHtml(
             doc.markdown.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
         );
         doc.guid = 'http://caolanmcmahon.com' + (
