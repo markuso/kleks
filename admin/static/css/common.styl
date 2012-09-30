@@ -43,6 +43,7 @@ h6
 a
   color: $linkColor
   text-decoration: none
+  cursor: pointer
 
   &:hover
     text-decoration: none
@@ -120,10 +121,11 @@ textarea
   height: 120px
   min-height: 60px
   border-left: 2px dotted $faintGrey
-  padding-left: 2px
+  padding-left: 5px
 
 button, .button
   display: inline-block
+  vertical-align: middle
   padding: 10px 30px
   font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif
   font-size: 1.1em
@@ -147,7 +149,8 @@ button, .button
 
   &.small
     padding: 0px 10px
-    font-size: 1em
+    font-size: 18px
+    font-weight: $normalFont
     line-height: 1.5em
 
 ::-webkit-input-placeholder

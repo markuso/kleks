@@ -168,5 +168,10 @@ class Collections extends Spine.Stack
     '/collection/new':   'form'
     '/collection/:id':   'form'
 
+  constructor: ->
+    super
+    for k, v of @controllers
+      @[k].active => @active()
+
 
 module.exports = Collections

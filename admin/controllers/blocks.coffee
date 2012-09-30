@@ -138,5 +138,10 @@ class Blocks extends Spine.Stack
     '/block/new':   'form'
     '/block/:id':   'form'
 
+  constructor: ->
+    super
+    for k, v of @controllers
+      @[k].active => @active()
+
 
 module.exports = Blocks

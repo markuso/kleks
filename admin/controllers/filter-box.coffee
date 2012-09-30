@@ -42,7 +42,11 @@ class FilterBox extends Spine.Controller
       @clear()
     
     @selectedSite.on 'click', (e) =>
+      e.stopPropagation()
       @siteSelector.toggle()
+
+    $('html').on 'click', (e) =>
+      @siteSelector.hide()
     
     @siteSelector.find('li').on 'click', (e) =>
       $item = $(e.currentTarget)

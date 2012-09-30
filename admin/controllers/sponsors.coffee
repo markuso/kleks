@@ -128,5 +128,10 @@ class Sponsors extends Spine.Stack
     '/sponsor/new':   'form'
     '/sponsor/:id':   'form'
 
+  constructor: ->
+    super
+    for k, v of @controllers
+      @[k].active => @active()
+
 
 module.exports = Sponsors

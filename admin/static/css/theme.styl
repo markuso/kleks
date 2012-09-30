@@ -194,7 +194,7 @@ span.label
 
         .top-spacer
           display: block
-          height: 3em
+          height: 4em
 
         .buttons
           position: fixed
@@ -294,7 +294,8 @@ span.label
 
       .heading
         color: $primaryColor
-        margin: 1em 0 0.4em 0
+        margin: 0.5em 0 0 0
+        font-size: 1.4em
      
       .field
         position: relative
@@ -319,23 +320,14 @@ span.label
         input[name='code']
           font-size: 1.5em
 
+        textarea[name='body'],
+        textarea[name='content']
+          height: 600px
+
         input[type='checkbox']
           display: inline-block
           float: left
           margin: 4px 10px 4px 0
-
-        textarea
-
-          &.fullscreen
-            position: fixed
-            top: 0
-            bottom: 0
-            left: 0
-            width: 50%
-            padding: 5px
-            background: white
-            border-left: 20px solid $primaryColor
-            z-index: 10
 
         .field-left
           float: left
@@ -381,6 +373,70 @@ span.label
         color: #fff
         padding: 5px 10px
         background: orange
+      
+      &.fullscreen
+
+        &:before
+          content: ''
+          position: fixed
+          top: 0
+          bottom: 0
+          left: 0
+          right: 0
+          background: $primaryColor
+          z-index: 99
+
+        input[name='title'],
+        input[name='name']
+          position: fixed
+          top: 0
+          left: 20%
+          right: 20%
+          width: auto
+          color: #fff
+          font-size: 1.8em
+          z-index: 100
+
+        textarea[name='body'],
+        textarea[name='content']
+          position: fixed
+          top: 60px
+          bottom: 0
+          left: 20%
+          right: 20%
+          width: auto
+          height: 90%
+          padding: 10px
+          border: 0
+          background: white
+          // outline: 10px solid rgba(255, 255, 255, 0.5)
+          z-index: 100
+
+        button.fullscreen-button,
+        .markdown-help:first-of-type
+          position: fixed
+          top: 10px
+          left: 10px
+          padding: 0 10px
+          font-size: 18px
+          font-weight: 300
+          background: darken($primaryColor, 5%)
+          color: #fff
+          border: 0
+          z-index: 100
+
+          &:hover
+            background: darken($primaryColor, 10%)
+
+        .markdown-help:first-of-type
+          position: fixed
+          top: 10px
+          left: auto
+          right: 10px
+
+          &:after
+            content: ' Help'
+            color: #fff
 
 .stack .panel:not(.active)
   display: none
@@ -388,16 +444,20 @@ span.label
 
 ul.ui-multi-select
   list-style-type: none
-  padding: 0
+  padding: 2px
   margin: 0
+  max-height: 100px
+  border-bottom: 2px dotted $faintGrey
+  overflow-y: auto
+  overflow-x: hidden
   -webkit-user-select: none
 
   > li
     display: inline-block
     padding: 4px 10px
     margin: 0 12px 12px 0
-    max-width: 100%
-    background: #fff
+    // max-width: 100%
+    width: 48%
     border: 1px solid $faintGrey
     ellipsis()
     cursor: pointer
@@ -407,9 +467,33 @@ ul.ui-multi-select
 
     &.selected
       color: $linkColor
+      background: #fff
       font-weight: $boldFont
       border-color: $primaryColor
       outline: 2px solid rgba($primaryColor, 0.5)
+
+      &:before
+        content: '•'
+        display: block
+        float: right
+        vertical-align: top
+        margin-top: 5px
+        color: $primaryColor
+        font-size: 1.5em
+        line-height: 0.5em
+
+  .sidebar &
+    border-color: #d3d3d3
+
+    > li
+      width: 95%
+      border: 1px solid darken($faintGrey, 10%)
+
+      &:hover
+        background: lighten($faintGrey, 10%)
+
+      &.selected
+        background: lighten($faintGrey, 30%)
 
 .ui-file-upload
   
@@ -454,3 +538,47 @@ ul.ui-multi-select
         em
           font-weight: $boldFont
           font-size: 0.8em
+
+.ui-help
+  position: absolute
+  top: 15%
+  right: 20px
+  bottom: 20px
+  max-width: 450px
+  padding: 20px
+  background: #333
+  color: #fff
+  font-size: 0.8em
+  overflow: auto
+  z-index: 110
+  
+  > h3
+    color: $primaryColor
+    margin: 1em 0
+
+  .close-button
+    float: right
+
+  > table
+    width: 100%
+    border-collapse: separate
+    border-spacing: 0 5px
+    
+    tbody
+
+      td
+        padding: 5px 10px
+        
+      td:first-of-type
+        width: 40%
+        padding: 5px 10px 5px 0
+        font-size: 1.1em
+
+      td:nth-child(2)
+        width: 5px
+        padding: 0
+        border: 1px solid rgba(255, 255, 255, 0.1)
+        border-right: 0
+
+      td:last-of-type
+        padding: 5px 0 5px 10px

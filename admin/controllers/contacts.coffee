@@ -119,5 +119,10 @@ class Contacts extends Spine.Stack
     '/contact/new':   'form'
     '/contact/:id':   'form'
 
+  constructor: ->
+    super
+    for k, v of @controllers
+      @[k].active => @active()
+
 
 module.exports = Contacts

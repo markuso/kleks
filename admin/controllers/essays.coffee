@@ -34,6 +34,7 @@ class EssayForm extends Spine.Controller
     '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
+    'button.fullscreen-button': 'fullscreenButton'
 
   events:
     'submit form':              'preventSubmit'
@@ -42,6 +43,7 @@ class EssayForm extends Spine.Controller
     'click .delete-button':     'destroy'
     'change select[name=site]': 'siteChange'
     'blur input[name=slug]':    'updateSlug'
+    'click .fullscreen-button': 'fullscreen'
     'click .import-button':     'import'
 
   constructor: ->
@@ -90,14 +92,14 @@ class EssayForm extends Spine.Controller
 
     # Use Sisyphus to auto save forms to LocalStorage
     @form.sisyphus
-      customKeyPrefix: ''
+      customKeyPrefix: 'CUSTOM_PREFIX'
       timeout: 0
       autoRelease: true
-      name: if @editing then @item.id else 'new-essay'
-      onSave: -> console.log "Saved to local storage"
-      onBeforeRestore: -> alert "About to restore from local storage"
-      onRestore: -> alert "Restored from local storage"
-      onRelease: -> console.log "Local storage was released"
+      name: 'ABC123XXX' #if @editing then @item.id else 'new-essay'
+      # onSave: -> console.log "Saved to local storage"
+      # onBeforeRestore: -> alert "About to restore from local storage"
+      # onRestore: -> alert "Restored from local storage"
+      # onRelease: -> console.log "Local storage was released"
       excludeFields: []
 
   siteChange: ->
@@ -111,7 +113,7 @@ class EssayForm extends Spine.Controller
       $siteSelected.html ""
 
   makeAuthorsList: (site) ->
-    authors = Author.findAllByAttribute('site', site.id)
+    authors = Author.findAllByAttribute('site', site.id).sort(Author.nameSort)
     @formAuthorId.empty()
       .append "<option value=\"\">Select an author...</option>"
     for author in authors
@@ -119,7 +121,7 @@ class EssayForm extends Spine.Controller
     @formAuthorId.val(@item.author_id)
   
   makeCollectionsList: (site) ->
-    collections = Collection.findAllByAttribute('site', site.id)
+    collections = Collection.findAllByAttribute('site', site.id).sort(Collection.nameSort)
     @collectionSelectUI = new MultiSelectUI
       items: collections
       selectedItems: (c.id for c in @item.collections)
@@ -131,10 +133,20 @@ class EssayForm extends Spine.Controller
     unless slug.val()
       slug.val utils.cleanSlug(@formTitle.val())
 
+  fullscreen: (e) =>
+    e?.preventDefault()
+    @fullscreenButtonText ?= @fullscreenButton.html()
+    if @form.hasClass('fullscreen')
+      @form.removeClass('fullscreen')
+      @fullscreenButton.html @fullscreenButtonText
+    else
+      @form.addClass('fullscreen')
+      @fullscreenButton.html "&lt; Exit #{@fullscreenButtonText}"
+
   import: (e) =>
     # For importing old HTML to Markdown directly from old location
-    e.preventDefault()
-    url = $.trim @formBody.val()
+    e?.preventDefault()
+    url = $.trim prompt("Paste a URL from #{@formSite.val()}")
     if url
       $.ajax
         type: 'GET'
@@ -244,6 +256,11 @@ class Essays extends Spine.Stack
     '/essays/list': 'list'
     '/essay/new':   'form'
     '/essay/:id':   'form'
+
+  constructor: ->
+    super
+    for k, v of @controllers
+      @[k].active => @active()
 
 
 module.exports = Essays

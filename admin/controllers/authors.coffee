@@ -1,5 +1,5 @@
 Spine       = require('spine/core')
-# $           = Spine.$
+$           = Spine.$
 templates   = require('duality/templates')
 
 Author      = require('models/author')
@@ -153,6 +153,11 @@ class Authors extends Spine.Stack
     '/authors/list': 'list'
     '/author/new':   'form'
     '/author/:id':   'form'
+
+  constructor: ->
+    super
+    for k, v of @controllers
+      @[k].active => @active()
 
 
 module.exports = Authors

@@ -1,7 +1,7 @@
 Spine       = require('spine/core')
 require('spine/route')
 require('spine/manager')
-# require('lib/fastclick')
+require('lib/fastclick')
 require('lib/sisyphus')
 
 templates   = require('duality/templates')
@@ -9,6 +9,7 @@ session     = require('session')
 
 MainNav     = require('controllers/main-nav')
 MainStack   = require('controllers/main-stack')
+HelpUI      = require('controllers/ui/help')
 
 Site        = require('models/site')
 Author      = require('models/author')
@@ -53,10 +54,11 @@ class App extends Spine.Controller
 
     @mainNav   = new MainNav
     @mainStack = new MainStack
+    @helpUI    = new HelpUI
 
-    @append @mainNav, @mainStack
+    @append @mainNav, @mainStack, @helpUI
 
-    Spine.Route.setup()
+    Spine.Route.setup(history: true)
 
     @doOtherStuff()
 
@@ -64,7 +66,7 @@ class App extends Spine.Controller
     # Use the fastclick module for touch devices.
     # Add a class of `needsclick` of the original click
     # is needed.
-    # new FastClick(document.body)
+    new FastClick(document.body)
 
 
 module.exports = App

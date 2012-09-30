@@ -14,6 +14,7 @@ class MultiSelectUI extends Spine.Controller
   valueField: 'id'
   valueFields: null
   emptyText: 'Nothing to select here.'
+  jumpToFirst: true
 
   constructor: ->
     super
@@ -46,6 +47,8 @@ class MultiSelectUI extends Spine.Controller
       
       # add the created option to the list
       @el.append $option
+
+    setTimeout(@scrollToSelected, 2000) if @jumpToFirst
     @
 
   selected: =>
@@ -61,6 +64,9 @@ class MultiSelectUI extends Spine.Controller
       else
         items.push $option.attr("data-#{cls.valueField}")
     return items
+
+  scrollToSelected: =>
+    @el.scrollTop(@el.find('.selected:first').position().top)
 
 
 module.exports = MultiSelectUI

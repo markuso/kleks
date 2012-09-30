@@ -128,5 +128,10 @@ class Sites extends Spine.Stack
     '/site/new':   'form'
     '/site/:id':   'form'
 
+  constructor: ->
+    super
+    for k, v of @controllers
+      @[k].active => @active()
+
 
 module.exports = Sites
