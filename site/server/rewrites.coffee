@@ -47,6 +47,19 @@ module.exports = [
     }
   }
 
+# Collection's JSON view - list of essays ONLY
+  # `:slug` is the collection's slug
+  {
+    from: '/render/:site/json/collection/:slug',
+    to: '_view/essays_by_collection',
+    query: {
+      startkey: [':site', ':slug', 'essay', {}],
+      endkey: [':site', ':slug', 'essay'],
+      descending: 'true',
+      include_docs: 'true'
+    }
+  }
+
   # Essay's content page
   # `:slug` is the essay's slug
   {

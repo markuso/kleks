@@ -54,10 +54,21 @@ exports.initialize = (config) ->
 
   # Setup the Collection menu
   if $collectionNav
-    $collectionNavId = $collectionNav.attr('data-id')
-    if $collectionNavId
-      for c in [1...5]
-        $collectionNavList.append "<li><a href=\"#\">Essay Number #{c}</a></li>"
+    collectionId = $collectionNav.attr('data-id')
+    collectionSlug = $collectionNav.attr('data-slug')
+    if collectionSlug
+      $.ajax
+        type: 'GET'
+        url: "/json/collection/#{collectionSlug}"
+        contentType: 'json'
+        success: (data) ->
+          if data
+            data = JSON.parse(data)
+            for row in data.rows
+              doc = row.doc
+              url = "/#{doc.type}/#{doc.slug}"
+              selectedClass = if window.location.pathname is url then 'active' else ''
+              $collectionNavList.append "<li><a href=\"#{url}\" class=\"#{selectedClass}\">#{doc.title}</a></li>"
 
     $collectionNavIcon.on 'click', (e) ->
       e.stopPropagation()

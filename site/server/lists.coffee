@@ -218,6 +218,7 @@ exports.essay = (head, req) ->
       content: templates.render 'essay.html', req,
         essay: essay
         collections: collections
+        collection: collections?[0] # primary one
         author: author
         sponsor: sponsor
         blocks: blocks

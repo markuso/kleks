@@ -58,7 +58,7 @@ class App extends Spine.Controller
 
     @append @mainNav, @mainStack, @helpUI
 
-    Spine.Route.setup(history: true)
+    Spine.Route.setup()
 
     @doOtherStuff()
 

@@ -48,7 +48,7 @@ class MultiSelectUI extends Spine.Controller
       # add the created option to the list
       @el.append $option
 
-    setTimeout(@scrollToSelected, 2000) if @jumpToFirst
+    setTimeout(@scrollToSelected, 1000) if @jumpToFirst
     @
 
   selected: =>
