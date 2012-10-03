@@ -1,5 +1,6 @@
 templates = require('duality/templates')
 dutils    = require('duality/utils')
+settings  = require('settings/root')
 Showdown  = require('showdown')
 _         = require('underscore')._
 utils     = require('lib/utils')
@@ -28,6 +29,7 @@ exports.home = (head, req) ->
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
     doc.updated_at_html = utils.prettyDate(doc.updated_at)
+    doc.updated_at_half = utils.halfDate(doc.updated_at)
     doc.fresh = utils.isItFresh(doc.updated_at)
     return doc
 
@@ -232,28 +234,33 @@ exports.essay = (head, req) ->
     }
 
 
-###
-exports.rssfeed = function (head, req) {
-    start({code: 200, headers: {'Content-Type': 'application/rss+xml'}});
+exports.rssfeed = (head, req) ->
+  # start code: 200, headers: {'Content-Type': 'application/rss+xml'}
+  start code: 200, headers: {'Content-Type': 'text/plain'}
 
-    var md = new Showdown.converter();
+  md = new Showdown.converter()
+  docs = []
+  site = null
 
-    var rows = getRows(function (row) {
-        var doc = row.doc;
-        doc.markdown_html = md.makeHtml(
-            doc.markdown.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
-        );
-        doc.guid = 'http://caolanmcmahon.com' + (
-            doc.oldurl || '/posts/' + doc.slug
-        );
-        return row;
-    });
+  while row = getRow()
+    doc = row.doc
+    docs.push(doc) if doc.type in settings.app.content_types
+    site ?= doc if doc.type is 'site'
 
-    return templates.render('feed.xml', req, {
-        rows: rows,
-        published_at: rows[0].doc.published_at,
-        builddate: new Date()
-    });
-};
+  docs = _.map docs, (doc) ->
+    doc.intro_html = md.makeHtml(
+      doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
+    )
+    doc.body_html = md.makeHtml(
+      doc.body.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
+    )
+    doc.published_at_html = utils.prettyDate(doc.published_at)
+    doc.full_url = "#{site.link}/#{doc.type}/#{doc.slug}"
+    doc.full_html = "#{doc.intro_html}<br>#{doc.body_html}"
+    return doc
 
-###
+  return templates.render 'feed.xml', req,
+    site: site
+    docs: docs
+    published_at: new Date(docs[0].published_at)
+    build_date: new Date()

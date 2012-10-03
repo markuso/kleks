@@ -1,6 +1,6 @@
 Spine = require('spine/core')
 
-class BaseModel extends Spine.Model 
+class BaseModel extends Spine.Model
 
   @nameSort: (a, b) ->
     if a.name > b.name then 1 else -1

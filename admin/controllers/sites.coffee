@@ -13,7 +13,7 @@ class SiteForm extends Spine.Controller
     '.item-title':        'itemTitle'
     '.error-message':     'errorMessage'
     'form':               'form'
-    'select[name=_id]':   'formSiteId'
+    'input[name=_id]':    'formSiteId'
     'select[name=theme]': 'formTheme'
     '.save-button':       'saveButton'
     '.cancel-button':     'cancelButton'
@@ -50,7 +50,7 @@ class SiteForm extends Spine.Controller
     # Set few initial form values
     if @editing
       @formTheme.val(@item.theme)
-      @formSiteId.attr('readonly', 'readonly')
+      @formSiteId.prop('readonly', true)
 
   save: (e) ->
     e.preventDefault()
@@ -107,8 +107,7 @@ class SiteList extends Spine.Controller
   render: =>
     context = 
       sites: Site.filter(@filterObj).sort(Site.nameSort)
-    @el.html templates.render('sites.html', {}, context)
-    @
+    @html templates.render('sites.html', {}, context)
 
   filter: (@filterObj) =>
     @render()

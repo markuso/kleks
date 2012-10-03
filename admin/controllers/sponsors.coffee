@@ -2,6 +2,8 @@ Spine       = require('spine/core')
 # $           = Spine.$
 templates   = require('duality/templates')
 
+FileUploadUI  = require('controllers/ui/file-upload')
+
 Sponsor     = require('models/sponsor')
 Contact     = require('models/contact')
 
@@ -15,6 +17,7 @@ class SponsorForm extends Spine.Controller
     'form':                    'form'
     'select[name=contact_id]': 'formContactId'
     'select[name=format]':     'formFormat'
+    '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
 
@@ -41,6 +44,8 @@ class SponsorForm extends Spine.Controller
     else
       @title = 'New Sponsor'
       @item = {}
+
+    @item._attachments ?= {}
     
     @item.contacts = Contact.all().sort(Contact.nameSort)
     @html templates.render('sponsor-form.html', {}, @item)
@@ -52,12 +57,22 @@ class SponsorForm extends Spine.Controller
       @formContactId.val(@item.contact_id)
       @formFormat.val(@item.format)
 
+    # Files upload area
+    @fileUploadUI = new FileUploadUI
+      docId: @item.id
+      selectedFieldName: 'image'
+      selectedFile: @item.image
+      attachments: @item._attachments
+    @fileUploadContainer.html @fileUploadUI.el
+
   save: (e) ->
     e.preventDefault()
     if @editing
       @item.fromForm(@form)
     else
       @item = new Sponsor().fromForm(@form)
+
+    @item._attachments = @fileUploadUI.attachments
     
     # Save the item and make sure it validates
     if @item.save()
@@ -107,8 +122,7 @@ class SponsorList extends Spine.Controller
   render: =>
     context = 
       sponsors: Sponsor.filter(@filterObj).sort(Sponsor.nameSort)
-    @el.html templates.render('sponsors.html', {}, context)
-    @
+    @html templates.render('sponsors.html', {}, context)
 
   filter: (@filterObj) =>
     @render()

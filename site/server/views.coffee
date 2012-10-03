@@ -16,8 +16,8 @@ exports.docs_for_home =
 
 exports.essays_by_collection =
   map: (doc) ->
-    if doc.site and doc.type is 'essay' and doc.collections and doc.updated_at and doc.published
-      timestamp = new Date(doc.updated_at).getTime()
+    if doc.site and doc.type is 'essay' and doc.collections and doc.published_at and doc.published
+      timestamp = new Date(doc.published_at).getTime()
       for c, i in doc.collections
         emit [doc.site, c.slug, 'essay', timestamp], null
     else if doc.site and doc.type is 'collection'
@@ -34,9 +34,9 @@ exports.essays_by_collection =
 
 exports.essays_by_date =
   map: (doc) ->
-    # List of essays sorted by `updated_at` along with their collection references
-    if doc.site and doc.type is 'essay' and doc.updated_at and doc.published
-      timestamp = new Date(doc.updated_at).getTime()
+    # List of essays sorted by `published_at` along with their collection references
+    if doc.site and doc.type is 'essay' and doc.published_at and doc.published
+      timestamp = new Date(doc.published_at).getTime()
       emit [doc.site, timestamp, doc._id, {}], null
       for c, i in doc.collections
         # To get each collection's doc

@@ -39,9 +39,9 @@
     {{#if sponsor.image_format}}
     <div class="image">
       {{#if sponsor.link}}
-        <a href="{{sponsor.link}}" target="_blank"><img src="{{sponsor.content}}" alt=""></a>
+        <a href="{{sponsor.link}}" target="_blank"><img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt=""></a>
       {{else}}
-        <img src="{{sponsor.content}}" alt="">
+        <img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt="">
       {{/if}}
     </div>
     {{/if}}

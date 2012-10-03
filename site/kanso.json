@@ -31,5 +31,9 @@
     "duality-handlebars": null,
     "showdown": null,
     "jquery": null
+  },
+
+  "app": {
+    "content_types": ["essay","scene","video","profile"]
   }
 }

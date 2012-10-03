@@ -8,9 +8,9 @@ BaseModel = require('models/base')
 utils = require('lib/utils')
 
 class Sponsor extends BaseModel
-  @configure "Sponsor", "format", "name", "link", "label", "content", "note", "contact_id"
+  @configure "Sponsor", "format", "name", "link", "label", "content", "image", "note", "contact_id", "_attachments"
   
-  @extend Spine.Model.CouchAjax
+  @extend @CouchAjax
 
   @queryOn: ['name','content','link','format']
     

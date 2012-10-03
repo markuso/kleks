@@ -1,0 +1,23 @@
+<rss version="2.0"> 
+    <channel> 
+        <title>{{site.name}}</title> 
+        <link>{{site.link}}</link> 
+        <description>{{site.seo_description}}</description> 
+        <language>en-us</language> 
+        <pubDate>{{published_at}}</pubDate> 
+ 
+        <lastBuildDate>{{build_date}}</lastBuildDate> 
+        <managingEditor>{{site.editor_email}}</managingEditor> 
+        <webMaster>{{site.admin_email}}</webMaster> 
+
+        {{#each docs}}
+        <item> 
+            <title>{{title}}</title> 
+            <link>{{full_url}}</link> 
+            <description><![CDATA[{{{full_html}}}]]></description> 
+            <pubDate>{{published_at}}</pubDate> 
+            <guid>{{full_url}}</guid>
+        </item>
+        {{/each}}
+    </channel>
+</rss>

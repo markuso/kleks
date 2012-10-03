@@ -12,8 +12,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=3.0, user-scalable=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   
+  {{#if site.favicon}}
+  <link rel="shortcut icon" href="{{baseURL}}/file/{{site._id}}/{{site.favicon}}">
+  {{else}}
   <link rel="shortcut icon" href="{{baseURL}}/static/img/favicon.ico">
-  <link rel="apple-touch-icon-precomposed" href="{{baseURL}}/static/img/apple-touch-icon-precomposed.png">
+  {{/if}}
+  <!-- <link rel="apple-touch-icon-precomposed" href="{{baseURL}}/static/img/apple-touch-icon-precomposed.png"> -->
 
   <link rel="stylesheet" href="{{baseURL}}/static/css/index.css" type="text/css" media="all" charset="utf-8">
   {{#if site.theme}}
@@ -31,29 +35,30 @@
     <h1 class="site-name"><a href="{{baseURL}}/">{{{site.name_html}}}</a></h1>
     <h2 class="site-tagline">{{{site.tagline}}}</h2>
 
-    <section class="site-promo">
-      {{{blocks.site_promo.content}}}
-    </section>
-
     {{{content}}}
 
     <nav class="main-nav">
-      <div class="icon"><span></span><span></span><span></span><i></i></div>
+      <div class="icon" data-track-click="Main Nav Icon">
+        <span></span><span></span><span></span><i></i>
+      </div>
       <ul>
+        <li class="heading">Main Menu</li>
         {{{site.menu_html}}}
         <li class="search-box">
-          <input type="text" placeholder="Search">
+          <input type="text" placeholder="Search" data-track-click="Search Box">
         </li>
       </ul>
     </nav>
 
-    {{#if site.footer_html}}<footer>{{{site.footer_html}}}</footer>{{/if}}
+    {{#if site.footer_html}}
+    <footer>{{{site.footer_html}}}</footer>
+    {{/if}}
   </div>
 
   <script src="{{baseURL}}/modules.js"></script>
   <script type="text/javascript">
     var $ = require('jquery');
-    var _gaq = { push: function(x){} };
+    var _gaq = { push: function(x){ console.log(x); } };
     $(function() {
       var app = require('lib/app');
       app.initialize({
@@ -69,7 +74,7 @@
   <!-- <script type="text/javascript">
     var _gaq = [];
     _gaq.push(['_setAccount', '{{site.google_analytics_code}}']);
-    _gaq.push(['_setDomainName', '{{site._id}}']);
+    _gaq.push(['_setDomainName', 'auto']);
     _gaq.push(['_trackPageview']);
     (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

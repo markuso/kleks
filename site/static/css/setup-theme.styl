@@ -33,7 +33,9 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
   .site-promo
     color: $primaryColor
 
-  .main-nav
+  .main-nav,
+  .toc-nav,
+  .collection-nav
     .icon
       background: $primaryColor
       &:hover
@@ -53,12 +55,18 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
         background: $primaryColor
 
   article.home
-    .collections      
+    .collections    
       > ul
         > li
-          border-color: $primaryColor
           .updated
             background: $primaryColor
+            border-color: $primaryColor
+          &:hover
+            border-color: $primaryColor
+            a
+              background: $primaryColor
+            .updated
+              color: $primaryColor
 
   article.essay
     .author

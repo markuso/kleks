@@ -36,10 +36,25 @@
     <div class="buttons">
       <button class="save-button">Save</button>
       <button class="cancel-button plain">Cancel</button>
-      {{#if id}}<a class="delete-button" href="#">delete {{type}}</a>{{/if}}
+      {{#if _id}}<a class="delete-button" href="#">delete {{type}}</a>{{/if}}
     </div>
 
     <div class="top-spacer"></div>
+
+    <div class="field">
+      <div class="field-left">
+        <label>Enabled</label>
+        <input type="checkbox" name="enabled">
+      </div>
+      <div class="field-right">
+        <!-- another spot -->
+      </div>
+    </div>
+
+    <h3 class="heading">Files</h3>
+    <div class="field">
+      <div class="upload-ui"></div>
+    </div>
   </div>
 
 </form>

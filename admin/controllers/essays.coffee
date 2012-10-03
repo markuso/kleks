@@ -90,18 +90,6 @@ class EssayForm extends Spine.Controller
       attachments: @item._attachments
     @fileUploadContainer.html @fileUploadUI.el
 
-    # Use Sisyphus to auto save forms to LocalStorage
-    @form.sisyphus
-      customKeyPrefix: 'CUSTOM_PREFIX'
-      timeout: 0
-      autoRelease: true
-      name: 'ABC123XXX' #if @editing then @item.id else 'new-essay'
-      # onSave: -> console.log "Saved to local storage"
-      # onBeforeRestore: -> alert "About to restore from local storage"
-      # onRestore: -> alert "Restored from local storage"
-      # onRelease: -> console.log "Local storage was released"
-      excludeFields: []
-
   siteChange: ->
     $siteSelected = @formSite.parents('.field').find('.site-selected')
     site = Site.exists(@formSite.val())
@@ -152,9 +140,12 @@ class EssayForm extends Spine.Controller
         type: 'GET'
         url: url
         success: (res) =>
-          $content = $(res.responseText).find('.entry')
-          @log res
-          @log $content
+          $html = $(res.responseText)
+          $title = $html.find('.post > h2:first > a')
+          $author = $html.find('.post .entry-author > a:first')
+          $date = $html.find('.post .entry-date > .published')
+          $content = $html.find('.post .entry:first')
+          $image = $content.find('img:first')
           if $content
             $content.find('.addthis_toolbox, .author-bio').remove()
             options =
@@ -174,6 +165,11 @@ class EssayForm extends Spine.Controller
             reMarker = new reMarked(options)
             markdown = reMarker.render($content.html())
             @formBody.val(markdown)
+
+          @formTitle.val($title.text()) if $title
+          @form.find('input[name=slug]').val($title.attr('href').replace("http://#{@formSite.val()}", '')) if $title
+          @formAuthorId.val($author.text()) if $author
+          @form.find('input[name=published_at]').val($date.text()) if $date
 
   save: (e) ->
     e.preventDefault()
@@ -236,8 +232,7 @@ class EssayList extends Spine.Controller
   render: =>
     context = 
       essays: Essay.filter(@filterObj).sort(Essay.titleSort)
-    @el.html templates.render('essays.html', {}, context)
-    @
+    @html templates.render('essays.html', {}, context)
 
   filter: (@filterObj) =>
     @render()

@@ -1,7 +1,17 @@
+{{#if blocks.site_promo.enabled}}
+<section class="site-promo">{{{blocks.site_promo.content}}}</section>
+{{/if}}
+
 <article class="home">
-  <section class="intro">
-    {{{blocks.site_intro.content}}}
-  </section>
+  {{#if blocks.site_intro.enabled}}
+    <section class="intro">{{{blocks.site_intro.content}}}</section>
+
+    {{#if blocks.site_intro.photo}}
+    <section class="photo">
+      <img src="/file/{{blocks.site_intro._id}}/{{blocks.site_intro.photo}}">
+    </section>
+    {{/if}}
+  {{/if}}
 
   {{{include "collections.html"}}}
 </article>

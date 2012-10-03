@@ -68,10 +68,19 @@
     <div class="buttons">
       <button class="save-button">Save</button>
       <button class="cancel-button plain">Cancel</button>
-      {{#if id}}<a class="delete-button" href="#">delete {{type}}</a>{{/if}}
+      {{#if _id}}<a class="delete-button" href="#">delete {{type}}</a>{{/if}}
     </div>
 
     <div class="top-spacer"></div>
+
+    <div class="field">
+      <label>Editor Email</label>
+      <input type="text" name="editor_email" value="{{editor_email}}" placeholder="editor@example.com">
+    </div>
+    <div class="field">
+      <label>Admin Email</label>
+      <input type="text" name="admin_email" value="{{admin_email}}" placeholder="admin@example.com">
+    </div>
   </div>
 
 </form>

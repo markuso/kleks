@@ -9,7 +9,7 @@ BaseModel = require('models/base')
 class Collection extends BaseModel
   @configure "Collection", "site", "slug", "name", "intro", "photo", "pinned", "updated_at", "sponsor_id", "sponsor_start", "sponsor_end", "sponsors_history", "_attachments"
 
-  @extend Spine.Model.CouchAjax
+  @extend @CouchAjax
 
   @queryOn: ['name','slug']
     
@@ -19,6 +19,15 @@ class Collection extends BaseModel
     return 'Site is required' unless @site
     return 'Slug is required' unless @slug
     return 'Name is required' unless @name
+
+    # Validate the `slug` to be unique within site
+    found = Collection.select (collection) =>
+      matched = collection.site is @site and collection.slug is @slug
+      if @isNew()
+        matched
+      else
+        collection.id isnt @id and matched
+    return 'Slug has been already used for this site.' if found.length
     
     # Take care of some dates
     updated_at = moment(@updated_at)

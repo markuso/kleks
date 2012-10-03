@@ -48,7 +48,7 @@ class MultiSelectUI extends Spine.Controller
       # add the created option to the list
       @el.append $option
 
-    setTimeout(@scrollToSelected, 1000) if @jumpToFirst
+    @delay(@scrollToSelected, 1000) if @jumpToFirst
     @
 
   selected: =>
@@ -66,7 +66,8 @@ class MultiSelectUI extends Spine.Controller
     return items
 
   scrollToSelected: =>
-    @el.scrollTop(@el.find('.selected:first').position().top)
+    position = @el.find('.selected:first')?.position()
+    @el.scrollTop(position?.top - 12) if position
 
 
 module.exports = MultiSelectUI

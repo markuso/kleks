@@ -25,8 +25,7 @@ Spine.Model.extend
     if typeof objects is 'string'
       objects = JSON.parse(objects)
     if Spine.isArray(objects)
-      for value in objects
-        make_object(value)
+      (make_object(value) for value in objects)
     else
       make_object(objects)
 
@@ -39,9 +38,16 @@ CouchAjax =
   requests: []
 
   disable: (callback) ->
-    @enabled = false
-    do callback
-    @enabled = true
+    if @enabled
+      @enabled = false
+      try
+        do callback
+      catch e
+        throw e
+      finally
+        @enabled = true
+    else
+      do callback
 
   requestNext: ->
     next = @requests.shift()
@@ -206,10 +212,13 @@ Model.CouchAjax =
     @extend Extend
     @include Include
     
+  # Private
+
   ajaxFetch: ->
     @ajax().fetch(arguments...)
     
   ajaxChange: (record, type, options = {}) ->
+    return if options.ajax is false
     record.ajax()[type](options.ajax, options)
     
 Model.CouchAjax.Methods = 

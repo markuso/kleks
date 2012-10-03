@@ -30,7 +30,7 @@
     </div>
     <div class="field">
       <label>Content</label>
-      <textarea name="content" placeholder="Type text or paste embed code of an image or video">{{content}}</textarea>
+      <textarea class="default" name="content" placeholder="Type text or paste embed code of an image or video">{{content}}</textarea>
     </div>
     <div class="field">
       <label>Note</label>
@@ -51,10 +51,15 @@
     <div class="buttons">
       <button class="save-button">Save</button>
       <button class="cancel-button plain">Cancel</button>
-      {{#if id}}<a class="delete-button" href="#">delete {{type}}</a>{{/if}}
+      {{#if _id}}<a class="delete-button" href="#">delete {{type}}</a>{{/if}}
     </div>
 
     <div class="top-spacer"></div>
+
+    <h3 class="heading">Files</h3>
+    <div class="field">
+      <div class="upload-ui"></div>
+    </div>
   </div>
 
 </form>

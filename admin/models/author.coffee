@@ -8,7 +8,7 @@ BaseModel = require('models/base')
 class Author extends BaseModel
   @configure "Author", "site", "name", "email", "bio", "links", "photo"
   
-  @extend Spine.Model.CouchAjax
+  @extend @CouchAjax
   
   @queryOn: ['name','email']
     

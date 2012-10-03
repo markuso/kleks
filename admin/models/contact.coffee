@@ -8,7 +8,7 @@ BaseModel = require('models/base')
 class Contact extends BaseModel
   @configure "Contact", "name", "email", "note"
   
-  @extend Spine.Model.CouchAjax
+  @extend @CouchAjax
   
   @queryOn: ['name','email']
     

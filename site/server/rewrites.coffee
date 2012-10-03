@@ -1,6 +1,10 @@
 moved = (from, to) ->
   { from: from, to: '_show/moved', query: {loc: to} }
 
+movedPattern = (from, to) ->
+  { from: from, to: '_show/moved_pattern', query: {loc: to} }
+
+
 module.exports = [
   # Static files from the root
   { from: '/static/*', to: 'static/*' }
@@ -21,18 +25,6 @@ module.exports = [
   { from: '/render/:site/static/*',    to: 'static/*' }
   { from: '/render/:site/modules.js',  to: 'modules.js' }
   { from: '/render/:site/duality.js',  to: 'duality.js' }
-
-  # List of all Essays sorted by `updated_at`
-  {
-    from: '/render/:site/essays',
-    to: '_list/essays/essays_by_date',
-    query: {
-      startkey: [':site', {}],
-      endkey: [':site'],
-      descending: 'true',
-      include_docs: 'true'
-    }
-  }
 
   # Collection's page - list of essays
   # `:slug` is the collection's slug
@@ -72,12 +64,39 @@ module.exports = [
     }
   }
 
+  # List of all Essays sorted by `updated_at`
+  {
+    from: '/render/:site/essays',
+    to: '_list/essays/essays_by_date',
+    query: {
+      startkey: [':site', {}],
+      endkey: [':site'],
+      descending: 'true',
+      include_docs: 'true'
+    }
+  }
+
+  # RSS Feed of all Essays sorted by `updated_at`
+  {
+    from: '/render/:site/essays/feed',
+    to: '_list/rssfeed/essays_by_date',
+    query: {
+      startkey: [':site', {}],
+      endkey: [':site'],
+      descending: 'true',
+      include_docs: 'true'
+    }
+  }
+
   # File attachments paths
   { from: '/file/:id/:filename', to: '../../:id/:filename' }
   { from: '/render/:site/file/:id/:filename', to: '../../:id/:filename' }
 
-  # Redirected old URLs
+  # Redirect some direct paths
   # moved '/posts/some-old-path', '/some-new-path'
+  
+  # Redirected old URLs using a pattern
+  movedPattern '/render/:site/posts/:id/:slug', '/:type/:slug'
 
   # 404 not found 
   { from: '/not-found', to: '_show/not_found' }

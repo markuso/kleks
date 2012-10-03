@@ -1,6 +1,6 @@
 {{#if essay.css}}<style>{{{essay.css}}}</style>{{/if}}
 
-<article class="view essay">
+<article class="view essay" id="TOC-Introduction">
   <h2 class="title"><a href="{{baseURL}}/essay/{{essay.slug}}">{{essay.title}}</a></h2>
 
   {{#if essay.photo}}
@@ -9,7 +9,7 @@
   </section>
   {{/if}}
 
-  <section class="intro" id="TOC-Introduction">
+  <section class="intro">
     {{{essay.intro_html}}}
   </section>
 
@@ -37,9 +37,9 @@
     {{#if sponsor.image_format}}
     <div class="image">
       {{#if sponsor.link}}
-        <a href="{{sponsor.link}}" target="_blank"><img src="{{sponsor.content}}" alt=""></a>
+        <a href="{{sponsor.link}}" target="_blank"><img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt=""></a>
       {{else}}
-        <img src="{{sponsor.content}}" alt="">
+        <img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt="">
       {{/if}}
     </div>
     {{/if}}
@@ -81,7 +81,9 @@
 </article>
 
 <nav class="toc-nav">
-  <div class="icon"><div>TOC</div><span></span><i></i></div>
+  <div class="icon" data-track-click="Document Nav Icon">
+    <div><span></span></div><i></i>
+  </div>
   <ul>
     <li class="heading">Essay's Table of Content</li>
     <li><a href="#TOC-Introduction">Introduction</a></li>
@@ -89,11 +91,13 @@
 </nav>
 
 <nav class="collection-nav" data-id="{{collection._id}}" data-slug="{{collection.slug}}">
-  <div class="icon"><div>Collection</div><i></i></div>
+  <div class="icon" data-track-click="Collection Nav Icon">
+    <div>Collection</div><i></i>
+  </div>
   <ul>
     <li class="heading">
       <small>5 Essays in Collection:</small><br>
-      {{collection.name}}
+      <a href="{{baseURL}}/collection/{{collection.slug}}">{{collection.name}}</a>
     </li>
   </ul>
 </nav>

@@ -2,6 +2,8 @@ Spine       = require('spine/core')
 # $           = Spine.$
 templates   = require('duality/templates')
 
+FileUploadUI  = require('controllers/ui/file-upload')
+
 Block       = require('models/block')
 Site        = require('models/site')
 
@@ -14,6 +16,8 @@ class BlockForm extends Spine.Controller
     '.error-message':          'errorMessage'
     'form':                    'form'
     'select[name=site]':       'formSite'
+    'input[name=enabled]':     'formEnabled'
+    '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
 
@@ -41,6 +45,8 @@ class BlockForm extends Spine.Controller
     else
       @title = 'New Block'
       @item = {}
+
+    @item._attachments ?= {}
     
     @item.sites = Site.all().sort(Site.nameSort)
     @html templates.render('block-form.html', {}, @item)
@@ -50,8 +56,10 @@ class BlockForm extends Spine.Controller
     # Set few initial form values
     if @editing
       @formSite.val(@item.site)
+      @formEnabled.prop('checked', @item.enabled)
     else
       @formSite.val(@stack.stack.filterBox.siteId)
+      @formEnabled.prop('checked', true)
     @siteChange()
 
   siteChange: ->
@@ -62,12 +70,24 @@ class BlockForm extends Spine.Controller
     else
       $siteSelected.html ""
 
+    # Files upload area
+    @fileUploadUI = new FileUploadUI
+      docId: @item.id
+      selectedFile: @item.photo
+      attachments: @item._attachments
+    @fileUploadContainer.html @fileUploadUI.el
+
   save: (e) ->
     e.preventDefault()
     if @editing
       @item.fromForm(@form)
     else
       @item = new Block().fromForm(@form)
+
+    @item._attachments = @fileUploadUI.attachments
+
+    # Take care of some boolean checkboxes
+    @item.enabled = @formEnabled.is(':checked')
     
     # Save the item and make sure it validates
     if @item.save()
@@ -117,8 +137,7 @@ class BlockList extends Spine.Controller
   render: =>
     context = 
       blocks: Block.filter(@filterObj).sort(Block.titleSort)
-    @el.html templates.render('blocks.html', {}, context)
-    @
+    @html templates.render('blocks.html', {}, context)
 
   filter: (@filterObj) =>
     @render()

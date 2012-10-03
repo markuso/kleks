@@ -1,5 +1,6 @@
 # App's main client script
-$ = require('jquery')
+$       = require('jquery')
+moment  = require('lib/moment')
 require('lib/fastclick')
 
 exports.initialize = (config) ->
@@ -10,6 +11,13 @@ exports.initialize = (config) ->
   # is needed.
   new FastClick(document.body)
 
+  setupNavMenus()
+  setupSmoothScrolling()
+  setupTimestampFormatting()
+  setupClickTracking()
+
+
+setupNavMenus = ->
   $mainNav = $('.main-nav')
   $mainNavIcon = $mainNav.find('> .icon')
   $mainNavList = $mainNav.find('> ul')
@@ -74,3 +82,38 @@ exports.initialize = (config) ->
       e.stopPropagation()
       hidePopups($collectionNavList)
       $collectionNavList.toggle()
+
+
+setupSmoothScrolling = ->
+  smoothScroll = (hash) ->
+    $target = $(hash)
+    $target = $target.length and $target or $('[name=' + hash.slice(1) +']')
+    if $target.length
+      adjustment = 15
+      targetOffset = $target.offset().top - adjustment
+      $('body').animate({scrollTop: targetOffset}, 400)
+      return true
+   
+  # Add some smooth scrolling to anchor links
+  $('body').on 'click', 'a[href*="#"]', (e) ->
+    if location.pathname.replace(/^\//,'') is @pathname.replace(/^\//,'') and location.hostname is @hostname
+      e.preventDefault()
+      smoothScroll(@hash)
+  
+  # In case this is a distination to a specific page anchor, let's smooth scroll
+  smoothScroll(location.hash) if location.hash.length
+  
+
+setupTimestampFormatting = ->
+  # Convert UTC dates to local time
+  $('.timestamp').each ->
+    timestamp = $(@).text()
+    $(@).html(moment(timestamp).local().format('MMM D, YYYY h:mm A'))
+
+
+setupClickTracking = ->
+  # Track some analytic events
+  $('body').on 'click', '[data-track-click]', (e) ->
+    label = $(@).attr('data-track-click');
+    _gaq?.push(['_trackEvent', 'Site Navigation', 'Click', label])
+    return true

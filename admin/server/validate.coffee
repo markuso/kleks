@@ -2,10 +2,10 @@ utils = require('lib/utils')
 
 exports.validate_doc_update = (newDoc, oldDoc, userCtx) ->
 
-  is_admin = if '_admin' in userCtx.roles then true else false
+  access = if 'admin' in userCtx.roles or 'manager' in userCtx.roles then true else false
 
-  if not is_admin
-    throw unauthorized: 'You are not a database admin'
+  if not access
+    throw unauthorized: 'You must have the role admin or manager to make changes'
 
   if newDoc.type is 'essay'
     if not newDoc.site

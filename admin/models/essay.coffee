@@ -7,9 +7,9 @@ moment = require('lib/moment')
 BaseModel = require('models/base')
 
 class Essay extends BaseModel
-  @configure "Essay", "site", "slug", "title", "intro", "body", "photo", "published", "published_at", "published_at", "author_id", "sponsor_id", "sponsor_start", "sponsor_end", "sponsors_history", "collections", "_attachments"
+  @configure "Essay", "site", "slug", "title", "intro", "body", "photo", "published", "published_at", "updated_at", "author_id", "sponsor_id", "sponsor_start", "sponsor_end", "sponsors_history", "collections", "_attachments"
   
-  @extend Spine.Model.CouchAjax
+  @extend @CouchAjax
   
   @titleSort: (a, b) ->
     if (a.title or a.published_at) > (b.title or b.published_at) then 1 else -1
@@ -25,6 +25,15 @@ class Essay extends BaseModel
     return 'Site is required' unless @site
     return 'Slug is required' unless @slug
     return 'Title is required' unless @title
+
+    # Validate the `slug` to be unique within site
+    found = Essay.select (essay) =>
+      matched = essay.site is @site and essay.slug is @slug
+      if @isNew()
+        matched
+      else
+        essay.id isnt @id and matched
+    return 'Slug has been already used for this site.' if found.length
 
     # Take care of some dates
     @updated_at = moment.utc().format()

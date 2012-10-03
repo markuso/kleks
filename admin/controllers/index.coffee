@@ -2,7 +2,6 @@ Spine       = require('spine/core')
 require('spine/route')
 require('spine/manager')
 require('lib/fastclick')
-require('lib/sisyphus')
 
 templates   = require('duality/templates')
 session     = require('session')
@@ -28,16 +27,16 @@ class App extends Spine.Controller
 
   checkSession: ->
     session.info (err, info) =>
-      if '_admin' in info.userCtx.roles
+      if 'manager' in info.userCtx.roles
         @startApp()
       else
-        username = 'admin'
-        pass = 'couchaxs'
+        username = 'evita'
+        pass = 'n3wst@rt'
         session.login username, pass, (err, resp) =>
           if err
             alert "Error logging in as #{username}: #{err}"
           else
-            if '_admin' in resp.roles
+            if 'manager' in resp.roles
               @startApp()
             else
               alert "User #{username} does not have permission"
