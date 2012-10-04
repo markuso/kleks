@@ -39,7 +39,7 @@ module.exports = [
     }
   }
 
-# Collection's JSON view - list of essays ONLY
+  # Collection's JSON view - list of essays ONLY
   # `:slug` is the collection's slug
   {
     from: '/render/:site/json/collection/:slug',

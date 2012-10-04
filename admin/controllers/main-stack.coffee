@@ -5,6 +5,7 @@ Sites       = require('controllers/sites')
 Authors     = require('controllers/authors')
 Collections = require('controllers/collections')
 Essays      = require('controllers/essays')
+Scenes      = require('controllers/scenes')
 Blocks      = require('controllers/blocks')
 Contacts    = require('controllers/contacts')
 Sponsors    = require('controllers/sponsors')
@@ -21,6 +22,7 @@ class MainStack extends Spine.Stack
     authors:     Authors
     collections: Collections
     essays:      Essays
+    scenes:      Scenes
     blocks:      Blocks
     contacts:    Contacts
     sponsors:    Sponsors
@@ -33,6 +35,7 @@ class MainStack extends Spine.Stack
     '/authors':     'authors'
     '/collections': 'collections'
     '/essays':      'essays'
+    '/scenes':      'scenes'
     '/blocks':      'blocks'
     '/contacts':    'contacts'
     '/sponsors':    'sponsors'

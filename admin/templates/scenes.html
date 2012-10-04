@@ -1,0 +1,24 @@
+<div class="content">
+  <h1>
+    Scenes
+    <a class="new" href="#/scene/new">+</a>
+    <span class="count">{{scenes.length}}</span>
+  </h1>
+  <ul class="scenes list">
+    {{#each scenes}}
+    <li>
+      <div class="actions">
+        {{#unless published}}<div><strong>In Draft</strong></div>{{/unless}}
+      </div>
+      <a href="#/scene/{{id}}">{{title}}</a>
+      <div class="meta">
+        <div><a href="http://{{site}}/scene/{{slug}}" target="_blank">view on {{site}}</a></div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="sidebar">
+  
+</div>

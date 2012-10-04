@@ -42,6 +42,8 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
         background: darken($primaryColor, 10%)
     > ul
       background: $primaryColor
+      &:before
+        background: $primaryColor
       > li
         a
           &:hover

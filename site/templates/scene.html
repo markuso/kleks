@@ -1,31 +1,31 @@
-{{#if essay.css}}<style>{{{essay.css}}}</style>{{/if}}
+{{#if scene.css}}<style>{{{scene.css}}}</style>{{/if}}
 
-<article class="view essay" id="TOC-Introduction">
-  <h2 class="title"><a href="{{baseURL}}/essay/{{essay.slug}}">{{essay.title}}</a></h2>
+<article class="view scene">
+  <h2 class="title"><a href="{{baseURL}}/scene/{{scene.slug}}">{{scene.title}}</a></h2>
 
-  {{#if essay.photo}}
+  {{#if scene.photo}}
   <section class="photo">
-    <img src="/file/{{essay._id}}/{{essay.photo}}">
+    <img src="/file/{{scene._id}}/{{scene.photo}}">
   </section>
   {{else}}
-    {{#if essay.old_photo}}
+    {{#if scene.old_photo}}
     <section class="photo old">
-      <img src="{{essay.old_photo}}">
+      <img src="{{scene.old_photo}}">
     </section>
     {{/if}}
   {{/if}}
 
   <section class="intro">
-    {{{essay.intro_html}}}
+    {{{scene.intro_html}}}
   </section>
 
   {{#if sponsor}}
-  <section class="sponsor essay-sponsor">
+  <section class="sponsor scene-sponsor">
     <div class="label">
       {{#if sponsor.label}}
         {{{sponsor.label}}}
       {{else}}
-        Essay is sponsored by
+        Scene is sponsored by
       {{/if}}
     </div>
 
@@ -57,12 +57,12 @@
   {{/if}}
 
   <section class="body">
-    {{{essay.body_html}}}
+    {{{scene.body_html}}}
   </section>
 
   <section class="meta">
-    <div class="published"><span class="label">Published</span> {{{essay.published_at_html}}}</div>
-    <div class="updated"><span class="label">Updated</span> {{{essay.updated_at_html}}}</div>
+    <div class="published"><span class="label">Published</span> {{{scene.published_at_html}}}</div>
+    <div class="updated"><span class="label">Updated</span> {{{scene.updated_at_html}}}</div>
     {{#each collections}}
     <div class="collection"><a href="{{baseURL}}/collection/{{slug}}">{{name}}</a></div>
     {{/each}}
@@ -86,23 +86,13 @@
   {{/if}}
 </article>
 
-<nav class="toc-nav">
-  <div class="icon" data-track-click="Document Nav Icon">
-    <div><span></span></div><i></i>
-  </div>
-  <ul>
-    <li class="heading">Essay's Table of Content</li>
-    <li><a href="#TOC-Introduction">Introduction</a></li>
-  </ul>
-</nav>
-
-<nav class="collection-nav" data-id="{{collection._id}}" data-slug="{{collection.slug}}">
+<nav class="collection-nav second" data-id="{{collection._id}}" data-slug="{{collection.slug}}">
   <div class="icon" data-track-click="Collection Nav Icon">
     <div>Collection</div><i></i>
   </div>
   <ul>
     <li class="heading">
-      <small>5 Essays in Collection:</small><br>
+      <small>5 Scenes in Collection:</small><br>
       <a href="{{baseURL}}/collection/{{collection.slug}}">{{collection.name}}</a>
     </li>
   </ul>

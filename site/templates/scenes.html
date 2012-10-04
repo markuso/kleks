@@ -1,0 +1,16 @@
+<article class="scenes">
+  <h2 class="title">Scenes List</h2>
+
+  <ul class="list">
+    {{#each scenes}}
+    <li class="item">
+      <h3 class="title"><a href="{{baseURL}}/scene/{{slug}}">{{title}}</a></h3>
+      <div class="meta">
+        {{#each collection_docs}}
+        <a class="collection" href="{{baseURL}}/collection/{{slug}}">{{name}}</a>
+        {{/each}}
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</article>
