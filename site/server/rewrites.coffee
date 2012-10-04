@@ -26,11 +26,10 @@ module.exports = [
   { from: '/render/:site/modules.js',  to: 'modules.js' }
   { from: '/render/:site/duality.js',  to: 'duality.js' }
 
-  # Collection's page - list of essays
-  # `:slug` is the collection's slug
+  # Collection page - list of docs
   {
     from: '/render/:site/collection/:slug',
-    to: '_list/collection/essays_by_collection',
+    to: '_list/collection/docs_by_collection',
     query: {
       startkey: [':site', ':slug', {}],
       endkey: [':site', ':slug'],
@@ -39,35 +38,33 @@ module.exports = [
     }
   }
 
-  # Collection's JSON view - list of essays ONLY
-  # `:slug` is the collection's slug
+  # Collection JSON view - list of docs ONLY
   {
     from: '/render/:site/json/collection/:slug',
-    to: '_view/essays_by_collection',
+    to: '_view/docs_by_collection',
     query: {
-      startkey: [':site', ':slug', 'essay', {}],
-      endkey: [':site', ':slug', 'essay'],
+      startkey: [':site', ':slug', 'doc', {}],
+      endkey: [':site', ':slug', 'doc'],
       descending: 'true',
       include_docs: 'true'
     }
   }
 
-  # Essay's content page
-  # `:slug` is the essay's slug
+  # Doc content page
   {
-    from: '/render/:site/essay/:slug',
-    to: '_list/essay/essays_by_slug',
+    from: '/render/:site/:type/:slug',
+    to: '_list/doc/docs_by_slug',
     query: {
-      startkey: [':site', ':slug'],
-      endkey: [':site', ':slug', {}],
+      startkey: [':site', ':type', ':slug'],
+      endkey: [':site', ':type', ':slug', {}],
       include_docs: 'true'
     }
   }
 
-  # List of all Essays sorted by `updated_at`
+  # Docs list for site sorted by `updated_at`
   {
-    from: '/render/:site/essays',
-    to: '_list/essays/essays_by_date',
+    from: '/render/:site/docs',
+    to: '_list/docs/docs_by_date',
     query: {
       startkey: [':site', {}],
       endkey: [':site'],
@@ -76,10 +73,10 @@ module.exports = [
     }
   }
 
-  # RSS Feed of all Essays sorted by `updated_at`
+  # RSS Feed of all docs sorted by `updated_at`
   {
-    from: '/render/:site/essays/feed',
-    to: '_list/rssfeed/essays_by_date',
+    from: '/render/:site/feed',
+    to: '_list/rssfeed/docs_by_date',
     query: {
       startkey: [':site', {}],
       endkey: [':site'],

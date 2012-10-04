@@ -30,7 +30,7 @@ class Collection extends BaseModel
     return 'Slug has been already used for this site.' if found.length
     
     # Take care of some dates
-    updated_at = moment(@updated_at)
+    updated_at = moment(@updated_at) or moment()
     return "Updated #{utils.msg.DATE_NOT_VALID}" unless updated_at.isValid()
     @updated_at = updated_at.utc().format()
     

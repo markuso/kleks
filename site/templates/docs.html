@@ -1,10 +1,11 @@
-<article class="scenes">
-  <h2 class="title">Scenes List</h2>
+<article class="docs">
+  <h2 class="title">Full List</h2>
 
   <ul class="list">
-    {{#each scenes}}
+    {{#each docs}}
     <li class="item">
-      <h3 class="title"><a href="{{baseURL}}/scene/{{slug}}">{{title}}</a></h3>
+      <h3 class="title"><a href="{{baseURL}}/{{type}}/{{slug}}">{{title}}</a></h3>
+      {{#if intro_html}}<div class="intro">{{{intro_html}}}</div>{{/if}}
       <div class="meta">
         {{#each collection_docs}}
         <a class="collection" href="{{baseURL}}/collection/{{slug}}">{{name}}</a>

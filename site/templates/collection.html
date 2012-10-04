@@ -15,48 +15,13 @@
     {{{collection.intro_html}}}
   </section>
   
-  {{#if sponsor}}
-  <section class="sponsor collection-sponsor">
-    <div class="label">
-      {{#if sponsor.label}}
-        {{{sponsor.label}}}
-      {{else}}
-        Collection is sponsored by
-      {{/if}}
-    </div>
-
-    {{#if sponsor.text_format}}
-    <div class="name">
-      {{#if sponsor.link}}
-        <a href="{{sponsor.link}}">{{{sponsor.name}}}</a>
-      {{else}}
-        {{{sponsor.name}}}
-      {{/if}}
-    </div>
-    <div class="content">{{{sponsor.content}}}</div>
-    {{/if}}
-
-    {{#if sponsor.image_format}}
-    <div class="image">
-      {{#if sponsor.link}}
-        <a href="{{sponsor.link}}" target="_blank"><img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt=""></a>
-      {{else}}
-        <img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt="">
-      {{/if}}
-    </div>
-    {{/if}}
-
-    {{#if sponsor.video_format}}
-    <div class="video">{{{sponsor.content}}}</div>
-    {{/if}}
-  </section>
-  {{/if}}
+  {{{include "partials/sponsor.html"}}}
 
   <ul class="list">
-  {{#each essays}}
+  {{#each docs}}
     <li>
       <div class="date fresh-{{fresh}}">{{published_at_html}}</div>
-      <h3><a href="{{baseURL}}/essay/{{slug}}">{{title}}</a></h3>
+      <h3><a href="{{baseURL}}/{{type}}/{{slug}}">{{title}}</a></h3>
     </li>
   {{/each}}
   </ul>

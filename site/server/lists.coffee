@@ -31,6 +31,7 @@ exports.home = (head, req) ->
     doc.updated_at_html = utils.prettyDate(doc.updated_at)
     doc.updated_at_half = utils.halfDate(doc.updated_at)
     doc.fresh = utils.isItFresh(doc.updated_at)
+    doc.type_tc = utils.capitalize(doc.type)
     return doc
 
   return {
@@ -49,7 +50,7 @@ exports.collection = (head, req) ->
   start code: 200, headers: {'Content-Type': 'text/html'}
 
   md = new Showdown.converter()
-  essays = []
+  docs = []
   collection = null
   blocks = {}
   sponsor = null
@@ -57,7 +58,7 @@ exports.collection = (head, req) ->
 
   while row = getRow()
     doc = row.doc
-    essays.push(doc) if doc.type is 'essay'
+    docs.push(doc) if doc.type in settings.app.content_types
     collection ?= doc if doc.type is 'collection'
     blocks[doc.code] = doc if doc.type is 'block'
     sponsor ?= doc if doc.type is 'sponsor'
@@ -69,14 +70,16 @@ exports.collection = (head, req) ->
         collection.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
     collection.fresh = utils.isItFresh(collection.updated_at)
+    collection.type_tc = utils.capitalize(collection.type)
 
-  essays = _.map essays, (doc) ->
+  docs = _.map docs, (doc) ->
     if doc.intro?
       doc.intro_html = md.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
     doc.published_at_html = utils.prettyDate(doc.published_at)
     doc.fresh = utils.isItFresh(doc.published_at)
+    doc.type_tc = utils.capitalize(doc.type)
     return doc
 
   if sponsor
@@ -85,10 +88,12 @@ exports.collection = (head, req) ->
     sponsor_end = moment.utc(collection.sponsor_end)
     now = moment.utc()
     if sponsor_start.diff(now) <= 0 and sponsor_end.diff(now) >= 0
-      # let continue on
+      # let's continue on
       sponsor.text_format = sponsor.format is 'text'
       sponsor.image_format = sponsor.format is 'image'
       sponsor.video_format = sponsor.format is 'video'
+      sponsor.for_type = collection.type
+      sponsor.for_type_tc = collection.type_tc
     else
       # let's remove the sponsor
       sponsor = null
@@ -99,7 +104,7 @@ exports.collection = (head, req) ->
       title: collection.name
       content: templates.render 'collection.html', req,
         collection: collection
-        essays: essays
+        docs: docs
         sponsor: sponsor
         blocks: blocks
         nav: 'collection'
@@ -112,26 +117,26 @@ exports.collection = (head, req) ->
     }
 
 
-exports.essays = (head, req) ->
+exports.docs = (head, req) ->
   # no need for double render on first hit
   return if req.client and req.initial_hit
   start code: 200, headers: {'Content-Type': 'text/html'}
 
   md = new Showdown.converter()
-  essays = []
+  docs = []
   site = null
 
   while row = getRow()
     doc = row.doc
-    if doc.type is 'essay'
+    if doc.type in settings.app.content_types
       doc.collection_docs = []
-      essays.push(doc)
+      docs.push(doc)
     else if doc.type is 'collection'
-      # Add the collection doc to the last essay doc pushed
-      essays[essays.length-1].collection_docs.push(doc)
+      # Add the collection doc to the last doc pushed
+      docs[docs.length-1].collection_docs.push(doc)
     site ?= doc if doc.type is 'site'
 
-  essays = _.map essays, (doc) ->
+  docs = _.map docs, (doc) ->
     if doc.intro?
       doc.intro_html = md.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
@@ -139,20 +144,21 @@ exports.essays = (head, req) ->
     doc.published_at_html = utils.prettyDate(doc.published_at)
     doc.updated_at_html = utils.prettyDate(doc.updated_at)
     doc.fresh = utils.isItFresh(doc.published_at)
+    doc.type_tc = utils.capitalize(doc.type)
     return doc
 
   return {
     site: site
-    title: 'Essays List'
-    content: templates.render 'essays.html', req,
-      essays: essays
-      nav: 'essays'
+    title: 'Docs List'
+    content: templates.render 'docs.html', req,
+      docs: docs
+      nav: 'docs'
   }
 
 
-exports.essay = (head, req) ->
+exports.doc = (head, req) ->
   ###
-  This will render the Essay content along with a list of its
+  This will render the content doc along with a list of its
   associated collections.
   ###
   # no need for double render on first hit
@@ -160,7 +166,7 @@ exports.essay = (head, req) ->
   start code: 200, headers: {'Content-Type': 'text/html'}
 
   md = new Showdown.converter()
-  essay = null
+  theDoc = null
   collections = []
   author = null
   sponsor = null
@@ -169,14 +175,17 @@ exports.essay = (head, req) ->
 
   while row = getRow()
     doc = row.doc
-    essay ?= doc if doc.type is 'essay'
+    theDoc ?= doc if doc.type in settings.app.content_types
     collections.push(doc) if doc.type is 'collection'
     sponsor ?= doc if doc.type is 'sponsor'
     author ?= doc if doc.type is 'author'
     blocks[doc.code] = doc if doc.type is 'block'
     site ?= doc if doc.type is 'site'
 
-  transformEssay = (doc) ->
+  # Let's just go back and use `doc` as the variable instead
+  doc = theDoc
+
+  transformDoc = (doc) ->
     doc.intro_html = md.makeHtml(
       doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
     )
@@ -186,9 +195,10 @@ exports.essay = (head, req) ->
     doc.published_at_html = utils.prettyDate(doc.published_at)
     doc.updated_at_html = utils.prettyDate(doc.updated_at)
     doc.fresh = utils.isItFresh(doc.published_at)
+    doc.type_tc = utils.capitalize(doc.type)
     return doc
 
-  essay = transformEssay(essay) if essay
+  doc = transformDoc(doc) if doc
 
   collections = _.map collections, (doc) ->
     if doc.intro?
@@ -201,30 +211,32 @@ exports.essay = (head, req) ->
 
   if sponsor
     # Check for strat/end dates of sponsorship
-    sponsor_start = moment.utc(essay.sponsor_start)
-    sponsor_end = moment.utc(essay.sponsor_end)
+    sponsor_start = moment.utc(doc.sponsor_start)
+    sponsor_end = moment.utc(doc.sponsor_end)
     now = moment.utc()
     if sponsor_start.diff(now) <= 0 and sponsor_end.diff(now) >= 0
       # let continue on
       sponsor.text_format = sponsor.format is 'text'
       sponsor.image_format = sponsor.format is 'image'
       sponsor.video_format = sponsor.format is 'video'
+      sponsor.for_type = doc.type
+      sponsor.for_type_tc = doc.type_tc
     else
       # let's remove the sponsor
       sponsor = null
 
-  if essay
+  if doc
     return {
       site: site
-      title: essay.title
-      content: templates.render 'essay.html', req,
-        essay: essay
+      title: doc.title
+      content: templates.render 'doc.html', req,
+        doc: doc
         collections: collections
         collection: collections?[0] # primary one
         author: author
         sponsor: sponsor
         blocks: blocks
-        nav: 'essay'
+        nav: 'doc'
     }
   else
     return {

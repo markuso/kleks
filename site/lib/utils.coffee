@@ -10,3 +10,7 @@ exports.isItFresh = (date) ->
   if moment.utc().eod() < moment.utc(date).add('days', 30).eod()
     return true
   return false
+
+exports.capitalize = (str) ->
+  str ?= ''
+  str.charAt(0).toUpperCase() + str.slice(1)

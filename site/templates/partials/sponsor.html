@@ -1,0 +1,36 @@
+  {{#if sponsor}}
+  <section class="sponsor {{sponsor.for_type}}-sponsor">
+    <div class="label">
+      {{#if sponsor.label}}
+        {{{sponsor.label}}}
+      {{else}}
+        {{sponsor.for_type_tc}} is sponsored by
+      {{/if}}
+    </div>
+
+    {{#if sponsor.text_format}}
+    <div class="name">
+      {{#if sponsor.link}}
+        <a href="{{sponsor.link}}">{{{sponsor.name}}}</a>
+      {{else}}
+        {{{sponsor.name}}}
+      {{/if}}
+    </div>
+    <div class="content">{{{sponsor.content}}}</div>
+    {{/if}}
+
+    {{#if sponsor.image_format}}
+    <div class="image">
+      {{#if sponsor.link}}
+        <a href="{{sponsor.link}}" target="_blank"><img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt=""></a>
+      {{else}}
+        <img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt="">
+      {{/if}}
+    </div>
+    {{/if}}
+
+    {{#if sponsor.video_format}}
+    <div class="video">{{{sponsor.content}}}</div>
+    {{/if}}
+  </section>
+  {{/if}}

@@ -51,7 +51,7 @@ setupNavMenus = ->
     $article.find('h3').each ->
       heading = $(@)
       text = heading.text()
-      headingId = 'TOC-' + text.replace(/[\ \.\?\#\'\"]/g, '-')
+      headingId = 'TOC-' + text.replace(/[\ \.\?\#\'\"\:\,]/g, '-')
       heading.attr('id', headingId)
       $tocNavList.append "<li><a href=\"##{headingId}\">#{text}</a></li>"
 
