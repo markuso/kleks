@@ -128,12 +128,11 @@ class EssayForm extends Spine.Controller
     if @form.hasClass('fullscreen')
       @form.removeClass('fullscreen')
       @fullscreenButton.html @fullscreenButtonText
-      @previewUI?.release()
+      @previewUI?.close()
     else
       @form.addClass('fullscreen')
       @fullscreenButton.html "&lt; Exit #{@fullscreenButtonText}"
-      @previewUI = new PreviewUI(@formBody)
-      @form.append @previewUI.el
+      @previewUI = new PreviewUI field: @formBody
 
   import: (e) =>
     # For importing old HTML to Markdown directly from old location

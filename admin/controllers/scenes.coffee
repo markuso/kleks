@@ -9,6 +9,7 @@ require('lib/jquery-xdomainajax')
 
 MultiSelectUI = require('controllers/ui/multi-select')
 FileUploadUI  = require('controllers/ui/file-upload')
+PreviewUI     = require('controllers/ui/preview')
 
 Scene       = require('models/scene')
 Author      = require('models/author')
@@ -127,9 +128,11 @@ class SceneForm extends Spine.Controller
     if @form.hasClass('fullscreen')
       @form.removeClass('fullscreen')
       @fullscreenButton.html @fullscreenButtonText
+      @previewUI?.close()
     else
       @form.addClass('fullscreen')
       @fullscreenButton.html "&lt; Exit #{@fullscreenButtonText}"
+      @previewUI = new PreviewUI field: @formBody
 
   import: (e) =>
     # For importing old HTML to Markdown directly from old location
@@ -165,7 +168,7 @@ class SceneForm extends Spine.Controller
             reMarker = new reMarked(options)
             markdown = reMarker.render($content.html())
             @formBody.val(markdown)
-            
+
           if not @item.old_url
             @formTitle.val($title.text()) if $title
             $slug = @form.find('input[name=slug]')

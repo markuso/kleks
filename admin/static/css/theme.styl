@@ -123,7 +123,7 @@ span.label
   overflow: auto
   box-shadow(-4px 4px 0 rgba(0, 0, 0, 0.1))
   -webkit-user-select: none
-  transition(all .3s)
+  transition(0.3s, all)
 
   .app-logo
     padding: 16px 18px
@@ -450,15 +450,16 @@ span.label
           position: fixed
           top: 60px
           bottom: 0
-          left: 10px
-          right: auto
-          width: 48%
+          left: 20%
+          right: 20%
+          width: auto
           height: 90%
           padding: 10px
           border: 0
           background: white
           // outline: 10px solid rgba(255, 255, 255, 0.5)
           z-index: 100
+          transition(0.3s, all)
 
         .ui-preview
           position: fixed
@@ -473,6 +474,14 @@ span.label
           background: white
           // outline: 10px solid rgba(255, 255, 255, 0.5)
           z-index: 100
+
+        &.preview-mode
+          
+          textarea[name='body'],
+          textarea[name='content']
+            left: 10px
+            right: auto
+            width: 48%
 
         button.fullscreen-button,
         .markdown-help:first-of-type
@@ -609,13 +618,25 @@ ul.ui-multi-select
   right: 0
   left: 0
   background: #fff
-  padding: 20px
-  overflow: auto
+  transition(0.3s, all)
 
-  .close-button
+  > .button
     position: absolute
     top: 10px
     right: 10px
+    outline: 4px solid rgba(255,255,255,0.7)
+
+    &.preview-button
+      right: 60px
+
+  > .inner
+    position: absolute
+    top: 0
+    bottom: 0
+    right: 0
+    left: 0
+    padding: 20px
+    overflow: auto
 
 .ui-help
   position: absolute
