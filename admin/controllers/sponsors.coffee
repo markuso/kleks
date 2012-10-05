@@ -126,6 +126,7 @@ class SponsorList extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
+    @el.scrollTop(0, 0)
 
 
 class Sponsors extends Spine.Stack

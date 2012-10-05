@@ -141,6 +141,7 @@ class BlockList extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
+    @el.scrollTop(0, 0)
 
 
 class Blocks extends Spine.Stack

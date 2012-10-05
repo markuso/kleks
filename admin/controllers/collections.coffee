@@ -152,6 +152,7 @@ class CollectionList extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
+    @el.scrollTop(0, 0)
 
 
 class Collections extends Spine.Stack

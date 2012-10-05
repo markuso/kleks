@@ -134,7 +134,7 @@ class SceneForm extends Spine.Controller
   import: (e) =>
     # For importing old HTML to Markdown directly from old location
     e?.preventDefault()
-    url = $.trim prompt("Paste a URL from #{@formSite.val()}")
+    url = $.trim prompt("Paste a URL from #{@formSite.val()}", @item.old_url or '')
     if url
       $.ajax
         type: 'GET'
@@ -165,11 +165,14 @@ class SceneForm extends Spine.Controller
             reMarker = new reMarked(options)
             markdown = reMarker.render($content.html())
             @formBody.val(markdown)
-
-          @formTitle.val($title.text()) if $title
-          @form.find('input[name=slug]').val($title.attr('href').replace("http://#{@formSite.val()}", '')) if $title
-          @formAuthorId.val($author.text()) if $author
-          @form.find('input[name=published_at]').val($date.text()) if $date
+            
+          if not @item.old_url
+            @formTitle.val($title.text()) if $title
+            $slug = @form.find('input[name=slug]')
+            unless slug.val()
+              $slug.val($title.attr('href').replace('www.', '').replace("http://#{@formSite.val().replace('www.', '')}", '')) if $title
+            @formAuthorId.val($author.text()) if $author
+            @form.find('input[name=published_at]').val($date.text()) if $date
 
   save: (e) ->
     e.preventDefault()
@@ -236,6 +239,7 @@ class SceneList extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
+    @el.scrollTop(0, 0)
 
 
 class Scenes extends Spine.Stack

@@ -111,6 +111,7 @@ class SiteList extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
+    @el.scrollTop(0, 0)
 
 
 class Sites extends Spine.Stack

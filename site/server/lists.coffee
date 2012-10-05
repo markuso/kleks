@@ -19,9 +19,10 @@ exports.home = (head, req) ->
 
   while row = getRow()
     doc = row.value
-    collections.push(doc) if doc.type is 'collection'
-    blocks[doc.code] = doc if doc.type is 'block'
-    site ?= doc if doc.type is 'site'
+    if doc
+      collections.push(doc) if doc.type is 'collection'
+      blocks[doc.code] = doc if doc.type is 'block'
+      site ?= doc if doc.type is 'site'
   
   collections = _.map collections, (doc) ->
     if doc.intro?
@@ -58,11 +59,12 @@ exports.collection = (head, req) ->
 
   while row = getRow()
     doc = row.doc
-    docs.push(doc) if doc.type in settings.app.content_types
-    collection ?= doc if doc.type is 'collection'
-    blocks[doc.code] = doc if doc.type is 'block'
-    sponsor ?= doc if doc.type is 'sponsor'
-    site ?= doc if doc.type is 'site'
+    if doc
+      docs.push(doc) if doc.type in settings.app.content_types
+      collection ?= doc if doc.type is 'collection'
+      blocks[doc.code] = doc if doc.type is 'block'
+      sponsor ?= doc if doc.type is 'sponsor'
+      site ?= doc if doc.type is 'site'
 
   if collection
     if collection.intro?
@@ -128,13 +130,14 @@ exports.docs = (head, req) ->
 
   while row = getRow()
     doc = row.doc
-    if doc.type in settings.app.content_types
-      doc.collection_docs = []
-      docs.push(doc)
-    else if doc.type is 'collection'
-      # Add the collection doc to the last doc pushed
-      docs[docs.length-1].collection_docs.push(doc)
-    site ?= doc if doc.type is 'site'
+    if doc
+      if doc.type in settings.app.content_types
+        doc.collection_docs = []
+        docs.push(doc)
+      else if doc.type is 'collection'
+        # Add the collection doc to the last doc pushed
+        docs[docs.length-1].collection_docs.push(doc)
+      site ?= doc if doc.type is 'site'
 
   docs = _.map docs, (doc) ->
     if doc.intro?
@@ -175,12 +178,13 @@ exports.doc = (head, req) ->
 
   while row = getRow()
     doc = row.doc
-    theDoc ?= doc if doc.type in settings.app.content_types
-    collections.push(doc) if doc.type is 'collection'
-    sponsor ?= doc if doc.type is 'sponsor'
-    author ?= doc if doc.type is 'author'
-    blocks[doc.code] = doc if doc.type is 'block'
-    site ?= doc if doc.type is 'site'
+    if doc
+      theDoc ?= doc if doc.type in settings.app.content_types
+      collections.push(doc) if doc.type is 'collection'
+      sponsor ?= doc if doc.type is 'sponsor'
+      author ?= doc if doc.type is 'author'
+      blocks[doc.code] = doc if doc.type is 'block'
+      site ?= doc if doc.type is 'site'
 
   # Let's just go back and use `doc` as the variable instead
   doc = theDoc
@@ -256,8 +260,9 @@ exports.rssfeed = (head, req) ->
 
   while row = getRow()
     doc = row.doc
-    docs.push(doc) if doc.type in settings.app.content_types
-    site ?= doc if doc.type is 'site'
+    if doc
+      docs.push(doc) if doc.type in settings.app.content_types
+      site ?= doc if doc.type is 'site'
 
   docs = _.map docs, (doc) ->
     doc.intro_html = md.makeHtml(

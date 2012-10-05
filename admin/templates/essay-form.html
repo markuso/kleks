@@ -93,6 +93,20 @@
         <input type="text" name="sponsor_end" value="{{sponsor_end}}" placeholder="Feb 20 2012 6:30 PM">
       </div>
     </div>
+
+    {{#if old_url}}
+    <h3 class="heading">Old Data</h3>
+    <div class="field">
+      <label>Old URL</label>
+      <div><a href="{{old_url}}" target="_blank" title="Open in New Tab">{{old_url}}</a></div>
+    </div>
+    <div class="field">
+      <label>Old Photos</label>
+      {{#each old_photos}}
+      <div><a href="{{.}}" target="_blank" title="Open in New Tab">{{.}}</a></div>
+      {{/each}}
+    </div>
+    {{/if}}
   </div>
 
 </form>

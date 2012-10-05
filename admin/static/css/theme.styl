@@ -121,7 +121,9 @@ span.label
   margin: 0
   background: $primaryColor
   overflow: auto
+  box-shadow(-4px 4px 0 rgba(0, 0, 0, 0.1))
   -webkit-user-select: none
+  transition(all .3s)
 
   .app-logo
     padding: 16px 18px
@@ -133,9 +135,33 @@ span.label
     letter-spacing: -0.07em
     word-spacing: 0em
     white-space: nowrap
+    text-shadow: 0px -1px 0 rgba(0,0,0,0.2)
 
     a
       color: #fff
+
+  > form.login
+    display: none
+    padding: 20px 30px
+    text-shadow: 0px -1px 0 rgba(0,0,0,0.2)
+
+    > input
+      display: inline-block
+      width: 140px
+      margin: 10px
+      vertical-align: middle
+      color: #fff
+      font-weight: $boldFont
+      font-size: 1.2em
+
+      ::-webkit-input-placeholder
+        color: rgba(255,255,255,0.7)
+
+      &.button
+        background: darken($primaryColor, 5%)
+
+        &:hover
+          background: darken($primaryColor, 10%)
 
   > ul
     list-style-type: none
@@ -161,6 +187,24 @@ span.label
         margin: 0.5em 0
         border-bottom: 1px solid rgba(255,255,255,0.5)
 
+  &.show-login
+    top: 30%
+    left: 30%
+    right: 30%
+    bottom: auto
+    width: initial
+    padding: 0 10px
+    z-index: 200
+
+    .app-logo
+      margin: 30px
+      padding: 0
+
+    > form.login
+      display: inline-block
+
+    > ul
+      display: none
 
 .main.stack
   position: absolute
@@ -406,9 +450,23 @@ span.label
           position: fixed
           top: 60px
           bottom: 0
-          left: 20%
-          right: 20%
-          width: auto
+          left: 10px
+          right: auto
+          width: 48%
+          height: 90%
+          padding: 10px
+          border: 0
+          background: white
+          // outline: 10px solid rgba(255, 255, 255, 0.5)
+          z-index: 100
+
+        .ui-preview
+          position: fixed
+          top: 60px
+          bottom: 0
+          left: auto
+          right: 10px
+          width: 48%
           height: 90%
           padding: 10px
           border: 0
@@ -542,6 +600,22 @@ ul.ui-multi-select
         em
           font-weight: $boldFont
           font-size: 0.8em
+
+.ui-preview
+
+  position: absolute
+  top: 0
+  bottom: 0
+  right: 0
+  left: 0
+  background: #fff
+  padding: 20px
+  overflow: auto
+
+  .close-button
+    position: absolute
+    top: 10px
+    right: 10px
 
 .ui-help
   position: absolute

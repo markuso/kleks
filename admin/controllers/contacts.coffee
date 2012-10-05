@@ -102,6 +102,7 @@ class ContactList extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
+    @el.scrollTop(0, 0)
 
 
 class Contacts extends Spine.Stack

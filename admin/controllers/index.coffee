@@ -23,26 +23,50 @@ Sponsor     = require('models/sponsor')
 class App extends Spine.Controller
   
   constructor: ->
-    super    
-    @checkSession()
+    super
+    @mainNav = new MainNav
+    @append @mainNav
+    @initApp()
 
-  checkSession: ->
+  setupSession: ->
+    session.on 'change', @checkRole
+    
     session.info (err, info) =>
-      if 'manager' in info.userCtx.roles
-        @startApp()
-      else
-        username = 'evita'
-        pass = 'n3wst@rt'
-        session.login username, pass, (err, resp) =>
-          if err
-            alert "Error logging in as #{username}: #{err}"
-          else
-            if 'manager' in resp.roles
-              @startApp()
-            else
-              alert "User #{username} does not have permission"
+      @checkRole info.userCtx
 
-  startApp: ->
+  checkRole: (userCtx) =>
+    if 'manager' in userCtx.roles
+      @mainNav.hideLogin()
+      @startApp() unless @appStarted
+      @loadData() unless @dataLoaded
+    else
+      @mainNav.showLogin()
+      @unloadData() if @dataLoaded
+      @endApp() if @appStarted
+
+  initApp: =>
+    @setupSession()
+
+    @mainStack = new MainStack
+    @helpUI    = new HelpUI
+    Spine.Route.setup()
+
+    @doOtherStuff()
+
+  startApp: =>
+    @loadData() unless @dataLoaded
+    unless @appStarted
+      @append @mainStack, @helpUI
+      @navigate('/')
+      @appStarted = true
+
+  endApp: =>
+    if @appStarted
+      @mainStack.el.remove()
+      @helpUI.el.remove()
+      @appStarted = false
+
+  loadData: =>
     # Load data models
     Site.fetch()
     Author.fetch()
@@ -52,16 +76,19 @@ class App extends Spine.Controller
     Block.fetch()
     Contact.fetch()
     Sponsor.fetch()
+    @dataLoaded = true
 
-    @mainNav   = new MainNav
-    @mainStack = new MainStack
-    @helpUI    = new HelpUI
-
-    @append @mainNav, @mainStack, @helpUI
-
-    Spine.Route.setup()
-
-    @doOtherStuff()
+  unloadData: =>
+    # Empty data from client models
+    Site.deleteAll()
+    Author.deleteAll()
+    Collection.deleteAll()
+    Essay.deleteAll()
+    Scene.deleteAll()
+    Block.deleteAll()
+    Contact.deleteAll()
+    Sponsor.deleteAll()
+    @dataLoaded = false
 
   doOtherStuff: ->
     # Use the fastclick module for touch devices.

@@ -9,6 +9,7 @@ require('lib/jquery-xdomainajax')
 
 MultiSelectUI = require('controllers/ui/multi-select')
 FileUploadUI  = require('controllers/ui/file-upload')
+PreviewUI     = require('controllers/ui/preview')
 
 Essay       = require('models/essay')
 Author      = require('models/author')
@@ -127,14 +128,17 @@ class EssayForm extends Spine.Controller
     if @form.hasClass('fullscreen')
       @form.removeClass('fullscreen')
       @fullscreenButton.html @fullscreenButtonText
+      @previewUI?.release()
     else
       @form.addClass('fullscreen')
       @fullscreenButton.html "&lt; Exit #{@fullscreenButtonText}"
+      @previewUI = new PreviewUI(@formBody)
+      @form.append @previewUI.el
 
   import: (e) =>
     # For importing old HTML to Markdown directly from old location
     e?.preventDefault()
-    url = $.trim prompt("Paste a URL from #{@formSite.val()}")
+    url = $.trim prompt("Paste a URL from #{@formSite.val()}", @item.old_url or '')
     if url
       $.ajax
         type: 'GET'
@@ -166,10 +170,13 @@ class EssayForm extends Spine.Controller
             markdown = reMarker.render($content.html())
             @formBody.val(markdown)
 
-          @formTitle.val($title.text()) if $title
-          @form.find('input[name=slug]').val($title.attr('href').replace("http://#{@formSite.val()}", '')) if $title
-          @formAuthorId.val($author.text()) if $author
-          @form.find('input[name=published_at]').val($date.text()) if $date
+          if not @item.old_url
+            @formTitle.val($title.text()) if $title
+            $slug = @form.find('input[name=slug]')
+            unless slug.val()
+              $slug.val($title.attr('href').replace('www.', '').replace("http://#{@formSite.val().replace('www.', '')}", '')) if $title
+            @formAuthorId.val($author.text()) if $author
+            @form.find('input[name=published_at]').val($date.text()) if $date
 
   save: (e) ->
     e.preventDefault()
@@ -236,6 +243,7 @@ class EssayList extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
+    @el.scrollTop(0, 0)
 
 
 class Essays extends Spine.Stack

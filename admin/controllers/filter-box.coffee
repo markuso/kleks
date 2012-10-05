@@ -20,7 +20,7 @@ class FilterBox extends Spine.Controller
   render: =>
     context = 
       sites: Site.all()
-    @el.html templates.render('filter-box.html', {}, context)
+    @html templates.render('filter-box.html', {}, context)
     @setup()
     @
 

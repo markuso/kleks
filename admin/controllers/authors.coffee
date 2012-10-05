@@ -137,6 +137,7 @@ class AuthorList extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
+    @el.scrollTop(0, 0)
 
 
 class Authors extends Spine.Stack
