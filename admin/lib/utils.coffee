@@ -6,10 +6,10 @@ exports.msg = {
 }
 
 exports.cleanCode = (code) ->
-  code.toLowerCase().replace(/[\ \.\'\"\:\,\-]/g, '_')
+  code.toLowerCase().replace(/[\ \.\'\"\-]/g, '_').replace(/[\:\,\&]/g, '')
 
 exports.cleanSlug = (slug) ->
-  slug.toLowerCase().replace(/[\ \.\'\"\:\,]/g, '-')
+  slug.toLowerCase().replace(/[\ \.\'\"]/g, '-').replace(/[\:\,\&]/g, '')
 
 exports.cleanContent = (content) ->
   protocol = "http(s)?:\/\/"

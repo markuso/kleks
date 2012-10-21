@@ -1,6 +1,6 @@
 {{#if site}}
 <!DOCTYPE html>
-<html>
+<html prefix="og: http://ogp.me/ns#">
 <head>
   
   <meta charset="utf-8">
@@ -11,6 +11,14 @@
   <meta name="developer" content="Markus Ochel at Markuso Web Solutions - http://www.markuso.com">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=3.0, user-scalable=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <meta property="og:site_name" content="{{og_site_name}}">
+  <meta property="og:title" content="{{og_title}}">
+  <meta property="og:description" content="{{og_description}}">
+  <meta property="og:type" content="{{og_type}}">
+  <meta property="og:url" content="{{og_url}}">
+  <meta property="og:image" content="{{og_image}}">
+  <meta property="og:video" content="{{og_video}}">
   
   {{#if site.favicon}}
   <link rel="shortcut icon" href="{{baseURL}}/file/{{site._id}}/{{site.favicon}}">

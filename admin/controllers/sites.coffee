@@ -15,20 +15,25 @@ class SiteForm extends Spine.Controller
     'form':               'form'
     'input[name=_id]':    'formSiteId'
     'select[name=theme]': 'formTheme'
+    '.social-links-list': 'socialLinksList'
     '.save-button':       'saveButton'
     '.cancel-button':     'cancelButton'
 
   events:
-    'submit form':          'preventSubmit'
-    'click .save-button':   'save'
-    'click .cancel-button': 'cancel'
-    'click .delete-button': 'destroy'
+    'submit form':            'preventSubmit'
+    'change *[name]':         'markAsDirty'
+    'keyup *[name]':          'markAsDirty'
+    'click .save-button':     'save'
+    'click .cancel-button':   'cancel'
+    'click .delete-button':   'destroy'
+    'click .add-social-link': 'addSocialLink'
 
   constructor: ->
     super
     @active @render
 
   render: (params) ->
+    @dirtyForm = false
     @editing = params.id?
     if @editing
       @copying = params.id.split('-')[0] is 'copy'
@@ -51,6 +56,12 @@ class SiteForm extends Spine.Controller
     if @editing
       @formTheme.val(@item.theme)
       @formSiteId.prop('readonly', true)
+    else:
+      @addSocialLink()
+
+  addSocialLink: (e) ->
+    e?.preventDefault()
+    @socialLinksList.append templates.render('partials/link-form.html', {}, {})
 
   save: (e) ->
     e.preventDefault()
@@ -58,6 +69,15 @@ class SiteForm extends Spine.Controller
       @item.fromForm(@form)
     else
       @item = new Site().fromForm(@form)
+
+    # Construct the social links list object
+    links = []
+    @socialLinksList.find('.social-link-form').each ->
+      label = $.trim $(@).find('input[name=link_label]').val()
+      url = $.trim $(@).find('input[name=link_url]').val()
+      if label and url
+        links.push label: label, url: url
+    @item.social_links = links
     
     # Save the item and make sure it validates
     if @item.save()
@@ -75,11 +95,15 @@ class SiteForm extends Spine.Controller
     if @item and confirm "Are you sure you want to delete this #{@item.constructor.name}?"
       @item.destroy()
       @back()
+
+  markAsDirty: ->
+    @dirtyForm = true
+    @saveButton.addClass('glow')
   
   cancel: (e) ->
     e.preventDefault()
     if @dirtyForm
-      if confirm "You may have some unsaved changes.\nAre you sure you want to cancel?"
+      if confirm "You may have some unsaved changes.\nAre you sure you want to proceed?"
         @back()
     else
       @back()

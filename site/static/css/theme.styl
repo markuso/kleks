@@ -211,7 +211,7 @@ article
 
   > .title
     color: $textDarkColor
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5em
 
     a
       color: $textDarkColor
@@ -221,16 +221,24 @@ article
       font-size: 0.5em
       margin-left: 0.5em
 
+  h3, h2
+    margin: 1em 0
+
   > .photo
+  > .intro > .photo
+  > .home-block > .photo
     position: relative
     left: -40px
     width: 105%
     max-height: 180px
-    margin: 0 0 1em 0
+    margin: 0 0 2em 0
     overflow: hidden
 
     img
       width: 100%
+
+    &.large
+      max-height: auto
 
   > .intro
     margin-bottom: 2em
@@ -238,6 +246,9 @@ article
     font-weight: $boldFont
     line-height: 1.6em
     color: darken($textColor, 5%)
+
+  > .home-block
+    margin-bottom: 2em
 
   .sponsor
     float: right
@@ -292,6 +303,23 @@ article
         > a
           display: inline-block
           margin-right: 2em
+
+  ul.grid-2
+    list-style-type: none
+    margin: 0
+    padding: 0
+    clearfix()
+
+    > li
+      display: inline-block
+      position: relative
+      width: 48%
+      padding: 0
+      margin: 0.8em 0.5em 0 0
+      vertical-align: top
+
+    &.with-borders > li
+      border: solid 1px $faintGrey
 
 article.home
 
@@ -352,7 +380,7 @@ article.essay
     ol, ul
       margin: 0 0.8em
       li
-        margin-bottom: 1em
+        // margin-bottom: 0.5em
 
   .meta
     font-size: 0.875em

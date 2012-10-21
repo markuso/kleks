@@ -17,6 +17,8 @@ class ContactForm extends Spine.Controller
 
   events:
     'submit form':          'preventSubmit'
+    'change *[name]':           'markAsDirty'
+    'keyup *[name]':            'markAsDirty'
     'click .save-button':   'save'
     'click .cancel-button': 'cancel'
     'click .delete-button': 'destroy'
@@ -26,6 +28,7 @@ class ContactForm extends Spine.Controller
     @active @render
 
   render: (params) ->
+    @dirtyForm = false
     @editing = params.id?
     if @editing
       @copying = params.id.split('-')[0] is 'copy'
@@ -66,11 +69,15 @@ class ContactForm extends Spine.Controller
     if @item and confirm "Are you sure you want to delete this #{@item.constructor.name}?"
       @item.destroy()
       @back()
+
+  markAsDirty: ->
+    @dirtyForm = true
+    @saveButton.addClass('glow')
   
   cancel: (e) ->
     e.preventDefault()
     if @dirtyForm
-      if confirm "You may have some unsaved changes.\nAre you sure you want to cancel?"
+      if confirm "You may have some unsaved changes.\nAre you sure you want to proceed?"
         @back()
     else
       @back()

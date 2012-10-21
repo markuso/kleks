@@ -37,6 +37,8 @@
   article
 
     > .photo
+    > .intro > .photo
+    > .home-block > .photo
       left: -14px
 
 // Odd one
@@ -52,6 +54,18 @@
       float: none
       width: 100%
       margin: 1em auto
+
+    ul.grid-2
+      > li
+        width: 100%
+        margin: 0.8em 0 0 0
+
+  article.home
+    .collections
+      > ul
+        > li
+          width: 100%
+          margin: 0.8em 0 0 0
 
 // Landscape on larger phone to smaller tablet
 @media (min-width: 481px) and (max-width: 767px)
@@ -83,6 +97,8 @@
   article
 
     > .photo
+    > .intro > .photo
+    > .home-block > .photo
       left: -20px
 
 

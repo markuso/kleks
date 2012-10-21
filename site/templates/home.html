@@ -4,13 +4,21 @@
 
 <article class="home">
   {{#if blocks.site_intro.enabled}}
-    <section class="intro">{{{blocks.site_intro.content}}}</section>
-
     {{#if blocks.site_intro.photo}}
     <section class="photo">
       <img src="/file/{{blocks.site_intro._id}}/{{blocks.site_intro.photo}}">
     </section>
     {{/if}}
+    <section class="intro">{{{blocks.site_intro.content}}}</section>
+  {{/if}}
+
+  {{#if blocks.site_home.enabled}}
+    {{#if blocks.site_home.photo}}
+    <section class="photo">
+      <img src="/file/{{blocks.site_home._id}}/{{blocks.site_home.photo}}">
+    </section>
+    {{/if}}
+    <section class="home-block">{{{blocks.site_home.content}}}</section>
   {{/if}}
 
   {{{include "collections.html"}}}

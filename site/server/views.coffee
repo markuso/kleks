@@ -4,7 +4,7 @@ exports.docs_for_home =
     # List of collections sorted by `pinned` then `updated_at`,
     # plus a few blocks that are needed on home page,
     # and the site configuration doc.
-    blocks = ['site_intro','site_promo']
+    blocks = ['site_intro','site_promo','site_home']
     if doc.site and doc.type is 'collection' and doc.updated_at
       pinned = if doc.pinned then 1 else 0
       timestamp = new Date(doc.updated_at).getTime()

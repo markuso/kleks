@@ -46,6 +46,18 @@
       <label>Footer HTML</label>
       <textarea name="footer_html" placeholder="Content to show on all pages in the footer">{{footer_html}}</textarea>
     </div>
+    
+    <h4 class="heading">
+      Social Links
+      <a class="button small add-social-link" href="#">+</a>
+    </h4>
+    <div class="field inline social-links-list">
+      {{#each social_links}}
+        {{{include "partials/link-form.html"}}}
+      {{/each}}
+    </div>
+    
+    <h4 class="heading">Other</h4>
     <div class="field">
       <label>CSS</label>
       <textarea name="css" placeholder="Custom CSS to override on site">{{css}}</textarea>
