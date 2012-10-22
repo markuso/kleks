@@ -29,8 +29,8 @@
   .site-tagline
     margin-bottom: 2em
 
-  .main-nav,
-  .toc-nav,
+  .main-nav
+  .toc-nav
   .collection-nav
     margin: 4px 4px 0 0
 
@@ -41,14 +41,29 @@
     > .home-block > .photo
       left: -14px
 
+    .body
+
+      img
+        display: block
+        margin: 1em auto
+
+        &.left, &.right
+          float: none
+          margin: 1em auto
+
 // Odd one
 @media (max-width: 650px)
 
-  .toc-nav,
+  .toc-nav
   .collection-nav
     display: none
   
   article
+    
+    .body
+
+      img
+        max-width: 300px
     
     .sponsor
       float: none
@@ -89,8 +104,8 @@
   .site-tagline
     margin-bottom: 2.5em
 
-  .main-nav,
-  .toc-nav,
+  .main-nav
+  .toc-nav
   .collection-nav
     margin: 8px 8px 0 0
 

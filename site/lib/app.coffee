@@ -21,6 +21,7 @@ setupNavMenus = ->
   $mainNav = $('.main-nav')
   $mainNavIcon = $mainNav.find('> .icon')
   $mainNavList = $mainNav.find('> ul')
+  $mainNavSearchInput = $mainNav.find('.search-box input')
   
   $tocNav = $('.toc-nav')
   $tocNavIcon = $tocNav.find('> .icon')
@@ -46,12 +47,15 @@ setupNavMenus = ->
     hidePopups($mainNavList)
     $mainNavList.toggle()
 
+  $mainNavSearchInput.on 'click', (e) ->
+    e.stopPropagation()
+
   # Setup the TOC menu
   if $tocNav and $article
     $article.find('h3').each ->
       heading = $(@)
       text = heading.text()
-      headingId = 'TOC-' + text.replace(/[\ \.\?\#\'\"\:\,]/g, '-')
+      headingId = 'TOC-' + text.replace(/[\ \'\"]/g, '-').replace(/[\.\?\#\:\,]/g, '')
       heading.attr('id', headingId)
       $tocNavList.append "<li><a href=\"##{headingId}\">#{text}</a></li>"
 

@@ -483,7 +483,10 @@ span.label
             right: auto
             width: 48%
 
-        button.fullscreen-button,
+          textarea[name='intro']
+            display: none
+
+        button.fullscreen-button
         .markdown-help:first-of-type
           position: fixed
           top: 10px
@@ -637,6 +640,15 @@ ul.ui-multi-select
     left: 0
     padding: 20px
     overflow: auto
+
+    h3, h4
+      margin: 1em 0
+
+    ol, ul
+      margin: 0 0.8em
+      
+    a
+      font-weight: $boldFont
 
 .ui-help
   position: absolute

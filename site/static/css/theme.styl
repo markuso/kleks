@@ -33,8 +33,8 @@
   font-size: 1.25em
   font-weight: $boldFont
 
-.main-nav,
-.toc-nav,
+.main-nav
+.toc-nav
 .collection-nav
   position: fixed
   top: 0
@@ -138,7 +138,7 @@
           color: $textColor
           background: #fff
 
-.toc-nav,
+.toc-nav
 .collection-nav
   // see above
   right: 70px
@@ -204,6 +204,12 @@
 
 
 article
+
+  h3, h4
+    margin: 1em 0
+
+  ol, ul
+    margin: 0 0.8em
   
   &.view
     a
@@ -220,9 +226,6 @@ article
     small
       font-size: 0.5em
       margin-left: 0.5em
-
-  h3, h2
-    margin: 1em 0
 
   > .photo
   > .intro > .photo
@@ -374,13 +377,6 @@ article.home
             background: #fff
 
 article.essay
-
-  .body
-    
-    ol, ul
-      margin: 0 0.8em
-      li
-        // margin-bottom: 0.5em
 
   .meta
     font-size: 0.875em

@@ -9,6 +9,7 @@
     <li>
       <div class="actions">
         {{#unless published}}<div><strong>In Draft</strong></div>{{/unless}}
+        {{#unless collections}}<div>No Collections</div>{{/unless}}
       </div>
       <a href="#/essay/{{id}}">{{title}}</a>
       <div class="meta">

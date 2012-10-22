@@ -95,6 +95,14 @@ img
   display: inline-block
   border: 0
 
+  &.left
+    float: left
+    margin: 0 1em 0.5em 0
+
+  &.right
+    float: right
+    margin: 0 0 0.5em 1em
+
 input[type='text'],
 input[type='password'],
 input[type='search'],
@@ -159,6 +167,9 @@ button, .button
 
 ::-webkit-input-placeholder
   color: #e3e3e3
+
+.clear:
+  clear: both
 
 .clearfix
   clearfix()
