@@ -62,7 +62,7 @@ class ContactForm extends Spine.Controller
 
   showError: (msg) ->
     @errorMessage.html(msg).show()
-    @el.scrollTop(0, 0)
+    @el.scrollTop(0)
   
   destroy: (e) ->
     e.preventDefault()
@@ -89,7 +89,7 @@ class ContactForm extends Spine.Controller
     e.preventDefault()
     
   deactivate: ->
-    @el.scrollTop(0, 0)
+    @el.scrollTop(0)
     super
 
 
@@ -109,7 +109,7 @@ class ContactList extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
-    @el.scrollTop(0, 0)
+    @el.scrollTop(0)
 
 
 class Contacts extends Spine.Stack

@@ -11,6 +11,7 @@ class MainNav extends Spine.Controller
     'form.login':             'loginForm'
     'input[name=username]':   'formUsername'
     'input[name=password]':   'formPassword'
+    'li a':                   'links'
 
   events:
     'submit form.login':      'login'
@@ -26,10 +27,20 @@ class MainNav extends Spine.Controller
     @html templates.render('main-nav.html', {}, {})
 
   setup: =>
-    links = @el.find('li a')
-    links.on 'click', (e) ->
-      links.removeClass('active')
-      $(@).addClass('active')
+    @links.on 'click', (e) =>
+      $link = $(e.currentTarget)
+      @selectLink($link)
+
+  selectFromClassName: (className) =>
+    if className
+      fragment = className.split(' ')[0]
+      $link = @el.find("li.#{fragment} a")
+      @selectLink($link)
+
+  selectLink: ($link) =>
+    if $link and not $link.hasClass('active')
+      @links.removeClass('active')
+      $link.addClass('active')
 
   showLogin: =>
     @resetLoginForm()

@@ -54,7 +54,7 @@ class FilterBox extends Spine.Controller
       @siteId = $item.attr('data-id')
       @siteSelector
         .hide()
-        .scrollTop(0, 0)
+        .scrollTop(0)
         .children()
         .removeClass('selected')
       $item.addClass('selected')

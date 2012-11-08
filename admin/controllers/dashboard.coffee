@@ -38,7 +38,7 @@ class DashboardOne extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
-    @el.scrollTop(0, 0)
+    @el.scrollTop(0)
 
 
 class Dashboard extends Spine.Stack
@@ -51,6 +51,11 @@ class Dashboard extends Spine.Stack
 
   routes:
     '/dashboard/one': 'one'
+
+  constructor: ->
+    super
+    for k, v of @controllers
+      @[k].active => @active()
 
 
 module.exports = Dashboard

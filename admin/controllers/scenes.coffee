@@ -202,7 +202,7 @@ class SceneForm extends Spine.Controller
 
   showError: (msg) ->
     @errorMessage.html(msg).show()
-    @el.scrollTop(0, 0)
+    @el.scrollTop(0)
   
   destroy: (e) ->
     e.preventDefault()
@@ -229,7 +229,7 @@ class SceneForm extends Spine.Controller
     e.preventDefault()
     
   deactivate: ->
-    @el.scrollTop(0, 0)
+    @el.scrollTop(0)
     super
 
 
@@ -249,7 +249,7 @@ class SceneList extends Spine.Controller
 
   filter: (@filterObj) =>
     @render()
-    @el.scrollTop(0, 0)
+    @el.scrollTop(0)
 
 
 class Scenes extends Spine.Stack

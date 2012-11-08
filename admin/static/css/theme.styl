@@ -97,7 +97,9 @@ span.label
     border: 1px solid $faintGrey
     border-top: 0
     max-height: 500px
-    overflow: auto
+    overflow-y: scroll
+    overflow-x: hidden
+    -webkit-overflow-scrolling: touch
     -webkit-user-select: none
 
     li
@@ -120,8 +122,10 @@ span.label
   padding: 0
   margin: 0
   background: $primaryColor
-  overflow: auto
   box-shadow(-4px 4px 0 rgba(0, 0, 0, 0.1))
+  overflow-y: scroll
+  overflow-x: hidden
+  -webkit-overflow-scrolling: touch
   -webkit-user-select: none
   transition(0.3s, all)
 
@@ -185,7 +189,7 @@ span.label
 
       &.seperator
         margin: 0.5em 0
-        border-bottom: 1px solid rgba(255,255,255,0.4)
+        border-bottom: 1px solid rgba(255,255,255,0.2)
 
   &.show-login
     top: 30%
@@ -225,7 +229,9 @@ span.label
 
     > .panel
       background: $faintGrey
-      overflow: auto
+      overflow-y: scroll
+      overflow-x: hidden
+      -webkit-overflow-scrolling: touch
 
       .content
         position: relative
@@ -639,7 +645,9 @@ ul.ui-multi-select
     right: 0
     left: 0
     padding: 20px
-    overflow: auto
+    overflow-y: scroll
+    overflow-x: auto
+    -webkit-overflow-scrolling: touch
 
     h3, h4
       margin: 1em 0
@@ -660,7 +668,9 @@ ul.ui-multi-select
   background: #333
   color: #fff
   font-size: 0.8em
-  overflow: auto
+  overflow-y: scroll
+  overflow-x: hidden
+  -webkit-overflow-scrolling: touch
   z-index: 110
   
   > h3

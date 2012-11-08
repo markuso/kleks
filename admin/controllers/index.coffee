@@ -51,6 +51,7 @@ class App extends Spine.Controller
     @helpUI    = new HelpUI
     Spine.Route.setup()
 
+    @hookPanelsToNav()
     @doOtherStuff()
 
   startApp: =>
@@ -89,6 +90,11 @@ class App extends Spine.Controller
     Contact.deleteAll()
     Sponsor.deleteAll()
     @dataLoaded = false
+
+  hookPanelsToNav: ->
+    cls = @
+    for k, v of @mainStack.controllers
+      @mainStack[k].active -> cls.mainNav.selectFromClassName(@className)
 
   doOtherStuff: ->
     # Use the fastclick module for touch devices.
