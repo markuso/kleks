@@ -40,8 +40,7 @@ module.exports = [
     to: "_view/docs_by_type",
     method: "GET",
     query: {
-      startkey: [":type", ":id"],
-      endkey: [":type", ":id", {}],
+      key: [":type", ":id"],
       include_docs: "true"
     }
   }

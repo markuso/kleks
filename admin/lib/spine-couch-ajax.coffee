@@ -15,6 +15,26 @@ Spine.Model.include
     result.id = result._id = @_id if @_id
     result
 
+  changeID: (id) ->
+    # Markus: Needed to refresh the client records
+    # since this is a new record with changed ID
+    records = @constructor.records
+    crecords = @constructor.crecords
+    record = records[@id].dup(false)
+    record.id = id
+    record._id = id
+    records[record.id] = record
+    crecords[record.cid] = record
+    delete records[@id]
+    @id = id
+    @_id = id
+    @save()
+    @constructor.trigger('refresh', @constructor.cloneArray(record))
+
+    # ... or fetch again from server which also works
+    # super
+    # @constructor.ajax().fetch({id: id})
+
 Spine.Model.extend
   fromJSON: (objects) ->
     make_object = (val) =>
@@ -109,7 +129,9 @@ class Collection extends Base
     else
       @all(params).success (records) =>
         @model.refresh(_.pluck(records.rows, "doc"))
-    
+  
+  # Private
+
   recordsResponse: (data, status, xhr) =>
     @model.trigger('ajaxSuccess', null, status, xhr)
 
