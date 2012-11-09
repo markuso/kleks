@@ -9,6 +9,9 @@ Scene       = require('models/scene')
 class DashboardOne extends Spine.Controller
   className: 'dashboard one panel'
 
+  events:
+    'click h1 .count':    'reload'
+
   constructor: ->
     super
     # @active @render
@@ -39,6 +42,10 @@ class DashboardOne extends Spine.Controller
   filter: (@filterObj) =>
     @render()
     @el.scrollTop(0)
+
+  reload: ->
+    Essay.fetch()
+    Scene.fetch()
 
 
 class Dashboard extends Spine.Stack

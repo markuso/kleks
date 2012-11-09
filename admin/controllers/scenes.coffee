@@ -61,6 +61,8 @@ class SceneForm extends Spine.Controller
       if @copying
         @title = 'Copy Scene'
         @item = Scene.find(params.id.split('-')[1]).dup()
+        # Important to indicate that we are creating a new record
+        @editing = false
       else
         @item = Scene.find(params.id)
         @title = @item.name
@@ -236,6 +238,9 @@ class SceneForm extends Spine.Controller
 class SceneList extends Spine.Controller
   className: 'scene list panel'
 
+  events:
+    'click h1 .count':    'reload'
+
   constructor: ->
     super
     # @active @render
@@ -250,6 +255,9 @@ class SceneList extends Spine.Controller
   filter: (@filterObj) =>
     @render()
     @el.scrollTop(0)
+
+  reload: ->
+    Scene.fetch()
 
 
 class Scenes extends Spine.Stack

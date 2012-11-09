@@ -40,6 +40,8 @@ class AuthorForm extends Spine.Controller
       if @copying
         @title = 'Copy Author'
         @item = Author.find(params.id.split('-')[1]).dup()
+        # Important to indicate that we are creating a new record
+        @editing = false
       else
         @item = Author.find(params.id)
         @title = @item.name
@@ -131,6 +133,9 @@ class AuthorForm extends Spine.Controller
 class AuthorList extends Spine.Controller
   className: 'author list panel'
 
+  events:
+    'click h1 .count':    'reload'
+
   constructor: ->
     super
     # @active @render
@@ -145,6 +150,9 @@ class AuthorList extends Spine.Controller
   filter: (@filterObj) =>
     @render()
     @el.scrollTop(0)
+
+  reload: ->
+    Author.fetch()
 
 
 class Authors extends Spine.Stack

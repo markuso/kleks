@@ -40,6 +40,8 @@ class SiteForm extends Spine.Controller
       if @copying
         @title = 'Copy Site'
         @item = Site.find(params.id.split('-')[1]).dup()
+        # Important to indicate that we are creating a new record
+        @editing = false
       else
         @item = Site.find(params.id)
         @title = @item.name
@@ -122,6 +124,9 @@ class SiteForm extends Spine.Controller
 class SiteList extends Spine.Controller
   className: 'site list panel'
 
+  events:
+    'click h1 .count':    'reload'
+
   constructor: ->
     super
     # @active @render
@@ -136,6 +141,9 @@ class SiteList extends Spine.Controller
   filter: (@filterObj) =>
     @render()
     @el.scrollTop(0)
+
+  reload: ->
+    Site.fetch()
 
 
 class Sites extends Spine.Stack

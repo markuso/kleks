@@ -41,6 +41,8 @@ class SponsorForm extends Spine.Controller
       if @copying
         @title = 'Copy Sponsor'
         @item = Sponsor.find(params.id.split('-')[1]).dup()
+        # Important to indicate that we are creating a new record
+        @editing = false
       else
         @item = Sponsor.find(params.id)
         @title = @item.name
@@ -120,6 +122,9 @@ class SponsorForm extends Spine.Controller
 class SponsorList extends Spine.Controller
   className: 'sponsor list panel'
 
+  events:
+    'click h1 .count':    'reload'
+
   constructor: ->
     super
     # @active @render
@@ -134,6 +139,9 @@ class SponsorList extends Spine.Controller
   filter: (@filterObj) =>
     @render()
     @el.scrollTop(0)
+
+  reload: ->
+    Sponsor.fetch()
 
 
 class Sponsors extends Spine.Stack

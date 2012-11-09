@@ -47,6 +47,8 @@ class CollectionForm extends Spine.Controller
       if @copying
         @title = 'Copy Collection'
         @item = Collection.find(params.id.split('-')[1]).dup()
+        # Important to indicate that we are creating a new record
+        @editing = false
       else
         @item = Collection.find(params.id)
         @title = @item.name
@@ -146,6 +148,9 @@ class CollectionForm extends Spine.Controller
 class CollectionList extends Spine.Controller
   className: 'collection list panel'
 
+  events:
+    'click h1 .count':    'reload'
+
   constructor: ->
     super
     # @active @render
@@ -160,6 +165,9 @@ class CollectionList extends Spine.Controller
   filter: (@filterObj) =>
     @render()
     @el.scrollTop(0)
+
+  reload: ->
+    Collection.fetch()
 
 
 class Collections extends Spine.Stack

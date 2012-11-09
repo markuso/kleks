@@ -61,6 +61,8 @@ class EssayForm extends Spine.Controller
       if @copying
         @title = 'Copy Essay'
         @item = Essay.find(params.id.split('-')[1]).dup()
+        # Important to indicate that we are creating a new record
+        @editing = false
       else
         @item = Essay.find(params.id)
         @title = @item.name
@@ -236,6 +238,9 @@ class EssayForm extends Spine.Controller
 class EssayList extends Spine.Controller
   className: 'essay list panel'
 
+  events:
+    'click h1 .count':    'reload'
+
   constructor: ->
     super
     # @active @render
@@ -250,6 +255,9 @@ class EssayList extends Spine.Controller
   filter: (@filterObj) =>
     @render()
     @el.scrollTop(0)
+
+  reload: ->
+    Essay.fetch()
 
 
 class Essays extends Spine.Stack

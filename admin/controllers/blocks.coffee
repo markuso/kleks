@@ -42,6 +42,8 @@ class BlockForm extends Spine.Controller
       if @copying
         @title = 'Copy Block'
         @item = Block.find(params.id.split('-')[1]).dup()
+        # Important to indicate that we are creating a new record
+        @editing = false
       else
         @item = Block.find(params.id)
         @title = @item.name
@@ -135,6 +137,9 @@ class BlockForm extends Spine.Controller
 class BlockList extends Spine.Controller
   className: 'block list panel'
 
+  events:
+    'click h1 .count':    'reload'
+
   constructor: ->
     super
     # @active @render
@@ -149,6 +154,9 @@ class BlockList extends Spine.Controller
   filter: (@filterObj) =>
     @render()
     @el.scrollTop(0)
+
+  reload: ->
+    Block.fetch()
 
 
 class Blocks extends Spine.Stack

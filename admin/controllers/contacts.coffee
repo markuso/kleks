@@ -35,6 +35,8 @@ class ContactForm extends Spine.Controller
       if @copying
         @title = 'Copy Contact'
         @item = Contact.find(params.id.split('-')[1]).dup()
+        # Important to indicate that we are creating a new record
+        @editing = false
       else
         @item = Contact.find(params.id)
         @title = @item.name
@@ -96,6 +98,9 @@ class ContactForm extends Spine.Controller
 class ContactList extends Spine.Controller
   className: 'contact list panel'
 
+  events:
+    'click h1 .count':    'reload'
+
   constructor: ->
     super
     # @active @render
@@ -110,6 +115,9 @@ class ContactList extends Spine.Controller
   filter: (@filterObj) =>
     @render()
     @el.scrollTop(0)
+
+  reload: ->
+    Contact.fetch()
 
 
 class Contacts extends Spine.Stack
