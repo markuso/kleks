@@ -42,6 +42,13 @@ exports.home = (head, req) ->
       collections: collections
       blocks: blocks
       nav: 'home'
+    og:
+      site_name: site.name
+      title: site.name
+      description: site.seo_description
+      type: 'website'
+      url: site.link
+      image: blocks.site_intro?.photo
   }
 
 
@@ -110,6 +117,12 @@ exports.collection = (head, req) ->
         sponsor: sponsor
         blocks: blocks
         nav: 'collection'
+      og:
+        site_name: site.name
+        title: collection.name
+        description: collection.intro
+        type: 'website'
+        image: collection.photo
     }
   else
     return {
@@ -156,6 +169,12 @@ exports.docs = (head, req) ->
     content: templates.render 'docs.html', req,
       docs: docs
       nav: 'docs'
+    og:
+      site_name: site.name
+      title: site.name
+      description: site.seo_description
+      type: 'website'
+      url: site.link
   }
 
 
@@ -241,6 +260,15 @@ exports.doc = (head, req) ->
         sponsor: sponsor
         blocks: blocks
         nav: 'doc'
+      og:
+        site_name: site.name
+        title: doc.title
+        description: doc.intro
+        type: 'article'
+        image: doc.photo
+        first_name: author?.name.split(' ')[0]
+        last_name: author?.name.split(' ')[1]
+        published: doc.published_at
     }
   else
     return {
