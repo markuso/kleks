@@ -29,7 +29,7 @@ Spine.Model.include
     @id = id
     @_id = id
     @save()
-    @constructor.trigger('refresh', @constructor.cloneArray(record))
+    @constructor.trigger('refresh', @constructor.cloneArray([record]))
 
     # ... or fetch again from server which also works
     # super
