@@ -62,9 +62,15 @@
       </ul>
     </nav>
 
-    {{#if site.footer_html}}
-    <footer>{{{site.footer_html}}}</footer>
-    {{/if}}
+    <footer>
+      <div class="social-icons">
+        {{#each site.social_links}}
+        <a href="{{url}}" title="{{label}}"><i class="icon icon-{{code}}"></i></a>
+        {{/each}}
+        <a href="{{baseURL}}/feed" title="RSS Feed"><i class="icon icon-rss"></i></a>
+      </div>
+      <div class="footer-html">{{{site.footer_html}}}</div>
+    </footer>
   </div>
 
   <script src="{{baseURL}}/modules.js"></script>

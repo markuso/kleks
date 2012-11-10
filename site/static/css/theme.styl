@@ -8,7 +8,7 @@
   border-left: 20px solid $primaryColor
 
 .site-name
-  margin: 0 0 8px -0.05em
+  margin: 0 0 14px -0.05em
   font-size: 5.25em
   line-height: 0.8em
   font-weight: $normalFont
@@ -59,7 +59,7 @@
     outline: 4px solid #fff
     white-space: nowrap
 
-    &:hover
+    &:hover, &:active
       background: darken($primaryColor, 10%)
 
     span
@@ -105,7 +105,7 @@
         font-weight: $normalFont
         color: #fff
 
-        &:hover
+        &:hover, &:active
           background: darken($primaryColor, 5%)
 
         &.active
@@ -208,6 +208,10 @@ article
 
   h3, h4
     margin: 1em 0
+
+    a
+      &:hover, &:active
+        color: darken($linkColor, 10%)
 
   ol, ul
     margin: 0 0.8em
@@ -366,7 +370,7 @@ article.home
           &.fresh-true
             display: block
 
-        &:hover
+        &:hover, &:active
           border-color: $primaryColor
 
           a
@@ -441,6 +445,26 @@ footer
   color: #aaa
   clear: both
 
-  .copyright
-    font-size: 0.75em
-    line-height: 1.5em
+  .social-icons
+    float: right
+    margin: 0 0 1em 1em
+
+    a
+      display: inline-block
+      width: 30px
+      height: 30px
+      margin-right: 10px
+      font-size: 30px
+      line-height: 30px
+      text-align: center
+      color: $primaryColor
+      overflow: hidden
+
+      &:hover, &:active
+        color: darken($primaryColor, 10%)
+
+  .footer-html
+
+    .copyright
+      font-size: 0.75em
+      line-height: 1.5em

@@ -77,8 +77,9 @@ class SiteForm extends Spine.Controller
     @socialLinksList.find('.social-link-form').each ->
       label = $.trim $(@).find('input[name=link_label]').val()
       url = $.trim $(@).find('input[name=link_url]').val()
+      code = $.trim $(@).find('input[name=link_code]').val()
       if label and url
-        links.push label: label, url: url
+        links.push label: label, url: url, code: code
     @item.social_links = links
     
     # Save the item and make sure it validates

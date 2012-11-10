@@ -18,7 +18,7 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
 
   button, .button
     background: $primaryColor
-    &:hover
+    &:hover, &:active
       background: darken($primaryColor, 5%)
     &.plain
       color: $primaryColor
@@ -38,7 +38,7 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
   .collection-nav
     .icon
       background: $primaryColor
-      &:hover
+      &:hover, &:active
         background: darken($primaryColor, 10%)
     > ul
       background: $primaryColor
@@ -46,12 +46,16 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
         background: $primaryColor
       > li
         a
-          &:hover
+          &:hover, &:active
             background: darken($primaryColor, 5%)
           &.active
             background: darken($primaryColor, 10%)
 
   article
+    h3, h4
+      a
+        &:hover, &:active
+          color: darken($linkColor, 10%)
     .sponsor
       .label
         background: $primaryColor
@@ -63,7 +67,7 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
           .updated
             background: $primaryColor
             border-color: $primaryColor
-          &:hover
+          &:hover, &:active
             border-color: $primaryColor
             a
               background: $primaryColor
@@ -76,3 +80,8 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
 
   footer
     border-color: $primaryColor
+    .social-icons
+      a
+        color: $primaryColor
+        &:hover, &:active
+          color: darken($primaryColor, 10%)
