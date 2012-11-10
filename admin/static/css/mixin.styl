@@ -163,6 +163,21 @@ arrow(direction = 'right', size = 10px, color = #666, width = 0.53em, length = 1
   border-{direction}-color: color;
   {direction}: 0.25em;
 
+iconic(content = '\67', color = $textColor, pos = 'before')
+  &:{pos}
+    content: content
+    font-family: 'fontello-kleks'
+    font-style: normal
+    font-weight: normal
+    speak: none
+    display: inline-block
+    text-decoration: none
+    width: 1em
+    text-align: center
+    line-height: 1em
+    font-size: 1em
+    color: color
+
 clearfix()
   *zoom: 1
   &:before, &:after

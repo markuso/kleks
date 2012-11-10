@@ -16,7 +16,7 @@ $navbarWidth  = 180px
   line-height: 1em
   font-weight: $normalFont
   color: #C4C4C4
-  letter-spacing: -0.07em
+  letter-spacing: -0.06em
   word-spacing: 0em
   white-space: nowrap
   a
@@ -181,11 +181,14 @@ span.label
         font-weight: $boldFont
         color: #fff
 
-        &:hover
+        &:hover, &:active
           background: darken($primaryColor, 5%)
 
         &.active
           background: darken($primaryColor, 10%)
+
+        .icon
+          margin-right: 0.5em
 
       &.seperator
         margin: 0.5em 0
@@ -446,7 +449,7 @@ span.label
         input[name='title'],
         input[name='name']
           position: fixed
-          top: 0
+          top: 30px
           left: 20%
           right: 20%
           width: auto
@@ -457,12 +460,12 @@ span.label
         textarea[name='body'],
         textarea[name='content']
           position: fixed
-          top: 60px
+          top: 90px
           bottom: 0
           left: 20%
           right: 20%
           width: auto
-          height: 90%
+          height: 87%
           padding: 10px
           border: 0
           background: white
@@ -470,14 +473,17 @@ span.label
           z-index: 100
           transition(0.3s, all)
 
+        textarea[name='intro']
+          display: none
+
         .ui-preview
           position: fixed
-          top: 60px
+          top: 90px
           bottom: 0
           left: auto
           right: 10px
           width: 48%
-          height: 90%
+          height: 87%
           padding: 10px
           border: 0
           background: white
@@ -492,17 +498,16 @@ span.label
             right: auto
             width: 48%
 
-          textarea[name='intro']
-            display: none
-
         button.fullscreen-button
         .markdown-help:first-of-type
           position: fixed
-          top: 10px
-          left: 10px
+          top: 0
+          left: 20%
+          margin: 0
           padding: 0 10px
           font-size: 18px
           font-weight: 300
+          line-height: 1.5em
           background: darken($primaryColor, 5%)
           color: #fff
           border: 0
@@ -510,15 +515,18 @@ span.label
 
           &:hover
             background: darken($primaryColor, 10%)
+        
+        button.fullscreen-button
+          iconic('\66', #fff, 'before')
+          &:before
+            margin-right: 0.5em
 
         .markdown-help:first-of-type
-          position: fixed
-          top: 10px
           left: auto
-          right: 10px
+          right: 20%
 
           &:after
-            content: ' Help'
+            content: ' ?'
             color: #fff
 
 .stack .panel:not(.active)
@@ -634,9 +642,9 @@ ul.ui-multi-select
 
   > .button
     position: absolute
-    top: 10px
-    right: 10px
-    outline: 4px solid rgba(255,255,255,0.7)
+    top: 2px
+    right: 2px
+    outline: 2px solid rgba(255,255,255,0.7)
 
     &.preview-button
       right: 60px
@@ -647,7 +655,7 @@ ul.ui-multi-select
     bottom: 0
     right: 0
     left: 0
-    padding: 20px
+    padding: 0 20px 10px 20px
     overflow-y: scroll
     overflow-x: auto
     -webkit-overflow-scrolling: touch
@@ -657,6 +665,14 @@ ul.ui-multi-select
 
     ol, ul
       margin: 0 0.8em
+
+    p
+      
+      &.center
+        text-align: center
+
+      &.right
+        text-align: right
       
     a
       font-weight: $boldFont

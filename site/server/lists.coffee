@@ -122,7 +122,7 @@ exports.collection = (head, req) ->
         title: collection.name
         description: collection.intro
         type: 'website'
-        image: collection.photo
+        image: "#{site.link}/file/#{collection._id}/#{collection.photo}"
     }
   else
     return {
@@ -265,7 +265,7 @@ exports.doc = (head, req) ->
         title: doc.title
         description: doc.intro
         type: 'article'
-        image: doc.photo
+        image: "#{site.link}/file/#{doc._id}/#{doc.photo}"
         first_name: author?.name.split(' ')[0]
         last_name: author?.name.split(' ')[1]
         published: doc.published_at

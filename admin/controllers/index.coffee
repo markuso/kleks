@@ -50,6 +50,7 @@ class App extends Spine.Controller
     @mainStack = new MainStack
     @helpUI    = new HelpUI
     Spine.Route.setup()
+    @navigate('/')
 
     @hookPanelsToNav()
     @doOtherStuff()
@@ -98,9 +99,16 @@ class App extends Spine.Controller
 
   doOtherStuff: ->
     # Use the fastclick module for touch devices.
-    # Add a class of `needsclick` of the original click
+    # Add a class of `needsclick` if the original click
     # is needed.
     new FastClick(document.body)
+
+    # Alert user when leaving the application.
+    window.onbeforeunload = (e) ->
+      msg = 'Leaving Kleks now, but you may have unsaved items. Keep going if you are sure.'
+      e = window.event if not e?
+      e.returnValue = msg if e
+      msg
 
 
 module.exports = App

@@ -136,7 +136,7 @@ class SceneForm extends Spine.Controller
       @previewUI?.close()
     else
       @form.addClass('fullscreen')
-      @fullscreenButton.html "&lt; Exit #{@fullscreenButtonText}"
+      @fullscreenButton.html "Exit #{@fullscreenButtonText}"
       @previewUI = new PreviewUI field: @formBody
 
   import: (e) =>

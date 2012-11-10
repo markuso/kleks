@@ -165,6 +165,16 @@ button, .button
   &.glow
     outline: 4px solid rgba(yellow, 0.7)
 
+  &.right-arrow
+    iconic('\67', #fff, 'after')
+    &:after
+      margin-left: 0.5em
+
+  &.left-arrow
+    iconic('\66', #fff, 'before')
+    &:before
+      margin-right: 0.5em
+
 ::-webkit-input-placeholder
   color: #e3e3e3
 
