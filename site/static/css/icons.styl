@@ -1,4 +1,4 @@
-$ver = 2
+$ver = 3
 
 @font-face
   font-family: 'fontello-kleks'
@@ -19,18 +19,29 @@ $ver = 2
   text-align: center
   line-height: 1em
   font-size: 1em
+  -webkit-font-smoothing: antialiased
 
 
+.icon-heart-empty:before
+  content: '\7a' /* 'z' */
+.icon-heart:before
+  content: '\79' /* 'y' */
 .icon-pencil:before
-  content: '\6b' /* 'k' */
+  content: '\75' /* 'u' */
 .icon-eye:before
   content: '\63' /* 'c' */
 .icon-eye-off:before
   content: '\64' /* 'd' */
-.icon-profile:before
+.icon-contact:before
   content: '\6e' /* 'n' */
-.icon-rss:before
+.icon-site:before
   content: '\6d' /* 'm' */
+.icon-trash:before
+  content: '\6b' /* 'k' */
+.icon-block:before
+  content: '\71' /* 'q' */
+.icon-rss:before
+  content: '\41' /* 'A' */
 .icon-down-open:before
   content: '\65' /* 'e' */
 .icon-left-open:before
@@ -39,25 +50,35 @@ $ver = 2
   content: '\67' /* 'g' */
 .icon-up-open:before
   content: '\68' /* 'h' */
+.icon-off:before
+  content: '\6c' /* 'l' */
 .icon-collection:before
   content: '\6a' /* 'j' */
-.icon-facebook:before
-  content: '\6f' /* 'o' */
-.icon-twitter:before
+.icon-gauge:before
   content: '\70' /* 'p' */
+.icon-facebook:before
+  content: '\44' /* 'D' */
+.icon-twitter:before
+  content: '\43' /* 'C' */
 .icon-google:before
-  content: '\71' /* 'q' */
+  content: '\42' /* 'B' */
 .icon-youtube:before
-  content: '\72' /* 'r' */
+  content: '\45' /* 'E' */
 .icon-scene:before
   content: '\62' /* 'b' */
 .icon-video:before
   content: '\61' /* 'a' */
+.icon-author:before
+  content: '\74' /* 't' */
 .icon-essay:before
   content: '\69' /* 'i' */
 .icon-book:before
-  content: '\74' /* 't' */
+  content: '\78' /* 'x' */
 .icon-book-open:before
+  content: '\76' /* 'v' */
+.icon-sponsor:before
   content: '\73' /* 's' */
 .icon-search:before
-  content: '\6c' /* 'l' */
+  content: '\72' /* 'r' */
+.icon-link:before
+  content: '\6f' /* 'o' */
