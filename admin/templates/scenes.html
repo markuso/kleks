@@ -8,9 +8,10 @@
     {{#each scenes}}
     <li>
       <div class="actions">
-        {{#unless published}}<div><strong>In Draft</strong></div>{{/unless}}
+        {{#unless collections}}<i class="icon-collection" title="Not in a collection"></i>{{/unless}}
+        {{#unless published}}<i class="icon-pencil" title="In draft mode"></i>{{/unless}}
       </div>
-      <a href="#/scene/{{id}}">{{title}}</a>
+      <a class="title" href="#/scene/{{id}}"><i class="icon icon-scene"></i>{{title}}</a>
       <div class="meta">
         <div><a href="http://{{site}}/scene/{{slug}}" target="_blank">view on {{site}}</a></div>
       </div>

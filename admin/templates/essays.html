@@ -8,10 +8,10 @@
     {{#each essays}}
     <li>
       <div class="actions">
-        {{#unless published}}<div><strong>In Draft</strong></div>{{/unless}}
-        {{#unless collections}}<div>No Collections</div>{{/unless}}
+        {{#unless collections}}<i class="icon-collection" title="Not in a collection"></i>{{/unless}}
+        {{#unless published}}<i class="icon-pencil" title="In draft mode"></i>{{/unless}}
       </div>
-      <a href="#/essay/{{id}}">{{title}}</a>
+      <a class="title" href="#/essay/{{id}}"><i class="icon icon-essay"></i>{{title}}</a>
       <div class="meta">
         <div><a href="http://{{site}}/essay/{{slug}}" target="_blank">view on {{site}}</a></div>
       </div>

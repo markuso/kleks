@@ -54,12 +54,20 @@ span.label
     border: 1px solid $faintGrey
     outline: none
 
+  .icon
+    position: absolute
+    top: 8px
+    right: 10px
+    color: $lightGrey
+    font-size: 1.5em
+    line-height: 1em
+
   .clear-filter
     display: none
     position: absolute
     top: 0
     right: 0
-    width: 20px
+    width: 22px
     height: 20px
     background: #D3A924
     padding: 0
@@ -73,7 +81,8 @@ span.label
       display: block
 
   .selected-site
-    padding: 10px 10px
+    position: relative
+    padding: 10px 40px 10px 10px
     border: 1px solid $faintGrey
     border-top: 0
     line-height: 1em
@@ -81,9 +90,7 @@ span.label
     -webkit-user-select: none
 
     .icon
-      float: right
-      margin: 5px 5px 0 0
-      arrow('top', 10px, $lightGrey)
+      top: 10px
 
     &:hover
       background: lighten($faintGrey, 50%)
@@ -289,6 +296,19 @@ span.label
           button, .button
             margin: 0 10px 10px 0
 
+        .delete-button
+          display: inline-block
+          float: right
+          height: 44px
+          width: 44px
+          background: #ddd
+          line-height: 44px
+          text-align: center
+          cursor: pointer
+          &:hover
+            color: #fff
+            background: #D3A924
+
         input[type='text'],
         input[type='search'],
         textarea,
@@ -297,10 +317,9 @@ span.label
 
         ::-webkit-input-placeholder
           color: #d3d3d3
-
+      
       &.form
         z-index: 20
-
 
     h1
       margin: 0 0 0.5em -0.05em
@@ -330,19 +349,35 @@ span.label
       clearfix()
 
       > li
-        font-size: 1.5em
-        line-height: 1.2em
         border-bottom: 1px dotted $faintGrey
-        padding: 0.5em 0
+        padding: 1em 0
         clearfix()
 
+        > a
+          display: block
+          font-size: 1.5em
+          line-height: 1.2em
+          &:hover
+            color: $textDarkColor
+          &.site-name
+            font-size: 2em
+          &.title
+            padding-left: 1.5em
+            .icon
+              margin-left: -1.5em
+              margin-right: 0.5em
+              color: $textColor
+
         .note
-          font-size: 0.6em
+          margin-top: 0.5em
+          font-size: 0.9em
           line-height: 1em
           color: $lightGrey
         
         .meta
-          font-size: 0.6em
+          margin-top: 0.5em
+          padding-left: 2.5em
+          font-size: 0.9em
           line-height: 1em
           color: $lightGrey
 
@@ -357,21 +392,31 @@ span.label
 
         .actions
           float: right
-          font-size: 0.6em
-          line-height: 3em
+          margin-left: 1em
+          font-size: 1.5em
+          line-height: 1.3em
           color: $lightGrey
 
           > div
             display: inline-block
-            margin-left: 1em
+            font-size: 0.6em
+            line-height: 3em
 
           a
             color: $lightGrey
             &:hover
               text-decoration: underline
 
+    .no-data
+      color: $lightGrey
+      padding: 2em 1em
+      margin-bottom: 2em
+      text-align: center
+      border: 1px dotted #ddd
+
     form
       margin: 0
+      height: 100%
 
       .heading
         color: $primaryColor
@@ -387,6 +432,10 @@ span.label
           display: block
           padding: 5px 0
           color: $lightGrey
+
+        .note
+          font-size: 0.8em
+          margin-bottom: 0.5em
 
         input[type='text'],
         input[type='search'],
@@ -552,6 +601,15 @@ span.label
 
 .stack .panel:not(.active)
   display: none
+
+
+.panel.dashboard
+
+  .content
+
+    > h3
+      color: $lightGrey
+      margin-bottom: 0.5em
 
 
 ul.ui-multi-select

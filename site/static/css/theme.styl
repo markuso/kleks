@@ -58,6 +58,7 @@
     cursor: pointer
     outline: 5px solid rgba(255,255,255,0.9)
     white-space: nowrap
+    overflow: hidden
 
     &:hover, &:active
       background: darken($primaryColor, 10%)
@@ -68,10 +69,16 @@
       margin-bottom: 5px
       background: #fff
     i
-      arrow('top', 12px, #fff, 12px, 7px)
-      margin: 0 auto
-      display: block
-      top: 2px
+      // arrow('top', 12px, #fff, 12px, 7px)
+      // margin: 0 auto
+      // display: block
+      // top: 2px
+      position: relative
+      top: -8px
+      left: 50%
+      margin-left: -0.5em
+      color: white
+      line-height: 10px
 
   > ul
     display: none
@@ -111,6 +118,9 @@
         &.active
           background: darken($primaryColor, 10%)
 
+        i
+          margin-right: 0.5em
+
       &.heading
         padding: 7px 20px
         font-size: 1.1em
@@ -124,10 +134,12 @@
           font-weight: $normalFont
           line-height: 1em
 
-        a
+        &.as-link
           padding: 0
-          font-size: inherit
-          font-weight: inherit
+
+          a
+            font-size: inherit
+            font-weight: inherit
 
       &.search-box
         padding: 10px
@@ -180,7 +192,7 @@
   &.second
     right: 70px
 
-  $iconWidth = 144px
+  $iconWidth = 146px
 
   .icon
     width: $iconWidth
@@ -193,7 +205,7 @@
       font-weight: $normalFont
       line-height: 1em
       text-align: center
-      margin: 3px 6px
+      margin: 3px 0
       border: 0
       padding: 0
       overflow: hidden
