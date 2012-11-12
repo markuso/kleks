@@ -28,22 +28,6 @@ class App extends Spine.Controller
     @append @mainNav
     @initApp()
 
-  setupSession: ->
-    session.on 'change', @checkRole
-    
-    session.info (err, info) =>
-      @checkRole info.userCtx
-
-  checkRole: (userCtx) =>
-    if 'manager' in userCtx.roles
-      @mainNav.hideLogin()
-      @startApp() unless @appStarted
-      @loadData() unless @dataLoaded
-    else
-      @mainNav.showLogin()
-      @unloadData() if @dataLoaded
-      @endApp() if @appStarted
-
   initApp: =>
     @setupSession()
 
@@ -54,6 +38,27 @@ class App extends Spine.Controller
 
     @hookPanelsToNav()
     @doOtherStuff()
+
+  setupSession: ->
+    session.on 'change', @checkRole
+    $(window).on 'focus', @getSessionInfo
+    # @mainNav.bind 'beforeChange', @getSessionInfo
+    @getSessionInfo()
+
+  getSessionInfo: =>
+    session.info (err, info) =>
+      @checkRole info.userCtx
+
+  checkRole: (userCtx) =>
+    if 'manager' in userCtx.roles
+      @mainNav.hideLogin()
+      @startApp() unless @appStarted
+      @loadData() unless @dataLoaded
+      @mainNav.greetUser(userCtx.name)
+    else
+      @mainNav.showLogin()
+      @unloadData() if @dataLoaded
+      @endApp() if @appStarted
 
   startApp: =>
     @loadData() unless @dataLoaded

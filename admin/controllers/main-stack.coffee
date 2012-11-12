@@ -45,6 +45,8 @@ class MainStack extends Spine.Stack
     @filterBox = new FilterBox
     @append @filterBox
 
+    # ..also see `hookPanelsToNav()` in index.coffee
+
 
 module.exports = MainStack
     

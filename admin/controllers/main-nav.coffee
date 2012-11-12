@@ -12,6 +12,7 @@ class MainNav extends Spine.Controller
     'input[name=username]':   'formUsername'
     'input[name=password]':   'formPassword'
     'li a':                   'links'
+    '.user-greeting':         'userGreeting'
 
   events:
     'submit form.login':      'login'
@@ -38,9 +39,11 @@ class MainNav extends Spine.Controller
       @selectLink($link)
 
   selectLink: ($link) =>
+    @trigger 'beforeChange'
     if $link and not $link.hasClass('active')
       @links.removeClass('active')
       $link.addClass('active')
+      @trigger 'change'
 
   showLogin: =>
     @resetLoginForm()
@@ -76,6 +79,16 @@ class MainNav extends Spine.Controller
     @formUsername.val('')
     @formPassword.val('')
     @formUsername.focus() if focus
+
+  greetUser: (name) =>
+    show = ->
+      @userGreeting
+        .html("Welcome back <strong>#{name}</strong>")
+        .addClass('show')
+    hide = ->
+      @userGreeting.removeClass('show')
+    @delay show, 1*1000
+    @delay hide, 10*1000
 
 
 module.exports = MainNav
