@@ -48,7 +48,7 @@ exports.home = (head, req) ->
       description: site.seo_description
       type: 'website'
       url: site.link
-      image: blocks.site_intro?.photo
+      image: "#{site.link}/file/#{blocks.site_intro._id}/#{blocks.site_intro.photo}" if blocks.site_intro?.photo
   }
 
 
@@ -122,7 +122,7 @@ exports.collection = (head, req) ->
         title: collection.name
         description: collection.intro
         type: 'website'
-        image: "#{site.link}/file/#{collection._id}/#{collection.photo}"
+        image: "#{site.link}/file/#{collection._id}/#{collection.photo}" if collection.photo
     }
   else
     return {
@@ -265,7 +265,7 @@ exports.doc = (head, req) ->
         title: doc.title
         description: doc.intro
         type: 'article'
-        image: "#{site.link}/file/#{doc._id}/#{doc.photo}"
+        image: "#{site.link}/file/#{doc._id}/#{doc.photo}" if doc.photo
         first_name: author?.name.split(' ')[0]
         last_name: author?.name.split(' ')[1]
         published: doc.published_at
