@@ -12,6 +12,7 @@ class FileUploadUI extends Spine.Controller
   attachments: {}
   docId: null
   selectedFile: null
+  changeCallback: null
 
   events:
     'click ul.files-list > li':   'itemClick'
@@ -20,6 +21,7 @@ class FileUploadUI extends Spine.Controller
   constructor: ->
     super
     @render()
+    @bind 'change', @changeCallback
 
   render: ->
     @dropzone = $("<div class=\"dropzone\">#{@dropzoneText}</div>")
@@ -62,6 +64,9 @@ class FileUploadUI extends Spine.Controller
     # Also select the item if it is the only one
     @selectItem($item) if @attachments.length is 1
 
+    # Trigger change event
+    @trigger 'change'
+
   itemClick: (e) ->
     # Selecting the main photo
     e.preventDefault()
@@ -71,6 +76,9 @@ class FileUploadUI extends Spine.Controller
       @resetSelection('Nothing is selected')
     else
       @selectItem(item)
+
+    # Trigger change event
+    @trigger 'change'
 
   itemDblClick: (e) ->
     # Removing an attachment
@@ -100,6 +108,9 @@ class FileUploadUI extends Spine.Controller
         $(item).remove()
         @fileSelectedInput.val('') if @fileSelectedInput.val() is name
         @fileName.html "#{name} was removed"
+
+        # Trigger change event
+        @trigger 'change'
 
   setupZoneEvents: ->
     @dropzone.on 'dragenter dragover', (e) ->

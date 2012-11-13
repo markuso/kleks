@@ -75,6 +75,7 @@ class SponsorForm extends Spine.Controller
       selectedFieldName: 'image'
       selectedFile: @item.image
       attachments: @item._attachments
+      changeCallback: @markAsDirty
     @fileUploadContainer.html @fileUploadUI.el
 
   save: (e) ->
@@ -103,7 +104,7 @@ class SponsorForm extends Spine.Controller
       @item.destroy()
       @back()
 
-  markAsDirty: ->
+  markAsDirty: =>
     @dirtyForm = true
     @saveButton.addClass('glow')
   

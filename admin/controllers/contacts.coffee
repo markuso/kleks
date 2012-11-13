@@ -17,8 +17,8 @@ class ContactForm extends Spine.Controller
 
   events:
     'submit form':          'preventSubmit'
-    'change *[name]':           'markAsDirty'
-    'keyup *[name]':            'markAsDirty'
+    'change *[name]':       'markAsDirty'
+    'keyup *[name]':        'markAsDirty'
     'click .save-button':   'save'
     'click .cancel-button': 'cancel'
     'click .delete-button': 'destroy'
@@ -72,7 +72,7 @@ class ContactForm extends Spine.Controller
       @item.destroy()
       @back()
 
-  markAsDirty: ->
+  markAsDirty: =>
     @dirtyForm = true
     @saveButton.addClass('glow')
   

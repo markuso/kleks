@@ -85,6 +85,7 @@ class CollectionForm extends Spine.Controller
       docId: @item.id
       selectedFile: @item.photo
       attachments: @item._attachments
+      changeCallback: @markAsDirty
     @fileUploadContainer.html @fileUploadUI.el
 
   siteChange: ->
@@ -129,7 +130,7 @@ class CollectionForm extends Spine.Controller
       @item.destroy()
       @back()
 
-  markAsDirty: ->
+  markAsDirty: =>
     @dirtyForm = true
     @saveButton.addClass('glow')
 

@@ -115,7 +115,7 @@ class AuthorForm extends Spine.Controller
       @item.destroy()
       @back()
 
-  markAsDirty: ->
+  markAsDirty: =>
     @dirtyForm = true
     @saveButton.addClass('glow')
 
