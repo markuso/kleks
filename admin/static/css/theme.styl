@@ -69,7 +69,7 @@ span.label
     right: 0
     width: 22px
     height: 20px
-    background: #D3A924
+    background: $alertColor
     padding: 0
     margin: 10px
     color: white
@@ -241,6 +241,20 @@ span.label
     &.show
       left: 0
 
+  .offline
+    display: none
+    position: absolute
+    top: 22px
+    left: 0
+    width: $navbarWidth
+    font-size: 2em
+    line-height: 2em
+    font-weight: $boldFont
+    text-transform: uppercase
+    text-align: center
+    color: #fff
+    background: $alertColor 
+
 .main.stack
   position: absolute
   top: 0
@@ -307,7 +321,7 @@ span.label
           cursor: pointer
           &:hover
             color: #fff
-            background: #D3A924
+            background: $alertColor
 
         input[type='text'],
         input[type='search'],
@@ -507,7 +521,7 @@ span.label
         display: none
         color: #fff
         padding: 5px 10px
-        background: orange
+        background: $alertColor
       
       &.fullscreen
 

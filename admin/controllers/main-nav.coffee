@@ -13,6 +13,7 @@ class MainNav extends Spine.Controller
     'input[name=password]':   'formPassword'
     'li a':                   'links'
     '.user-greeting':         'userGreeting'
+    '.offline':               'offline'
 
   events:
     'submit form.login':      'login'

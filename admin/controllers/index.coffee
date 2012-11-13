@@ -37,6 +37,7 @@ class App extends Spine.Controller
     @navigate('/')
 
     @hookPanelsToNav()
+    @setupOnlineOffline()
     @doOtherStuff()
 
   setupSession: ->
@@ -101,6 +102,19 @@ class App extends Spine.Controller
     cls = @
     for k, v of @mainStack.controllers
       @mainStack[k].active -> cls.mainNav.selectFromClassName(@className)
+
+  setupOnlineOffline: ->   
+    if not navigator.onLine
+      @mainNav.offline.show(500)
+      Spine.trigger 'app:offline'
+      
+    $(window).on 'offline', =>
+      @mainNav.offline.show(500)
+      Spine.trigger 'app:offline'
+    
+    $(window).on 'online', =>
+      @mainNav.offline.hide()
+      Spine.trigger 'app:online'
 
   doOtherStuff: ->
     # Use the fastclick module for touch devices.
