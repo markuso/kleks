@@ -48,7 +48,11 @@ class App extends Spine.Controller
 
   getSessionInfo: =>
     session.info (err, info) =>
-      @checkRole info.userCtx
+      if info
+        @mainNav.offline.hide()
+        @checkRole info.userCtx
+      else
+        @mainNav.offline.show()
 
   checkRole: (userCtx) =>
     if 'manager' in userCtx.roles
@@ -105,15 +109,16 @@ class App extends Spine.Controller
 
   setupOnlineOffline: ->   
     if not navigator.onLine
-      @mainNav.offline.show(500)
+      @mainNav.offline.show()
       Spine.trigger 'app:offline'
       
     $(window).on 'offline', =>
-      @mainNav.offline.show(500)
+      @mainNav.offline.show()
       Spine.trigger 'app:offline'
     
     $(window).on 'online', =>
       @mainNav.offline.hide()
+      @getSessionInfo()
       Spine.trigger 'app:online'
 
   doOtherStuff: ->
