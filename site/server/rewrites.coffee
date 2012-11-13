@@ -76,12 +76,23 @@ module.exports = [
   # RSS Feed of all docs sorted by `updated_at`
   {
     from: '/render/:site/feed',
-    to: '_list/rssfeed/docs_by_date',
+    to: '_list/rssfeed/docs_for_feeds',
     query: {
-      startkey: [':site', {}],
-      endkey: [':site'],
+      startkey: [':site', 'content', {}, {}],
+      endkey: [':site', 'content', null],
       descending: 'true',
-      include_docs: 'true'
+      include_docs: 'true',
+      limit: '11'
+    }
+  }
+
+  # Sitemap.xml file of all docs sorted by `updated_at`
+  {
+    from: '/render/:site/sitemap.xml',
+    to: '_list/sitemap/docs_for_feeds',
+    query: {
+      startkey: [':site'],
+      endkey: [':site', {}]
     }
   }
 

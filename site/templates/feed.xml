@@ -1,22 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"> 
     <channel> 
-        <title>{{site.name}}</title> 
-        <link>{{site.link}}</link> 
-        <description>{{site.seo_description}}</description> 
-        <language>en-us</language> 
-        <pubDate>{{published_at}}</pubDate> 
- 
-        <lastBuildDate>{{build_date}}</lastBuildDate> 
-        <managingEditor>{{site.editor_email}}</managingEditor> 
-        <webMaster>{{site.admin_email}}</webMaster> 
-
+        <title>{{site.name}}</title>
+        <link>{{site.link}}</link>
+        <description>{{site.seo_description}}</description>
+        <language>en-us</language>
+        <lastBuildDate>{{build_date}}</lastBuildDate>
+        {{#if site.editor_email}}<managingEditor>{{site.editor_email}}</managingEditor>{{/if}}
+        {{#if site.admin_email}}<webMaster>{{site.admin_email}}</webMaster>{{/if}}
         {{#each docs}}
         <item> 
-            <title>{{title}}</title> 
-            <link>{{full_url}}</link> 
-            <description><![CDATA[{{{full_html}}}]]></description> 
-            <pubDate>{{published_at}}</pubDate> 
+            <title>{{title}}</title>
+            <link>{{full_url}}</link>
             <guid>{{full_url}}</guid>
+            <description><![CDATA[{{{full_html}}]]></description>
+            <pubDate>{{published_at}}</pubDate>
         </item>
         {{/each}}
     </channel>

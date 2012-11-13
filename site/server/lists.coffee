@@ -279,7 +279,7 @@ exports.doc = (head, req) ->
 
 
 exports.rssfeed = (head, req) ->
-  start code: 200, headers: {'Content-Type': 'application/rss+xml'}
+  start code: 200, headers: {'Content-Type': 'application/xml'}
   # Output as plain text for troubleshooting
   # start code: 200, headers: {'Content-Type': 'text/plain'}
 
@@ -300,13 +300,34 @@ exports.rssfeed = (head, req) ->
     doc.body_html = md.makeHtml(
       doc.body.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
     )
-    doc.published_at_html = utils.prettyDate(doc.published_at)
+    doc.published_at = moment.utc(doc.published_at).toDate().toGMTString()
     doc.full_url = "#{site.link}/#{doc.type}/#{doc.slug}"
-    doc.full_html = "#{doc.intro_html}<br>#{doc.body_html}"
+    doc.full_html = "#{doc.intro_html}<br><br>#{doc.body_html}"
     return doc
 
   return templates.render 'feed.xml', req,
     site: site
     docs: docs
-    published_at: new Date(docs[0].published_at)
-    build_date: new Date()
+    build_date: moment.utc().toDate().toGMTString()
+
+
+exports.sitemap = (head, req) ->
+  start code: 200, headers: {'Content-Type': 'application/xml'}
+
+  docs = []
+  siteLink = ''
+
+  while row = getRow()
+    key = row.key
+    date = key[2]
+    type = key[3]
+    slug = key[4]
+    if type is 'site'
+      siteLink = slug if not siteLink
+    else
+      docs.push
+        url: "#{siteLink}/#{type}/#{slug}"
+        date: date
+
+  return templates.render 'sitemap.html', req,
+    docs: docs
