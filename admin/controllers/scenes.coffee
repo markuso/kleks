@@ -127,6 +127,7 @@ class SceneForm extends Spine.Controller
       items: collections
       selectedItems: (c.id for c in @item.collections)
       valueFields: ['id','slug']
+      changeCallback: @markAsDirty
     @collectionsList.html @collectionSelectUI.el
 
   updateSlug: (e) =>

@@ -15,11 +15,13 @@ class MultiSelectUI extends Spine.Controller
   valueFields: null
   emptyText: 'Nothing to select here.'
   jumpToFirst: true
+  changeCallback: null
 
   constructor: ->
     super
     @el.addClass(@tagClass) if @tagClass
     @render()
+    @bind 'change', @changeCallback
 
   render: =>
     @el.html $("<#{@itemTag}/>").html(@emptyText) unless @items
@@ -41,9 +43,11 @@ class MultiSelectUI extends Spine.Controller
       $option.addClass('selected') if item[@keyField] in @selectedItems
 
       # setup a selection toggle
-      $option.on 'click', (e) ->
+      $option.on 'click', (e) =>
         e.preventDefault()
-        $(@).toggleClass('selected')
+        $(e.currentTarget).toggleClass('selected')
+        # Trigger change event
+        @trigger 'change'
       
       # add the created option to the list
       @el.append $option
