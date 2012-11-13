@@ -15,14 +15,14 @@ exports.home = (head, req) ->
   md = new Showdown.converter()
   collections = []
   blocks = {}
-  site = null
+  site = {}
 
   while row = getRow()
     doc = row.value
     if doc
       collections.push(doc) if doc.type is 'collection'
       blocks[doc.code] = doc if doc.type is 'block'
-      site ?= doc if doc.type is 'site'
+      site = doc if doc.type is 'site'
   
   collections = _.map collections, (doc) ->
     if doc.intro?
@@ -36,6 +36,7 @@ exports.home = (head, req) ->
     return doc
 
   return {
+    on_dev: utils.isDev(req)
     site: site
     title: "#{site.name}"
     content: templates.render "home.html", req,
@@ -62,7 +63,7 @@ exports.collection = (head, req) ->
   collection = null
   blocks = {}
   sponsor = null
-  site = null
+  site = {}
 
   while row = getRow()
     doc = row.doc
@@ -71,7 +72,7 @@ exports.collection = (head, req) ->
       collection ?= doc if doc.type is 'collection'
       blocks[doc.code] = doc if doc.type is 'block'
       sponsor ?= doc if doc.type is 'sponsor'
-      site ?= doc if doc.type is 'site'
+      site = doc if doc.type is 'site'
 
   if collection
     if collection.intro?
@@ -109,6 +110,7 @@ exports.collection = (head, req) ->
 
   if collection
     return {
+      on_dev: utils.isDev(req)
       site: site
       title: collection.name
       content: templates.render 'collection.html', req,
@@ -129,6 +131,7 @@ exports.collection = (head, req) ->
       code: 404
       title: '404 Not Found'
       content: templates.render '404.html', req, { host: req.headers.Host }
+      on_dev: utils.isDev(req)
     }
 
 
@@ -139,7 +142,7 @@ exports.docs = (head, req) ->
 
   md = new Showdown.converter()
   docs = []
-  site = null
+  site = {}
 
   while row = getRow()
     doc = row.doc
@@ -150,7 +153,7 @@ exports.docs = (head, req) ->
       else if doc.type is 'collection'
         # Add the collection doc to the last doc pushed
         docs[docs.length-1].collection_docs.push(doc)
-      site ?= doc if doc.type is 'site'
+      site = doc if doc.type is 'site'
 
   docs = _.map docs, (doc) ->
     if doc.intro?
@@ -164,6 +167,7 @@ exports.docs = (head, req) ->
     return doc
 
   return {
+    on_dev: utils.isDev(req)
     site: site
     title: 'Docs List'
     content: templates.render 'docs.html', req,
@@ -193,7 +197,7 @@ exports.doc = (head, req) ->
   author = null
   sponsor = null
   blocks = {}
-  site = null
+  site = {}
 
   while row = getRow()
     doc = row.doc
@@ -203,7 +207,7 @@ exports.doc = (head, req) ->
       sponsor ?= doc if doc.type is 'sponsor'
       author ?= doc if doc.type is 'author'
       blocks[doc.code] = doc if doc.type is 'block'
-      site ?= doc if doc.type is 'site'
+      site = doc if doc.type is 'site'
 
   # Let's just go back and use `doc` as the variable instead
   doc = theDoc
@@ -250,6 +254,7 @@ exports.doc = (head, req) ->
 
   if doc
     return {
+      on_dev: utils.isDev(req)
       site: site
       title: doc.title
       content: templates.render 'doc.html', req,
@@ -275,6 +280,7 @@ exports.doc = (head, req) ->
       code: 404
       title: '404 Not Found'
       content: templates.render '404.html', req, { host: req.headers.Host }
+      on_dev: utils.isDev(req)
     }
 
 
@@ -285,13 +291,13 @@ exports.rssfeed = (head, req) ->
 
   md = new Showdown.converter()
   docs = []
-  site = null
+  site = {}
 
   while row = getRow()
     doc = row.doc
     if doc
       docs.push(doc) if doc.type in settings.app.content_types
-      site ?= doc if doc.type is 'site'
+      site = doc if doc.type is 'site'
 
   docs = _.map docs, (doc) ->
     doc.intro_html = md.makeHtml(
