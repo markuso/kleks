@@ -279,8 +279,9 @@ exports.doc = (head, req) ->
 
 
 exports.rssfeed = (head, req) ->
-  # start code: 200, headers: {'Content-Type': 'application/rss+xml'}
-  start code: 200, headers: {'Content-Type': 'text/plain'}
+  start code: 200, headers: {'Content-Type': 'application/rss+xml'}
+  # Output as plain text for troubleshooting
+  # start code: 200, headers: {'Content-Type': 'text/plain'}
 
   md = new Showdown.converter()
   docs = []

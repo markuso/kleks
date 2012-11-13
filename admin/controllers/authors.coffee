@@ -14,6 +14,7 @@ class AuthorForm extends Spine.Controller
     '.error-message':          'errorMessage'
     'form':                    'form'
     'select[name=site]':       'formSite'
+    'textarea[name=bio]':      'formBio'
     '.links-list':             'linksList'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
@@ -45,6 +46,12 @@ class AuthorForm extends Spine.Controller
       else
         @item = Author.find(params.id)
         @title = @item.name
+        
+      # Fetch missing data if need be
+      if not @item.bio?
+        @item.ajax().reload {},
+          success: =>
+            @formBio.val(@item.bio)
     else
       @title = 'New Author'
       @item = {}

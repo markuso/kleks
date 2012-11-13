@@ -17,6 +17,7 @@ class BlockForm extends Spine.Controller
     'form':                    'form'
     'select[name=site]':       'formSite'
     'input[name=enabled]':     'formEnabled'
+    'textarea[name=content]':  'formContent'
     '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
@@ -47,6 +48,12 @@ class BlockForm extends Spine.Controller
       else
         @item = Block.find(params.id)
         @title = @item.name
+        
+      # Fetch missing data if need be
+      if not @item.content?
+        @item.ajax().reload {},
+          success: =>
+            @formContent.val(@item.content)
     else
       @title = 'New Block'
       @item = {}
@@ -67,6 +74,13 @@ class BlockForm extends Spine.Controller
       @formEnabled.prop('checked', true)
     @siteChange()
 
+    # Files upload area
+    @fileUploadUI = new FileUploadUI
+      docId: @item.id
+      selectedFile: @item.photo
+      attachments: @item._attachments
+    @fileUploadContainer.html @fileUploadUI.el
+
   siteChange: ->
     $siteSelected = @formSite.parents('.field').find('.site-selected')
     site = Site.exists(@formSite.val())
@@ -74,13 +88,6 @@ class BlockForm extends Spine.Controller
       $siteSelected.html "<div class=\"site-name theme-#{site.theme}\">#{site.name_html}</div>"
     else
       $siteSelected.html ""
-
-    # Files upload area
-    @fileUploadUI = new FileUploadUI
-      docId: @item.id
-      selectedFile: @item.photo
-      attachments: @item._attachments
-    @fileUploadContainer.html @fileUploadUI.el
 
   save: (e) ->
     e.preventDefault()

@@ -30,6 +30,7 @@ class EssayForm extends Spine.Controller
     'select[name=sponsor_id]': 'formSponsorId'
     'input[name=title]':       'formTitle'
     'input[name=published]':   'formPublished'
+    'textarea[name=intro]':    'formIntro'
     'textarea[name=body]':     'formBody'
     '.collections-list':       'collectionsList'
     '.upload-ui':              'fileUploadContainer'
@@ -66,6 +67,13 @@ class EssayForm extends Spine.Controller
       else
         @item = Essay.find(params.id)
         @title = @item.name
+        
+      # Fetch missing data if need be
+      if not @item.body?
+        @item.ajax().reload {},
+          success: =>
+            @formBody.val(@item.body)
+            @formIntro.val(@item.intro)
     else
       @title = 'New Essay'
       @item = {}

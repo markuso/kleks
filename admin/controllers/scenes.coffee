@@ -66,6 +66,12 @@ class SceneForm extends Spine.Controller
       else
         @item = Scene.find(params.id)
         @title = @item.name
+        
+      # Fetch missing data if need be
+      if not @item.body?
+        @item.ajax().reload {},
+          success: =>
+            @formBody.val(@item.body)
     else
       @title = 'New Scene'
       @item = {}

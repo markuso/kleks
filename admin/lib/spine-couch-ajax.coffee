@@ -187,7 +187,7 @@ class Singleton extends Base
       if Spine.isBlank(data)
         data = false
       else if data.rows
-        data = @model.fromJSON(_.pluck(data.rows, "doc"))
+        data = @model.fromJSON(_.pluck(data.rows, "doc")[0])
       else
         data = @model.fromJSON(data)
     

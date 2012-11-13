@@ -21,6 +21,7 @@ class CollectionForm extends Spine.Controller
     'select[name=sponsor_id]': 'formSponsorId'
     'input[name=name]':        'formName'
     'input[name=pinned]':      'formPinned'
+    'textarea[name=intro]':    'formIntro'
     '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
@@ -52,6 +53,12 @@ class CollectionForm extends Spine.Controller
       else
         @item = Collection.find(params.id)
         @title = @item.name
+        
+      # Fetch missing data if need be
+      if not @item.intro?
+        @item.ajax().reload {},
+          success: =>
+            @formIntro.val(@item.intro)
     else
       @title = 'New Collection'
       @item = {}

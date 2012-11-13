@@ -17,6 +17,7 @@ class SponsorForm extends Spine.Controller
     'form':                    'form'
     'select[name=contact_id]': 'formContactId'
     'select[name=format]':     'formFormat'
+    'textarea[name=content]':  'formContent'
     '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
     '.cancel-button':          'cancelButton'
@@ -46,6 +47,12 @@ class SponsorForm extends Spine.Controller
       else
         @item = Sponsor.find(params.id)
         @title = @item.name
+        
+      # Fetch missing data if need be
+      if not @item.content?
+        @item.ajax().reload {},
+          success: =>
+            @formContent.val(@item.content)
     else
       @title = 'New Sponsor'
       @item = {}

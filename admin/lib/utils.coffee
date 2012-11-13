@@ -6,17 +6,18 @@ exports.msg = {
 }
 
 exports.cleanCode = (code) ->
-  code.toLowerCase().replace(/[\ \.\'\"\-]/g, '_').replace(/[\:\,\&]/g, '')
+  code.toLowerCase().replace(/[\ \-]/g, '_').replace(/[\/\\\=\.\'\"\`\:\,\;\&\?\!\#\+\@]/g, '')
 
 exports.cleanSlug = (slug) ->
-  slug.toLowerCase().replace(/[\ \.\'\"]/g, '-').replace(/[\:\,\&]/g, '')
+  slug.toLowerCase().replace(/[\ \_]/g, '-').replace(/[\/\\\=\.\'\"\`\:\,\;\&\?\!\#\+\@]/g, '')
 
 exports.cleanContent = (content) ->
-  protocol = "http(s)?:\/\/"
-  if settings.app.dev_host
-    dev_host = new RegExp(protocol+settings.app.dev_host, "g")
-    content = content.replace(dev_host, '')
-  if settings.app.prod_host
-    prod_host = new RegExp(protocol+settings.app.prod_host, "g")
-    content = content.replace(prod_host, '')
+  if content
+    protocol = "http(s)?:\/\/"
+    if settings.app.dev_host
+      dev_host = new RegExp(protocol+settings.app.dev_host, "g")
+      content = content.replace(dev_host, '')
+    if settings.app.prod_host
+      prod_host = new RegExp(protocol+settings.app.prod_host, "g")
+      content = content.replace(prod_host, '')
   return content

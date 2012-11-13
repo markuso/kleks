@@ -26,7 +26,9 @@ module.exports = [
 
   {
     from: "/spine-adapter/:type",
-    to: "_view/docs_by_type",
+    # to: "_view/docs_by_type",
+    # Using a list function to filter out large data attributes
+    to: "_list/docs/docs_by_type",
     method: "GET",
     query: {
       startkey: [":type"],
