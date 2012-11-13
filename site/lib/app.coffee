@@ -31,7 +31,7 @@ setupNavMenus = ->
   $collectionNavIcon = $collectionNav.find('> .icon')
   $collectionNavList = $collectionNav.find('> ul')
   
-  $article = $('.container > article')
+  $articleView = $('.container > article.view')
 
   hidePopups = (exceptMe) ->
     $mainNavList.hide() unless $mainNavList is exceptMe
@@ -51,8 +51,8 @@ setupNavMenus = ->
     e.stopPropagation()
 
   # Setup the TOC menu
-  if $tocNav and $article
-    $article.find('h3').each ->
+  if $tocNav and $articleView
+    $articleView.find('h3').each ->
       heading = $(@)
       text = heading.text()
       headingId = 'TOC-' + text.replace(/[\ \'\"]/g, '-').replace(/[\.\?\#\:\,]/g, '')
