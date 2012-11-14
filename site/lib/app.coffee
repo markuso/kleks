@@ -34,9 +34,15 @@ setupNavMenus = ->
   $articleView = $('.container > article.view')
 
   hidePopups = (exceptMe) ->
-    $mainNavList.hide() unless $mainNavList is exceptMe
-    $tocNavList.hide() unless $tocNavList is exceptMe
-    $collectionNavList.hide() unless $collectionNavList is exceptMe
+    unless $mainNavList is exceptMe
+      $mainNavList.hide()
+      $mainNavIcon.removeClass('open')
+    unless $tocNavList is exceptMe
+      $tocNavList.hide()
+      $tocNavIcon.removeClass('open')
+    unless $collectionNavList is exceptMe
+      $collectionNavList.hide()
+      $collectionNavIcon.removeClass('open')
 
   $('html').on 'click', (e) ->
     hidePopups()
@@ -46,6 +52,7 @@ setupNavMenus = ->
     e.stopPropagation()
     hidePopups($mainNavList)
     $mainNavList.toggle()
+    $mainNavIcon.toggleClass('open')
 
   $mainNavSearchInput.on 'click', (e) ->
     e.stopPropagation()
@@ -55,7 +62,7 @@ setupNavMenus = ->
     $articleView.find('h3').each ->
       heading = $(@)
       text = heading.text()
-      headingId = 'TOC-' + text.replace(/[\ \'\"]/g, '-').replace(/[\.\?\#\:\,]/g, '')
+      headingId = 'TOC-' + text.replace(/[\ \_]/g, '-').replace(/[\'\"\.\?\#\:\,\;\@\=]/g, '')
       heading.attr('id', headingId)
       $tocNavList.append "<li><a href=\"##{headingId}\">#{text}</a></li>"
 
@@ -63,6 +70,7 @@ setupNavMenus = ->
       e.stopPropagation()
       hidePopups($tocNavList)
       $tocNavList.toggle()
+      $tocNavIcon.toggleClass('open')
 
   # Setup the Collection menu
   if $collectionNav
@@ -86,6 +94,7 @@ setupNavMenus = ->
       e.stopPropagation()
       hidePopups($collectionNavList)
       $collectionNavList.toggle()
+      $collectionNavIcon.toggleClass('open')
 
 
 setupSmoothScrolling = ->

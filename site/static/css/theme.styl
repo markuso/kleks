@@ -40,7 +40,7 @@
   top: 0
   right: 0
   padding: 0
-  margin: 20px 20px 0 0
+  margin: 0 10px 0 0
   -webkit-user-select: none
   -webkit-tap-highlight-color: rgba(0,0,0,0)
   z-index: 20
@@ -56,12 +56,15 @@
     padding: 10px
     background: $primaryColor
     cursor: pointer
-    outline: 5px solid rgba(255,255,255,0.9)
+    // outline: 5px solid rgba(255,255,255,0.9)
     white-space: nowrap
     overflow: hidden
 
     &:hover, &:active
       background: darken($primaryColor, 10%)
+
+    &.open
+      height: $iconSize+11
 
     span
       display: block
@@ -87,20 +90,24 @@
     right: 0
     min-width: 260px
     max-width: 400px
+    max-height: 400px
     list-style-type: none
     padding: 0
     margin: 0
     background: $primaryColor
     box-shadow(-4px 4px 0 rgba(0, 0, 0, 0.1))
+    overflow-y: scroll
+    overflow-x: hidden
+    -webkit-overflow-scrolling: touch
 
-    &:before
-      content: ''
-      position: absolute
-      top: -10px
-      right: 0
-      width: $iconSize
-      height: 10px
-      background: $primaryColor
+    // &:before
+    //   content: ''
+    //   position: absolute
+    //   top: -11px
+    //   right: 0
+    //   width: $iconSize
+    //   height: 12px
+    //   background: $primaryColor
 
     > li
       padding: 0

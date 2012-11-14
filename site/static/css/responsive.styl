@@ -1,10 +1,5 @@
 /* Responsive styles */
 
-// Portrait phones and down
-// @media (max-width: 320px)
-
-
-// Larger phones to smaller landscape phones, and down
 @media (max-width: 480px)
 
   body
@@ -52,7 +47,7 @@
           float: none
           margin: 1em auto
 
-// Odd one
+
 @media (max-width: 650px)
 
   .toc-nav
@@ -91,7 +86,7 @@
       float: none
       margin: 0 0 1em 0
 
-// Landscape on larger phone to smaller tablet
+
 @media (min-width: 481px) and (max-width: 767px)
   
   .container
@@ -127,10 +122,10 @@
       left: -20px
 
 
-// Portrait tablet to landscape and desktop
-// @media (min-width: 768px) and (max-width: 979px)
-
-
-// Large desktop
-// @media (min-width: 1200px)
-
+// Heights
+@media (min-height: 768px)
+  .main-nav
+  .toc-nav
+  .collection-nav
+    > ul
+      max-height: 600px
