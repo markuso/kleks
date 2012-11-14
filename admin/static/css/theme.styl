@@ -92,7 +92,8 @@ span.label
     .icon
       top: 10px
 
-    &:hover
+    html.no-touch &:hover
+    html.touch &:active
       background: lighten($faintGrey, 50%)
 
   ul.site-selector
@@ -113,7 +114,8 @@ span.label
       padding: 10px 10px
       cursor: pointer
 
-      &:hover
+      html.no-touch &:hover
+      html.touch &:active
         background: lighten($faintGrey, 50%)
 
       &.selected
@@ -172,7 +174,8 @@ span.label
       &.button
         background: darken($primaryColor, 5%)
 
-        &:hover
+        html.no-touch &:hover
+        html.touch &:active
           background: darken($primaryColor, 10%)
 
   > ul
@@ -189,7 +192,8 @@ span.label
         font-weight: $boldFont
         color: #fff
 
-        &:hover, &:active
+        html.no-touch &:hover
+        html.touch &:active
           background: darken($primaryColor, 5%)
 
         &.active
@@ -319,7 +323,8 @@ span.label
           line-height: 44px
           text-align: center
           cursor: pointer
-          &:hover
+          html.no-touch &:hover
+          html.touch &:active
             color: #fff
             background: $alertColor
 
@@ -376,7 +381,8 @@ span.label
           display: block
           font-size: 1.5em
           line-height: 1.2em
-          &:hover
+          html.no-touch &:hover
+          html.touch &:active
             color: $textDarkColor
           &.site-name
             font-size: 2em
@@ -406,7 +412,8 @@ span.label
 
           a
             color: $lightGrey
-            &:hover
+            html.no-touch &:hover
+            html.touch &:active
               text-decoration: underline
 
         .actions
@@ -423,7 +430,8 @@ span.label
 
           a
             color: $lightGrey
-            &:hover
+            html.no-touch &:hover
+            html.touch &:active
               text-decoration: underline
 
     .no-data
@@ -602,7 +610,8 @@ span.label
           border: 0
           z-index: 100
 
-          &:hover
+          html.no-touch &:hover
+          html.touch &:active
             background: darken($primaryColor, 10%)
         
         button.fullscreen-button
@@ -651,7 +660,8 @@ ul.ui-multi-select
     ellipsis()
     cursor: pointer
 
-    &:hover
+    html.no-touch &:hover
+    html.touch &:active
       background: lighten($faintGrey, 50%)
 
     &.selected
@@ -678,7 +688,8 @@ ul.ui-multi-select
       width: 95%
       border: 1px solid darken($faintGrey, 10%)
 
-      &:hover
+      html.no-touch &:hover
+      html.touch &:active
         background: lighten($faintGrey, 10%)
 
       &.selected

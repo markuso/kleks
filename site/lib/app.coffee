@@ -30,6 +30,7 @@ setupNavMenus = ->
   $collectionNav = $('.collection-nav')
   $collectionNavIcon = $collectionNav.find('> .icon')
   $collectionNavList = $collectionNav.find('> ul')
+  collectionDocs = []
   
   $articleView = $('.container > article.view')
 
@@ -66,6 +67,11 @@ setupNavMenus = ->
       heading.attr('id', headingId)
       $tocNavList.append "<li><a href=\"##{headingId}\">#{text}</a></li>"
 
+    # Decide if we should show the TOC
+    if $tocNavList.children().length > 2
+      $tocNav.show()
+      $collectionNav.addClass('third')
+
     $tocNavIcon.on 'click', (e) ->
       e.stopPropagation()
       hidePopups($tocNavList)
@@ -86,9 +92,11 @@ setupNavMenus = ->
             data = JSON.parse(data)
             for row in data.rows
               doc = row.doc
+              collectionDocs.push(doc)
               url = "/#{doc.type}/#{doc.slug}"
               selectedClass = if window.location.pathname is url then 'active' else ''
-              $collectionNavList.append "<li><a href=\"#{url}\" class=\"#{selectedClass}\">#{doc.title}</a></li>"
+              $collectionNavList.append "<li><a href=\"#{url}\" class=\"#{selectedClass}\" data-id=\"#{doc._id}\">#{doc.title}</a></li>"
+            setupCollectionDocsNav(collectionDocs)
 
     $collectionNavIcon.on 'click', (e) ->
       e.stopPropagation()
@@ -96,6 +104,13 @@ setupNavMenus = ->
       $collectionNavList.toggle()
       $collectionNavIcon.toggleClass('open')
 
+
+setupCollectionDocsNav = (docs) ->
+  $(document).on 'keydown', (e) ->
+    if e.which is 37
+      console.log docs[1].title
+    else if e.which is 39
+      console.log docs[1]._id
 
 setupSmoothScrolling = ->
   smoothScroll = (hash) ->

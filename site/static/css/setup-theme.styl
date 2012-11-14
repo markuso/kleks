@@ -18,7 +18,8 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
 
   button, .button
     background: $primaryColor
-    &:hover, &:active
+    html.no-touch &:hover
+    html.touch &:active
       background: darken($primaryColor, 5%)
     &.plain
       color: $primaryColor
@@ -36,9 +37,10 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
   .main-nav
   .toc-nav
   .collection-nav
-    .icon
+    > .icon
       background: $primaryColor
-      &:hover, &:active
+      html.no-touch &:hover
+      html.touch &:active
         background: darken($primaryColor, 10%)
     > ul
       background: $primaryColor
@@ -46,7 +48,8 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
         background: $primaryColor
       > li
         a
-          &:hover, &:active
+          html.no-touch &:hover
+          html.touch &:active
             background: darken($primaryColor, 5%)
           &.active
             background: darken($primaryColor, 10%)
@@ -54,7 +57,8 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
   article
     h3, h4
       a
-        &:hover, &:active
+        html.no-touch &:hover
+        html.touch &:active
           color: darken($linkColor, 10%)
     .sponsor
       .label
@@ -68,7 +72,8 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
           .updated
             background: $primaryColor
             border-color: $primaryColor
-          &:hover, &:active
+          html.no-touch &:hover
+          html.touch &:active
             border-color: $primaryColor
             a
               background: $primaryColor
@@ -84,5 +89,6 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
     .social-icons
       a
         color: $primaryColor
-        &:hover, &:active
+        html.no-touch &:hover
+        html.touch &:active
           color: darken($primaryColor, 10%)

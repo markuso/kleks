@@ -6,7 +6,7 @@
     font-size: 14px
 
   .container
-    padding: 14px
+    padding: 50px 14px 14px 14px
     border-left-width: 8px
 
   h1
@@ -24,11 +24,6 @@
 
   .site-tagline
     margin-bottom: 2em
-
-  .main-nav
-  .toc-nav
-  .collection-nav
-    margin: 4px 4px 0 0
 
   article
 
@@ -48,12 +43,72 @@
           margin: 1em auto
 
 
-@media (max-width: 650px)
+@media (max-width: 640px)
+
+  // NAVIGATION
+  .main-nav
+  .toc-nav
+  .collection-nav
+    $iconSize = 40px
+
+    > .icon
+      width: $iconSize+4
+      height: $iconSize
+      padding: 7px
+
+      &.open
+        height: $iconSize+11
+
+      span
+        height: 4px
+        margin-bottom: 4px
+
+    > ul
+      top: $iconSize+10px
+
+  .main-nav
+    > .icon
+      i
+        top: -10px
 
   .toc-nav
   .collection-nav
-    display: none
-  
+    right: 50px
+
+    > .icon
+      right: 50px
+
+      div
+        height: 20px
+        padding: 3px 3px 0px 3px
+        margin-bottom: 2px
+        span
+          height: 2px
+          margin-bottom: 2px
+
+    > ul
+      right: 50px
+
+  .collection-nav
+    $iconWidth = 110px
+
+    > .icon
+      width: $iconWidth
+      padding: 5px 0
+
+      div
+        height: 22px
+        font-size: 14px
+        line-height: @height
+
+    &.third
+      right: 100px
+      > .icon
+        right: 100px
+      > ul
+        right: 100px
+  //-- END NAVIGATION
+ 
   article
     
     .body
@@ -108,11 +163,6 @@
 
   .site-tagline
     margin-bottom: 2.5em
-
-  .main-nav
-  .toc-nav
-  .collection-nav
-    margin: 8px 8px 0 0
 
   article
 

@@ -22,7 +22,6 @@
     color: $primaryColor
 
 .site-tagline
-  width: 70%
   color: #C4C4C4
   font-size: 1.1em
   line-height: 1em
@@ -36,19 +35,18 @@
 .main-nav
 .toc-nav
 .collection-nav
-  position: fixed
+  position: absolute
   top: 0
   right: 0
   padding: 0
-  margin: 0 10px 0 0
   -webkit-user-select: none
   -webkit-tap-highlight-color: rgba(0,0,0,0)
   z-index: 20
 
   $iconSize = 60px
 
-  .icon
-    position: absolute
+  > .icon
+    position: fixed
     top: 0
     right: 0
     width: $iconSize
@@ -60,7 +58,8 @@
     white-space: nowrap
     overflow: hidden
 
-    &:hover, &:active
+    html.no-touch &:hover
+    html.touch &:active
       background: darken($primaryColor, 10%)
 
     &.open
@@ -85,7 +84,7 @@
 
   > ul
     display: none
-    position: absolute
+    position: fixed
     top: $iconSize+10px
     right: 0
     min-width: 260px
@@ -100,15 +99,6 @@
     overflow-x: hidden
     -webkit-overflow-scrolling: touch
 
-    // &:before
-    //   content: ''
-    //   position: absolute
-    //   top: -11px
-    //   right: 0
-    //   width: $iconSize
-    //   height: 12px
-    //   background: $primaryColor
-
     > li
       padding: 0
 
@@ -119,7 +109,8 @@
         font-weight: $normalFont
         color: #fff
 
-        &:hover, &:active
+        html.no-touch &:hover
+        html.touch &:active
           background: darken($primaryColor, 5%)
 
         &.active
@@ -163,28 +154,38 @@
   // see above
   right: 70px
 
-  .icon
+  > .icon
+    right: 70px
 
-    // OLD for the TOC icon <div>TOC</div><span></span>
+    // For the TOC icon <div>TOC</div><span></span>
     // div
     //   width: 48px
     //   height: 24px
     //   color: #fff
-    //   font-size: 22px
-    //   font-weight: $heavyFont
-    //   line-height: 1em
+    //   font-size: 20px
+    //   line-height: @font-size
+    //   font-weight: $boldFont
     //   text-align: center
+    //   text-transform: uppercase
     //   margin-left: -4px
     //   overflow: hidden
 
+    // For the rectangle icon <div><span></span><span></span><span></span></div>
     div
       height: 31px
       background: transparent
-      border: 5px solid white
-      padding: 7px 5px 0 5px
+      border: 2px solid white
+      padding: 3px 3px 0px 3px
       margin-bottom: 5px
+      span
+        height: 5px
+        margin-bottom: 3px
+        opacity: 0.5
+        &:nth-child(2n)
+          opacity: 1
 
   > ul
+    right: 70px
 
     > li
 
@@ -192,35 +193,39 @@
         font-size: 1em
         line-height: 1.15em
 
+.toc-nav
+  // Let's make it hidden by default
+  display: none
+
 .collection-nav
   // see above
-  right: 140px
-
-  &.second
-    right: 70px
 
   $iconWidth = 146px
 
-  .icon
+  > .icon
     width: $iconWidth
+    padding: 10px 0
 
     div
       width: auto
-      height: 30px
+      height: 36px
       color: #fff
-      font-size: 26px
+      font-size: 20px
+      line-height: @height
       font-weight: $normalFont
-      line-height: 1em
       text-align: center
-      margin: 3px 0
+      text-transform: uppercase
+      margin: 0
       border: 0
       padding: 0
       overflow: hidden
 
-  > ul
-
-    &:before
-      width: $iconWidth
+  &.third
+    right: 140px
+    > .icon
+      right: 140px
+    > ul
+      right: 140px
 
 
 article
@@ -229,7 +234,8 @@ article
     margin: 1em 0
 
     a
-      &:hover, &:active
+      html.no-touch &:hover
+      html.touch &:active
         color: darken($linkColor, 10%)
 
   ol, ul
@@ -431,7 +437,8 @@ article.home
           &.fresh-true
             display: block
 
-        &:hover, &:active
+        html.no-touch &:hover
+        html.touch &:active
           border-color: $primaryColor
 
           a
@@ -530,7 +537,8 @@ footer
       color: $primaryColor
       overflow: hidden
 
-      &:hover, &:active
+      html.no-touch &:hover
+      html.touch &:active
         color: darken($primaryColor, 10%)
 
   .footer-html
