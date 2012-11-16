@@ -24,58 +24,59 @@ class App extends Spine.Controller
   
   constructor: ->
     super
+    @appStarted = false
     @mainNav = new MainNav
     @append @mainNav
     @initApp()
 
   initApp: =>
-    @setupSession()
-
     @mainStack = new MainStack
     @helpUI    = new HelpUI
+    @append @mainStack, @helpUI
     Spine.Route.setup()
-    @navigate('/')
-
+    
+    @setupSession()
     @hookPanelsToNav()
     @setupOnlineOffline()
     @doOtherStuff()
 
   setupSession: ->
     session.on 'change', @checkRole
-    $(window).on 'focus', @getSessionInfo
-    # @mainNav.bind 'beforeChange', @getSessionInfo
     @getSessionInfo()
 
   getSessionInfo: =>
     session.info (err, info) =>
-      if info
+      if not info
+        # try again in 5 seconds
+        @mainNav.offline.show()
+        @delay @getSessionInfo, 5000
+      else
         @mainNav.offline.hide()
         @checkRole info.userCtx
-      else
-        @mainNav.offline.show()
 
   checkRole: (userCtx) =>
-    if 'manager' in userCtx.roles
+    if userCtx?.roles and 'manager' in userCtx.roles
       @mainNav.hideLogin()
-      @startApp() unless @appStarted
-      @loadData() unless @dataLoaded
       @mainNav.greetUser(userCtx.name)
+      @startApp()
+      @mainStack.el.css('visibility', 'visible')
+      @helpUI.el.css('visibility', 'visible')
     else
       @mainNav.showLogin()
-      @unloadData() if @dataLoaded
-      @endApp() if @appStarted
+      @endApp()
+      @mainStack.el.css('visibility', 'hidden')
+      @helpUI.el.css('visibility', 'hidden')
 
   startApp: =>
-    @loadData() unless @dataLoaded
     unless @appStarted
-      @append @mainStack, @helpUI
+      @loadData()
       @navigate('/')
       @appStarted = true
 
   endApp: =>
     if @appStarted
-      @mainStack.el.remove()
-      @helpUI.el.remove()
+      @unloadData()
+      @mainStack.filterBox.reset()
       @appStarted = false
 
   loadData: =>
@@ -110,16 +111,13 @@ class App extends Spine.Controller
   setupOnlineOffline: ->   
     if not navigator.onLine
       @mainNav.offline.show()
-      Spine.trigger 'app:offline'
       
     $(window).on 'offline', =>
       @mainNav.offline.show()
-      Spine.trigger 'app:offline'
     
     $(window).on 'online', =>
       @mainNav.offline.hide()
-      @getSessionInfo()
-      Spine.trigger 'app:online'
+      @delay @getSessionInfo, 5000
 
   doOtherStuff: ->
     # Use the fastclick module for touch devices.

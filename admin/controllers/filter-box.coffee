@@ -21,6 +21,8 @@ class FilterBox extends Spine.Controller
     context = 
       sites: Site.all()
     @html templates.render('filter-box.html', {}, context)
+    @siteId = ''
+    @query = ''
     @setup()
     @
 
@@ -50,19 +52,27 @@ class FilterBox extends Spine.Controller
     
     @siteSelector.find('li').on 'click', (e) =>
       $item = $(e.currentTarget)
-      @selectedSite.find('> span').html($item.html()).attr('class', $item.attr('class'))
-      @siteId = $item.attr('data-id')
-      @siteSelector
-        .hide()
-        .scrollTop(0)
-        .children()
-        .removeClass('selected')
-      $item.addClass('selected')
+      @changeSite($item)
       @filter()
+
+  changeSite: ($item) ->
+    @selectedSite.find('> span').html($item.html()).attr('class', $item.attr('class'))
+    @siteId = $item.attr('data-id')
+    @siteSelector
+      .hide()
+      .scrollTop(0)
+      .children()
+      .removeClass('selected')
+    $item.addClass('selected')
 
   clear: ->
     @filterInput.val('')
     @filter()
+
+  reset: =>
+    $item = @siteSelector.children().first()
+    @changeSite($item)
+    @clear()
 
   filter: =>
     @query = $.trim(@filterInput.val())
@@ -73,6 +83,7 @@ class FilterBox extends Spine.Controller
     Spine.trigger 'filterbox:change',
       query: @query
       siteId: @siteId
+
 
 
 module.exports = FilterBox

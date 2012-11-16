@@ -88,8 +88,8 @@ class MainNav extends Spine.Controller
         .addClass('show')
     hide = ->
       @userGreeting.removeClass('show')
-    @delay show, 1*1000
-    @delay hide, 10*1000
+    @delay show, 200
+    @delay hide, 5000
 
 
 module.exports = MainNav

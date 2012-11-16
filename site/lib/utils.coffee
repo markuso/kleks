@@ -2,8 +2,9 @@ moment    = require('lib/moment')
 
 exports.isDev = (req) ->
   # We are on DEV when Host has string like
-  # '/dev.' or '/staging.' or '.local' or 'localhost'
-  !!(req.headers.Host.match(/(\/dev\.|\/staging\.|\.local$|localhost)/))
+  # '/dev.' or '/staging.' or '.local' or '.dev' or 'localhost'
+  found = req.headers.Host.search(/(\/dev\.|\/staging\.|\.local$|\.dev$|localhost)/) > -1
+  return found
 
 exports.prettyDate = (date) ->
   moment.utc(date).local().format('MMM Do YYYY')

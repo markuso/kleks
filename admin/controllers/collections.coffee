@@ -103,6 +103,10 @@ class CollectionForm extends Spine.Controller
 
   save: (e) ->
     e.preventDefault()
+    if not navigator.onLine
+      alert "Can not save. You are OFFLINE."
+      return
+      
     if @editing
       @item.fromForm(@form)
     else
@@ -126,7 +130,7 @@ class CollectionForm extends Spine.Controller
   
   destroy: (e) ->
     e.preventDefault()
-    if @item and confirm "Are you sure you want to delete this #{@item.constructor.name}?"
+    if @item and confirm "Are you sure you want to delete this item?"
       @item.destroy()
       @back()
 
@@ -147,6 +151,7 @@ class CollectionForm extends Spine.Controller
 
   preventSubmit: (e) ->
     e.preventDefault()
+    return false
     
   deactivate: ->
     @el.scrollTop(0)
