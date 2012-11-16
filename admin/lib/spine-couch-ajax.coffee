@@ -207,6 +207,9 @@ class Singleton extends Base
     (xhr, statusText, error) =>
       @record.trigger('ajaxError', xhr, statusText, error)
       options.error?.apply(@record)
+      
+      # Popup an alert box that we could communicate with server
+      alert "Could NOT communicate with server for \"#{@record.title or @record.name}\".\n\nCheck your connection and try again."
 
 # CouchAjax endpoint
 Model.host = ''

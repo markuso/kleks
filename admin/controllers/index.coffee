@@ -127,7 +127,7 @@ class App extends Spine.Controller
 
     # Alert user when leaving the application.
     window.onbeforeunload = (e) ->
-      msg = 'Leaving Kleks now, but you may have unsaved items. Keep going if you are sure.'
+      msg = 'Bye bye! Leaving Kleks now, but you may have unsaved items. Keep going if you are sure.'
       e = window.event if not e?
       e.returnValue = msg if e
       msg
