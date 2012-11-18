@@ -1,0 +1,20 @@
+<nav class="toc-nav {{doc.type}}">
+  <div class="icon" data-track-click="Document Nav Icon">
+    <div><span></span><span></span><span></span></div><i class="icon-down-open"></i>
+  </div>
+  <ul>
+    <li class="heading">{{doc.type_tc}}'s Table of Contents</li>
+    <li><a href="#TOC-Introduction">Introduction</a></li>
+  </ul>
+</nav>
+
+<nav class="collection-nav" data-id="{{collection._id}}" data-slug="{{collection.slug}}">
+  <div class="icon" data-track-click="Collection Nav Icon">
+    <div>Collection</div><i class="icon-down-open"></i>
+  </div>
+  <ul>
+    <li class="heading as-link">
+      <a href="{{baseURL}}/collection/{{collection.slug}}"><i class=" icon-collection"></i>{{collection.name}}</a>
+    </li>
+  </ul>
+</nav>

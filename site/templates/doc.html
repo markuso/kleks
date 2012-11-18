@@ -1,18 +1,18 @@
 {{#if doc.css}}<style>{{{doc.css}}}</style>{{/if}}
 
-<article class="view {{doc.type}}" id="TOC-Introduction">
+<article class="view {{doc.type}} layout-{{doc.layout}}" id="TOC-Introduction">
   <h2 class="title"><a href="{{baseURL}}/{{doc.type}}/{{doc.slug}}">{{doc.title}}</a></h2>
 
   {{#if doc.photo}}
   <section class="photo">
-    <img src="/file/{{doc._id}}/{{doc.photo}}">
+    <img src="/file/{{doc._id}}/{{doc.photo}}" alt="{{doc.title}}">
   </section>
-  {{else}}
-    {{#if doc.old_photo}}
-    <section class="photo old">
-      <img src="{{doc.old_photo}}">
-    </section>
-    {{/if}}
+  {{/if}}
+
+  {{#if doc.video}}
+  <section class="video">
+    {{doc.video}}
+  </section>
   {{/if}}
 
   {{#if doc.intro_html}}
@@ -27,49 +27,8 @@
     {{{doc.body_html}}}
   </section>
 
-  <section class="meta">
-    <div class="published"><span class="label">Published</span> {{{doc.published_at_html}}}</div>
-    <div class="updated"><span class="label">Updated</span> {{{doc.updated_at_html}}}</div>
-    {{#each collections}}
-    <div class="collection"><a href="{{baseURL}}/collection/{{slug}}"><i class="icon icon-collection"></i> {{name}}</a></div>
-    {{/each}}
-  </section>
-
-  {{#if author}}
-  <section class="author">
-    {{#if author.photo}}
-    <div class="photo"><img src="{{author.photo}}" alt="{{author.name}}"></div>
-    {{/if}}
-    <div class="content">
-      <h5 class="name"><span class="label">Author</span> {{author.name}}</h5>
-      <div class="bio">{{{author.bio}}}</div>
-      <ul class="links">
-        {{#each author.links}}
-        <li><a href="{{url}}" target="_blank">{{label}}</a></li>
-        {{/each}}
-      </ul>
-    </div>
-  </section>
-  {{/if}}
+  {{{include "partials/doc-meta.html"}}}
+  {{{include "partials/doc-author.html"}}}
 </article>
 
-<nav class="toc-nav {{doc.type}}">
-  <div class="icon" data-track-click="Document Nav Icon">
-    <div><span></span><span></span><span></span></div><i class="icon-down-open"></i>
-  </div>
-  <ul>
-    <li class="heading">{{doc.type_tc}}'s Table of Contents</li>
-    <li><a href="#TOC-Introduction">Introduction</a></li>
-  </ul>
-</nav>
-
-<nav class="collection-nav" data-id="{{collection._id}}" data-slug="{{collection.slug}}">
-  <div class="icon" data-track-click="Collection Nav Icon">
-    <div>Collection</div><i class="icon-down-open"></i>
-  </div>
-  <ul>
-    <li class="heading as-link">
-      <a href="{{baseURL}}/collection/{{collection.slug}}"><i class=" icon-collection"></i>{{collection.name}}</a>
-    </li>
-  </ul>
-</nav>
+{{{include "partials/doc-navigation.html"}}}

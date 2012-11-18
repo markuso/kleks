@@ -90,6 +90,10 @@ exports.collection = (head, req) ->
     doc.published_at_html = utils.prettyDate(doc.published_at)
     doc.fresh = utils.isItFresh(doc.published_at)
     doc.type_tc = utils.capitalize(doc.type)
+    if doc.type is 'scene'
+      doc.list_item_template = 'partials/list-item-scene.html'
+    else
+      doc.list_item_template = 'partials/list-item-default.html'
     return doc
 
   if sponsor
@@ -164,6 +168,10 @@ exports.docs = (head, req) ->
     doc.updated_at_html = utils.prettyDate(doc.updated_at)
     doc.fresh = utils.isItFresh(doc.published_at)
     doc.type_tc = utils.capitalize(doc.type)
+    if doc.type is 'scene'
+      doc.list_item_template = 'partials/list-item-scene.html'
+    else
+      doc.list_item_template = 'partials/list-item-default.html'
     return doc
 
   return {

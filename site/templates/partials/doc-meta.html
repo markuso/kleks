@@ -1,0 +1,7 @@
+  <section class="meta">
+    <div class="published"><span class="label">Published</span> {{{doc.published_at_html}}}</div>
+    <div class="updated"><span class="label">Updated</span> {{{doc.updated_at_html}}}</div>
+    {{#each collections}}
+    <div class="collection"><a href="{{baseURL}}/collection/{{slug}}"><i class="icon icon-collection"></i> {{name}}</a></div>
+    {{/each}}
+  </section>

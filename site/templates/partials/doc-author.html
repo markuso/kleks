@@ -1,0 +1,16 @@
+  {{#if author}}
+  <section class="author">
+    {{#if author.photo}}
+    <div class="photo"><img src="{{author.photo}}" alt="{{author.name}}"></div>
+    {{/if}}
+    <div class="content">
+      <h5 class="name"><span class="label">Author</span> {{author.name}}</h5>
+      <div class="bio">{{{author.bio}}}</div>
+      <ul class="links">
+        {{#each author.links}}
+        <li><a href="{{url}}" target="_blank">{{label}}</a></li>
+        {{/each}}
+      </ul>
+    </div>
+  </section>
+  {{/if}}
