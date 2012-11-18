@@ -60,6 +60,8 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
         html.no-touch &:hover
         html.touch &:active
           color: darken($linkColor, 10%)
+    > .author
+      border-color: $primaryColor
     .sponsor
       .label
         background: $primaryColor
@@ -79,10 +81,6 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
               background: $primaryColor
             .updated
               color: $primaryColor
-
-  article.essay
-    .author
-      border-color: $primaryColor
 
   footer
     border-color: $primaryColor
