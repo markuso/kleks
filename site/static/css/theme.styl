@@ -279,10 +279,19 @@ article
     overflow: hidden
 
     img
+      display: block
       width: 100%
+    
+    .shade
+      position: absolute
+      top: -10px
+      left: 0
+      bottom: -10px
+      width: 20px
+      box-shadow: inset 8px 0 12px rgba(0, 0, 0, 0.5)
 
     &.large
-      max-height: auto
+      max-height: initial
 
   > .intro
     margin-bottom: 2em
@@ -311,7 +320,9 @@ article
       float: left
       width: 10%
       min-width: 30px
+      margin-bottom: 2em
       img
+        display: block
         width: 100%
         max-width: 100%
 
@@ -502,7 +513,13 @@ article.collection
 article.scene
 
   > .photo
-    max-height: auto
+    max-height: initial
+    margin-bottom: 1em
+
+  > .body
+    font-size: 1.3em
+    line-height: 1.5em
+    margin-bottom: 2em
 
 footer
   margin-top: 2em
@@ -535,3 +552,6 @@ footer
     .copyright
       font-size: 0.75em
       line-height: 1.5em
+      
+      a
+        font-weight: $boldFont

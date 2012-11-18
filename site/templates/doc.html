@@ -6,6 +6,7 @@
   {{#if doc.photo}}
   <section class="photo">
     <img src="/file/{{doc._id}}/{{doc.photo}}" alt="{{doc.title}}">
+    {{#ifequal doc.type "scene"}}<div class="shade"></div>{{/ifequal}}
   </section>
   {{/if}}
 
