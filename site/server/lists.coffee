@@ -221,9 +221,10 @@ exports.doc = (head, req) ->
   doc = theDoc
 
   transformDoc = (doc) ->
-    doc.intro_html = md.makeHtml(
-      doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
-    )
+    if doc.intro?
+      doc.intro_html = md.makeHtml(
+        doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
+      )
     doc.body_html = md.makeHtml(
       doc.body.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
     )
@@ -308,9 +309,10 @@ exports.rssfeed = (head, req) ->
       site = doc if doc.type is 'site'
 
   docs = _.map docs, (doc) ->
-    doc.intro_html = md.makeHtml(
-      doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
-    )
+    if doc.intro?
+      doc.intro_html = md.makeHtml(
+        doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
+      )
     doc.body_html = md.makeHtml(
       doc.body.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
     )
