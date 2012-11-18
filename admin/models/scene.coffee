@@ -38,7 +38,7 @@ class Scene extends BaseModel
     # Take care of some dates
     @updated_at = moment.utc().format()
 
-    published_at = moment(@published_at)
+    published_at = moment(@published_at) or moment()
     return "Published #{utils.msg.DATE_NOT_VALID}" unless published_at.isValid()
     @published_at = published_at.utc().format()
 
