@@ -81,6 +81,7 @@ setupNavMenus = ->
     collectionId = $collectionNav.attr('data-id')
     collectionSlug = $collectionNav.attr('data-slug')
     if collectionSlug
+      $collectionNav.show()
       $.ajax
         type: 'GET'
         url: "/json/collection/#{collectionSlug}"
@@ -95,6 +96,9 @@ setupNavMenus = ->
               selectedClass = if window.location.pathname is url then 'active' else ''
               $collectionNavList.append "<li><a href=\"#{url}\" class=\"#{selectedClass}\" data-id=\"#{doc._id}\">#{doc.title}</a></li>"
             setupCollectionDocsNav(collectionDocs, $collectionNavList)
+    else
+      # Remove the doc nav prev and next arrows
+      $('.doc-nav').remove()
 
     $collectionNavIcon.on 'click', (e) ->
       e.stopPropagation()
@@ -105,51 +109,51 @@ setupNavMenus = ->
 
 setupCollectionDocsNav = (docs, $collectionNavList) ->
   $docNav = $('.doc-nav')
-  $docNavPrev = $docNav.find('> .prev')
-  $docNavNext = $docNav.find('> .next')
+  if $docNav
+    $docNavPrev = $docNav.find('> .prev')
+    $docNavNext = $docNav.find('> .next')
+    $activeLink = $collectionNavList.find('.active')
 
-  $activeLink = $collectionNavList.find('.active')
-
-  prev = -> $activeLink.parent().prev(':not(.heading)')?.find('a')[0]?.click()
-  next = -> $activeLink.parent().next(':not(.heading)')?.find('a')[0]?.click()
-
-  $docNavPrev.on 'click', ->
-    if prev()
-      $docNav.children().removeClass('disabled')
-    else
-      $docNavPrev.addClass('disabled')
-  
-  $docNavNext.on 'click', ->
-    if next()
-      $docNav.children().removeClass('disabled')
-    else
-      $docNavNext.addClass('disabled')
-
-  $(document).on 'keydown', (e) ->
-    # if Modernizr.history
-    #   currentId = $collectionNavList.find('.active').attr('data-id')
-    #   if currentId
-    #     currentIndex = $.grep(docs, (d, i) -> if d._id is currentId then i)
-    #     if e.which is 37
-    #       # console.log docs[currentIndex-1]?._id
-    #       doc = docs[currentIndex-1]
-    #     else if e.which is 39
-    #       # console.log docs[currentIndex+1]?.title
-    #       doc = docs[currentIndex+1]
-
-    #     if doc
-    #       $('article.view > .title').html(doc.title)
-    #       $('article.view > .photo img')
-    #         .attr('src', "/file/{{doc._id}}/{{doc.photo}}")
-    #         .attr('alt', "#{doc.title}")
-    #       $('article.view > .intro').html(doc.intro_html)
-    #       $('article.view > .body').html(doc.body_html)
-    # else
     if $activeLink
-      if e.which is 37
-        $docNavPrev.click()
-      else if e.which is 39
-        $docNavNext.click()
+      prev = -> $activeLink.parent().prev(':not(.heading)')?.find('a')[0]?.click()
+      next = -> $activeLink.parent().next(':not(.heading)')?.find('a')[0]?.click()
+
+      $docNavPrev.on 'click', ->
+        if prev()
+          $docNav.children().removeClass('disabled')
+        else
+          $docNavPrev.addClass('disabled')
+      
+      $docNavNext.on 'click', ->
+        if next()
+          $docNav.children().removeClass('disabled')
+        else
+          $docNavNext.addClass('disabled')
+
+      $(document).on 'keydown', (e) ->
+        # if Modernizr.history
+        #   currentId = $collectionNavList.find('.active').attr('data-id')
+        #   if currentId
+        #     currentIndex = $.grep(docs, (d, i) -> if d._id is currentId then i)
+        #     if e.which is 37
+        #       # console.log docs[currentIndex-1]?._id
+        #       doc = docs[currentIndex-1]
+        #     else if e.which is 39
+        #       # console.log docs[currentIndex+1]?.title
+        #       doc = docs[currentIndex+1]
+
+        #     if doc
+        #       $('article.view > .title').html(doc.title)
+        #       $('article.view > .photo img')
+        #         .attr('src', "/file/{{doc._id}}/{{doc.photo}}")
+        #         .attr('alt', "#{doc.title}")
+        #       $('article.view > .intro').html(doc.intro_html)
+        #       $('article.view > .body').html(doc.body_html)
+        # else
+        if e.which is 37
+          $docNavPrev.click()
+        else if e.which is 39
+          $docNavNext.click()
 
 setupSmoothScrolling = ->
   smoothScroll = (hash) ->
