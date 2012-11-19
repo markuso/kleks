@@ -482,6 +482,9 @@ span.label
         input[name='code']
           font-size: 1.5em
 
+        textarea[name='video']
+          height: 60px
+
         textarea[name='body'],
         textarea[name='content']:not(.default)
           height: 600px
@@ -575,7 +578,8 @@ span.label
           z-index: 100
           transition(0.3s, all)
 
-        textarea[name='intro']
+        textarea[name='intro'],
+        textarea[name='video']
           display: none
 
         .ui-preview

@@ -3,6 +3,7 @@ Spine       = require('spine/core')
 templates   = require('duality/templates')
 
 Essay       = require('models/essay')
+Video       = require('models/video')
 Scene       = require('models/scene')
 
 
@@ -16,12 +17,14 @@ class DashboardOne extends Spine.Controller
     super
     # @active @render
     Essay.bind 'change refresh', @render
+    Video.bind 'change refresh', @render
     Scene.bind 'change refresh', @render
     Spine.bind 'filterbox:change', @filter
 
   render: =>
     context = 
       essays: Essay.select(@selectFilter)
+      videos: Video.select(@selectFilter)
       scenes: Scene.select(@selectFilter)
     @html templates.render('dashboard.html', {}, context)
 
@@ -45,6 +48,7 @@ class DashboardOne extends Spine.Controller
 
   reload: ->
     Essay.fetch()
+    Video.fetch()
     Scene.fetch()
 
 

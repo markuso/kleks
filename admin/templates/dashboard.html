@@ -21,6 +21,26 @@
   <div class="no-data">No items to show in this view.</div>
   {{/if}}
 
+  <h3>Draft Videos</h3>
+  {{#if videos}}
+  <ul class="drafts videos list">
+    {{#each videos}}
+    <li>
+      <div class="actions">
+        {{#unless collections}}<i class="icon-collection" title="Not in a collection"></i>{{/unless}}
+        {{#unless published}}<i class="icon-pencil" title="In draft mode"></i>{{/unless}}
+      </div>
+      <a class="title" href="#/{{type}}/{{id}}"><i class="icon icon-{{type}}"></i>{{title}}</a>
+      <div class="meta">
+        <div><a href="http://{{site}}/{{type}}/{{slug}}" target="_blank"><strong>{{type}}</strong> on {{site}}</a></div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+  {{else}}
+  <div class="no-data">No items to show in this view.</div>
+  {{/if}}
+
   <h3>Draft Scenes</h3>
   {{#if scenes}}
   <ul class="drafts scenes list">

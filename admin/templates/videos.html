@@ -1,0 +1,25 @@
+<div class="content">
+  <h1>
+    Videos
+    <a class="new" href="#/video/new">+</a>
+    <span class="count">{{videos.length}}</span>
+  </h1>
+  <ul class="videos list">
+    {{#each videos}}
+    <li>
+      <div class="actions">
+        {{#unless collections}}<i class="icon-collection" title="Not in a collection"></i>{{/unless}}
+        {{#unless published}}<i class="icon-pencil" title="In draft mode"></i>{{/unless}}
+      </div>
+      <a class="title" href="#/video/{{id}}"><i class="icon icon-video"></i>{{title}}</a>
+      <div class="meta">
+        <div><a href="http://{{site}}/video/{{slug}}" target="_blank">view on {{site}}</a></div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="sidebar">
+  
+</div>

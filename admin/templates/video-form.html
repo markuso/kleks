@@ -1,0 +1,117 @@
+<form class="video">
+
+  <div class="content">
+    <h1>
+      Video <i class="icon icon-video"></i>
+      <button class="fullscreen-button small">Fullscreen</button>
+      <span class="status">{{#if published}}Published{{else}}In Draft{{/if}}</span>
+    </h1>
+    <h3 class="item-title">{{title}}</h3>
+
+    <div class="error-message"></div>
+
+    <div class="field required">
+      <label>Site</label>
+      <select name="site">
+        <option value="" disabled>Choose a site...</option>
+        {{#each sites}}
+        <option value="{{id}}">{{name}} &mdash; {{id}}</option>
+        {{/each}}
+      </select>
+      <div class="site-selected"></div>
+    </div>
+    <div class="field required">
+      <label>Title</label>
+      <input type="text" name="title" value="{{title}}" placeholder="Write a smart title">
+    </div>
+    <div class="field">
+      <div class="field-left required">
+        <label>Slug</label>
+        <input type="text" name="slug" value="{{slug}}" placeholder="All lowercase and hyphens but NO spaces">
+      </div>
+      <div class="field-right">
+        <label>Author</label>
+        <select name="author_id"></select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Video Embed <small>640 × 360</small></label>
+      <textarea name="video" placeholder="Paste video embed IFRAME code">{{video}}</textarea>
+    </div>
+    <div class="field">
+      <label>Intro as <a class="markdown-help">Markdown/HTML</a></label>
+      <textarea name="intro" placeholder="Provide an video introduction text as Markdown/HTML">{{intro}}</textarea>
+    </div>
+    <div class="field">
+      <label>Content as <a class="markdown-help">Markdown/HTML</a> | <a class="fullscreen-button">Fullscreen</a> | <a class="import-button">Import</a></label>
+      <textarea name="body" placeholder="Write your video content as Markdown/HTML">{{body}}</textarea>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="buttons">
+      <button class="save-button" tabindex="0">Save</button>
+      <button class="cancel-button plain" tabindex="0">Cancel</button>
+      {{#if _id}}<div class="delete-button"><i class="icon-trash"></i></div>{{/if}}
+    </div>
+
+    <div class="top-spacer"></div>
+
+    <div class="field">
+      <div class="field-left">
+        <label>Published</label>
+        <input type="checkbox" name="published">
+      </div>
+      <div class="field-right">
+        <label>Published At</label>
+        <input type="text" name="published_at" value="{{published_at}}" placeholder="ex. Feb 20 2012 6:30 PM or leave blank">
+      </div>
+    </div>
+
+    <h3 class="heading">Collections *</h3>
+    <div class="field">
+      <div class="collections-list"></div>
+    </div>
+
+    <h3 class="heading">Files</h3>
+    <div class="field">
+      <div class="note">Main photo must be 900px by 180px strictly.</div>
+      <div class="upload-ui"></div>
+    </div>
+
+    <h3 class="heading">Sponsorship</h3>
+    <div class="field">
+      <div class="field-left">
+        <label>Sponsor</label>
+        <select name="sponsor_id">
+          <option value="">Select a sponsor...</option>
+          {{#each sponsors}}
+          <option value="{{id}}">{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+      <div class="field-right">
+        <label>Start</label>
+        <input type="text" name="sponsor_start" value="{{sponsor_start}}" placeholder="Feb 20 2012 6:30 PM">
+        <br class="clearfix">
+        <label>End</label>
+        <input type="text" name="sponsor_end" value="{{sponsor_end}}" placeholder="Feb 20 2012 6:30 PM">
+      </div>
+    </div>
+
+    {{#if old_url}}
+    <h3 class="heading">Old Data</h3>
+    <div class="field">
+      <label>Old URL</label>
+      <div><a href="{{old_url}}" target="_blank" title="Open in New Tab">{{old_url}}</a></div>
+    </div>
+    <div class="field">
+      <label>Old Photos</label>
+      {{#each old_photos}}
+      <div><a href="{{.}}" target="_blank" title="Open in New Tab">{{.}}</a></div>
+      {{/each}}
+    </div>
+    {{/if}}
+  </div>
+
+</form>
