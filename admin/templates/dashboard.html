@@ -1,7 +1,7 @@
 <div class="content">
   <h1>Dashboard <i class="icon icon-gauge"></i></h1>
 
-  <h3>Draft Essays</h3>
+  <h3>Draft Essays <span class="count">{{essays.length}}</span></h3>
   {{#if essays}}
   <ul class="drafts essays list">
     {{#each essays}}
@@ -21,7 +21,7 @@
   <div class="no-data">No items to show in this view.</div>
   {{/if}}
 
-  <h3>Draft Videos</h3>
+  <h3>Draft Videos <span class="count">{{videos.length}}</span></h3>
   {{#if videos}}
   <ul class="drafts videos list">
     {{#each videos}}
@@ -41,7 +41,7 @@
   <div class="no-data">No items to show in this view.</div>
   {{/if}}
 
-  <h3>Draft Scenes</h3>
+  <h3>Draft Scenes <span class="count">{{scenes.length}}</span></h3>
   {{#if scenes}}
   <ul class="drafts scenes list">
     {{#each scenes}}
