@@ -37,12 +37,12 @@ exports.home = (head, req) ->
 
   return {
     on_dev: utils.isDev(req)
+    area: 'home'
     site: site
     title: "#{site.name}"
     content: templates.render "home.html", req,
       collections: collections
       blocks: blocks
-      nav: 'home'
     og:
       site_name: site.name
       title: site.name
@@ -116,6 +116,7 @@ exports.collection = (head, req) ->
   if collection
     return {
       on_dev: utils.isDev(req)
+      area: 'collection'
       site: site
       title: collection.name
       content: templates.render 'collection.html', req,
@@ -123,7 +124,6 @@ exports.collection = (head, req) ->
         docs: docs
         sponsor: sponsor
         blocks: blocks
-        nav: 'collection'
       og:
         site_name: site.name
         title: collection.name
@@ -137,6 +137,7 @@ exports.collection = (head, req) ->
       title: '404 Not Found'
       content: templates.render '404.html', req, { host: req.headers.Host }
       on_dev: utils.isDev(req)
+      area: '404'
     }
 
 
@@ -177,11 +178,11 @@ exports.docs = (head, req) ->
 
   return {
     on_dev: utils.isDev(req)
+    area: 'docs'
     site: site
     title: 'Docs List'
     content: templates.render 'docs.html', req,
       docs: docs
-      nav: 'docs'
     og:
       site_name: site.name
       title: site.name
@@ -266,6 +267,7 @@ exports.doc = (head, req) ->
   if doc
     return {
       on_dev: utils.isDev(req)
+      area: 'doc'
       site: site
       title: doc.title
       content: templates.render 'doc.html', req,
@@ -275,7 +277,6 @@ exports.doc = (head, req) ->
         author: author
         sponsor: sponsor
         blocks: blocks
-        nav: 'doc'
       og:
         site_name: site.name
         title: doc.title
@@ -292,6 +293,7 @@ exports.doc = (head, req) ->
       title: '404 Not Found'
       content: templates.render '404.html', req, { host: req.headers.Host }
       on_dev: utils.isDev(req)
+      area: '404'
     }
 
 
