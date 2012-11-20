@@ -8,18 +8,18 @@
       {{/if}}
     </div>
 
-    {{#if sponsor.text_format}}
+    {{#ifequal sponsor.format "text"}}
     <div class="name">
       {{#if sponsor.link}}
-        <a href="{{sponsor.link}}">{{{sponsor.name}}}</a>
+        <a href="{{sponsor.link}}" >{{{sponsor.name}}}</a>
       {{else}}
         {{{sponsor.name}}}
       {{/if}}
     </div>
     <div class="content">{{{sponsor.content}}}</div>
-    {{/if}}
+    {{/ifequal}}
 
-    {{#if sponsor.image_format}}
+    {{#ifequal sponsor.format "image"}}
     <div class="image">
       {{#if sponsor.link}}
         <a href="{{sponsor.link}}" target="_blank"><img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt=""></a>
@@ -27,10 +27,14 @@
         <img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt="">
       {{/if}}
     </div>
-    {{/if}}
+    {{/ifequal}}
 
-    {{#if sponsor.video_format}}
+    {{#ifequal sponsor.format "video"}}
     <div class="video">{{{sponsor.content}}}</div>
-    {{/if}}
+    {{/ifequal}}
+
+    {{#ifequal sponsor.format "embed"}}
+    <div class="content">{{{sponsor.content}}}</div>
+    {{/ifequal}}
   </section>
   {{/if}}
