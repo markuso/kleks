@@ -420,15 +420,25 @@ article
       padding: 0 1em 1em 1em
       overflow: hidden
 
-    .image img
-      width: 100%
+    .image
       overflow: hidden
+      img
+        width: 100%
 
     .video
       overflow: hidden
       iframe
         display: block
         max-width: 100%
+
+    .embed
+      width: 100%
+      // border: 1px solid $faintGrey
+      // border-top: 0
+      overflow: hidden
+
+      ins
+        display: block !important
 
   > ul.list
     list-style-type: none
