@@ -1,5 +1,6 @@
   {{#if sponsor}}
   <section class="sponsor {{sponsor.for_type}}-sponsor">
+    {{#if sponsor.show_label}}
     <div class="label">
       {{#if sponsor.label}}
         {{{sponsor.label}}}
@@ -7,6 +8,7 @@
         Supported By
       {{/if}}
     </div>
+    {{/if}}
 
     {{#if sponsor.text_format}}
     <div class="name">

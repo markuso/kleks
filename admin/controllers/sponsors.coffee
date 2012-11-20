@@ -17,6 +17,7 @@ class SponsorForm extends Spine.Controller
     'form':                    'form'
     'select[name=contact_id]': 'formContactId'
     'select[name=format]':     'formFormat'
+    'input[name=show_label]':  'formShowLabel'
     'textarea[name=content]':  'formContent'
     '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
@@ -68,6 +69,9 @@ class SponsorForm extends Spine.Controller
     if @editing
       @formContactId.val(@item.contact_id)
       @formFormat.val(@item.format)
+      @formShowLabel.prop('checked', @item.show_label)
+    else
+      @formShowLabel.prop('checked', true)
 
     # Files upload area
     @fileUploadUI = new FileUploadUI
@@ -91,6 +95,9 @@ class SponsorForm extends Spine.Controller
 
     @item._attachments = @fileUploadUI.attachments
     
+    # Take care of some boolean checkboxes
+    @item.show_label = @formShowLabel.is(':checked')
+
     # Save the item and make sure it validates
     if @item.save()
       @back()
