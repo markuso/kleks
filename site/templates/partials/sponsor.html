@@ -8,33 +8,33 @@
       {{/if}}
     </div>
 
-    {{#ifequal sponsor.format "text"}}
+    {{#if sponsor.text_format}}
     <div class="name">
       {{#if sponsor.link}}
-        <a href="{{sponsor.link}}" >{{{sponsor.name}}}</a>
+        <a href="{{sponsor.link}}">{{{sponsor.name}}}</a>
       {{else}}
         {{{sponsor.name}}}
       {{/if}}
     </div>
     <div class="content">{{{sponsor.content}}}</div>
-    {{/ifequal}}
+    {{/if}}
 
-    {{#ifequal sponsor.format "image"}}
+    {{#if sponsor.image_format}}
     <div class="image">
       {{#if sponsor.link}}
-        <a href="{{sponsor.link}}" target="_blank"><img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt=""></a>
+        <a href="{{sponsor.link}}" target="_blank"><img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}"></a>
       {{else}}
-        <img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}" alt="">
+        <img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}">
       {{/if}}
     </div>
-    {{/ifequal}}
+    {{/if}}
 
-    {{#ifequal sponsor.format "video"}}
+    {{#if sponsor.video_format}}
     <div class="video">{{{sponsor.content}}}</div>
-    {{/ifequal}}
+    {{/if}}
 
-    {{#ifequal sponsor.format "embed"}}
+    {{#if sponsor.embed_format}}
     <div class="content">{{{sponsor.content}}}</div>
-    {{/ifequal}}
+    {{/if}}
   </section>
   {{/if}}

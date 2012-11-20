@@ -103,6 +103,10 @@ exports.collection = (head, req) ->
     now = moment.utc()
     if sponsor_start.diff(now) <= 0 and sponsor_end.diff(now) >= 0
       # let's continue on
+      sponsor.text_format = sponsor.format is 'text'
+      sponsor.image_format = sponsor.format is 'image'
+      sponsor.video_format = sponsor.format is 'video'
+      sponsor.embed_format = sponsor.format is 'embed'
       sponsor.for_type = collection.type
       sponsor.for_type_tc = collection.type_tc
     else
@@ -248,7 +252,11 @@ exports.doc = (head, req) ->
     sponsor_end = moment.utc(doc.sponsor_end)
     now = moment.utc()
     if sponsor_start.diff(now) <= 0 and sponsor_end.diff(now) >= 0
-      # let continue on
+      # let's continue on
+      sponsor.text_format = sponsor.format is 'text'
+      sponsor.image_format = sponsor.format is 'image'
+      sponsor.video_format = sponsor.format is 'video'
+      sponsor.embed_format = sponsor.format is 'embed'
       sponsor.for_type = doc.type
       sponsor.for_type_tc = doc.type_tc
     else
