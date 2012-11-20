@@ -47,8 +47,16 @@
 <body class="theme-{{site.theme}} layout-{{site.layout}}">
 
   <div class="container">
-    <h1 class="site-name"><a href="{{baseURL}}/">{{{site.name_html}}}</a></h1>
-    <h2 class="site-tagline">{{{site.tagline}}}</h2>
+    <header>
+      <div class="brand">
+        <h1 class="site-name"><a href="{{baseURL}}/">{{{site.name_html}}}</a></h1>
+        <h2 class="site-tagline">{{{site.tagline}}}</h2>
+      </div>
+
+      {{#if site.header_html}}
+      <div class="header-html">{{{site.header_html}}}</div>
+      {{/if}}
+    </header>
 
     {{{content}}}
 
