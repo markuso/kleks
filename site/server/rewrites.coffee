@@ -99,12 +99,18 @@ module.exports = [
   # File attachments paths
   { from: '/file/:id/:filename', to: '../../:id/:filename' }
   { from: '/render/:site/file/:id/:filename', to: '../../:id/:filename' }
-
-  # Redirect some direct paths
-  # moved '/posts/some-old-path', '/some-new-path'
   
   # Redirected old URLs using a pattern
   movedPattern '/render/:site/posts/:id/:slug', '/:type/:slug'
+
+  # Redirect some direct paths
+  # moved '/posts/some-old-path', '/some-new-path'
+
+  # For science.evolvingteachers.com old urls
+  moved '/snc4m1-curriculum-course-material/', '/essay/snc4m1-curriculum-course-material'
+  moved '/snc3m1-svn3m1-curriculum-course-material/', '/collection/grade-11-science'
+  moved '/snc2d1-snc2p1-curriculum-course-material/', '/collection/grade-10-science'
+  moved '/snc1d1-snc1p1-curriculum-course-material/', '/collection/grade-9-science'
 
   # 404 not found 
   { from: '/not-found', to: '_show/not_found' }
