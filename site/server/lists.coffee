@@ -322,7 +322,7 @@ exports.rssfeed = (head, req) ->
     )
     doc.published_at = moment.utc(doc.published_at).toDate().toGMTString()
     doc.full_url = "#{site.link}/#{doc.type}/#{doc.slug}"
-    doc.full_html = "#{doc.intro_html}<br><br>#{doc.body_html}"
+    doc.full_html = if doc.intro_html? then "#{doc.intro_html}<br><br>#{doc.body_html}" else doc.body_html
     return doc
 
   return templates.render 'feed.xml', req,
