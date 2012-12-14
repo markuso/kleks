@@ -19,7 +19,7 @@ class FilterBox extends Spine.Controller
 
   render: =>
     context = 
-      sites: Site.all()
+      sites: Site.all().sort(Site.nameSort)
     @html templates.render('filter-box.html', {}, context)
     @siteId = ''
     @query = ''
