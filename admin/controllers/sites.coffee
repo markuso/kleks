@@ -78,7 +78,7 @@ class SiteForm extends Spine.Controller
 
     # Construct the social links list object
     links = []
-    @socialLinksList.find('.social-link-form').each ->
+    @socialLinksList.find('.link-form').each ->
       label = $.trim $(@).find('input[name=link_label]').val()
       url = $.trim $(@).find('input[name=link_url]').val()
       code = $.trim $(@).find('input[name=link_code]').val()
