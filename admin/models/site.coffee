@@ -6,7 +6,7 @@ utils = require('lib/utils')
 BaseModel = require('models/base')
 
 class Site extends BaseModel
-  @configure "Site", "_id", "name", "name_html", "tagline", "menu_html", "header_html", "footer_html", "link", "theme", "css", "seo_description", "seo_keywords", "google_analytics_code", "editor_email", "admin_email"
+  @configure "Site", "_id", "name", "name_html", "tagline", "menu_html", "header_html", "footer_html", "link", "social_links", "theme", "css", "seo_description", "seo_keywords", "google_analytics_code", "editor_email", "admin_email"
   
   @extend @CouchAjax
   
