@@ -24,6 +24,7 @@ class FilterBox extends Spine.Controller
     @siteId = ''
     @query = ''
     @setup()
+    @filter()
     @
 
   setup: ->
@@ -83,7 +84,6 @@ class FilterBox extends Spine.Controller
     Spine.trigger 'filterbox:change',
       query: @query
       siteId: @siteId
-
 
 
 module.exports = FilterBox
