@@ -50,18 +50,51 @@ module.exports = [
     }
   }
 
-  # Doc content page
+  # Essay content page
   {
-    from: '/render/:site/:type/:slug',
+    from: '/render/:site/essay/:slug',
     to: '_list/doc/docs_by_slug',
     query: {
-      startkey: [':site', ':type', ':slug'],
-      endkey: [':site', ':type', ':slug', {}],
+      startkey: [':site', 'essay', ':slug'],
+      endkey: [':site', 'essay', ':slug', {}],
       include_docs: 'true'
     }
   }
 
-  # Docs list for site sorted by `updated_at`
+  # Scene content page
+  {
+    from: '/render/:site/scene/:slug',
+    to: '_list/doc/docs_by_slug',
+    query: {
+      startkey: [':site', 'scene', ':slug'],
+      endkey: [':site', 'scene', ':slug', {}],
+      include_docs: 'true'
+    }
+  }
+
+  # Video content page
+  {
+    from: '/render/:site/video/:slug',
+    to: '_list/doc/docs_by_slug',
+    query: {
+      startkey: [':site', 'video', ':slug'],
+      endkey: [':site', 'video', ':slug', {}],
+      include_docs: 'true'
+    }
+  }
+
+  # Profile content page
+  {
+    from: '/render/:site/profile/:slug',
+    to: '_list/doc/docs_by_slug',
+    query: {
+      startkey: [':site', 'profile', ':slug'],
+      endkey: [':site', 'profile', ':slug', {}],
+      include_docs: 'true'
+    }
+  }
+
+  # All docs list for site sorted by `updated_at`
   {
     from: '/render/:site/docs',
     to: '_list/docs/docs_by_date',
@@ -106,11 +139,12 @@ module.exports = [
   # Redirect some direct paths
   # moved '/render/:site/some-old-path', '/some-new-path'
 
-  # For science.evolvingteachers.com old urls
-  moved '/render/:site/snc4m1-curriculum-course-material/', '/essay/snc4m1-curriculum-course-material'
-  moved '/render/:site/snc3m1-svn3m1-curriculum-course-material/', '/collection/grade-11-science'
-  moved '/render/:site/snc2d1-snc2p1-curriculum-course-material/', '/collection/grade-10-science'
-  moved '/render/:site/snc1d1-snc1p1-curriculum-course-material/', '/collection/grade-9-science'
+  # `redirect` type - from a slug to a URL
+  # doc id must be like `r/www.example.com/some-path`
+  {
+    from: '/render/:site/*',
+    to: '_show/redirect/r/:site/*'
+  }
 
   # 404 not found 
   { from: '/not-found', to: '_show/not_found' }

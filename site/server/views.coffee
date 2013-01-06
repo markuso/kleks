@@ -89,3 +89,10 @@ exports.docs_for_feeds =
         emit [doc.site, 'content', date, doc.type, doc.slug], null
       else
         emit [doc.site, 'x-other', date, doc.type, doc.slug], null
+
+
+exports.redirects_by_slug =
+  map: (doc) ->
+    if doc.site and doc.type and doc.type is 'redirect' and doc.slug and doc.location
+      emit [doc.site, doc.slug], doc.location
+    

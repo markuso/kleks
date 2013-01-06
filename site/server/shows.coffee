@@ -5,9 +5,18 @@ exports.not_found = (doc, req) ->
   title: "404 Not Found"
   content: templates.render("404.html", req, { host: req.headers.Host })
 
+exports.redirect = (doc, req) ->
+  if doc
+    code: 301
+    headers: { 'Location': doc.location }
+  else
+    code: 404
+    title: "404 Not Found"
+    content: templates.render("404.html", req, { host: req.headers.Host })
+
 exports.moved = (doc, req) ->
   code: 301
-  headers: { location: req.query.loc }
+  headers: { 'Location': req.query.loc }
 
 exports.moved_pattern = (doc, req) ->
   loc = req.query.loc
@@ -21,5 +30,5 @@ exports.moved_pattern = (doc, req) ->
   loc = loc.replace(/\:id/g, req.query.id)
   return {
     code: 301
-    headers: { location: loc }
+    headers: { 'Location': loc }
   }

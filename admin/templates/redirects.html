@@ -1,0 +1,24 @@
+<div class="content">
+  <h1>
+    Redirects
+    <a class="new" href="#/redirect/new">+</a>
+    <span class="count">{{redirects.length}}</span>
+  </h1>
+  <ul class="redirects list">
+    {{#each redirects}}
+    <li>
+      <div class="actions">
+        <div>{{location}}</div>
+      </div>
+      <a class="title" href="#/redirect/{{id}}"><i class="icon icon-link"></i>{{slug}}</a>
+      <div class="meta">
+        <div><a href="http://{{site}}/{{slug}}" target="_blank">Go to {{site}}/{{slug}}</a></div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="sidebar">
+  
+</div>

@@ -1,0 +1,43 @@
+<form class="redirect">
+  
+  <div class="content">
+    <h1>Redirect <i class="icon icon-link"></i></h1>
+    <h3 class="item-title">{{slug}}</h3>
+
+    <div class="error-message"></div>
+
+    <div class="field required">
+      <label>Site and Slug</label>
+      <select name="site" style="width: auto; display: inline-block;">
+        <option value="" disabled>Choose a site...</option>
+        {{#each sites}}
+        <option value="{{id}}">{{id}}</option>
+        {{/each}}
+      </select>
+      <div class="site-selected" style="top: 15px;"></div>
+      /
+      <input type="text" name="slug" value="{{slug}}" placeholder="some/path" style="font-weight: bold; width: 50%; min-width: 150px; display: inline-block;">
+      <div class="note">
+        No leading or trailing slashes. Slug is always from the root path.
+      </div>
+    </div>
+    <div class="field required">
+      <label>Location</label>
+      <input type="text" name="location" value="{{location}}" placeholder="/essay/some-path or http://www.example.com">
+      <div class="note">
+        Use site absolute URL with a leading slash (like <code>/collection/funny-stuff</code>, or a full URL).
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar">
+    <div class="buttons">
+      <button class="save-button" tabindex="0">Save</button>
+      <button class="cancel-button plain" tabindex="0">Cancel</button>
+      {{#if _id}}<div class="delete-button"><i class="icon-trash"></i></div>{{/if}}
+    </div>
+
+    <div class="top-spacer"></div>
+  </div>
+
+</form>

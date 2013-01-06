@@ -19,6 +19,7 @@ Scene       = require('models/scene')
 Block       = require('models/block')
 Contact     = require('models/contact')
 Sponsor     = require('models/sponsor')
+Redirect    = require('models/redirect')
 
 
 class App extends Spine.Controller
@@ -91,6 +92,7 @@ class App extends Spine.Controller
     Block.fetch()
     Contact.fetch()
     Sponsor.fetch()
+    Redirect.fetch()
     @dataLoaded = true
 
   unloadData: =>
@@ -104,6 +106,7 @@ class App extends Spine.Controller
     Block.deleteAll()
     Contact.deleteAll()
     Sponsor.deleteAll()
+    Redirect.deleteAll()
     @dataLoaded = false
 
   hookPanelsToNav: ->

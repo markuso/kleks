@@ -1,21 +1,20 @@
 Spine       = require('spine/core')
 # $           = Spine.$
 templates   = require('duality/templates')
-settings    = require('settings/root')
 
+Redirect    = require('models/redirect')
 Site        = require('models/site')
 
 
-class SiteForm extends Spine.Controller
-  className: 'site form panel'
+class RedirectForm extends Spine.Controller
+  className: 'redirect form panel'
 
   elements:
     '.item-title':        'itemTitle'
     '.error-message':     'errorMessage'
     'form':               'form'
-    'input[name=_id]':    'formSiteId'
-    'select[name=theme]': 'formTheme'
-    '.social-links-list': 'socialLinksList'
+    'select[name=site]':  'formSite'
+    'input[name=slug]':   'formSlug'
     '.save-button':       'saveButton'
     '.cancel-button':     'cancelButton'
 
@@ -26,7 +25,7 @@ class SiteForm extends Spine.Controller
     'click .save-button':     'save'
     'click .cancel-button':   'cancel'
     'click .delete-button':   'destroy'
-    'click .add-social-link': 'addSocialLink'
+    'change select[name=site]': 'siteChange'
 
   constructor: ->
     super
@@ -34,36 +33,43 @@ class SiteForm extends Spine.Controller
 
   render: (params) ->
     @dirtyForm = false
+    # Get the redirect id from the url glob
+    params.id = params.match[1]
     @editing = params.id?
     if @editing
       @copying = params.id.split('-')[0] is 'copy'
       if @copying
-        @title = 'Copy Site'
-        @item = Site.find(params.id.split('-')[1]).dup()
+        @title = 'Copy Redirect'
+        @item = Redirect.find(params.id.split('-')[1]).dup()
         # Important to indicate that we are creating a new record
         @editing = false
       else
-        @item = Site.find(params.id)
-        @title = @item.name
+        @item = Redirect.find(params.id)
+        @title = @item.slug
     else
-      @title = 'New Site'
+      @title = 'New Redirect'
       @item = {}
     
-    @item.themes = settings.app.themes
-    @html templates.render('site-form.html', {}, @item)
+    @item.sites = Site.all().sort(Site.nameSort)
+    @html templates.render('redirect-form.html', {}, @item)
 
     @itemTitle.html @title
     
     # Set few initial form values
     if @editing
-      @formTheme.val(@item.theme)
-      @formSiteId.prop('readonly', true)
+      @formSite.val(@item.site)
+      @formSlug.prop('readonly', true).attr('title', 'Can not change the slug')
     else
-      @addSocialLink()
+      @formSite.val(@stack.stack.filterBox.siteId)
+    @siteChange()
 
-  addSocialLink: (e) ->
-    e?.preventDefault()
-    @socialLinksList.append templates.render('partials/link-form.html', {}, {})
+  siteChange: ->
+    $siteSelected = @formSite.parents('.field').find('.site-selected')
+    site = Site.exists(@formSite.val())
+    if site
+      $siteSelected.html "<div class=\"site-name theme-#{site.theme}\">#{site.name_html}</div>"
+    else
+      $siteSelected.html ""
 
   save: (e) ->
     e.preventDefault()
@@ -74,17 +80,8 @@ class SiteForm extends Spine.Controller
     if @editing
       @item.fromForm(@form)
     else
-      @item = new Site().fromForm(@form)
-
-    # Construct the social links list object
-    links = []
-    @socialLinksList.find('.link-form').each ->
-      label = $.trim $(@).find('input[name=link_label]').val()
-      url = $.trim $(@).find('input[name=link_url]').val()
-      code = $.trim $(@).find('input[name=link_code]').val()
-      if label and url
-        links.push label: label, url: url, code: code
-    @item.social_links = links
+      @item = new Redirect().fromForm(@form)
+      @item._id = "r/#{@item.site}/#{@item.slug}"
     
     # Save the item and make sure it validates
     if @item.save()
@@ -116,7 +113,7 @@ class SiteForm extends Spine.Controller
       @back()
 
   back: ->
-    @navigate('/sites/list')
+    @navigate('/redirects/list')
 
   preventSubmit: (e) ->
     e.preventDefault()
@@ -127,8 +124,8 @@ class SiteForm extends Spine.Controller
     super
 
 
-class SiteList extends Spine.Controller
-  className: 'site list panel'
+class RedirectList extends Spine.Controller
+  className: 'redirect list panel'
 
   events:
     'click h1 .count':    'reload'
@@ -136,35 +133,35 @@ class SiteList extends Spine.Controller
   constructor: ->
     super
     # @active @render
-    Site.bind 'change refresh', @render
+    Redirect.bind 'change refresh', @render
     Spine.bind 'filterbox:change', @filter
 
   render: =>
     context = 
-      sites: Site.filter(@filterObj).sort(Site.nameSort)
-    @html templates.render('sites.html', {}, context)
+      redirects: Redirect.filter(@filterObj).sort(Redirect.nameSort)
+    @html templates.render('redirects.html', {}, context)
 
   filter: (@filterObj) =>
     @render()
     @el.scrollTop(0)
 
   reload: ->
-    Site.fetch()
+    Redirect.fetch()
 
 
-class Sites extends Spine.Stack
-  className: 'sites panel'
+class Redirects extends Spine.Stack
+  className: 'redirects panel'
 
   controllers:
-    list: SiteList
-    form: SiteForm
+    list: RedirectList
+    form: RedirectForm
 
   default: 'list'
 
   routes:
-    '/sites/list': 'list'
-    '/site/new':   'form'
-    '/site/:id':   'form'
+    '/redirects/list': 'list'
+    '/redirect/new':   'form'
+    '/redirect/*glob':   'form'
 
   constructor: ->
     super
@@ -172,4 +169,4 @@ class Sites extends Spine.Stack
       @[k].active => @active()
 
 
-module.exports = Sites
+module.exports = Redirects

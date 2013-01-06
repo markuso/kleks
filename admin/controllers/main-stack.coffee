@@ -10,6 +10,7 @@ Scenes      = require('controllers/scenes')
 Blocks      = require('controllers/blocks')
 Contacts    = require('controllers/contacts')
 Sponsors    = require('controllers/sponsors')
+Redirects   = require('controllers/redirects')
 
 FilterBox   = require('controllers/filter-box')
 
@@ -28,6 +29,7 @@ class MainStack extends Spine.Stack
     blocks:      Blocks
     contacts:    Contacts
     sponsors:    Sponsors
+    redirects:   Redirects
 
   default: 'dashboard'
 
@@ -42,6 +44,7 @@ class MainStack extends Spine.Stack
     '/blocks':      'blocks'
     '/contacts':    'contacts'
     '/sponsors':    'sponsors'
+    '/redirects':   'redirects'
 
   constructor: ->
     super
