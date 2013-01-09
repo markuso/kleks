@@ -6,6 +6,12 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
   if !$linkColor
     $linkColor = darken($primaryColor, 20%)
 
+  .primary-color
+    color: $primaryColor
+
+  .primary-background
+    background: $primaryColor
+
   a
     color: $linkColor
     &.button
