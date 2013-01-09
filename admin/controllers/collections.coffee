@@ -21,6 +21,7 @@ class CollectionForm extends Spine.Controller
     'select[name=sponsor_id]': 'formSponsorId'
     'input[name=name]':        'formName'
     'input[name=pinned]':      'formPinned'
+    'input[name=hidden]':      'formHidden'
     'textarea[name=intro]':    'formIntro'
     '.upload-ui':              'fileUploadContainer'
     '.save-button':            'saveButton'
@@ -76,6 +77,7 @@ class CollectionForm extends Spine.Controller
       @formSite.val(@item.site)
       @formSponsorId.val(@item.sponsor_id)
       @formPinned.prop('checked', @item.pinned)
+      @formHidden.prop('checked', @item.hidden)
     else
       @formSite.val(@stack.stack.filterBox.siteId)
     @siteChange()
@@ -116,6 +118,7 @@ class CollectionForm extends Spine.Controller
 
     # Take care of some boolean checkboxes
     @item.pinned = @formPinned.is(':checked')
+    @item.hidden = @formHidden.is(':checked')
 
     # Save the item and make sure it validates
     if @item.save()
