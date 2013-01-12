@@ -313,16 +313,19 @@ exports.rssfeed = (head, req) ->
       site = doc if doc.type is 'site'
 
   docs = _.map docs, (doc) ->
+    doc.intro_html = ''
     if doc.intro?
       doc.intro_html = md.makeHtml(
         doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
       )
+    doc.intro_html = "<p><img src=\"#{site.link}/file/#{doc._id}/#{doc.photo}\" style=\"display: block; max-width: 100%;\"></p>" + doc.intro_html if doc.photo
+    doc.intro_html = doc.intro_html + doc.video if doc.video
     doc.body_html = md.makeHtml(
       doc.body.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
     )
     doc.published_at = moment.utc(doc.published_at).toDate().toGMTString()
     doc.full_url = "#{site.link}/#{doc.type}/#{doc.slug}"
-    doc.full_html = if doc.intro_html? then "#{doc.intro_html}<br><br>#{doc.body_html}" else doc.body_html
+    doc.full_html = "#{doc.intro_html} #{doc.body_html}"
     return doc
 
   return templates.render 'feed.xml', req,
