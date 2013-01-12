@@ -13,10 +13,8 @@
         {{#each sites}}
         <option value="{{id}}">{{id}}</option>
         {{/each}}
-      </select>
-      <div class="site-selected" style="top: 15px;"></div>
-      /
-      <input type="text" name="slug" value="{{slug}}" placeholder="some/path" style="font-weight: bold; width: 50%; min-width: 150px; display: inline-block;">
+      </select>/<input type="text" name="slug" value="{{slug}}" placeholder="some/path" style="font-weight: bold; width: 50%; min-width: 150px; display: inline-block;">
+      <div class="site-selected"></div>
       <div class="note">
         No leading or trailing slashes. Slug is always from the root path.
       </div>

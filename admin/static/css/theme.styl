@@ -508,9 +508,9 @@ span.label
 
         .site-selected
           position: absolute
-          top: 42px
-          right: 0
-          padding-left: 10px
+          top: 22px
+          right: 10px
+          padding: 0 3px
           background: #fff
         
         .inline
@@ -678,10 +678,10 @@ span.label
 
 ul.ui-multi-select
   list-style-type: none
-  padding: 2px
+  padding: 10px
   margin: 0
-  max-height: 150px
-  border-bottom: 2px dotted $faintGrey
+  max-height: 170px
+  border: 1px solid $faintGrey
   overflow-y: auto
   overflow-x: hidden
   -webkit-user-select: none
@@ -721,8 +721,12 @@ ul.ui-multi-select
     border-color: #d3d3d3
 
     > li
-      width: 95%
+      width: 100%
+      margin-right: 0
       border: 1px solid darken($faintGrey, 10%)
+
+      &:last-child
+        margin-bottom: 0
 
       html.no-touch &:hover
       html.touch &:active
