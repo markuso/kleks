@@ -129,6 +129,7 @@ exports.collection = (head, req) ->
         title: collection.name
         description: collection.intro
         type: 'website'
+        url: "#{site.link}/collection/#{collection.slug}"
         image: "#{site.link}/file/#{collection._id}/#{collection.photo}" if collection.photo
     }
   else
@@ -282,6 +283,7 @@ exports.doc = (head, req) ->
         title: doc.title
         description: doc.intro
         type: 'article'
+        url: "#{site.link}/#{doc.type}/#{doc.slug}"
         image: "#{site.link}/file/#{doc._id}/#{doc.photo}" if doc.photo
         first_name: author?.name.split(' ')[0]
         last_name: author?.name.split(' ')[1]
