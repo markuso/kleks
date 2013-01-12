@@ -249,7 +249,7 @@ class SceneForm extends Spine.Controller
 
 
 class SceneList extends Spine.Controller
-  className: 'scene list panel'
+  className: 'scene list panel fixed-header'
 
   events:
     'click h1 .count':    'reload'

@@ -251,7 +251,7 @@ class VideoForm extends Spine.Controller
 
 
 class VideoList extends Spine.Controller
-  className: 'video list panel'
+  className: 'video list panel fixed-header'
 
   events:
     'click h1 .count':    'reload'

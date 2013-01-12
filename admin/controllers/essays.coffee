@@ -251,7 +251,7 @@ class EssayForm extends Spine.Controller
 
 
 class EssayList extends Spine.Controller
-  className: 'essay list panel'
+  className: 'essay list panel fixed-header'
 
   events:
     'click h1 .count':    'reload'

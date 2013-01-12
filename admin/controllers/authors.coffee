@@ -144,7 +144,7 @@ class AuthorForm extends Spine.Controller
 
 
 class AuthorList extends Spine.Controller
-  className: 'author list panel'
+  className: 'author list panel fixed-header'
 
   events:
     'click h1 .count':    'reload'

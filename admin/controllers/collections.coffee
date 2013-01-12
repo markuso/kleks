@@ -162,7 +162,7 @@ class CollectionForm extends Spine.Controller
 
 
 class CollectionList extends Spine.Controller
-  className: 'collection list panel'
+  className: 'collection list panel fixed-header'
 
   events:
     'click h1 .count':    'reload'

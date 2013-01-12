@@ -140,7 +140,7 @@ class SponsorForm extends Spine.Controller
 
 
 class SponsorList extends Spine.Controller
-  className: 'sponsor list panel'
+  className: 'sponsor list panel fixed-header'
 
   events:
     'click h1 .count':    'reload'

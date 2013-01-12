@@ -101,7 +101,7 @@ class ContactForm extends Spine.Controller
 
 
 class ContactList extends Spine.Controller
-  className: 'contact list panel'
+  className: 'contact list panel fixed-header'
 
   events:
     'click h1 .count':    'reload'

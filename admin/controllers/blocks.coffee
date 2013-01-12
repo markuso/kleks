@@ -148,7 +148,7 @@ class BlockForm extends Spine.Controller
 
 
 class BlockList extends Spine.Controller
-  className: 'block list panel'
+  className: 'block list panel fixed-header'
 
   events:
     'click h1 .count':    'reload'

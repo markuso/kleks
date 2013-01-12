@@ -125,7 +125,7 @@ class RedirectForm extends Spine.Controller
 
 
 class RedirectList extends Spine.Controller
-  className: 'redirect list panel'
+  className: 'redirect list panel fixed-header'
 
   events:
     'click h1 .count':    'reload'

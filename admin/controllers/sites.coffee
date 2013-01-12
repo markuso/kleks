@@ -128,7 +128,7 @@ class SiteForm extends Spine.Controller
 
 
 class SiteList extends Spine.Controller
-  className: 'site list panel'
+  className: 'site list panel fixed-header'
 
   events:
     'click h1 .count':    'reload'
