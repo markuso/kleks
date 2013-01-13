@@ -205,9 +205,9 @@ exports.doc = (head, req) ->
   md = new Showdown.converter()
   theDoc = null
   collections = []
+  blocks = []
   author = null
   sponsor = null
-  blocks = {}
   site = {}
 
   while row = getRow()
@@ -215,27 +215,33 @@ exports.doc = (head, req) ->
     if doc
       theDoc ?= doc if doc.type in settings.app.content_types
       collections.push(doc) if doc.type is 'collection'
+      blocks.push(doc) if doc.type is 'block'
       sponsor ?= doc if doc.type is 'sponsor'
       author ?= doc if doc.type is 'author'
-      blocks[doc.code] = doc if doc.type is 'block'
       site = doc if doc.type is 'site'
 
   # Let's just go back and use `doc` as the variable instead
   doc = theDoc
 
   transformDoc = (doc) ->
-    if doc.intro?
-      doc.intro_html = md.makeHtml(
-        doc.intro.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
-      )
-    doc.body_html = md.makeHtml(
-      doc.body.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
-    )
+    doc.intro_html = md.makeHtml(replaceTokens(doc.intro)) if doc.intro?
+    doc.body_html = md.makeHtml(replaceTokens(doc.body))
     doc.published_at_html = utils.prettyDate(doc.published_at)
     doc.updated_at_html = utils.prettyDate(doc.updated_at)
     doc.fresh = utils.isItFresh(doc.published_at)
     doc.type_tc = utils.capitalize(doc.type)
     return doc
+
+  replaceTokens = (content) ->
+    # Replace the {baseURL} or {{baseURL}} token
+    content = content.replace(/\{\{?baseURL\}?\}/g, dutils.getBaseURL(req))
+    # Replace any references to the extra doc's blocks
+    # within the doc e.g. "<!-- block: some_code_or_id -->"  (optionally without spaces)
+    for block in blocks
+      if block.enabled
+        re = new RegExp('<!--\\s*block:\\s*(' + block._id + '|' + block.code + ')\\s*-->', 'gi')
+        content = content.replace(re, block.content)
+    return content
 
   doc = transformDoc(doc) if doc
 
