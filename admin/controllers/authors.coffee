@@ -69,6 +69,8 @@ class AuthorForm extends Spine.Controller
       @addLink()
     @siteChange()
 
+    return @
+
   siteChange: ->
     $siteSelected = @formSite.parents('.field').find('.site-selected')
     site = Site.exists(@formSite.val())
@@ -108,6 +110,8 @@ class AuthorForm extends Spine.Controller
     else
       msg = @item.validate()
       @showError msg
+
+    return @
 
   showError: (msg) ->
     @errorMessage.html(msg).show()

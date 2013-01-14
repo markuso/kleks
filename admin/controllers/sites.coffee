@@ -61,6 +61,8 @@ class SiteForm extends Spine.Controller
     else
       @addSocialLink()
 
+    return @
+
   addSocialLink: (e) ->
     e?.preventDefault()
     @socialLinksList.append templates.render('partials/link-form.html', {}, {})
@@ -92,6 +94,8 @@ class SiteForm extends Spine.Controller
     else
       msg = @item.validate()
       @showError msg
+
+    return @
 
   showError: (msg) ->
     @errorMessage.html(msg).show()

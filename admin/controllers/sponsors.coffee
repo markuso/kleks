@@ -82,6 +82,8 @@ class SponsorForm extends Spine.Controller
       changeCallback: @markAsDirty
     @fileUploadContainer.html @fileUploadUI.el
 
+    return @
+
   save: (e) ->
     e.preventDefault()
     if not navigator.onLine
@@ -104,6 +106,8 @@ class SponsorForm extends Spine.Controller
     else
       msg = @item.validate()
       @showError msg
+
+    return @
 
   showError: (msg) ->
     @errorMessage.html(msg).show()

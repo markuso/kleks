@@ -48,6 +48,8 @@ class ContactForm extends Spine.Controller
 
     @itemTitle.html @title
 
+    return @
+
   save: (e) ->
     e.preventDefault()
     if not navigator.onLine
@@ -65,6 +67,8 @@ class ContactForm extends Spine.Controller
     else
       msg = @item.validate()
       @showError msg
+
+    return @
 
   showError: (msg) ->
     @errorMessage.html(msg).show()
