@@ -15,6 +15,7 @@ class SiteForm extends Spine.Controller
     'form':               'form'
     'input[name=_id]':    'formSiteId'
     'select[name=theme]': 'formTheme'
+    'input[name=default_ad_enabled]':     'formDefaultAdEnabled'
     '.social-links-list': 'socialLinksList'
     '.save-button':       'saveButton'
     '.cancel-button':     'cancelButton'
@@ -58,6 +59,7 @@ class SiteForm extends Spine.Controller
     if @editing
       @formTheme.val(@item.theme)
       @formSiteId.prop('readonly', true)
+      @formDefaultAdEnabled.prop('checked', @item.default_ad_enabled)
     else
       @addSocialLink()
 
@@ -87,6 +89,9 @@ class SiteForm extends Spine.Controller
       if label and url
         links.push label: label, url: url, code: code
     @item.social_links = links
+
+    # Take care of some boolean checkboxes
+    @item.default_ad_enabled = @formDefaultAdEnabled.is(':checked')
     
     # Save the item and make sure it validates
     if @item.save()

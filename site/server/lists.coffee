@@ -114,6 +114,15 @@ exports.collection = (head, req) ->
       sponsor = null
 
   if collection
+    if not sponsor and site and site.default_ad_unit and site.default_ad_enabled
+      # In this case create a new sponsor object and use
+      # the site's default ad unit if enabled
+      sponsor = {}
+      sponsor.content = site.default_ad_unit
+      sponsor.embed_format = true
+      sponsor.for_type = collection.type
+      sponsor.for_type_tc = collection.type_tc
+
     return {
       on_dev: utils.isDev(req)
       area: 'collection'
@@ -272,6 +281,15 @@ exports.doc = (head, req) ->
       sponsor = null
 
   if doc
+    if not sponsor and site and site.default_ad_unit and site.default_ad_enabled
+      # In this case create a new sponsor object and use
+      # the site's default ad unit if enabled
+      sponsor = {}
+      sponsor.content = site.default_ad_unit
+      sponsor.embed_format = true
+      sponsor.for_type = doc.type
+      sponsor.for_type_tc = doc.type_tc
+
     return {
       on_dev: utils.isDev(req)
       area: 'doc'
