@@ -51,11 +51,19 @@
   .toc-nav
   .collection-nav
     $iconSize = 40px
+    $iconTop = 5px
+    $iconRight = 5px
+
+    top: $iconTop
+    right: $iconRight
 
     > .icon
+      top: $iconTop
+      right: $iconRight
       width: $iconSize+4
       height: $iconSize
       padding: 7px
+      outline: 5px solid #fff
 
       &.open
         height: $iconSize+11
@@ -65,7 +73,8 @@
         margin-bottom: 4px
 
     > ul
-      top: $iconSize+10px
+      top: $iconTop+$iconSize+5px
+      right: $iconRight
 
   .main-nav
     > .icon
@@ -74,10 +83,12 @@
 
   .toc-nav
   .collection-nav
-    right: 50px
+    $iconRight = 55px
+    
+    right: $iconRight
 
     > .icon
-      right: 50px
+      right: $iconRight
 
       div
         height: 20px
@@ -88,9 +99,12 @@
           margin-bottom: 2px
 
     > ul
-      right: 50px
+      right: $iconRight
 
   .collection-nav
+    // only applied for .third below
+    $iconRight = 105px
+
     $iconWidth = 110px
 
     > .icon
@@ -103,11 +117,11 @@
         line-height: @height
 
     &.third
-      right: 100px
+      right: $iconRight
       > .icon
-        right: 100px
+        right: $iconRight
       > ul
-        right: 100px
+        right: $iconRight
   //-- END NAVIGATION
  
   article

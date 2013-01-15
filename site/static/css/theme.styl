@@ -41,26 +41,28 @@
 .main-nav
 .toc-nav
 .collection-nav
+  $iconSize = 60px
+  $iconTop = 10px
+  $iconRight = 10px
+
   position: absolute
-  top: 0
-  right: 0
+  top: $iconTop
+  right: $iconRight
   padding: 0
   -webkit-user-select: none
   -webkit-tap-highlight-color: rgba(0,0,0,0)
   z-index: 20
 
-  $iconSize = 60px
-
   > .icon
     position: fixed
-    top: 0
-    right: 0
+    top: $iconTop
+    right: $iconRight
     width: $iconSize
     height: $iconSize
     padding: 10px
     background: $primaryColor
     cursor: pointer
-    // outline: 5px solid rgba(255,255,255,0.9)
+    outline: 10px solid #fff
     white-space: nowrap
     overflow: hidden
 
@@ -91,8 +93,8 @@
   > ul
     display: none
     position: fixed
-    top: $iconSize+10px
-    right: 0
+    top: $iconTop+$iconSize+10px
+    right: $iconRight
     min-width: 260px
     max-width: 400px
     max-height: 400px
@@ -157,12 +159,14 @@
 
 .toc-nav
 .collection-nav
+  $iconRight = 80px
+  
   // Let's make it hidden by default
   display: none
-  right: 70px
+  right: $iconRight
 
   > .icon
-    right: 70px
+    right: $iconRight
 
     // For the TOC icon <div>TOC</div><span></span>
     // div
@@ -192,7 +196,7 @@
           opacity: 1
 
   > ul
-    right: 70px
+    right: $iconRight
 
     > li
 
@@ -201,7 +205,8 @@
         line-height: 1.15em
 
 .collection-nav
-  // see above
+  // only applied for .third below
+  $iconRight = 150px
 
   $iconWidth = 146px
 
@@ -224,11 +229,11 @@
       overflow: hidden
 
   &.third
-    right: 140px
+    right: $iconRight
     > .icon
-      right: 140px
+      right: $iconRight
     > ul
-      right: 140px
+      right: $iconRight
 
 
 .doc-nav
