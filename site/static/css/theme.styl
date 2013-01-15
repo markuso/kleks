@@ -240,6 +240,7 @@
 
   > div
     display: inline-block
+    color: $primaryColor
     font-size: 4em
     line-height: 1em
     padding: 10px
@@ -247,8 +248,8 @@
     cursor: pointer
     html.no-touch &:hover
     html.touch &:active
-      color: darken($linkColor, 10%)
-      background: $faintGrey
+      color: darken($primaryColor, 5%)
+      background: #f3f3f3
 
     &.disabled
       color: $faintGrey

@@ -62,10 +62,10 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
 
   .doc-nav
     > div
-      color: $linkColor
+      color: $primaryColor
       html.no-touch &:hover
       html.touch &:active
-        color: darken($linkColor, 10%)
+        color: darken($primaryColor, 5%)
 
   article
     h3, h4
