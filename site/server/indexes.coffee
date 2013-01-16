@@ -19,12 +19,12 @@ exports.site_docs =
       index 'updated', updated, {'store': 'yes'}
 
     else if doc.site and doc.type is 'collection'
-      content = doc.title + ' ' + doc.intro
+      content = doc.name + ' ' + doc.intro
       index 'default', content
       index 'site', doc.site
       index 'type', doc.type, {'store': 'yes'}
       index 'slug', doc.slug, {'store': 'yes'}
-      index 'title', doc.title, {'store': 'yes'}
+      index 'title', doc.name, {'store': 'yes'}
 
     else if doc.type is 'block' and doc.code and blocks.indexOf(doc.code) >= 0 and doc.enabled is true
       index 'default', doc.content
