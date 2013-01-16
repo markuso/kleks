@@ -4,3 +4,4 @@ module.exports =
   lists: require("./lists")
   rewrites: require("./rewrites")
   filters: require('./filters')
+  indexes: require("./indexes")

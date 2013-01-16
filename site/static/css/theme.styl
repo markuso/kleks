@@ -97,7 +97,7 @@
     right: $iconRight
     min-width: 260px
     max-width: 400px
-    max-height: 400px
+    max-height: 600px
     list-style-type: none
     padding: 0
     margin: 0
@@ -644,6 +644,54 @@ footer
       a
         font-weight: $boldFont
 
+
+.search-results-view
+  display: none
+  position: fixed
+  top: 0
+  left: 20px
+  width: 70%
+  max-width: 600px
+  max-height: 600px
+  padding: 20px
+  background: $faintGrey
+  box-shadow(4px 4px 0 rgba(0,0,0,0.1))
+  overflow-y: scroll
+  overflow-x: hidden
+  -webkit-overflow-scrolling: touch
+  z-index: 30
+
+  > input
+    background: #fff
+    margin: 1em 0
+    border: 1px solid #ddd
+
+  > ul.list
+    list-style-type: none
+    margin: 0
+    padding: 0
+
+    > li
+      margin-bottom: 1.5em
+
+      h3
+        font-size: 1.3em
+        padding-left: 1.5em
+
+        a
+          .icon
+            margin-left: -1.5em
+            margin-right: 0.5em
+            color: $lightGrey
+      
+      .meta
+        font-size: 0.875em
+        > a
+          display: inline-block
+          margin-right: 2em
+
+  > .close-button
+    float: right
 
 /* Extra helper classes */
 

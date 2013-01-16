@@ -50,6 +50,12 @@ module.exports = [
     }
   }
 
+  # Search JSON endpoint
+  {
+    from: '/render/:site/json/search',
+    to: '_search/site_docs'
+  }
+
   # Essay content page
   {
     from: '/render/:site/essay/:slug',

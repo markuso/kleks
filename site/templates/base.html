@@ -67,9 +67,9 @@
       <ul>
         <li class="heading">Main Menu</li>
         {{{site.menu_html}}}
-        <!-- <li class="search-box">
-          <input type="text" placeholder="Search" data-track-click="Search Box">
-        </li> -->
+        <li class="search-box">
+          <input type="text" placeholder="Search" data-track-click="Search Box" data-site="{{site._id}}">
+        </li>
       </ul>
     </nav>
 
@@ -82,6 +82,13 @@
       </div>
       <div class="footer-html">{{{site.footer_html}}}</div>
     </footer>
+
+    <div class="search-results-view">
+      <button class="close-button small">X</button>
+      <h2>Search</h2>
+      <input type="text" placeholder="Type your search..." data-track-click="Search Box" data-site="{{site._id}}">
+      <ul class="list"></ul>
+    </div>
   </div>
 
   <script src="{{baseURL}}/modules.js"></script>

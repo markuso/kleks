@@ -21,6 +21,12 @@ setupNavMenus = ->
   $mainNavList = $mainNav.find('> ul')
   $mainNavSearchInput = $mainNav.find('.search-box input')
   
+  $searchResultsView = $('.search-results-view')
+  $searchResultsInput = $searchResultsView.find('input')
+  $searchResultsList = $searchResultsView.find('.list')
+  $searchResultsCloseButton = $searchResultsView.find('.close-button')
+  searchResults = {}
+  
   $tocNav = $('.toc-nav')
   $tocNavIcon = $tocNav.find('> .icon')
   $tocNavList = $tocNav.find('> ul')
@@ -55,6 +61,66 @@ setupNavMenus = ->
 
   $mainNavSearchInput.on 'click', (e) ->
     e.stopPropagation()
+
+  $searchResultsCloseButton.on 'click', (e) ->
+    # Close and reset search input fields
+    $searchResultsView.hide()
+    $searchResultsInput.val('')
+    $mainNavSearchInput.val('')
+    $searchResultsList.html('')
+
+  performSearch = (e) ->
+    e.stopPropagation()
+    # Show search results on Enter key
+    if e.which is 13
+      $inputField = $(e.currentTarget)
+      term = $.trim $inputField.val()
+      if term
+        hidePopups()
+        $searchResultsInput.val(term)
+        $mainNavSearchInput.val(term)
+        $searchResultsView.show()
+        $searchResultsList.html('<li>Looking, please wait...</li>')
+
+        site = $inputField.attr('data-site')
+        query = encodeURIComponent("site:#{site} AND (#{term})")
+        
+        # TEMP FOR TESTING
+        # data = {
+        #   total_rows: 3,
+        #   rows: [
+        #     {fields: {type: 'essay', title: 'Title 1 Goes Here', slug: 'title-1'}},
+        #     {fields: {type: 'essay', title: 'Title 2 Goes Here', slug: 'title-2'}},
+        #     {fields: {type: 'essay', title: 'Title 3 Goes Here', slug: 'title-3'}}
+        #   ]
+        # }
+        # $searchResultsList.html("<li><strong>#{data.total_rows}</strong> matches found.</li>")
+        # for row in data.rows
+        #   if row.fields.slug
+        #     $item = $("<li><h3><a href=\"/#{row.fields.type}/#{row.fields.slug}\"><i class=\"icon icon-#{row.fields.type}\"></i>#{row.fields.title}</a></h3></li>")
+        #   else
+        #     $item = $("<li><h3><a href=\"/\"><i class=\"icon icon-essay\"></i>Home</a></h3></li>")
+        #   $searchResultsList.append($item)
+        
+        $.ajax
+          type: 'GET'
+          url: "/json/search?q=#{query}"
+          contentType: 'json'
+          success: (data) ->
+            if data
+              data = JSON.parse(data)
+              $searchResultsList.html("<li><strong>#{data.total_rows}</strong> matches found.</li>")
+              for row in data.rows
+                if row.fields.slug
+                  $item = $("<li><h3><a href=\"/#{row.fields.type}/#{row.fields.slug}\"><i class=\"icon icon-#{row.fields.type}\"></i>#{row.fields.title}</a></h3></li>")
+                else
+                  $item = $("<li><h3><a href=\"/\"><i class=\"icon icon-essay\"></i>Home</a></h3></li>")
+                $searchResultsList.append($item)
+            else
+              $searchResultsList.html("<li>Server didn't respond with any data.</li>")
+
+  $mainNavSearchInput.on 'keydown', performSearch
+  $searchResultsInput.on 'keydown', performSearch
 
   # Setup the TOC menu
   if $tocNav and $articleView

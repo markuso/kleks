@@ -43,6 +43,10 @@
           float: none
           margin: 1em auto
 
+  .search-results-view
+    left: 8px
+    width: 90%
+
 
 @media (max-width: 640px)
 
@@ -191,6 +195,10 @@
     > .home-block > .photo
       left: -20px
 
+  .search-results-view
+    left: 14px
+    width: 80%
+
 
 @media (min-width: 1100px)
 
@@ -206,9 +214,12 @@
 
 
 // Heights
-@media (min-height: 768px)
+@media (max-height: 480px)
   .main-nav
   .toc-nav
   .collection-nav
     > ul
-      max-height: 600px
+      max-height: 400px
+
+  .search-results-view
+    max-height: 400px
