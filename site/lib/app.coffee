@@ -77,8 +77,9 @@ setupNavMenus = ->
       term = $.trim $inputField.val()
       if term
         hidePopups()
-        $searchResultsInput.val(term)
         $mainNavSearchInput.val(term)
+        $searchResultsInput.val(term)
+        document.activeElement.blur() # to hide mobile keyboard
         $searchResultsView.show()
         $searchResultsList.html('<li>Looking, please wait...</li>')
 

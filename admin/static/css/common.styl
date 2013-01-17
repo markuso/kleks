@@ -129,7 +129,13 @@ textarea
   min-height: 60px
   padding: 5px 7px
 
-button, .button
+input[type='submit'],
+input[type='button'],
+input[type='reset'],
+button,
+.button
+  -webkit-appearance: none
+  outline: none
   display: inline-block
   vertical-align: middle
   padding: 10px 30px

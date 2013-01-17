@@ -22,7 +22,11 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
     &:before
       color: $primaryColor
 
-  button, .button
+  input[type='submit'],
+  input[type='button'],
+  input[type='reset'],
+  button,
+  .button
     background: $primaryColor
     html.no-touch &:hover
     html.touch &:active
