@@ -136,7 +136,7 @@ exports.collection = (head, req) ->
       og:
         site_name: site.name
         title: collection.name
-        description: collection.intro_html
+        description: collection.intro
         type: 'website'
         url: "#{site.link}/collection/#{collection.slug}"
         image: "#{site.link}/file/#{collection._id}/#{collection.photo}" if collection.photo
@@ -305,7 +305,7 @@ exports.doc = (head, req) ->
       og:
         site_name: site.name
         title: doc.title
-        description: doc.intro_html
+        description: doc.intro
         type: 'article'
         url: "#{site.link}/#{doc.type}/#{doc.slug}"
         image: "#{site.link}/file/#{doc._id}/#{doc.photo}" if doc.photo
