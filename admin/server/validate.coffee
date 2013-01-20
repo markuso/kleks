@@ -16,4 +16,4 @@ exports.validate_doc_update = (newDoc, oldDoc, userCtx) ->
     throw forbidden: 'slug is a required field' unless newDoc.slug
     
     if newDoc.published
-      throw forbidden: 'Published essay must have a publish date' unless newDoc.published_at
+      throw forbidden: 'Published doc must have a publish date' unless newDoc.published_at
