@@ -1,6 +1,7 @@
 Spine       = require('spine/core')
 $           = Spine.$
 Showdown    = require('showdown')
+{_}         = require("underscore")
 
 
 class PreviewUI extends Spine.Controller
@@ -36,7 +37,9 @@ class PreviewUI extends Spine.Controller
     @inner.html contentHtml
   
   setupLivePreview: =>
-    @field.on 'keyup', @render
+    # Wait before firing the event constantly (a way to throttle)
+    @lazyRender = _.debounce(@render, 800)
+    @field.on 'keyup', @lazyRender
 
   setupCloseButton: ->
     @el.append $('<a class="close-button button small">X</a>')
@@ -54,6 +57,7 @@ class PreviewUI extends Spine.Controller
   close: (e) =>
     e?.preventDefault()
     @parentForm.removeClass('preview-mode')
+    @field.off 'keyup', @lazyRender
     @release()
 
 
