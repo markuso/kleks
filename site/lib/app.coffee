@@ -58,6 +58,7 @@ setupNavMenus = ->
     hidePopups($mainNavList)
     $mainNavList.toggle()
     $mainNavIcon.toggleClass('open')
+    _gaq?.push(['_trackEvent', 'Site Navigation', 'Click', 'Main Nav Icon'])
 
   $mainNavSearchInput.on 'click', (e) ->
     e.stopPropagation()
@@ -142,6 +143,7 @@ setupNavMenus = ->
       hidePopups($tocNavList)
       $tocNavList.toggle()
       $tocNavIcon.toggleClass('open')
+      _gaq?.push(['_trackEvent', 'Site Navigation', 'Click', 'Document Nav Icon'])
 
   # Setup the Collection menu
   if $collectionNav
@@ -172,6 +174,7 @@ setupNavMenus = ->
       hidePopups($collectionNavList)
       $collectionNavList.toggle()
       $collectionNavIcon.toggleClass('open')
+      _gaq?.push(['_trackEvent', 'Site Navigation', 'Click', 'Collection Nav Icon'])
 
 
 setupCollectionDocsNav = (docs, $collectionNavList) ->
@@ -190,12 +193,14 @@ setupCollectionDocsNav = (docs, $collectionNavList) ->
           $docNav.children().removeClass('disabled')
         else
           $docNavPrev.addClass('disabled')
+        _gaq?.push(['_trackEvent', 'Site Navigation', 'Click', 'Doc Nav Prev'])
       
       $docNavNext.on 'click', ->
         if next()
           $docNav.children().removeClass('disabled')
         else
           $docNavNext.addClass('disabled')
+        _gaq?.push(['_trackEvent', 'Site Navigation', 'Click', 'Doc Nav Next'])
 
       $(document).on 'keydown', (e) ->
         # if Modernizr.history
@@ -253,5 +258,5 @@ setupClickTracking = ->
   # Track some analytic events
   $('body').on 'click', '[data-track-click]', (e) ->
     label = $(@).attr('data-track-click');
-    _gaq?.push(['_trackEvent', 'Site Navigation', 'Click', label])
+    _gaq?.push(['_trackEvent', 'Tracked Items', 'Click', label])
     return true
