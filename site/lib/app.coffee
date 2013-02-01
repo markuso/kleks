@@ -62,6 +62,7 @@ setupNavMenus = ->
 
   $mainNavSearchInput.on 'click', (e) ->
     e.stopPropagation()
+    _gaq?.push(['_trackEvent', 'Site Navigation', 'Click', 'Search Box'])
 
   $searchResultsCloseButton.on 'click', (e) ->
     # Close and reset search input fields
