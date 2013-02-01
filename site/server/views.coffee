@@ -77,17 +77,18 @@ exports.docs_by_slug =
 exports.docs_for_feeds =
   map: (doc) ->
     types = ['essay','scene','video','profile']
+    others = ['collection']
     if doc.type is 'site'
       # Make first and last rows as the same site doc
       emit [doc._id, 'content', null, doc.type, doc.link], null
       emit [doc._id, 'content', {}, doc.type, doc.link], null
-    else if doc.slug and doc.type
+    else if doc.site and doc.type and doc.slug
       date = doc.updated_at
       date = doc.published_at unless date
       date = new Date().toISOString() unless date
-      if doc.type and types.indexOf(doc.type) >= 0
+      if types.indexOf(doc.type) >= 0
         emit [doc.site, 'content', date, doc.type, doc.slug], null
-      else
+      else if others.indexOf(doc.type) >= 0
         emit [doc.site, 'x-other', date, doc.type, doc.slug], null
 
 
