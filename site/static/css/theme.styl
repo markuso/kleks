@@ -499,26 +499,6 @@ article
           display: inline-block
           margin-right: 2em
 
-  ul.grid-2
-    list-style-type: none
-    margin: 0
-    padding: 0
-    clearfix()
-
-    > li
-      display: inline-block
-      position: relative
-      width: 48%
-      padding: 0
-      margin: 0.8em 0.5em 0 0
-      vertical-align: top
-
-    &.with-borders > li
-      width: 47%
-      padding: 1em
-      margin: 0.5em 0.4em
-      border: solid 1px $faintGrey
-
 article.home
 
   .collections
@@ -615,6 +595,11 @@ footer
   color: #aaa
   clear: both
 
+  .bottom-html
+    margin-bottom: 2em
+    padding-bottom: 2em
+    border-bottom: 1px dotted $primaryColor
+
   .social-icons
     float: right
     margin: 0 0 1em 1em
@@ -638,11 +623,17 @@ footer
   .footer-html
 
     .copyright
-      font-size: 0.75em
+      font-size: 0.8em
       line-height: 1.5em
       
       a
         font-weight: $boldFont
+        color: #999
+
+        html.no-touch &:hover
+        html.touch &:active
+          text-decoration: underline
+
 
 
 .search-results-view

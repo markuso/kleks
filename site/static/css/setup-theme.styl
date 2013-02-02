@@ -9,8 +9,14 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
   .primary-color
     color: $primaryColor
 
+  .primary-link
+    color: $linkColor
+
   .primary-background
-    background: $primaryColor
+    background-color: $primaryColor
+
+  .primary-border
+    border-color: $primaryColor
 
   a
     color: $linkColor
@@ -101,6 +107,8 @@ setupTheme($primaryColor = $blueColor, $secondaryColor = $lightGrey, $linkColor 
 
   footer
     border-color: $primaryColor
+    .bottom-html
+      border-color: $primaryColor
     .social-icons
       a
         color: $primaryColor

@@ -196,15 +196,68 @@ table
     text-align: left
     vertical-align: top
 
+/* Custom style classes */
+
+ul.grid-2
+  list-style-type: none
+  margin: 0
+  padding: 0
+  border-collapse: collapse
+  clearfix()
+
+  > li
+    display: inline-block
+    position: relative
+    width: 48%
+    padding: 0
+    margin: 0.8em 0.5em 0 0
+    vertical-align: top
+
+  &.with-borders > li
+    width: 47%
+    padding: 1em
+    margin: 0.5em 0.4em
+    border: solid 1px $faintGrey
+    
+  &.no-margins > li
+    margin: 0
+
+ul.links
+  list-style-type: none
+  margin: 0
+  padding: 0
+  border-collapse: collapse
+
+  > li
+    padding: 0
+    margin: 0.3em 0
+    
+    a
+      display: block
+
+  &.with-borders > li
+    border: solid 1px $faintGrey
+    
+    a
+      padding: 0.3em 0.5em
+
+  &.no-margins > li
+    margin: 0
 
 /* Extra helper classes */
 
 .primary-color
   color: $primaryColor
 
+.primary-link
+  color: $linkColor
+
 .primary-background
   color: #fff
-  background: $primaryColor
+  background-color: $primaryColor
+
+.primary-border
+  border-color: $primaryColor
 
 .normal
   font-weight: $normalFont

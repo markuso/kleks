@@ -40,18 +40,33 @@
     </div>
     <div class="field">
       <label>Menu HTML</label>
-      <textarea name="menu_html" placeholder="only LI items">{{menu_html}}</textarea>
+      <textarea name="menu_html" placeholder="">{{menu_html}}</textarea>
+      <div class="note">
+        Main menu list items. Only list the <code>&lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;</code> entries.
+      </div>
     </div>
     <div class="field">
       <label>Header HTML</label>
-      <textarea name="header_html" placeholder="Content to show on all pages in the header">{{header_html}}</textarea>
+      <textarea name="header_html" placeholder="">{{header_html}}</textarea>
       <div class="note">
-        Use `div.content` as a wrapper to get auto `margin-bottom`.<br>Use classes like `home-hide` or `hide doc-show` to control display of elements if needed.
+        Content to show on all pages in the header.
+        Use <code>div.content</code> as a wrapper to get auto <code>margin-bottom</code>.
+        Use classes like <code>"home-hide"</code> or <code>"hide doc-show"</code> to control display of elements if needed.
+      </div>
+    </div>
+    <div class="field">
+      <label>Bottom HTML</label>
+      <textarea name="bottom_html" placeholder="">{{bottom_html}}</textarea>
+      <div class="note">
+        Content to show on all pages just above the footer.
       </div>
     </div>
     <div class="field">
       <label>Footer HTML</label>
-      <textarea name="footer_html" placeholder="Content to show on all pages in the footer">{{footer_html}}</textarea>
+      <textarea name="footer_html" placeholder="">{{footer_html}}</textarea>
+      <div class="note">
+        Content to show on all pages in the footer. Use <code>div.copyright</code> as a wrapper.
+      </div>
     </div>
     
     <h4 class="heading">

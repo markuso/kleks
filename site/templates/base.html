@@ -74,13 +74,20 @@
     </nav>
 
     <footer>
+      {{#if site.bottom_html}}
+      <div class="bottom-html">{{{site.bottom_html}}}</div>
+      {{/if}}
+
       <div class="social-icons">
         {{#each site.social_links}}
         <a href="{{url}}" title="{{label}}"><i class="icon icon-{{code}}"></i></a>
         {{/each}}
         <a href="{{baseURL}}/feed" title="RSS Feed"><i class="icon icon-rss"></i></a>
       </div>
+      
+      {{#if site.footer_html}}
       <div class="footer-html">{{{site.footer_html}}}</div>
+      {{/if}}
     </footer>
 
     <div class="search-results-view">
