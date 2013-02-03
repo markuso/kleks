@@ -9,7 +9,11 @@
     <div><span></span><span></span><span></span></div><i class="icon-down-open"></i>
   </div>
   <ul>
+    {{#ifequal doc.type "scene"}}
+    <li class="heading">Table of Contents</li>
+    {{else}}
     <li class="heading">{{doc.type_tc}}'s Table of Contents</li>
+    {{/ifequal}}
     <li><a href="#TOC-Introduction">Introduction</a></li>
   </ul>
 </nav>
