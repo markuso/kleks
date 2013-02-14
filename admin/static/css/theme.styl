@@ -137,6 +137,7 @@ span.label
   -webkit-overflow-scrolling: touch
   -webkit-user-select: none
   transition(0.3s, all)
+  z-index: 0
 
   .app-logo
     padding: 16px 18px
@@ -318,6 +319,9 @@ span.label
 
           button, .button
             margin: 0 10px 10px 0
+            padding: 10px 25px
+            &:last-of-type
+              margin-right: 0
 
         .delete-button
           display: inline-block
@@ -838,7 +842,7 @@ ul.ui-multi-select
   top: 15%
   right: 20px
   bottom: 20px
-  max-width: 450px
+  max-width: 600px
   padding: 20px
   background: #333
   color: #fff
@@ -866,9 +870,10 @@ ul.ui-multi-select
         padding: 5px 10px
         
       td:first-of-type
-        width: 40%
+        width: 45%
         padding: 5px 10px 5px 0
         font-size: 1.1em
+        line-height: 1.2em
 
       td:nth-child(2)
         width: 5px

@@ -2,7 +2,7 @@
 <h2>Help</h2>
 
 <h3>Markdown Reference</h3>
-<table>
+<table class="plain">
   <tbody>
     <tr>
       <td>### Heading 3</td>
@@ -25,9 +25,13 @@
       <td><em>italic text</em></td>
     </tr>
     <tr>
-      <td>> Quoted text</td>
+      <td>
+        &gt; Quoted text paragraph<br>
+        &gt;<br>
+        &gt; &lt;small&gt;**Name**, Some Source&lt;/small&gt;
+      </td>
       <td></td>
-      <td><blockquote>Quoted text without quotes</blockquote></td>
+      <td><blockquote>Quoted text paragraph<br><br><small><strong>Name</strong>, Some Source</small></blockquote></td>
     </tr>
     <tr>
       <td>
@@ -63,6 +67,30 @@
       <td>Link to [my site](http://mysite.com "Some title")</td>
       <td></td>
       <td>Link to <a title="Some title">my site</a></td>
+    </tr>
+    <tr>
+      <td>
+        <small>Button HTML code with site color:</small><br>
+        &lt;a class="button" href="http://mysite.com"&gt;My Button&lt;/a&gt;
+      </td>
+      <td></td>
+      <td><a class="button" href="javascript:void(0)">My Button</a></td>
+    </tr>
+    <tr>
+      <td>
+        <small>Button with arrow HTML code:</small><br>
+        &lt;a class="button right-arrow" href="http://mysite.com"&gt;My Button &amp; Arrow&lt;/a&gt;
+      </td>
+      <td></td>
+      <td><a class="button right-arrow" href="javascript:void(0)">My Button &amp; Arrow</a></td>
+    </tr>
+    <tr>
+      <td>
+        <small>Plain button HTML code:</small><br>
+        &lt;a class="button plain" href="http://mysite.com"&gt;My Plain Button&lt;/a&gt;
+      </td>
+      <td></td>
+      <td><a class="button plain" href="javascript:void(0)">My Plain Button </a></td>
     </tr>
     <tr>
       <td><a href="http://daringfireball.net/projects/markdown/dingus" target="_blank">Online reference</a></td>
