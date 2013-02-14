@@ -56,13 +56,13 @@ class AuthorForm extends Spine.Controller
       @title = 'New Author'
       @item = {}
     
-    @item.sites = Site.all().sort(Site.nameSort)
+    @item.sites = Site.all().sort(Site.alphaSort)
     @html templates.render('author-form.html', {}, @item)
 
     @itemTitle.html @title
     
     # Set few initial form values
-    if @editing
+    if @editing or @copying
       @formSite.val(@item.site)
     else
       @formSite.val(@stack.stack.filterBox.siteId)
@@ -161,7 +161,7 @@ class AuthorList extends Spine.Controller
 
   render: =>
     context = 
-      authors: Author.filter(@filterObj).sort(Author.nameSort)
+      authors: Author.filter(@filterObj).sort(Author.alphaSort)
     @html templates.render('authors.html', {}, context)
 
   filter: (@filterObj) =>

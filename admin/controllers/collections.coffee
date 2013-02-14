@@ -66,14 +66,14 @@ class CollectionForm extends Spine.Controller
 
     @item._attachments ?= {}
     
-    @item.sites = Site.all().sort(Site.nameSort)
-    @item.sponsors = Sponsor.all().sort(Sponsor.nameSort)
+    @item.sites = Site.all().sort(Site.alphaSort)
+    @item.sponsors = Sponsor.all().sort(Sponsor.alphaSort)
     @html templates.render('collection-form.html', {}, @item)
 
     @itemTitle.html @title
     
     # Set few initial form values
-    if @editing
+    if @editing or @copying
       @formSite.val(@item.site)
       @formSponsorId.val(@item.sponsor_id)
       @formPinned.prop('checked', @item.pinned)
@@ -178,8 +178,9 @@ class CollectionList extends Spine.Controller
     Spine.bind 'filterbox:change', @filter
 
   render: =>
+    sortFunc = if @filterObj?.sortBy then Collection[@filterObj.sortBy] else Collection.dateSort
     context = 
-      collections: Collection.filter(@filterObj).sort(Collection.nameSort)
+      collections: Collection.filter(@filterObj).sort(sortFunc)
     @html templates.render('collections.html', {}, context)
 
   filter: (@filterObj) =>

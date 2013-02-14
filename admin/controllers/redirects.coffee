@@ -50,13 +50,13 @@ class RedirectForm extends Spine.Controller
       @title = 'New Redirect'
       @item = {}
     
-    @item.sites = Site.all().sort(Site.nameSort)
+    @item.sites = Site.all().sort(Site.alphaSort)
     @html templates.render('redirect-form.html', {}, @item)
 
     @itemTitle.html @title
     
     # Set few initial form values
-    if @editing
+    if @editing or @copying
       @formSite.val(@item.site)
       @formSlug.prop('readonly', true).attr('title', 'Can not change the slug')
     else
@@ -142,7 +142,7 @@ class RedirectList extends Spine.Controller
 
   render: =>
     context = 
-      redirects: Redirect.filter(@filterObj).sort(Redirect.nameSort)
+      redirects: Redirect.filter(@filterObj).sort(Redirect.alphaSort)
     @html templates.render('redirects.html', {}, context)
 
   filter: (@filterObj) =>

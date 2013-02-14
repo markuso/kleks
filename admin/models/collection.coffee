@@ -11,6 +11,9 @@ class Collection extends BaseModel
 
   @extend @CouchAjax
 
+  @dateSort: (a, b) ->
+    if (a.updated_at or a.name) < (b.updated_at or b.name) then 1 else -1
+
   @queryOn: ['name','slug']
     
   validate: ->

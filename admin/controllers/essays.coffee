@@ -81,14 +81,14 @@ class EssayForm extends Spine.Controller
     @item.collections ?= []
     @item._attachments ?= {}
     
-    @item.sites = Site.all().sort(Site.nameSort)
-    @item.sponsors = Sponsor.all().sort(Sponsor.nameSort)
+    @item.sites = Site.all().sort(Site.alphaSort)
+    @item.sponsors = Sponsor.all().sort(Sponsor.alphaSort)
     @html templates.render('essay-form.html', {}, @item)
 
     @itemTitle.html @title
     
     # Set few initial form values
-    if @editing
+    if @editing or @copying
       @formSite.val(@item.site)
       @formSponsorId.val(@item.sponsor_id)
       @formPublished.prop('checked', @item.published)
@@ -118,7 +118,7 @@ class EssayForm extends Spine.Controller
       $siteSelected.html ""
 
   makeAuthorsList: (site) ->
-    authors = Author.findAllByAttribute('site', site.id).sort(Author.nameSort)
+    authors = Author.findAllByAttribute('site', site.id).sort(Author.alphaSort)
     @formAuthorId.empty()
       .append "<option value=\"\">Select an author...</option>"
     for author in authors
@@ -126,7 +126,7 @@ class EssayForm extends Spine.Controller
     @formAuthorId.val(@item.author_id)
   
   makeCollectionsList: (site) ->
-    collections = Collection.findAllByAttribute('site', site.id).sort(Collection.nameSort)
+    collections = Collection.findAllByAttribute('site', site.id).sort(Collection.alphaSort)
     @collectionSelectUI = new MultiSelectUI
       items: collections
       selectedItems: (c.id for c in @item.collections)
@@ -267,8 +267,9 @@ class EssayList extends Spine.Controller
     Spine.bind 'filterbox:change', @filter
 
   render: =>
+    sortFunc = if @filterObj?.sortBy then Essay[@filterObj.sortBy] else Essay.dateSort
     context = 
-      essays: Essay.filter(@filterObj).sort(Essay.titleSort)
+      essays: Essay.filter(@filterObj).sort(sortFunc)
     @html templates.render('essays.html', {}, context)
 
   filter: (@filterObj) =>

@@ -15,11 +15,12 @@ class FilterBox extends Spine.Controller
     super
     @siteId = ''
     @query = ''
+    @sortBy = ''
     Site.bind 'change refresh', @render
 
   render: =>
     context = 
-      sites: Site.all().sort(Site.nameSort)
+      sites: Site.all().sort(Site.alphaSort)
     @html templates.render('filter-box.html', {}, context)
     @siteId = ''
     @query = ''
@@ -32,6 +33,10 @@ class FilterBox extends Spine.Controller
     @filterClear = $(@el).find('.clear-filter')
     @selectedSite = $(@el).find('.selected-site')
     @siteSelector = $(@el).find('ul.site-selector')
+    @sortBySelector = $(@el).find('input[name=sort-by]')
+
+    @sortBySelector.on 'change', (e) =>
+      @filter()
     
     @filterInput.on 'keyup', (e) =>
       if e.keyCode is KEYCODE_ESC
@@ -81,9 +86,11 @@ class FilterBox extends Spine.Controller
       @filterClear.addClass('active')
     else
       @filterClear.removeClass('active')
+    @sortBy = @sortBySelector.filter(':checked').val()
     Spine.trigger 'filterbox:change',
       query: @query
       siteId: @siteId
+      sortBy: @sortBy
 
 
 module.exports = FilterBox

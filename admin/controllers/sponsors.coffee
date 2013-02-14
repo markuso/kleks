@@ -60,13 +60,13 @@ class SponsorForm extends Spine.Controller
 
     @item._attachments ?= {}
     
-    @item.contacts = Contact.all().sort(Contact.nameSort)
+    @item.contacts = Contact.all().sort(Contact.alphaSort)
     @html templates.render('sponsor-form.html', {}, @item)
 
     @itemTitle.html @title
     
     # Set few initial form values
-    if @editing
+    if @editing or @copying
       @formContactId.val(@item.contact_id)
       @formFormat.val(@item.format)
       @formShowLabel.prop('checked', @item.show_label)
@@ -157,7 +157,7 @@ class SponsorList extends Spine.Controller
 
   render: =>
     context = 
-      sponsors: Sponsor.filter(@filterObj).sort(Sponsor.nameSort)
+      sponsors: Sponsor.filter(@filterObj).sort(Sponsor.alphaSort)
     @html templates.render('sponsors.html', {}, context)
 
   filter: (@filterObj) =>

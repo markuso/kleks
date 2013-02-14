@@ -11,11 +11,11 @@ class Essay extends BaseModel
   
   @extend @CouchAjax
   
-  @titleSort: (a, b) ->
+  @alphaSort: (a, b) ->
     if (a.title or a.published_at) > (b.title or b.published_at) then 1 else -1
 
   @dateSort: (a, b) ->
-    if (a.published_at or a.title) > (b.published_at or b.title) then 1 else -1
+    if (a.published_at or a.title) < (b.published_at or b.title) then 1 else -1
 
   @queryOn: ['title','slug']
     

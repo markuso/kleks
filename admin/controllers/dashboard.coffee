@@ -22,10 +22,13 @@ class DashboardOne extends Spine.Controller
     Spine.bind 'filterbox:change', @filter
 
   render: =>
+    essaySortFunc = if @filterObj?.sortBy then Essay[@filterObj.sortBy] else Essay.dateSort
+    videoSortFunc = if @filterObj?.sortBy then Video[@filterObj.sortBy] else Video.dateSort
+    sceneSortFunc = if @filterObj?.sortBy then Scene[@filterObj.sortBy] else Scene.dateSort
     context = 
-      essays: Essay.select(@selectFilter)
-      videos: Video.select(@selectFilter)
-      scenes: Scene.select(@selectFilter)
+      essays: Essay.select(@selectFilter).sort(essaySortFunc)
+      videos: Video.select(@selectFilter).sort(videoSortFunc)
+      scenes: Scene.select(@selectFilter).sort(sceneSortFunc)
     @html templates.render('dashboard.html', {}, context)
 
   selectFilter: (item) =>

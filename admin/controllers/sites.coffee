@@ -56,7 +56,7 @@ class SiteForm extends Spine.Controller
     @itemTitle.html @title
     
     # Set few initial form values
-    if @editing
+    if @editing or @copying
       @formTheme.val(@item.theme)
       @formSiteId.prop('readonly', true)
       @formDefaultAdEnabled.prop('checked', @item.default_ad_enabled)
@@ -150,7 +150,7 @@ class SiteList extends Spine.Controller
 
   render: =>
     context = 
-      sites: Site.filter(@filterObj).sort(Site.nameSort)
+      sites: Site.filter(@filterObj).sort(Site.alphaSort)
     @html templates.render('sites.html', {}, context)
 
   filter: (@filterObj) =>

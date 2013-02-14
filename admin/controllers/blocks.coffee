@@ -60,13 +60,13 @@ class BlockForm extends Spine.Controller
 
     @item._attachments ?= {}
     
-    @item.sites = Site.all().sort(Site.nameSort)
+    @item.sites = Site.all().sort(Site.alphaSort)
     @html templates.render('block-form.html', {}, @item)
 
     @itemTitle.html @title
     
     # Set few initial form values
-    if @editing
+    if @editing or @copying
       @formSite.val(@item.site)
       @formEnabled.prop('checked', @item.enabled)
     else
@@ -165,7 +165,7 @@ class BlockList extends Spine.Controller
 
   render: =>
     context = 
-      blocks: Block.filter(@filterObj).sort(Block.titleSort)
+      blocks: Block.filter(@filterObj).sort(Block.alphaSort)
     @html templates.render('blocks.html', {}, context)
 
   filter: (@filterObj) =>

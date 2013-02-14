@@ -2,11 +2,11 @@ Spine = require('spine/core')
 
 class BaseModel extends Spine.Model
 
-  @nameSort: (a, b) ->
-    if a.name > b.name then 1 else -1
-
-  @titleSort: (a, b) ->
-    if a.title > b.title then 1 else -1
+  @alphaSort: (a, b) ->
+    if a.name?
+      if a.name > b.name then 1 else -1
+    else if a.title?
+      if a.title > b.title then 1 else -1
 
   @queryOn: ['name','title']
 
