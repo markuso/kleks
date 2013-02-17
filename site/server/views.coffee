@@ -76,20 +76,31 @@ exports.docs_by_slug =
 
 exports.docs_for_feeds =
   map: (doc) ->
+    # List of content published docs sorted by `published_at`
+    types = ['essay','scene','video','profile']
+    if doc.type is 'site'
+      # Add the site doc
+      emit [doc._id, null], null
+    else if doc.site and doc.type and types.indexOf(doc.type) >= 0 and doc.published_at and doc.published
+      timestamp = new Date(doc.published_at).getTime()
+      emit [doc.site, timestamp, doc._id, {}], null
+
+
+exports.docs_for_sitemaps =
+  map: (doc) ->
     types = ['essay','scene','video','profile']
     others = ['collection']
     if doc.type is 'site'
-      # Make first and last rows as the same site doc
-      emit [doc._id, 'content', null, doc.type, doc.link], null
-      emit [doc._id, 'content', {}, doc.type, doc.link], null
+      emit [doc._id, {}, doc.type, doc.link], null
     else if doc.site and doc.type and doc.slug
       date = doc.updated_at
       date = doc.published_at unless date
       date = new Date().toISOString() unless date
+      # Include only published content
       if types.indexOf(doc.type) >= 0 and doc.published
-        emit [doc.site, 'content', date, doc.type, doc.slug], null
+        emit [doc.site, date, doc.type, doc.slug], null
       else if others.indexOf(doc.type) >= 0
-        emit [doc.site, 'x-other', date, doc.type, doc.slug], null
+        emit [doc.site, date, doc.type, doc.slug], null
 
 
 exports.redirects_by_slug =

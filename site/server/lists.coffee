@@ -396,9 +396,10 @@ exports.sitemap = (head, req) ->
 
   while row = getRow()
     key = row.key
-    date = key[2]
-    type = key[3]
-    slug = key[4]
+    date = key[1]
+    type = key[2]
+    slug = key[3]
+    log key
     if type is 'site'
       siteLink = slug if not siteLink
     else
