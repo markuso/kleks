@@ -80,7 +80,7 @@ exports.docs_for_feeds =
     types = ['essay','scene','video','profile']
     if doc.type is 'site'
       # Add the site doc
-      emit [doc._id, null], null
+      emit [doc._id, {}], null
     else if doc.site and doc.type and types.indexOf(doc.type) >= 0 and doc.published_at and doc.published
       timestamp = new Date(doc.published_at).getTime()
       emit [doc.site, timestamp, doc._id, {}], null
