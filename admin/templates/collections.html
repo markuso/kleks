@@ -7,10 +7,10 @@
   <ul class="collections list">
     {{#each collections}}
     <li>
-      <div class="actions">
-        <div><a href="http://{{site}}/collection/{{slug}}" target="_blank">{{site}}</a></div>
-      </div>
       <a class="title" href="#/collection/{{id}}"><i class="icon icon-collection"></i>{{name}}{{#if hidden}}<i class="status-icon icon-eye-off"></i>{{/if}}</a>
+      <div class="meta">
+        <div><a href="http://{{site}}/collection/{{slug}}" target="_blank">{{site}}/collection/<strong>{{slug}}</strong></a></div>
+      </div>
     </li>
     {{/each}}
   </ul>
