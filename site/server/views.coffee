@@ -86,7 +86,7 @@ exports.docs_for_feeds =
       date = doc.updated_at
       date = doc.published_at unless date
       date = new Date().toISOString() unless date
-      if types.indexOf(doc.type) >= 0
+      if types.indexOf(doc.type) >= 0 and doc.published
         emit [doc.site, 'content', date, doc.type, doc.slug], null
       else if others.indexOf(doc.type) >= 0
         emit [doc.site, 'x-other', date, doc.type, doc.slug], null
