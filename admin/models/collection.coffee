@@ -7,7 +7,7 @@ moment = require('lib/moment')
 BaseModel = require('models/base')
 
 class Collection extends BaseModel
-  @configure "Collection", "site", "slug", "name", "intro", "photo", "pinned", "hidden", "updated_at", "sponsor_id", "sponsor_start", "sponsor_end", "sponsors_history", "_attachments"
+  @configure "Collection", "site", "slug", "name", "intro", "photo", "pinned", "hidden", "updated_at", "sponsor_id", "sponsor_start", "sponsor_end", "sponsor_propagate", "sponsors_history", "_attachments"
 
   @extend @CouchAjax
 
@@ -40,6 +40,7 @@ class Collection extends BaseModel
     # Convert some boolean properties
     @pinned = Boolean(@pinned)
     @hidden = Boolean(@hidden)
+    @sponsor_propagate = Boolean(@sponsor_propagate)
 
     # Sponsor dates if setting a sponsor
     if @sponsor_id

@@ -1,42 +1,48 @@
-  {{#if sponsor}}
-  <section class="sponsor {{sponsor.for_type}}-sponsor">
-    {{#if sponsor.show_label}}
-    <div class="label">
-      {{#if sponsor.label}}
-        {{{sponsor.label}}}
-      {{else}}
-        Supported By
+{{#if sponsor}}
+
+  {{#if sponsor.load_on_client}}
+    <div class="hide embed" data-action="load-sponsor">{{{sponsor.default_ad_unit}}}</div>
+  {{else}}
+    <section class="sponsor {{sponsor.for_type}}-sponsor">
+      {{#if sponsor.show_label}}
+      <div class="label">
+        {{#if sponsor.label}}
+          {{{sponsor.label}}}
+        {{else}}
+          Supported By
+        {{/if}}
+      </div>
       {{/if}}
-    </div>
-    {{/if}}
 
-    {{#if sponsor.text_format}}
-    <div class="name">
-      {{#if sponsor.link}}
-        <a href="{{sponsor.link}}">{{{sponsor.name}}}</a>
-      {{else}}
-        {{{sponsor.name}}}
+      {{#if sponsor.text_format}}
+      <div class="name">
+        {{#if sponsor.link}}
+          <a href="{{sponsor.link}}" target="_blank" rel="nofollow">{{{sponsor.name}}}</a>
+        {{else}}
+          {{{sponsor.name}}}
+        {{/if}}
+      </div>
+      <div class="content">{{{sponsor.content}}}</div>
       {{/if}}
-    </div>
-    <div class="content">{{{sponsor.content}}}</div>
-    {{/if}}
 
-    {{#if sponsor.image_format}}
-    <div class="image">
-      {{#if sponsor.link}}
-        <a href="{{sponsor.link}}" target="_blank"><img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}"></a>
-      {{else}}
-        <img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}">
+      {{#if sponsor.image_format}}
+      <div class="image">
+        {{#if sponsor.link}}
+          <a href="{{sponsor.link}}" target="_blank" rel="nofollow"><img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}"></a>
+        {{else}}
+          <img src="{{#if sponsor.image}}{{sponsor.image}}{{else}}{{sponsor.content}}{{/if}}">
+        {{/if}}
+      </div>
       {{/if}}
-    </div>
-    {{/if}}
 
-    {{#if sponsor.video_format}}
-    <div class="video">{{{sponsor.content}}}</div>
-    {{/if}}
+      {{#if sponsor.video_format}}
+      <div class="video">{{{sponsor.content}}}</div>
+      {{/if}}
 
-    {{#if sponsor.embed_format}}
-    <div class="embed">{{{sponsor.content}}}</div>
-    {{/if}}
-  </section>
+      {{#if sponsor.embed_format}}
+      <div class="embed">{{{sponsor.content}}}</div>
+      {{/if}}
+    </section>
   {{/if}}
+
+{{/if}}

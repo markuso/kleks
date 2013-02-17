@@ -3,6 +3,9 @@ $       = require('jquery')
 moment  = require('lib/moment')
 require('lib/fastclick')
 
+handlebars = require('handlebars')
+settings  = require('settings/root')
+
 exports.initialize = (config) ->
   # Use the fastclick module for touch devices.
   # Add a class of `needsclick` of the original click
@@ -151,6 +154,7 @@ setupNavMenus = ->
     collectionId = $collectionNav.attr('data-id')
     collectionSlug = $collectionNav.attr('data-slug')
     if collectionSlug
+      # Grab the docs for the collection from DB
       $collectionNav.show()
       $.ajax
         type: 'GET'
@@ -159,13 +163,37 @@ setupNavMenus = ->
         success: (data) ->
           if data
             data = JSON.parse(data)
+            collectionObject = null
+            collectionSponsor = null
+            
             for row in data.rows
               doc = row.doc
-              collectionDocs.push(doc)
+              collectionDocs.push(doc) if doc.type in settings.app.content_types
+              collectionObject ?= doc if doc.type is 'collection'
+              collectionSponsor ?= doc if doc.type is 'sponsor'
+
+            # Loop through docs within collection
+            for doc in collectionDocs
               url = "/#{doc.type}/#{doc.slug}"
               selectedClass = if window.location.pathname is url then 'active' else ''
               $collectionNavList.append "<li><a href=\"#{url}\" class=\"#{selectedClass}\" data-id=\"#{doc._id}\">#{doc.title}</a></li>"
             setupCollectionDocsNav(collectionDocs, $collectionNavList)
+
+            # Setup collcetion sponsor inheritance if needed
+            $loadSponsorSection = $('div[data-action="load-sponsor"]')
+            if collectionSponsor and $loadSponsorSection
+              collectionSponsor.text_format = collectionSponsor.format is 'text'
+              collectionSponsor.image_format = collectionSponsor.format is 'image'
+              collectionSponsor.video_format = collectionSponsor.format is 'video'
+              collectionSponsor.embed_format = collectionSponsor.format is 'embed'
+              collectionSponsor.for_type = collectionObject?.type
+              collectionSponsor.for_type_tc = collectionObject?.type_tc
+              $html = $(handlebars.templates['partials/sponsor.html']({sponsor: collectionSponsor}, {}))
+              $html.insertAfter($loadSponsorSection)
+              if collectionSponsor.include_default_ad_unit
+                $loadSponsorSection.prependTo($html).removeClass('hide')
+              else
+                $loadSponsorSection.remove()
     else
       # Remove the doc nav prev and next arrows
       $('.doc-nav').remove()
@@ -227,6 +255,7 @@ setupCollectionDocsNav = (docs, $collectionNavList) ->
           $docNavPrev.click()
         else if e.which is 39
           $docNavNext.click()
+
 
 setupSmoothScrolling = ->
   smoothScroll = (hash) ->

@@ -19,6 +19,7 @@ class CollectionForm extends Spine.Controller
     'form':                    'form'
     'select[name=site]':       'formSite'
     'select[name=sponsor_id]': 'formSponsorId'
+    'input[name=sponsor_propagate]': 'formSponsorPropagate'
     'input[name=name]':        'formName'
     'input[name=pinned]':      'formPinned'
     'input[name=hidden]':      'formHidden'
@@ -76,6 +77,7 @@ class CollectionForm extends Spine.Controller
     if @editing or @copying
       @formSite.val(@item.site)
       @formSponsorId.val(@item.sponsor_id)
+      @formSponsorPropagate.prop('checked', @item.sponsor_propagate)
       @formPinned.prop('checked', @item.pinned)
       @formHidden.prop('checked', @item.hidden)
     else
@@ -119,6 +121,7 @@ class CollectionForm extends Spine.Controller
     @item._attachments = @fileUploadUI.attachments
 
     # Take care of some boolean checkboxes
+    @item.sponsor_propagate = @formSponsorPropagate.is(':checked')
     @item.pinned = @formPinned.is(':checked')
     @item.hidden = @formHidden.is(':checked')
 

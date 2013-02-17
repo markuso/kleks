@@ -39,16 +39,38 @@ module.exports = [
   }
 
   # Collection JSON view - list of docs ONLY
+  # {
+  #   from: '/render/:site/json/collection/:slug',
+  #   to: '_view/docs_by_collection',
+  #   query: {
+  #     startkey: [':site', ':slug', 'doc', {}],
+  #     endkey: [':site', ':slug', 'doc'],
+  #     descending: 'true',
+  #     include_docs: 'true'
+  #   }
+  # }
+
+  # Collection JSON view - all related rows 
   {
     from: '/render/:site/json/collection/:slug',
     to: '_view/docs_by_collection',
     query: {
-      startkey: [':site', ':slug', 'doc', {}],
-      endkey: [':site', ':slug', 'doc'],
+      startkey: [':site', ':slug', {}],
+      endkey: [':site', ':slug'],
       descending: 'true',
       include_docs: 'true'
     }
   }
+
+  # Collection's Sponsor JSON view - sponsor ONLY
+  # {
+  #   from: '/render/:site/json/collection-sponsor/:slug',
+  #   to: '_view/docs_by_collection',
+  #   query: {
+  #     key: [':site', ':slug', 'sponsor', {}],
+  #     include_docs: 'true'
+  #   }
+  # }
 
   # Search JSON endpoint
   {

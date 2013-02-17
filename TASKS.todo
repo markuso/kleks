@@ -3,9 +3,10 @@ New Admin Features:
  ✔ Arbitrary site redirects @done (13-01-05 20:22)
  ☐ Offline and crash recovery support
  ☐ Image insertion into content
- ☐ List sorting options
+ ✔ List sorting options @done (13-02-16 21:14)
  ☐ Option to remove dates from bottom of pages
  ☐ Create a layout selection feature
+ ✔ Sponsor `include_default_ad_unit` flag option @done (13-02-16 21:22)
 
  --- ✄ -----------------------
 

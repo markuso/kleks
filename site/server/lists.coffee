@@ -39,6 +39,7 @@ exports.home = (head, req) ->
     on_dev: utils.isDev(req)
     area: 'home'
     site: site
+    type: 'home'
     title: "#{site.name}"
     content: templates.render "home.html", req,
       collections: collections
@@ -109,6 +110,9 @@ exports.collection = (head, req) ->
       sponsor.embed_format = sponsor.format is 'embed'
       sponsor.for_type = collection.type
       sponsor.for_type_tc = collection.type_tc
+      # Let's also pass the site's default ad unit if asked for it
+      if site and site.default_ad_unit and site.default_ad_enabled and sponsor.include_default_ad_unit
+        sponsor.content = site.default_ad_unit + sponsor.content
     else
       # let's remove the sponsor
       sponsor = null
@@ -127,6 +131,7 @@ exports.collection = (head, req) ->
       on_dev: utils.isDev(req)
       area: 'collection'
       site: site
+      type: 'collection'
       title: collection.name
       content: templates.render 'collection.html', req,
         collection: collection
@@ -190,6 +195,7 @@ exports.docs = (head, req) ->
     on_dev: utils.isDev(req)
     area: 'docs'
     site: site
+    type: 'docs'
     title: 'Docs List'
     content: templates.render 'docs.html', req,
       docs: docs
@@ -263,6 +269,8 @@ exports.doc = (head, req) ->
     doc.fresh = utils.isItFresh(doc.updated_at)
     return doc
 
+  collection = collections?[0] # primary one
+
   if sponsor
     # Check for strat/end dates of sponsorship
     sponsor_start = moment.utc(doc.sponsor_start)
@@ -276,9 +284,28 @@ exports.doc = (head, req) ->
       sponsor.embed_format = sponsor.format is 'embed'
       sponsor.for_type = doc.type
       sponsor.for_type_tc = doc.type_tc
+      # Let's also pass the site's default ad unit if asked for it
+      if site and site.default_ad_unit and site.default_ad_enabled and sponsor.include_default_ad_unit
+        sponsor.content = site.default_ad_unit + sponsor.content
     else
       # let's remove the sponsor
       sponsor = null
+
+  # Let's use the collection's sponsor if there was no doc sponsor
+  # and the sponsor was setup to propogate to entire collection's docs
+  if not sponsor and collection and collection.sponsor_id and collection.sponsor_propagate
+    # Check for strat/end dates of sponsorship
+    sponsor_start = moment.utc(collection.sponsor_start)
+    sponsor_end = moment.utc(collection.sponsor_end)
+    now = moment.utc()
+    if sponsor_start.diff(now) <= 0 and sponsor_end.diff(now) >= 0
+      sponsor =
+        load_on_client: true
+        collection_id: collection._id
+        sponsor_id: collection.sponsor_id
+      # Let's also pass the site's default ad unit in case we like to use it
+      if site and site.default_ad_unit and site.default_ad_enabled
+        sponsor.default_ad_unit = site.default_ad_unit
 
   if doc
     if not sponsor and site and site.default_ad_unit and site.default_ad_enabled
@@ -294,11 +321,12 @@ exports.doc = (head, req) ->
       on_dev: utils.isDev(req)
       area: 'doc'
       site: site
+      type: doc.type
       title: doc.title
       content: templates.render 'doc.html', req,
         doc: doc
         collections: collections
-        collection: collections?[0] # primary one
+        collection: collection
         author: author
         sponsor: sponsor
         blocks: blocks
