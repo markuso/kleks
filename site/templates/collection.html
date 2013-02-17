@@ -1,7 +1,7 @@
 {{#if collection.css}}<style>{{{collection.css}}}</style>{{/if}}
 
 <article class="collection layout-{{collection.layout}}">
-  <h2 class="title"><a href="{{baseURL}}/collection/{{collection.slug}}"><i class="icon icon-collection"></i>{{collection.name}}</a>&nbsp;<small>Collection</small></h2>
+  <h2 class="title"><a href="{{baseURL}}/collection/{{collection.slug}}"><i class="icon icon-collection"></i>{{collection.name}}</a>&nbsp;<small title="{{docs.length}} items in this collection">Collection</small></h2>
 
   {{#if collection.photo}}
   <section class="photo">
