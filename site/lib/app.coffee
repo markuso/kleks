@@ -91,23 +91,6 @@ setupNavMenus = ->
         site = $inputField.attr('data-site')
         query = encodeURIComponent("site:#{site} AND (#{term})")
         
-        # TEMP FOR TESTING
-        # data = {
-        #   total_rows: 3,
-        #   rows: [
-        #     {fields: {type: 'essay', title: 'Title 1 Goes Here', slug: 'title-1'}},
-        #     {fields: {type: 'essay', title: 'Title 2 Goes Here', slug: 'title-2'}},
-        #     {fields: {type: 'essay', title: 'Title 3 Goes Here', slug: 'title-3'}}
-        #   ]
-        # }
-        # $searchResultsList.html("<li><strong>#{data.total_rows}</strong> matches found.</li>")
-        # for row in data.rows
-        #   if row.fields.slug
-        #     $item = $("<li><h3><a href=\"/#{row.fields.type}/#{row.fields.slug}\"><i class=\"icon icon-#{row.fields.type}\"></i>#{row.fields.title}</a></h3></li>")
-        #   else
-        #     $item = $("<li><h3><a href=\"/\"><i class=\"icon icon-essay\"></i>Home</a></h3></li>")
-        #   $searchResultsList.append($item)
-        
         $.ajax
           type: 'GET'
           url: "/json/search?q=#{query}"
@@ -123,7 +106,7 @@ setupNavMenus = ->
                   $item = $("<li><h3><a href=\"/\"><i class=\"icon icon-essay\"></i>Home</a></h3></li>")
                 $searchResultsList.append($item)
             else
-              $searchResultsList.html("<li>Server didn't respond with any data.</li>")
+              $searchResultsList.html("<li>Server didn\'t respond with any data.</li>")
 
   $mainNavSearchInput.on 'keydown', performSearch
   $searchResultsInput.on 'keydown', performSearch
@@ -232,25 +215,6 @@ setupCollectionDocsNav = (docs, $collectionNavList) ->
         _gaq?.push(['_trackEvent', 'Site Navigation', 'Click', 'Doc Nav Next'])
 
       $(document).on 'keydown', (e) ->
-        # if Modernizr.history
-        #   currentId = $collectionNavList.find('.active').attr('data-id')
-        #   if currentId
-        #     currentIndex = $.grep(docs, (d, i) -> if d._id is currentId then i)
-        #     if e.which is 37
-        #       # console.log docs[currentIndex-1]?._id
-        #       doc = docs[currentIndex-1]
-        #     else if e.which is 39
-        #       # console.log docs[currentIndex+1]?.title
-        #       doc = docs[currentIndex+1]
-
-        #     if doc
-        #       $('article.view > .title').html(doc.title)
-        #       $('article.view > .photo img')
-        #         .attr('src', "/file/{{doc._id}}/{{doc.photo}}")
-        #         .attr('alt', "#{doc.title}")
-        #       $('article.view > .intro').html(doc.intro_html)
-        #       $('article.view > .body').html(doc.body_html)
-        # else
         if e.which is 37
           $docNavPrev.click()
         else if e.which is 39

@@ -407,5 +407,5 @@ exports.sitemap = (head, req) ->
         url: "#{siteLink}/#{type}/#{slug}"
         date: date
 
-  return templates.render 'sitemap.html', req,
+  return templates.render 'sitemap.xml', req,
     docs: docs

@@ -21,7 +21,7 @@ exports.moved = (doc, req) ->
 exports.moved_pattern = (doc, req) ->
   loc = req.query.loc
   switch req.query.site
-    when 'www.evitaochel.com'
+    when 'some_site_id' # Example: www.markuso.com
       type = 'essay'
     else
       type = 'essay'

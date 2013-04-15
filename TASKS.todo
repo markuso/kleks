@@ -1,22 +1,24 @@
 New Admin Features:
  ☐ Rename a collection
- ✔ Arbitrary site redirects @done (13-01-05 20:22)
  ☐ Offline and crash recovery support
  ☐ Image insertion into content
- ✔ List sorting options @done (13-02-16 21:14)
  ☐ Option to remove dates from bottom of pages
  ☐ Create a layout selection feature
- ✔ Sponsor `include_default_ad_unit` flag option @done (13-02-16 21:22)
+ ☐ Rework the FileUpload feature - make clearer
 
  --- ✄ -----------------------
 
- Donuts:
+Bugs:
+ ☐ Fix fullscreen mode on iPad / mobile devices
 
 
-Crispies:
+Issues:
  ☐ Session timeout and recovery
  ☐ Large data sets rendering
 
- Nice To Have:
+
+Nice To Have:
  ☐ Cleaner mobile layout
  ☐ Brand logo for Kleks
+ ☐ Documentation of the whole app
+ ☐ Release as open source on GitHub

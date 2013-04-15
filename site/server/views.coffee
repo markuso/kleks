@@ -1,4 +1,3 @@
-
 exports.docs_for_home =
   map: (doc) ->
     # List of collections sorted by `pinned` then `updated_at`,
@@ -107,4 +106,3 @@ exports.redirects_by_slug =
   map: (doc) ->
     if doc.site and doc.type and doc.type is 'redirect' and doc.slug and doc.location
       emit [doc.site, doc.slug], doc.location
-    

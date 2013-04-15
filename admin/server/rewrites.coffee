@@ -51,7 +51,7 @@ module.exports = [
   { from: '/file/:id/:filename', to: '../../:id/:filename' }
 
   # show color page
-  { from: "/_colors", to: "_show/colors" }
+  { from: "/_color_samples", to: "_show/color_samples" }
 
   # catch all
   { from: "*", to: "_show/not_found" }

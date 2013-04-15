@@ -1,4 +1,3 @@
-
 exports.site_docs =
   index: (doc) ->
     blocks = ['site_intro','site_home']

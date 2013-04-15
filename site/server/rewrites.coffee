@@ -10,7 +10,7 @@ module.exports = [
   { from: '/static/*', to: 'static/*' }
 
   # Dynamic site rendering used with a virtual host like:
-  # www.evitaochel.com = /kleks/_design/site/_rewrite/render/evitaochel
+  # www.somesite.com = /kleks/_design/site/_rewrite/render/www.somesite.com
   {
     from: '/render/:site',
     to: '_list/home/docs_for_home',
