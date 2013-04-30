@@ -1,13 +1,17 @@
 Kleks - Pure CouchDB based CMS
-------------------------------
+==============================
 
-**Kleks** is a pure CouchDB based CMS written as a **CouchApp** using Kanso, Spine.js, CoffeeScript and Stylus. Supports multi-site setup and Markdown authoring.
+**Kleks** is a pure CouchDB based CMS written as a **CouchApp** using Kanso, Spine.js, CoffeeScript and Stylus. Supports multi-site setup and Markdown authoring. It is fully open-source with a MIT license.
 
 Kleks can be used to power a network of content-based sites with the ability to fully sync/replicate its NoSQL document-based datastore, CouchDB, in real-time to other locations. The admin interface is accessible from desktops and mobile tablets at this time.
 
 It generates fully responsive websites that are optimized for mobile devices as well. The front-end is built as a CouchApp with HTML5/JavaScript that lives and is served from inside the CouchDB database. It means that there is no need for the middle-tier and no other servers are required.
 
 It has been successfully deployed for a network of content-based sites on [Cloudant](http://cloudant.com) – a scalable hosted CouchDB cloud infrastructure – and replicates to multiple local and remote machines for backups and offline access.
+
+## Who Should Use It?
+
+Kleks is meant for moderate to experienced CouchDB developers that are interested in having a CouchApp solution for some of their content-based site deployments. They can use it as a starting point to customize their own solution for their clients.
 
 ## Philosophy
 
@@ -22,7 +26,7 @@ There is also the concept of content sponsorships to monetize these living colle
 Kleks was originally written for a network of sites listed below to migrate them from the common WordPress CMS, PHP, and MySQL to a completely CouchDB based solution without any other layers needed.
 
 - [Evita Ochel](http://www.evitaochel.com) – Consciousness Expansion Teacher.
-- [Evolving Wellenss](http://www.evolvingwellness.com) – Holistic, Natural, and Green Approach to Optimal Wellness.
+- [Evolving Wellness](http://www.evolvingwellness.com) – Holistic, Natural, and Green Approach to Optimal Wellness.
 - [Evolving Beings](http://www.evolvingbeings.com) – Consciousness Expansion and Heart-Centered Living.
 - [Evolving Channels](http://www.evolvingchannels.com) – Video Library for the Awakening Mind.
 - [Evolving Scenes](http://www.evolvingscenes.com) – Reflections and Nature Photography.
