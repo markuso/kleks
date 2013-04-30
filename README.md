@@ -98,32 +98,11 @@ You will need the same `.kansorc` file in both locations, `.../kleks/admin` and 
 
 You can of course add more deployment destinations beyond the `default` and `live` destinations you see above. Refer to [Kanso documentation](http://kan.so/docs/Configuration_.kansorc) on this for more info.
 
-## TODO & Known Issues
-
-Some of things that are still in the works or needed to be implemented are listed below.
-
-### New Admin Features
-
- ☐ Built-in support for Disqus commenting system when needed
- ☐ Renaming the slug of a collection after it has child documents
- ☐ Offline and crash recovery support
- ☐ Image insertion into content
- ☐ Option to remove dates from bottom of pages
- ☐ Create a layout selection feature
- ☐ Rework the File Upload feature - make clearer
-
-### Things To Solve
+## TODO
  
- ☐ Fix fullscreen mode on iPad / mobile devices
- ☐ Session timeout and recovery
- ☐ Large data sets rendering
- ☐ Write as many tests as possible
-
-### Nice To Have
- 
- ☐ Cleaner mobile layout
- ☐ Brand logo for Kleks
- ☐ Documentation of the whole app
+- Deal with large data sets rendering
+- Write as many tests as possible
+- Documentation of the whole app
 
 ## MIT License
 
