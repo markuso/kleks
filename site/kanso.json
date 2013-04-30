@@ -1,5 +1,5 @@
 {
-  "name": "kleks-site",
+  "name": "site",
   "version": "0.5.1",
   "description": "Kleks site application that renders each site.",
   "load": "server/setup",
