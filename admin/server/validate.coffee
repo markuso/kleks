@@ -3,7 +3,7 @@ utils    = require('lib/utils')
 exports.validate_doc_update = (newDoc, oldDoc, userCtx) ->
   types = ['essay','scene','video','profile']
 
-  access = if '_admin' in userCtx.roles or 'admin' in userCtx.roles or 'manager' in userCtx.roles then true else false
+  access = if '_admin' in userCtx.roles or '_creator' in userCtx.roles or 'admin' in userCtx.roles or 'manager' in userCtx.roles then true else false
 
   if not access
     throw unauthorized: 'You must have the role admin or manager to make changes'
