@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "0.5.2",
+  "version": "0.5.3",
   "description": "Kleks admin application that allows management of sites and content.",
   "load": "server/setup",
   "modules": ["server","controllers","models","lib"],
@@ -39,7 +39,7 @@
   "app": {
     "dev_host": "kleks.example.local",
     "prod_host": "kleks.example.com",
-    "themes": ["default","blue","green","brown","teal","aqua","purple","red"],
+    "themes": ["default","blue","green","brown","chocolate","teal","aqua","purple","red"],
     "content_types": ["essay","scene","video","profile"]
   }
 }
