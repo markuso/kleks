@@ -72,6 +72,7 @@
 
     &.open
       height: $iconSize+11
+      background: darken($primaryColor, 10%)
 
     span
       display: block
@@ -101,7 +102,8 @@
     list-style-type: none
     padding: 0
     margin: 0
-    background: $primaryColor
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2)
+    background: darken($primaryColor, 10%)
     box-shadow(-4px 4px 0 rgba(0, 0, 0, 0.1))
     overflow-y: scroll
     overflow-x: hidden
@@ -119,10 +121,10 @@
 
         html.no-touch &:hover
         html.touch &:active
-          background: darken($primaryColor, 5%)
+          background: darken($primaryColor, 14%)
 
         &.active
-          background: darken($primaryColor, 10%)
+          background: darken($primaryColor, 20%)
 
         i
           margin-right: 0.5em
@@ -619,12 +621,12 @@ footer
       font-size: 30px
       line-height: 30px
       text-align: center
-      color: $primaryColor
+      color: darken($primaryColor, 10%)
       overflow: hidden
 
       html.no-touch &:hover
       html.touch &:active
-        color: darken($primaryColor, 10%)
+        color: darken($primaryColor, 20%)
 
   .footer-html
 
