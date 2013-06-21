@@ -1,6 +1,6 @@
 {
   "name": "admin",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Kleks admin application that allows management of sites and content.",
   "load": "server/setup",
   "modules": ["server","controllers","models","lib"],
