@@ -1,6 +1,10 @@
 History of Changes
 ==================
 
+## v0.6.0 / 2012-06-22
+
+- Implemented CouchDB `_changes` feeds in admin app to sync all connected clients with latest changes live
+
 ## v0.5.3 / 2012-06-21
 
 - Added a new chocolate color to the list of theme colors

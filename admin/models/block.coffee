@@ -1,6 +1,4 @@
 Spine = require('spine/core')
-require('lib/spine-couch-ajax')
-
 utils = require('lib/utils')
 
 BaseModel = require('models/base')
@@ -9,6 +7,8 @@ class Block extends BaseModel
   @configure "Block", "site", "code", "name", "content", "photo", "enabled", "_attachments"
   
   @extend @CouchAjax
+  @extend @CouchChanges
+    handler: @CouchChanges.PrivateChanges
   
   @queryOn: ['name','code']
     

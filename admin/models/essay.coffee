@@ -1,6 +1,4 @@
 Spine = require('spine/core')
-require('lib/spine-couch-ajax')
-
 utils = require('lib/utils')
 moment = require('lib/moment')
 
@@ -10,6 +8,8 @@ class Essay extends BaseModel
   @configure "Essay", "site", "slug", "title", "intro", "body", "photo", "published", "published_at", "updated_at", "author_id", "sponsor_id", "sponsor_start", "sponsor_end", "sponsors_history", "collections", "_attachments"
   
   @extend @CouchAjax
+  @extend @CouchChanges
+    handler: @CouchChanges.PrivateChanges
   
   @alphaSort: (a, b) ->
     if (a.title or a.published_at) > (b.title or b.published_at) then 1 else -1

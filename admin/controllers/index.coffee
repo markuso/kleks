@@ -1,6 +1,8 @@
 Spine       = require('spine/core')
 require('spine/route')
 require('spine/manager')
+require('lib/spine-couch-ajax')
+require('lib/spine-couch-changes')
 require('lib/fastclick')
 
 templates   = require('duality/templates')

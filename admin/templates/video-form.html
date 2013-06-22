@@ -43,7 +43,7 @@
       <textarea name="intro" placeholder="Provide an video introduction text as Markdown/HTML">{{intro}}</textarea>
     </div>
     <div class="field">
-      <label>Content as <a class="markdown-help">Markdown/HTML</a> | <a class="fullscreen-button">Fullscreen</a> | <a class="import-button">Import</a></label>
+      <label>Content as <a class="markdown-help">Markdown/HTML</a> | <a class="fullscreen-button">Fullscreen</a></label>
       <textarea name="body" placeholder="Write your video content as Markdown/HTML">{{body}}</textarea>
     </div>
   </div>
@@ -52,7 +52,7 @@
     <div class="buttons">
       <button class="save-button" tabindex="0">Save</button>
       <button class="cancel-button plain" tabindex="0">Cancel</button>
-      {{#if _id}}<div class="delete-button"><i class="icon-trash"></i></div>{{/if}}
+      {{#if id}}<div class="delete-button"><i class="icon-trash"></i></div>{{/if}}
     </div>
 
     <div class="top-spacer"></div>

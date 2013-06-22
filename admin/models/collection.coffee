@@ -1,6 +1,4 @@
 Spine = require('spine/core')
-require('lib/spine-couch-ajax')
-
 utils  = require('lib/utils')
 moment = require('lib/moment')
 
@@ -10,6 +8,8 @@ class Collection extends BaseModel
   @configure "Collection", "site", "slug", "name", "intro", "photo", "pinned", "hidden", "updated_at", "sponsor_id", "sponsor_start", "sponsor_end", "sponsor_propagate", "sponsors_history", "_attachments"
 
   @extend @CouchAjax
+  @extend @CouchChanges
+    handler: @CouchChanges.PrivateChanges
 
   @dateSort: (a, b) ->
     if (a.updated_at or a.name) < (b.updated_at or b.name) then 1 else -1
