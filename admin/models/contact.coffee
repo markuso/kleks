@@ -1,6 +1,4 @@
 Spine = require('spine/core')
-require('lib/spine-couch-ajax')
-
 utils = require('lib/utils')
 
 BaseModel = require('models/base')
@@ -9,6 +7,8 @@ class Contact extends BaseModel
   @configure "Contact", "name", "email", "note"
   
   @extend @CouchAjax
+  @extend @CouchChanges
+    handler: @CouchChanges.PrivateChanges
   
   @queryOn: ['name','email']
     

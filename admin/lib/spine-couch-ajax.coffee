@@ -85,7 +85,7 @@ CouchAjax =
       @requests.push(callback)
     else
       @pending = true
-      @request(callback)    
+      @request(callback)
     callback
     
 class Base
@@ -190,6 +190,8 @@ class Singleton extends Base
         data = @model.fromJSON(_.pluck(data.rows, "doc")[0])
       else
         data = @model.fromJSON(data)
+
+      data._rev = xhr.getResponseHeader( 'X-Couch-Update-NewRev' )
     
       CouchAjax.disable =>
         if data
@@ -209,7 +211,7 @@ class Singleton extends Base
       options.error?.apply(@record)
       
       # Popup an alert box that we could communicate with server
-      alert "Could NOT communicate with server for \"#{@record.title or @record.name}\".\n\nCheck your connection and try again."
+      alert "#{statusText}\n#{error}\nSomehting may have gone wrong with an action for \"#{@record.title or @record.name}\".\n\nCheck your connection and try again."
 
 # CouchAjax endpoint
 Model.host = ''
@@ -223,7 +225,7 @@ Include =
     base += encodeURIComponent(@id)
     base
     
-Extend = 
+Extend =
   ajax: -> new Collection(this)
 
   url: ->

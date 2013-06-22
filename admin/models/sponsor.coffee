@@ -1,6 +1,4 @@
 Spine = require('spine/core')
-require('lib/spine-couch-ajax')
-
 utils = require('lib/utils')
 
 BaseModel = require('models/base')
@@ -11,6 +9,8 @@ class Sponsor extends BaseModel
   @configure "Sponsor", "format", "name", "link", "label", "show_label", "content", "include_default_ad_unit", "image", "note", "contact_id", "_attachments"
   
   @extend @CouchAjax
+  @extend @CouchChanges
+    handler: @CouchChanges.PrivateChanges
 
   @queryOn: ['name','content','link','format']
     
