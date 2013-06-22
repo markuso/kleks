@@ -1,6 +1,7 @@
-db       = require "db"
-duality  = require "duality/core"
-session  = require "session"
+Spine    = require('spine/core')
+db       = require('db')
+duality  = require('duality/core')
+session  = require('session')
 
 
 feeds = {} # Cache `_changes` feeds by their url
@@ -43,10 +44,10 @@ Spine.Model.CouchChanges.Changes = class Changes
     return unless changes
     Spine.CouchAjax.disable =>
       for doc in changes
-        if modelname = doc.doc?.modelname
-          klass = @subscribers[modelname]
+        if type = doc.doc?.type
+          klass = @subscribers[type]
         unless klass
-          console.warn "changes: can't find subscriber for #{doc.doc.modelname}"
+          console.warn "changes: can't find subscriber for #{doc.doc.type}"
           continue
         atts = doc.doc
         atts.id = atts._id unless atts.id
