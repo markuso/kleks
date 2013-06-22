@@ -1,6 +1,6 @@
 {
   "name": "site",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "Kleks site application that renders each site.",
   "load": "server/setup",
   "modules": ["server","lib"],
