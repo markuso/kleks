@@ -1,6 +1,4 @@
 Spine = require('spine/core')
-require('lib/spine-couch-ajax')
-
 utils = require('lib/utils')
 
 BaseModel = require('models/base')
@@ -9,6 +7,8 @@ class Site extends BaseModel
   @configure "Site", "_id", "name", "name_html", "tagline", "menu_html", "header_html", "bottom_html", "footer_html", "link", "social_links", "theme", "css", "seo_description", "seo_keywords", "google_analytics_code", "editor_email", "admin_email", "default_ad_unit", "default_ad_enabled"
   
   @extend @CouchAjax
+  @extend @CouchChanges
+    handler: @CouchChanges.PrivateChanges
   
   @queryOn: ['name','tagline','_id']
     
