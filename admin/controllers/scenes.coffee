@@ -3,10 +3,6 @@ $           = Spine.$
 templates   = require('duality/templates')
 utils       = require('lib/utils')
 
-# For importing HTML from old sites
-require('lib/reMarked')
-require('lib/jquery-xdomainajax')
-
 MultiSelectUI = require('controllers/ui/multi-select')
 FileUploadUI  = require('controllers/ui/file-upload')
 PreviewUI     = require('controllers/ui/preview')
@@ -47,7 +43,6 @@ class SceneForm extends Spine.Controller
     'change select[name=site]': 'siteChange'
     'blur input[name=slug]':    'updateSlug'
     'click .fullscreen-button': 'fullscreen'
-    'click .import-button':     'import'
 
   constructor: ->
     super
@@ -148,49 +143,6 @@ class SceneForm extends Spine.Controller
       @form.addClass('fullscreen')
       @fullscreenButton.html "Exit #{@fullscreenButtonText}"
       @previewUI = new PreviewUI field: @formBody
-
-  import: (e) =>
-    # For importing old HTML to Markdown directly from old location
-    e?.preventDefault()
-    url = $.trim prompt("Paste a URL from #{@formSite.val()}", @item.old_url or '')
-    if url
-      $.ajax
-        type: 'GET'
-        url: url
-        success: (res) =>
-          $html = $(res.responseText)
-          $title = $html.find('.post > h2:first > a')
-          $author = $html.find('.post .entry-author > a:first')
-          $date = $html.find('.post .entry-date > .published')
-          $content = $html.find('.post .entry:first')
-          $image = $content.find('img:first')
-          if $content
-            $content.find('.addthis_toolbox, .author-bio').remove()
-            options =
-                link_list:  false    # render links as references, create link list as appendix
-                h1_setext:  true     # underline h1 headers
-                h2_setext:  true     # underline h2 headers
-                h_atx_suf:  true     # header suffixes (###)
-                gfm_code:   false    # render code blocks as via ``` delims
-                li_bullet:  "*"      # list item bullet style
-                hr_char:    "-"      # hr style
-                indnt_str:  "    "   # indentation string
-                bold_char:  "*"      # char used for strong
-                emph_char:  "_"      # char used for em
-                gfm_tbls:   false    # markdown-extra tables
-                tbl_edges:  false    # show side edges on tables
-                hash_lnks:  false    # anchors w/hash hrefs as links
-            reMarker = new reMarked(options)
-            markdown = reMarker.render($content.html())
-            @formBody.val(markdown)
-
-          if not @item.old_url
-            @formTitle.val($title.text()) if $title
-            $slug = @form.find('input[name=slug]')
-            unless slug.val()
-              $slug.val($title.attr('href').replace('www.', '').replace("http://#{@formSite.val().replace('www.', '')}", '')) if $title
-            @formAuthorId.val($author.text()) if $author
-            @form.find('input[name=published_at]').val($date.text()) if $date
 
   save: (e) ->
     e.preventDefault()
