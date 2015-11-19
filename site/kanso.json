@@ -18,19 +18,19 @@
       "remove_from_attachments": true
   },
   "dependencies": {
-    "modules": null,
-    "settings": null,
-    "attachments": null,
-    "properties": null,
-    "db": null,
-    "coffee-script-precompiler": null,
-    "stylus-precompiler": null,
-    "duality": null,
-    "handlebars": null,
-    "handlebars-helpers": null,
-    "duality-handlebars": null,
-    "showdown": null,
-    "jquery": null
+    "modules": "0.0.13",
+    "settings": "0.0.12",
+    "attachments": "0.0.10",
+    "properties": "0.0.12",
+    "db": "0.1.0",
+    "coffee-script-precompiler": "1.3.1-kanso.1",
+    "stylus-precompiler": "0.26.0-kanso.3",
+    "duality": "0.0.18",
+    "handlebars": "1.0.2",
+    "handlebars-helpers": "0.0.5",
+    "duality-handlebars": "0.0.2",
+    "showdown": "0.0.2",
+    "jquery": "1.9.1-kanso.2"
   },
 
   "app": {

@@ -55,7 +55,9 @@ A fresh and ready copy of Kleks' design documents are pushed to a database named
 
 You can replicate using Futon from your CouchDB instance, or use the command line `curl` tool to do so:
 
-    $ curl http://localhost:5984/_replicate -H 'Content-Type: application/json' -d '{ "source": "https://markuso.cloudant.com/kleks_install", "target": "kleks" }'
+```
+$ curl http://localhost:5984/_replicate -H 'Content-Type: application/json' -d '{ "source": "https://markuso.cloudant.com/kleks_install", "target": "kleks" }'
+```
 
 ## VHOSTS are a MUST
 
@@ -71,9 +73,11 @@ Each site has a unique `_id` which should be set as its full domain name. Like `
 
 For example:
 
-    vhosts:
-      kleks.example.local = /kleks/_design/admin/_rewrite"
-      www.example.local   = /kleks/_design/site/_rewrite/render/www.example.com
+```
+vhosts:
+  kleks.example.local = /kleks/_design/admin/_rewrite
+  www.example.local   = /kleks/_design/site/_rewrite/render/www.example.com
+```
 
 If your local CouchDB install is still running on the default port `5984` then you can access the admin app above at `http://kleks.example.local:5984` and so on. I am running my CouchDB on port 80, so I don't need to use the port number.
 
@@ -93,15 +97,19 @@ You can use Cloudant's authentication to login to the admin app. Just make sure 
 
 But if you want to create and use a `_users` database to manage access to the admin app, then you must first turn off Cloudant's own security for the Kleks database to manage via `_users`. To do this you need to PUT a JSON document like the following to the `_security` endpoint of the database (for example `https://USERNAME.cloudant.com/DATABASE/_security`):
 
-    {
-      "cloudant": { "nobody": ["_reader","_creator","_writer","_admin"] },
-      "readers": { "names": [], "roles": [] },
-      "admins": { "names": [], "roles": ["admin","manager"] }
-    }
+```
+{
+  "cloudant": { "nobody": ["_reader","_creator","_writer","_admin"] },
+  "readers": { "names": [], "roles": [] },
+  "admins": { "names": [], "roles": ["admin","manager"] }
+}
+```
 
 You can achieve that by using the following: _(be sure to change the USERNAME and DATABASE where needed below)_
 
-    $ curl -X PUT -u USERNAME -p https://USERNAME.cloudant.com/DATABASE/_security -d '{"cloudant":{"nobody":["_reader","_creator","_writer","_admin"]}, "readers": {"names": [], "roles": []}, "admins": {"names": [], "roles": ["admin","manager"]}}'
+```
+$ curl -X PUT -u USERNAME -p https://USERNAME.cloudant.com/DATABASE/_security -d '{"cloudant":{"nobody":["_reader","_creator","_writer","_admin"]}, "readers": {"names": [], "roles": []}, "admins": {"names": [], "roles": ["admin","manager"]}}'
+```
 
 See their own [security documentation](https://cloudant.com/for-developers/faq/auth/) for more details.
 
@@ -114,13 +122,17 @@ The best way to ask a question about deployment, or to report an issue, is to us
 
 You will need to use [Kanso](http://kan.so/) for managing the CouchApp's packages, build, and deployment. It makes it super easy to manage. To [install Kanso](http://kan.so/install), just use NPM as follows given that you have NPM and Node.js already installed:
 
-    $ sudo npm install -g kanso
+```
+$ sudo npm install -g kanso
+```
 
 In Kanso, Node.js is used for the command-line tools only. The end result is a pure CouchApp you can host using CouchDB alone. Learn more at [Kanso](http://kan.so/).
 
 Now download or clone the Kleks git repo. You can always get a copy of the latest master branch by using:
 
-    $ git clone https://github.com/markuso/kleks.git
+```
+$ git clone https://github.com/markuso/kleks.git
+```
 
 That will download and create a folder in your current path named `kleks`. You may change the folder name as you wish.
 
@@ -130,40 +142,48 @@ Kleks has two CouchApps that need to be pushed to your CouchDB. One is `_design/
 
 When you first setup Kleks, begin with installing dependencies for each CouchApp and pushing to your destination as follows: _(assuming your folder is left named `kleks`)_
 
-    $ cd ~/path/to/kleks/admin
-    $ kanso install
-    $ kanso push
+```
+$ cd ~/path/to/kleks/admin
+$ kanso install
+$ kanso push
 
-    $ cd ~/path/to/kleks/site
-    $ kanso install
-    $ kanso push
+$ cd ~/path/to/kleks/site
+$ kanso install
+$ kanso push
+```
 
-Once a `.kansorc` file is created (see below) with a production config setting named `live` then we can deploy to prodcution using:
+Once a `.kansorc` file is created (see below) with a production config setting named `live` then we can deploy to production using:
 
-    $ cd ~/path/to/kleks/admin
-    $ kanso push live
+```
+$ cd ~/path/to/kleks/admin
+$ kanso push live
 
-    $ cd ~/path/to/kleks/site
-    $ kanso push live
+$ cd ~/path/to/kleks/site
+$ kanso push live
+```
 
-Or you can even push to any arbitrary distination if you like:
+Or you can even push to any arbitrary destination if you like:
 
-    $ kanso push http://your-couch-server.com/dbname
+```
+$ kanso push http://your-couch-server.com/dbname
+```
 
 ### Example `.kansorc` File
 
 You should create a `.kansorc` like the example below. The example assumes your database is name `kleks` but it could be anything you want, and for your live database it assumes you are hosting it on [Cloudant](http://cloudant.com). Be sure to modify by providing your information instead. This file should stay private and is ignored in `.gitignore` so to not commit it to Git.
 
-    exports.env = {
-      'default': {
-        db: 'http://user:password@localhost:5984/kleks'
-      },
-      'live': {
-        db: 'https://user:password@USERNAME.cloudant.com/kleks',
-        baseURL: '/.',
-        minify: true
-      }
-    };
+```
+exports.env = {
+  'default': {
+    db: 'http://user:password@localhost:5984/kleks'
+  },
+  'live': {
+    db: 'https://user:password@USERNAME.cloudant.com/kleks',
+    baseURL: '/.',
+    minify: true
+  }
+};
+```
 
 Please note that the `baseURL: '/.'` is needed when deploying a Kanso CouchApp to [Cloudant](http://cloudant.com) so file references, like js and css files, can work properly.
 
@@ -178,7 +198,7 @@ There is still more to document in the [wiki](https://github.com/markuso/kleks/w
 The [wiki](https://github.com/markuso/kleks/wiki) will be the next order of focus to create a User Manual essentially.
 
 ## TODO
- 
+
 - Deal with large data sets rendering
 - Write as many tests as possible
 - Documentation of all the features of Kleks
