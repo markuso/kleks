@@ -72,7 +72,7 @@ Each site has a unique `_id` which should be set as its full domain name. Like `
 For example:
 
     vhosts:
-      kleks.example.local = /kleks/_design/admin/_rewrite"
+      kleks.example.local = /kleks/_design/admin/_rewrite
       www.example.local   = /kleks/_design/site/_rewrite/render/www.example.com
 
 If your local CouchDB install is still running on the default port `5984` then you can access the admin app above at `http://kleks.example.local:5984` and so on. I am running my CouchDB on port 80, so I don't need to use the port number.
