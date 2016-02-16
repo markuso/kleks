@@ -1,6 +1,8 @@
 Kleks - Pure CouchDB based CMS
 ==============================
 
+#### --- PROJECT IS NO LONGER MAINTAINED ---
+
 **Kleks** is a pure CouchDB based CMS written as a **CouchApp** using Kanso, Spine.js, CoffeeScript and Stylus. Supports multi-site setup and Markdown authoring. It is fully open-source with a MIT license.
 
 Kleks can be used to power a network of content-based sites with the ability to fully sync/replicate its NoSQL document-based datastore, CouchDB, in real-time to other locations. The admin interface is accessible from desktops and mobile tablets at this time.
@@ -20,18 +22,6 @@ Kleks is meant for moderate to experienced CouchDB developers that are intereste
 The admin interface is a modern web application written as a CouchApp that has a fast and clean interface which is uncluttered and easy on the eye. It uses Markdown to compose and preview the content within for clean publishing of essays — the living content.
 
 There is also the concept of content sponsorships to monetize these living collections and essays with the ability to place the sponsor's name, link, ad image or video on individual essays or collections of choice, or even just place some Google AdSense for monitization. But only a single sponsor per page to keep interface non-cluttered and reader friendly.
-
-## Example Sites Using Kleks
-
-Kleks was originally written for a network of sites listed below to migrate them from the common WordPress CMS, PHP, and MySQL to a completely CouchDB based solution without any other layers needed.
-
-- [Evita Ochel](http://www.evitaochel.com) – Consciousness Expansion Teacher.
-- [Evolving Wellness](http://www.evolvingwellness.com) – Holistic, Natural, and Green Approach to Optimal Wellness.
-- [Evolving Beings](http://www.evolvingbeings.com) – Consciousness Expansion and Heart-Centered Living.
-- [Evolving Channels](http://www.evolvingchannels.com) – Video Library for the Awakening Mind.
-- [Evolving Scenes](http://www.evolvingscenes.com) – Reflections and Nature Photography.
-- [Healthytarian](http://www.healthytarian.com) – Fresh Thinking. Smart Eating. Mindful Living.
-- [Markuso Web Solutions](http://www.markuso.com) – Developing Holistic Modern Web Applications.
 
 ## Admin App Screeshots
 
