@@ -198,7 +198,7 @@ The [wiki](https://github.com/markuso/kleks/wiki) will be the next order of focu
 
 (The MIT License)
 
-Copyright (C) 2012 by Markus Ochel <markus@markuso.com>
+Copyright (C) 2012 by Markuso
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
